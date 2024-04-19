@@ -31,6 +31,10 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
+  --prefix="$(STAGING_DIR_HOSTPKG)" \
+  --exec-prefix="$(STAGING_DIR_HOSTPKG)"
+
+CONFIGURE_ARGS += \
   --prefix=/usr
 
 define Build/InstallDev
