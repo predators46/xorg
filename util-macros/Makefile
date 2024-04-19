@@ -30,10 +30,6 @@ endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
-HOST_CONFIGURE_ARGS += \
-  --prefix="$(HOSTPKG)" \
-  --exec-prefix="$(HOSTPKG)"
-
 CONFIGURE_ARGS += \
   --prefix=/usr
 
@@ -49,6 +45,9 @@ define Build/InstallDev
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
 	  $(1)/usr/lib/
+endef
+
+define Package/util-macros/install
 endef
 
 $(eval $(call BuildPackage,util-macros))
