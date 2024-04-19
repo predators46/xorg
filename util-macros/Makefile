@@ -31,8 +31,8 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 HOST_CONFIGURE_ARGS += \
-  --prefix="$(STAGING_DIR_HOSTPKG)" \
-  --exec-prefix="$(STAGING_DIR_HOSTPKG)"
+  --prefix="$(HOSTPKG)" \
+  --exec-prefix="$(HOSTPKG)"
 
 CONFIGURE_ARGS += \
   --prefix=/usr
