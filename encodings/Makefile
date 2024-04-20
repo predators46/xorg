@@ -31,7 +31,7 @@ TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
   --prefix=/usr \
-  -with-encodingsdir=/usr/share/fonts/encodings
+  --with-encodingsdir=/usr/share/fonts/encodings
 
 #define Build/InstallDev
 #	$(INSTALL_DIR) \
