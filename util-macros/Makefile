@@ -30,9 +30,6 @@ endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
-define Host/Exports
-endef
-
 CONFIGURE_ARGS += \
   --prefix=/usr
 
