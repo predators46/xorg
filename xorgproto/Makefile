@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xorgproto
@@ -13,31 +8,32 @@ PKG_SOURCE_URL:=https://xorg.freedesktop.org/archive/individual/proto/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=372225fd40815b8423547f5d890c5debc72e88b91088fbfb13158c20495ccb59
 
-PKG_BUILD_DEPENDS:=util-macros
-PKG_BUILD_PARALLEL:=1
-HOST_BUILD_DEPENDS:=util-macros/host
-HOST_BUILD_PARALLEL:=1
-PKG_FIXUP:=autoreconf
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=BSD-2-Clause, HPND, HPND-sell-variant, ICU, MIT, MIT-open-group, SGI-B-2.0, SMLNJ, X11, X11-distribute-modifications-variant
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DEPENDS:=util-macros libxslt/host
+HOST_BUILD_DEPENDS:=util-macros/host libxslt/host
 
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/xorgproto
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=
-  TITLE:=Combined X.Org X11 protocol headers
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X.Org X11 Protocol headers
+	URL:=http://xorg.freedesktop.org/
 endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --without-fop \
-  --without-xmlto \
-  --without-xsltproc \
-  --disable-specs
+define Package/xorgproto/description
+	combined X.Org X11 Protocol headers
+endef
+
+MESON_ARGS += \
+	-Dlegacy=true
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -51,9 +47,6 @@ define Build/InstallDev
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
 	  $(1)/usr/lib/
-endef
-
-define Package/xorgproto/install
 endef
 
 $(eval $(call BuildPackage,xorgproto))
