@@ -1,41 +1,72 @@
+#
+# Copyright (C) 2006-2015 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=python-markupsafe
-PKG_VERSION:=2.1.5
+PKG_NAME:=freetype
+PKG_VERSION:=2.13.2
 PKG_RELEASE:=1
 
-PYPI_NAME:=MarkupSafe
-PKG_HASH:=d283d37a890ba4c1ae73ffadf8046435c76e7bc2247bbb63c00bd1a709c6544b
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@SF/freetype
+PKG_HASH:=12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d
 
-PKG_MAINTAINER:=
-PKG_LICENSE:=BSD-3-Clause license
-PKG_LICENSE_FILES:=LICENSE.rst
+PKG_MAINTAINER:=Val Kulkov <val.kulkov@gmail.com>
+PKG_LICENSE:=FTL GPL-2.0-only MIT ZLIB GPL-3.0-or-later
+PKG_LICENSE_FILES:=docs/LICENSE.TXT docs/FTL.TXT docs/GPLv2.TXT src/bdf/README src/pcf/README src/gzip/zlib.h builds/unix/config.sub builds/unix/config.guess builds/unix/libtool 
+PKG_CPE_ID:=cpe:/a:freetype:freetype
 
-PKG_BUILD_FLAGS:=no-mips16
-
-HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-wheel/host
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host python-wheel/host
-
-include ../pypi.mk
-include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
-include ../python3-package.mk
-include ../python3-host-build.mk
+include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
-define Package/python3-markupsafe
-  SUBMENU:=Python
-  SECTION:=lang
-  CATEGORY:=Languages
-  TITLE:=Safely add untrusted strings to HTML/XML markup.
-  URL:=https://github.com/pallets/markupsafe/
-  DEPENDS:=+python3-light
+define Package/libfreetype
+  SECTION:=libs
+  CATEGORY:=Libraries
+  TITLE:=A free, high-quality and portable font engine
+  URL:=https://www.freetype.org/
+  DEPENDS:=+zlib +libpng
 endef
 
-define Package/python3-markupsafe/description
-  MarkupSafe implements a text object that escapes characters so it is safe to use in HTML and XML. Characters that have special meanings are replaced so that they display as the actual characters. This mitigates injection attacks, meaning untrusted user input can safely be displayed on a page.
+define Package/libfreetype/description
+ The FreeType project is a team of volunteers who develop free,
+ portable and high-quality software solutions for digital typography.
+ They specifically target embedded systems and focus on bringing small,
+ efficient and ubiquitous products.
 endef
 
-$(eval $(call Py3Package,python3-markupsafe))
-$(eval $(call BuildPackage,python3-markupsafe))
-$(eval $(call BuildPackage,python3-markupsafe-src))
-$(eval $(call HostBuild))
+MESON_HOST_ARGS += \
+	-Dzlib=disabled \
+	-Dbzip2=disabled \
+	-Dpng=disabled \
+	-Dharfbuzz=disabled \
+	-Dbrotli=disabled \
+	-Dmmap=disabled
+
+MESON_ARGS += \
+	-Dzlib=enabled \
+	-Dbzip2=disabled \
+	-Dpng=enabled \
+	-Dharfbuzz=disabled \
+	-Dbrotli=disabled \
+	-Dmmap=enabled
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/include/freetype2
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/freetype2/* $(1)/usr/include/freetype2/
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfreetype.so* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/freetype2.pc $(1)/usr/lib/pkgconfig/freetype2.pc
+endef
+
+define Package/libfreetype/install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfreetype.so.* $(1)/usr/lib/
+endef
+
+$(eval $(call BuildPackage,libfreetype))
