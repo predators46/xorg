@@ -14,7 +14,6 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=0b86b262dbe971edb4ff233bc370dfad9f241d09f078a3f6d5b7f4b8ea4430db
 
 PKG_BUILD_PARALLEL:=1
-HOST_BUILD_DEPENDS:=util-macros
 HOST_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
@@ -30,6 +29,9 @@ define Package/util-macros
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+
+define Host/Exports
+endef
 
 CONFIGURE_ARGS += \
   --prefix=/usr
