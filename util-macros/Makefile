@@ -31,8 +31,8 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 HOST_CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --exec-prefix=/usr
+  --prefix=/hostpkg \
+  --exec-prefix=/hostpkg
 
 CONFIGURE_ARGS += \
   --prefix=/usr
