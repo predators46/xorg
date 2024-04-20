@@ -27,7 +27,7 @@ define Package/xorg-server
 	+pixman +xcb-util +xinit +libxkbui +libxv +libxxf86dga +libxtst\
 	+libxxf86misc +font-cursor-misc +font-misc-misc +xcb-util-wm \
 	+xcb-util-image +xcb-util-renderutil +xcb-util-keysyms +acpid \
-	+libudev-fbsd  +kbd +hicolor-icon-theme +libbsd +libxres +libfs \
+	+libudev-zero  +kbd +hicolor-icon-theme +libbsd +libxres +libfs \
 	+libxcomposite +xcb-util-cursor +iceauth +luit +sessreg +xcursorgen \
 	+libxaw +libxpm
   TITLE:=X.Org X servers
