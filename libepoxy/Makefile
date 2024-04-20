@@ -13,7 +13,7 @@ PKG_SOURCE_URL:=https://github.com/anholt/libepoxy/releases/download/$(PKG_VERSI
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=002958c5528321edd53440235d3c44e71b5b1e09b9177e8daf677450b6c4433d
 
-PKG_BUILD_DEPENDS:=util-macros python
+PKG_BUILD_DEPENDS:=util-macros python3/host
 #PKG_FIXUP:=autoreconf
 PKG_FIXUP:=libtool
 
