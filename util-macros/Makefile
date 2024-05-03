@@ -57,7 +57,7 @@ define Host/Install
 
 	$(CP) \
 	  $(HOST_BUILD_DIR)/xorg-macros.pc \
-	  $(STAGING_DIR_HOSTPKG)/lib/
+	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/
 endef
 
 $(eval $(call BuildPackage,util-macros))
