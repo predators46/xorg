@@ -18,6 +18,7 @@ PKG_BUILD_DEPENDS:=util-macros mkfontscale/host font-util encodings
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/encodings
@@ -51,3 +52,4 @@ define Package/encodings/install
 endef
 
 $(eval $(call BuildPackage,encodings))
+$(eval $(call HostBuild))
