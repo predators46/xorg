@@ -56,7 +56,7 @@ define Host/Install
 	  $(STAGING_DIR_HOSTPKG)/lib
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/xorg-macros.pc \
+	  $(HOST_BUILD_DIR)/*.pc \
 	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/
 endef
 
