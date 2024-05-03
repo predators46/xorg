@@ -23,7 +23,6 @@ include $(INCLUDE_DIR)/package.mk
 define Package/util-macros
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=
   TITLE:=X.Org Autotools macros
   URL:=http://xorg.freedesktop.org/
 endef
@@ -44,10 +43,21 @@ define Build/InstallDev
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
+	  $(1)/usr/share/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
 	  $(1)/usr/lib/
 endef
 
-define Package/util-macros/install
+define Host/Install
+	$(call Host/Install/Default)
+	$(INSTALL_DIR) \
+	  $(STAGING_DIR_HOSTPKG)/lib
+
+	$(CP) \
+	  $(HOST_BUILD_DIR)/xorg-macros.pc \
+	  $(STAGING_DIR_HOSTPKG)/lib/
 endef
 
 $(eval $(call BuildPackage,util-macros))
