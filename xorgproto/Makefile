@@ -48,8 +48,7 @@ define Build/InstallDev
 endef
 
 define Host/Install
-	+$(NINJA) -C $(MESON_HOST_BUILD_DIR) install
-	
+	$(call Host/Install/Meson)
 	$(INSTALL_DIR) \
 	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
 
