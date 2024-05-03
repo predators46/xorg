@@ -22,7 +22,6 @@ include $(INCLUDE_DIR)/package.mk
 define Package/encodings
   SECTION:=xorg
   CATEGORY:=Xorg
-  DEPENDS:=+libx11 +libxfixes
   TITLE:=X.org font encoding files
   URL:=http://xorg.freedesktop.org/
 endef
