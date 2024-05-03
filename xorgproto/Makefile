@@ -52,7 +52,7 @@ define Host/Install
 	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/*.pc \
+	  $(HOST_BUILD_DIR)/openwrt-build/*.pc \
 	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/
 endef
 
