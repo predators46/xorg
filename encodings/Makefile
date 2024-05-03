@@ -13,8 +13,8 @@ PKG_SOURCE_URL:=https://www.x.org/releases/individual/font/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=9ff13c621756cfa12e95f32ba48a5b23839e8f577d0048beda66c67dab4de975
 
-HOST_BUILD_DEPENDS:=util-macros/host mkfontscale/host font-util/host encodings/host
-PKG_BUILD_DEPENDS:=util-macros mkfontscale/host font-util encodings
+HOST_BUILD_DEPENDS:=util-macros/host mkfontscale/host font-util/host
+PKG_BUILD_DEPENDS:=util-macros mkfontscale/host font-util
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
