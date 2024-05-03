@@ -53,7 +53,7 @@ endef
 define Host/Install
 	$(call Host/Install/Default)
 	$(INSTALL_DIR) \
-	  $(STAGING_DIR_HOSTPKG)/lib
+	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
 
 	$(CP) \
 	  $(HOST_BUILD_DIR)/xorg-macros.pc \
