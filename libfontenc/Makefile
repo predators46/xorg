@@ -38,14 +38,12 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --disable-static \
-  --enable-shared \
-  --with-fontrootdir=/usr/share/fonts/X11 \
-  --with-encodingsdir=/usr/share/fonts/encodings
+	--disable-static \
+	--enable-shared
 
 HOST_CONFIGURE_ARGS += \
-  --enable-static \
-  --disable-shared
+	--enable-static \
+	--disable-shared
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
