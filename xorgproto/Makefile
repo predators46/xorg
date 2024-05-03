@@ -15,8 +15,6 @@ PKG_LICENSE_FILES:=COPYING
 PKG_BUILD_DEPENDS:=util-macros libxslt/host
 HOST_BUILD_DEPENDS:=util-macros/host libxslt/host
 
-PKG_INSTALL:=1
-
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
@@ -50,7 +48,6 @@ define Build/InstallDev
 endef
 
 define Host/Install
-	$(call Host/Install/Default)
 	$(INSTALL_DIR) \
 	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
 
