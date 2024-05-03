@@ -30,22 +30,16 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --with-encodingsdir=/usr/share/fonts/encodings
+	--prefix=/usr
 
-#define Build/InstallDev
-#	$(INSTALL_DIR) \
-#	  $(1)/usr/include \
-#	  $(1)/usr/lib
-#
-#	$(CP) \
-#	  $(PKG_INSTALL_DIR)/usr/include/* \
-#	  $(1)/usr/include/
-#
-#	$(CP) \
-#	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
-#	  $(1)/usr/lib/
-#endef
+define Build/InstallDev
+	$(INSTALL_DIR) \
+	  $(1)/usr/share
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share/fonts \
+	  $(1)/usr/share/
+endef
 
 define Package/encodings/install
 	$(INSTALL_DIR) \
