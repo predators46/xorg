@@ -24,7 +24,6 @@ define Package/mkfontscale
 	CATEGORY:=Applications
 	TITLE:=Create an index of scalable font files for X
 	URL:=http://xorg.freedesktop.org/
-	BUILDONLY:=1
 endef
 
 define Package/mkfontscale/description
