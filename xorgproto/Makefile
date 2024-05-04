@@ -12,7 +12,6 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=BSD-2-Clause, HPND, HPND-sell-variant, ICU, MIT, MIT-open-group, SGI-B-2.0, SMLNJ, X11, X11-distribute-modifications-variant
 PKG_LICENSE_FILES:=COPYING
 
-PKG_HOST_ONLY:=1
 PKG_BUILD_DEPENDS:=util-macros
 HOST_BUILD_DEPENDS:=util-macros/host
 
