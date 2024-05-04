@@ -13,8 +13,13 @@ PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=7b02c3d405236e0d86806b1de9d6868fe60c313628b38350b032914aa4fd14c6
 
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
+
 PKG_BUILD_DEPENDS:=util-macros xorgproto font-util
 HOST_BUILD_DEPENDS:=xorgproto/host util-macros/host font-util/host
+
 HOST_BUILD_PARALLEL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
@@ -23,16 +28,16 @@ include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libfontenc
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+zlib
-  TITLE:=X11 font encoding library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X11 font encoding library
+	DEPENDS:=+zlib
+	URL:=http://xorg.freedesktop.org/
 endef
 
 define Package/libfontenc/description
-    Libfontenc is a library which helps font libraries portably determine
-    and deal with different encodings of fonts.
+	Libfontenc is a library which helps font libraries portably determine
+	and deal with different encodings of fonts.
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
