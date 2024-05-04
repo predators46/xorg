@@ -24,6 +24,7 @@ define Package/xorgproto
 	CATEGORY:=Libraries
 	TITLE:=X.Org X11 Protocol headers
 	URL:=http://xorg.freedesktop.org/
+	BUILDONLY:=1
 endef
 
 define Package/xorgproto/description
