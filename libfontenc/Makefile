@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libfontenc
@@ -44,7 +39,9 @@ TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
 	--disable-static \
-	--enable-shared
+	--enable-shared \
+	--with-fontrootdir=/usr/share/fonts/X11 \
+	--with-encodingsdir=/usr/share/fonts/encodings
 
 HOST_CONFIGURE_ARGS += \
 	--enable-static \
