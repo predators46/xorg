@@ -24,6 +24,7 @@ define Package/util-macros
 	CATEGORY:=Utilities
 	TITLE:=X.Org Autotools macros
 	URL:=http://xorg.freedesktop.org/
+	BUILDONLY:=1
 endef
 
 define Package/util-macros/description
