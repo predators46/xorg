@@ -22,7 +22,6 @@ include $(INCLUDE_DIR)/package.mk
 define Package/util-macros
 	SECTION:=utils
 	CATEGORY:=Utilities
-	SUBMENU:=Xorg
 	TITLE:=X.Org Autotools macros
 	URL:=http://xorg.freedesktop.org/
 endef
