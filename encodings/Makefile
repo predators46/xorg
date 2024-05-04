@@ -42,14 +42,14 @@ define Build/InstallDev
 	  $(1)/usr/share/
 endef
 
-define Package/encodings/install
-	$(INSTALL_DIR) \
-	  $(1)/usr/share
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/share/fonts \
-	  $(1)/usr/share/
-endef
+#define Package/encodings/install
+#	$(INSTALL_DIR) \
+#	  $(1)/usr/share
+#
+#	$(CP) \
+#	  $(PKG_INSTALL_DIR)/usr/share/fonts \
+#	  $(1)/usr/share/
+#endef
 
 $(eval $(call BuildPackage,encodings))
 $(eval $(call HostBuild))
