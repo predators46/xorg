@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xcb-proto
@@ -13,42 +8,56 @@ PKG_SOURCE_URL:=https://xcb.freedesktop.org/dist/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=a75a1848ad2a89a82d841a51be56ce988ff3c63a8d6bf4383ae3219d8d915119
 
-PKG_BUILD_DEPENDS:=python3/host xorgproto
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
+
+PYTHON3_PKG_BUILD:=0
+PKG_BUILD_DEPENDS:=python3/host
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/xcb-proto
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=
-  TITLE:=XML-XCB protocol descriptions
-  URL:=https://xcb.freedesktop.org
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=XML-XCB protocol descriptions
+	URL:=http://xorg.freedesktop.org/
+	BUILDONLY:=1
+endef
+
+define Package/xcb-proto/description
+	XML-XCB protocol descriptions used by libxcb for the X11 protocol & extensions
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr
+	--prefix=/usr
+
+CONFIGURE_VARS += \
+	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/lib \
-	  $(1)/usr/share
+	  $(1)/usr/share \
+	  $(1)/$(PYTHON3_PKG_DIR)
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,python3.11} \
+	  $(PKG_INSTALL_DIR)/usr/lib/pkgconfig \
 	  $(1)/usr/lib/
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/xcb \
 	  $(1)/usr/share/
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/$(PYTHON3_PKG_DIR)/xcbgen \
+	  $(1)/$(PYTHON3_PKG_DIR)
 	$(SED) \
 		 's,/usr/share,$$$${prefix}/share,g' \
 		 $(1)/usr/lib/pkgconfig/xcb-proto.pc
-endef
-
-define Package/xcb-proto/install
 endef
 
 $(eval $(call BuildPackage,xcb-proto))
