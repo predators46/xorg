@@ -16,7 +16,6 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/libXt-$(PKG_VERSION)
 
 PKG_BUILD_DEPENDS:=util-macros xorgproto
 
-PKG_FIXUP:=autoreconf
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
@@ -59,7 +58,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
