@@ -42,8 +42,8 @@ define Build/InstallDev
 	  $(1)/usr/share
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include \
-	  $(1)/usr/
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
+	  $(1)/usr/include/
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
