@@ -56,7 +56,7 @@ define Build/InstallDev
 	  $(1)/$(PYTHON3_PKG_DIR)
 	$(SED) \
 		 's,/usr/share,$$$${prefix}/share,g' \
-		 $(1)/usr/lib/pkgconfig/xcb-proto.pc
+		 $(1)/usr/share/pkgconfig/xcb-proto.pc
 endef
 
 $(eval $(call BuildPackage,xcb-proto))
