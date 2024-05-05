@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xcb-proto
-PKG_VERSION:=1.16.0
+PKG_VERSION:=1.17.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://xcb.freedesktop.org/dist/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=a75a1848ad2a89a82d841a51be56ce988ff3c63a8d6bf4383ae3219d8d915119
+PKG_HASH:=2c1bacd2110f4799f74de6ebb714b94cf6f80fb112316b1219480fd22562148c
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
