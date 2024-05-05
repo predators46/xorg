@@ -12,9 +12,9 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-PYTHON3_PKG_BUILD:=0
 PKG_BUILD_DEPENDS:=python3/host
 PKG_BUILD_PARALLEL:=1
+PYTHON3_PKG_BUILD:=0
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
