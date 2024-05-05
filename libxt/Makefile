@@ -35,6 +35,12 @@ endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
+CONFIGURE_VARS += \
+	LDFLAGS_FOR_BUILD="$(HOST_LDFLAGS)" \
+	CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)" \
+	CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+	CC_FOR_BUILD="$(HOSTCC)"
+
 CONFIGURE_ARGS += \
 	--enable-malloc0returnsnull \
 	--with-appdefaultdir=/etc/X11/app-defaults \
@@ -43,15 +49,6 @@ CONFIGURE_ARGS += \
 	--without-xmlto \
 	--without-xsltproc\
 	--without-fop
-
-define Build/Compile
-	$(MAKE) -C $(PKG_BUILD_DIR)/util \
-	CC="$(HOSTCC)" \
-	CFLAGS="$(HOST_CFLAGS)" \
-	CPPFLAGS="$(HOST_CPPFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)"
-	$(call Build/Compile/Default)
-endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
