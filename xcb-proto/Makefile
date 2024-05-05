@@ -42,13 +42,12 @@ CONFIGURE_VARS += \
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
-	  $(1)/usr/lib \
 	  $(1)/usr/share \
 	  $(1)/$(PYTHON3_PKG_DIR)
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/pkgconfig \
-	  $(1)/usr/lib/
+	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
+	  $(1)/usr/share/
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/share/xcb \
 	  $(1)/usr/share/
