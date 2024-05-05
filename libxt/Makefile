@@ -50,6 +50,7 @@ define Build/Compile
 	CFLAGS="$(HOST_CFLAGS)" \
 	CPPFLAGS="$(HOST_CPPFLAGS)" \
 	LDFLAGS="$(HOST_LDFLAGS)"
+	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
