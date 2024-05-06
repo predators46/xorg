@@ -32,6 +32,14 @@ define Package/libjpeg-turbo
   PROVIDES:=libjpeg
 endef
 
+define Package/libturbojpeg-turbo
+  $(call Package/libjpeg-turbo/Default)
+  SECTION:=libs
+  CATEGORY:=Libraries
+  TITLE+= runtime library
+  PROVIDES:=libturbojpeg
+endef
+
 define Package/libjpeg-turbo-utils
   $(call Package/libjpeg-turbo/Default)
   SECTION:=utils
@@ -44,6 +52,10 @@ endef
 
 define Package/libjpeg-turbo/description
 	libjpeg-turbo is a speed focused fork of libjpeg.
+endef
+
+define Package/libturbojpeg-turbo/description
+	libturbojpeg-turbo is a speed focused fork of libjpeg.
 endef
 
 define Package/libjpeg-turbo-utils/description
@@ -66,15 +78,24 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libjpeg.so* $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libjpeg.a $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libturbojpeg.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libturbojpeg.a $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/*.pc $(1)/usr/lib/pkgconfig/
 	$(SED) 's,/usr/include,$$$${prefix}/include,g' $(1)/usr/lib/pkgconfig/libjpeg.pc
 	$(SED) 's,/usr/lib,$$$${exec_prefix}/lib,g' $(1)/usr/lib/pkgconfig/libjpeg.pc
+	$(SED) 's,/usr/include,$$$${prefix}/include,g' $(1)/usr/lib/pkgconfig/libturbojpeg.pc
+	$(SED) 's,/usr/lib,$$$${exec_prefix}/lib,g' $(1)/usr/lib/pkgconfig/libturbojpeg.pc
 endef
 
 define Package/libjpeg-turbo/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libjpeg.so* $(1)/usr/lib
+endef
+
+define Package/libturbojpeg-turbo/install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libturbojpeg.so* $(1)/usr/lib
 endef
 
 define Package/libjpeg-turbo-utils/install
@@ -87,4 +108,5 @@ define Package/libjpeg-turbo-utils/install
 endef
 
 $(eval $(call BuildPackage,libjpeg-turbo))
+$(eval $(call BuildPackage,libturbojpeg-turbo))
 $(eval $(call BuildPackage,libjpeg-turbo-utils))
