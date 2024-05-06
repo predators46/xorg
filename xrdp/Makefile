@@ -20,7 +20,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xrdp
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libjpeg-turbo +libice +libsm
+	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libturbojpeg-turbo +libice +libsm
 	TITLE:=An open source RDP server
 	URL:=http://www.xrdp.org/
 endef
