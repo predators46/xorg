@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-HOST_BUILD_DEPENDS:=libfontenc/host freetype/host util-macros/host
+HOST_BUILD_DEPENDS:=libfontenc/host freetype/host util-macros/host xorgproto/host
 HOST_BUILD_PARALLEL:=1
 PKG_HOST_ONLY:=1
 
