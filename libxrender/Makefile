@@ -1,39 +1,42 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxrender
-_PKG_NAME:=libXrender
 PKG_VERSION:=0.9.11
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libXrender-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=bc53759a3a83d1ff702fb59641b3d2f7c56e05051fa0cfa93501166fa782dc24
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
-PKG_BUILD_DEPENDS:=renderproto
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=LICENSE
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXrender-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=util-macros xorgproto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxrender
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11
-  TITLE:=X Rendering Extension client library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X Rendering Extension client library
+	DEPENDS:=+libx11
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxrender/description
+	libXrender - library for the Render Extension to the X11 protocol
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --enable-malloc0returnsnull \
-  --prefix=/usr
+	--enable-malloc0returnsnull \
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -41,7 +44,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
