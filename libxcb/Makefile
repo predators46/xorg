@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxcb
@@ -13,6 +8,10 @@ PKG_SOURCE_URL:=https://xcb.freedesktop.org/dist/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=f24d187154c8e027b358fc7cb6588e35e33e6a92f11c668fe77396a7ae66e311
 
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
+
 PKG_BUILD_DEPENDS:=xcb-proto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
@@ -20,28 +19,25 @@ PKG_INSTALL:=1
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxcb
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libxau +libxdmcp
-  TITLE:=X11 client-side library
-  URL:=https://xcb.freedesktop.org
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X11 client-side library
+	DEPENDS:=+libxau +libxdmcp
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxcb/description
+	C interface to the X Window System protocol, which replaces the traditional Xlib interface.
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --enable-xkb \
-  --enable-xinput \
-  --without-doxygen \
-  --disable-devel-docs
-
-define Build/Prepare
-	$(call Build/Prepare/Default)
-	$(SED) \
-	 's/pthread-stubs//' \
-	 $(PKG_BUILD_DIR)/configure
-endef
+	--prefix=/usr \
+	--enable-xkb \
+	--enable-xinput \
+	--without-doxygen \
+	--disable-devel-docs
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -49,7 +45,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/xcb \
 	  $(1)/usr/include/
 
 	$(CP) \
