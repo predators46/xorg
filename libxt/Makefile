@@ -50,6 +50,13 @@ CONFIGURE_ARGS += \
 	--without-xsltproc\
 	--without-fop
 
+# We can't use the default, as the default passes $(MAKE_ARGS), which
+# overrides CC, CFLAGS, etc. and defeats the *_FOR_BUILD definitions
+# passed in CONFIGURE_VARS
+define Build/Compile
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)
+endef
+
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
