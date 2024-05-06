@@ -34,11 +34,11 @@ endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
-CONFIGURE_ARGS += \
-	--prefix=/usr
-
 CONFIGURE_VARS += \
 	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
+
+CONFIGURE_ARGS += \
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
