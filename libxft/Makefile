@@ -1,38 +1,42 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxft
-_PKG_NAME:=libXft
 PKG_VERSION:=2.3.8
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libXft-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=5e8c3c4bc2d4c0a40aef6b4b38ed2fb74301640da29f6528154b5009b1c6dd49
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=LICENSE
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXft-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=util-macros xorgproto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxft
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11 +fontconfig +libfreetype +libxrender
-  TITLE:=FreeType-based font drawing library for X
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=FreeType-based font drawing library for X
+	DEPENDS:=+fontconfig +libfreetype +libx11 +libxrender
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxft/description
+	libXft - X FreeType library
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --enable-malloc0returnsnull \
-  --prefix=/usr
+	--enable-malloc0returnsnull \
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -40,7 +44,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
