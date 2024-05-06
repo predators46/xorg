@@ -52,7 +52,7 @@ endef
 
 CMAKE_OPTIONS += \
 	-DWITH_SIMD=O$(if $(findstring mips,$(CONFIG_ARCH)),FF,N) \
-	-DWITH_TURBOJPEG=OFF
+	-DWITH_TURBOJPEG=ON
 
 ifneq ($(findstring arm,$(CONFIG_ARCH)),)
 ifeq ($(findstring neon,$(CONFIG_CPU_TYPE)),)
