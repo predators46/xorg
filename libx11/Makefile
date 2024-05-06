@@ -1,66 +1,68 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libx11
-_PKG_NAME:=libX11
 PKG_VERSION:=1.8.9
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libX11-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=779d8f111d144ef93e2daa5f23a762ce9555affc99592844e71c4243d3bd3262
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=BSD 1-Clause License
+PKG_LICENSE_FILES:=COPYING
 
-PKG_FIXUP:=autoreconf
-PKG_INSTALL:=1
+PKG_BUILD_DIR:=$(BUILD_DIR)/libX11-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=xtrans xorgproto util-macros
 PKG_BUILD_PARALLEL:=1
-PKG_BUILD_DEPENDS:=xtrans
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libx11
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libxcb
-  TITLE:=X11 client-side library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X11 client-side library
+	DEPENDS:=+libxcb
+	URL:=http://xorg.freedesktop.org/
 endef
 
-define Build/Prepare
-# hack for cross
-	$(call Build/Prepare/Default)
-	echo -e 'install: \nall: ' > $(PKG_BUILD_DIR)/src/util/Makefile
-	rm -fr $(PKG_BUILD_DIR)/src/util/Makefile.*
-	$(HOSTCC) $(HOST_CFLAGS) -I$(PKG_BUILD_DIR)/include \
-	-I$(STAGING_DIR)/usr/include $(PKG_BUILD_DIR)/src/util/makekeys.c \
-	-o $(PKG_BUILD_DIR)/src/util/makekeys
+define Package/libx11/description
+	libX11 - Core X11 protocol client library
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
+CONFIGURE_VARS += \
+	LDFLAGS_FOR_BUILD="$(HOST_LDFLAGS)" \
+	CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)" \
+	CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+	CC_FOR_BUILD="$(HOSTCC)"
+
 CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --enable-malloc0returnsnull \
-  --without-xmlto \
-  --without-xsltproc
+	--prefix=/usr \
+	--enable-malloc0returnsnull \
+	--without-xmlto \
+	--without-xsltproc
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
-	  $(1)/usr/lib
+	  $(1)/usr/lib \
+	  $(1)/usr/share
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share/X11 \
+	  $(1)/usr/share/
 endef
 
 define Package/libx11/install
