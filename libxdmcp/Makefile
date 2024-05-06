@@ -1,42 +1,44 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxdmcp
 PKG_VERSION:=1.1.5
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/pub/individual/lib/
 PKG_SOURCE:=libXdmcp-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=d8a5222828c3adab70adf69a5583f1d32eb5ece04304f7f8392b6a353aa2228c
+
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/libXdmcp-$(PKG_VERSION)
 
-PKG_BUILD_DEPENDS:=xproto
+PKG_BUILD_DEPENDS:=util-macros xorgproto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxdmcp
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libbsd
-  TITLE:=X11 Display Manager Control Protocol library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X Display Manager Control Protocol library
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxdmcp/description
+	libXdmcp - X Display Manager Control Protocol library
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --disable-docs \
-  --without-fop \
-  --without-xmlto \
-  --without-xsltproc
+	--prefix=/usr \
+	--disable-docs \
+	--without-fop \
+	--without-xmlto \
+	--without-xsltproc
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -44,7 +46,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
