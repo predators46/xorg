@@ -1,44 +1,48 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxi
-_PKG_NAME:=libXi
 PKG_VERSION:=1.8.1
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libXi-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=89bfc0e814f288f784202e6e5f9b362b788ccecdeb078670145eacd8749656a7
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXi-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=util-macros xorgproto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxi
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11 +libxfixes +libxext
-  TITLE:=X11 Input extension library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X11 Input extension library
+	DEPENDS:=+libx11 +libxfixes +libxext
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxi/description
+	libXi - library for the X Input Extension
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --enable-malloc0returnsnull \
-  --prefix=/usr \
-  --disable-docs \
-  --disable-specs \
-  --without-xmlto \
-  --without-fop \
-  --without-xsltproc \
-  --without-asciidoc
+	--enable-malloc0returnsnull \
+	--prefix=/usr \
+	--disable-docs \
+	--disable-specs \
+	--without-xmlto \
+	--without-fop \
+	--without-xsltproc \
+	--without-asciidoc
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -46,7 +50,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
