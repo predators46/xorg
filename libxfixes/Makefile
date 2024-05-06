@@ -1,38 +1,41 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxfixes
-_PKG_NAME:=libXfixes
 PKG_VERSION:=6.0.1
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libXfixes-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
 PKG_HASH:=b695f93cd2499421ab02d22744458e650ccc88c1d4c8130d60200213abc02d58
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXfixes-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=util-macros xorgproto
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxfixes
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11
-  TITLE:=X11 miscellaneous *fixes* extension library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X11 miscellaneous 'fixes' extension library
+	DEPENDS:=+libx11
+	URL:=http://xorg.freedesktop.org/
+endef
+
+define Package/libxfixes/description
+	libXfixes - XFIXES Extension library
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -40,7 +43,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
