@@ -20,7 +20,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xset
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+libx11 +libxext +libxmu libxxf86misc
+	DEPENDS:=+libx11 +libxext +libxmu
 	TITLE:=X.Org xset application
 	URL:=http://xorg.freedesktop.org/
 endef
