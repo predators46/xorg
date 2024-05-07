@@ -16,6 +16,7 @@ PKG_FIXUP:=autoreconf
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/xrdp
@@ -38,14 +39,9 @@ CONFIGURE_ARGS += \
 	--disable-pam \
 	--enable-tjpeg
 
-define Build/Compile
-	# Build using host compiler and let it generate the files we need
-	# CFLAGS, CPPFLAGS & LDFLAGS need to be passed with CC because they are being ingored
-	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
-		-C $(PKG_BUILD_DIR)/common
-	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
-		-C $(PKG_BUILD_DIR)/keygen
-endef
+HOST_CONFIGURE_ARGS += \
+	--disable-pam \
+	--disable-tjpeg
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -88,4 +84,5 @@ define Package/xrdp/install
 	  $(1)/etc/
 endef
 
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,xrdp))
