@@ -1,15 +1,3 @@
-From e5fe34b2edd3a37ec7c5fc9a51f1a31c5d3de47d Mon Sep 17 00:00:00 2001
-From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 8 May 2024 04:56:15 +0800
-Subject: [PATCH] Add files via upload
-
----
- keygen/Makefile.am | 2 +-
- keygen/Makefile.in | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/keygen/Makefile.am b/keygen/Makefile.am
-index 2422196..793b3df 100644
 --- a/keygen/Makefile.am
 +++ b/keygen/Makefile.am
 @@ -20,7 +20,7 @@ xrdpsysconfdir = $(sysconfdir)/xrdp
@@ -21,8 +9,6 @@ index 2422196..793b3df 100644
  	fi && \
  	if [ ! -f $(DESTDIR)$(xrdpsysconfdir)/cert.pem ]; then \
  	  $(OPENSSL) req -x509 -newkey rsa:2048 -sha256 -nodes \
-diff --git a/keygen/Makefile.in b/keygen/Makefile.in
-index c9f1fc2..e64624d 100644
 --- a/keygen/Makefile.in
 +++ b/keygen/Makefile.in
 @@ -689,7 +689,7 @@ uninstall-am: uninstall-binPROGRAMS
