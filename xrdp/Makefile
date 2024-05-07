@@ -40,8 +40,11 @@ CONFIGURE_ARGS += \
 	--enable-tjpeg
 
 HOST_CONFIGURE_ARGS += \
+	--enable-static \
+	--disable-shared
 	--disable-pam \
-	--disable-tjpeg
+	--disable-tjpeg \
+	--without-x
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
