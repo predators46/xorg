@@ -12,11 +12,9 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-PKG_FIXUP:=autoreconf
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
-include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/xrdp
@@ -38,14 +36,6 @@ CONFIGURE_ARGS += \
 	--prefix=/usr \
 	--disable-pam \
 	--enable-tjpeg
-
-HOST_CONFIGURE_ARGS += \
-	--enable-static \
-	--disable-shared \
-	--disable-pam \
-	--disable-tjpeg \
-	--disable-x \
-	--without-x
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -88,5 +78,4 @@ define Package/xrdp/install
 	  $(1)/etc/
 endef
 
-$(eval $(call HostBuild))
 $(eval $(call BuildPackage,xrdp))
