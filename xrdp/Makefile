@@ -39,11 +39,12 @@ CONFIGURE_ARGS += \
 	--enable-tjpeg
 
 define Build/Compile
-	$(MAKE) -C $(PKG_BUILD_DIR)/keygen \
-	CC="$(HOSTCC)" \
-	CFLAGS="$(HOST_CFLAGS)" \
-	CPPFLAGS="$(HOST_CPPFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)"
+	# Build using host compiler and let it generate the files we need
+	# CFLAGS, CPPFLAGS & LDFLAGS need to be passed with CC because they are being ingored
+	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
+		-C $(PKG_BUILD_DIR)/common
+	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
+		-C $(PKG_BUILD_DIR)/keygen
 	$(call Build/Compile/Default)
 endef
 
