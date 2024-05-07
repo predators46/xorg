@@ -31,10 +31,6 @@ define Package/xrdp/description
 endef
 
 CONFIGURE_VARS += \
-	LDFLAGS_FOR_BUILD="$(HOST_LDFLAGS)" \
-	CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)" \
-	CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
-	CC_FOR_BUILD="$(HOSTCC)" \
 	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
 CONFIGURE_ARGS += \
@@ -42,11 +38,12 @@ CONFIGURE_ARGS += \
 	--disable-pam \
 	--enable-tjpeg
 
-# We can't use the default, as the default passes $(MAKE_ARGS), which
-# overrides CC, CFLAGS, etc. and defeats the *_FOR_BUILD definitions
-# passed in CONFIGURE_VARS
 define Build/Compile
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)
+	( cd $(PKG_BUILD_DIR)/keygen ; \
+		$(HOSTCC) keygen.c -c -o keygen.o ; \
+		$(HOSTCC) keygen.o -o xrdp-keygen ; \
+	)
+	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
