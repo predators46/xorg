@@ -39,8 +39,12 @@ CONFIGURE_ARGS += \
 	--enable-tjpeg
 
 define Build/Compile
-	$(HOSTCC) $(HOST_CFLAGS) -I$(PKG_BUILD_DIR)/common $(HOST_LDFLAGS) -znow -zrelro \
-		$(PKG_BUILD_DIR)/keygen/keygen.c -o $(PKG_BUILD_DIR)/keygen/keygen
+	$(MAKE) -C $(PKG_BUILD_DIR)/keygen \
+	CC="$(HOSTCC)" \
+	CFLAGS="$(HOST_CFLAGS)" \
+	CPPFLAGS="$(HOST_CPPFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)"
+	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
