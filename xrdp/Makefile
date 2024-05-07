@@ -39,11 +39,10 @@ CONFIGURE_ARGS += \
 	--enable-tjpeg
 
 define Build/Compile
-	( cd $(PKG_BUILD_DIR)/keygen ; \
-		$(HOSTCC) keygen.c -c -o keygen.o ; \
-		$(HOSTCC) keygen.o -o xrdp-keygen ; \
-	)
-	$(call Build/Compile/Default)
+	# Build using host compiler and let it generate the files we need
+	# CFLAGS, CPPFLAGS & LDFLAGS need to be passed with CC because they are being ingored
+	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
+		-C $(PKG_BUILD_DIR)/keygen
 endef
 
 define Build/InstallDev
