@@ -41,9 +41,10 @@ CONFIGURE_ARGS += \
 
 HOST_CONFIGURE_ARGS += \
 	--enable-static \
-	--disable-shared \
+	--disable-shared
 	--disable-pam \
 	--disable-tjpeg \
+	--disable-x \
 	--without-x
 
 define Build/InstallDev
