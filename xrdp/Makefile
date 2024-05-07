@@ -45,7 +45,6 @@ define Build/Compile
 		-C $(PKG_BUILD_DIR)/common
 	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
 		-C $(PKG_BUILD_DIR)/keygen
-	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
