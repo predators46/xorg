@@ -21,7 +21,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xrdp
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libjpeg-turbo +libice +libsm
+	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libturbojpeg-turbo +libice +libsm
 	TITLE:=An open source RDP server
 	URL:=http://www.xrdp.org/
 endef
@@ -31,7 +31,7 @@ define Package/xrdp/description
 endef
 
 CONFIGURE_VARS += \
-	TURBOJPEG_PATH=$(STAGING_DIR)/usr
+	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
