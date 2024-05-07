@@ -29,6 +29,14 @@ define Package/xrdp/description
 	xrdp provides a graphical login to remote machines using Microsoft Remote Desktop Protocol (RDP).
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	$(MAKE) -C $(PKG_BUILD_DIR)/common CC="$(HOSTCC)"
+	$(MAKE) -C $(PKG_BUILD_DIR)/keygen CC="$(HOSTCC)"
+	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/keygen/xrdp-keygen $(STAGING_DIR_HOSTPKG)/bin/
+endef
+
 CONFIGURE_VARS += \
 	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
