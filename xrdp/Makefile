@@ -12,6 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
+PKG_FIXUP:=autoreconf
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
@@ -20,7 +21,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xrdp
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libturbojpeg-turbo +libice +libsm
+	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libjpeg-turbo +libice +libsm
 	TITLE:=An open source RDP server
 	URL:=http://www.xrdp.org/
 endef
@@ -79,3 +80,4 @@ define Package/xrdp/install
 endef
 
 $(eval $(call BuildPackage,xrdp))
+
