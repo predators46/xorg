@@ -431,7 +431,7 @@ define Package/openssl-util/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/openssl $(1)/usr/bin/
 endef
 
-OPENSSL_HOST_TARGET:=linux-$(call qstrip,$(HOST_ARCH))-x86_64
+OPENSSL_HOST_TARGET:=linux-$(call qstrip,$(HOST_ARCH))-openwrt
 
 HOST_STAMP_CONFIGURED := $(HOST_STAMP_CONFIGURED)_$(shell echo $(OPENSSL_OPTIONS) | $(MKHASH) md5)
 
