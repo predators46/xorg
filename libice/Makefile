@@ -38,7 +38,7 @@ CONFIGURE_ARGS += \
 	--disable-docs \
 	--without-xmlto \
 	--without-xsltproc \
-	--without-fop \
+	--without-fop
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
