@@ -39,13 +39,14 @@ CONFIGURE_ARGS += \
 	--enable-tjpeg
 
 define Build/Compile
-	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
-		$(HOST_JOBS) -C $(PKG_BUILD_DIR)/common
-	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) \
-		$(HOST_JOBS) -C $(PKG_BUILD_DIR)/keygen
-	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/keygen/xrdp-keygen $(STAGING_DIR_HOSTPKG)/bin/
-	$(call Build/Compile/Default)
+	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/common \
+		CC="$(HOSTCC)"
+	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/keygen \
+		CC="$(HOSTCC)"
+	$(MAKE) -C $(PKG_BUILD_DIR) \
+		CC="$(HOSTCC)" \
+		DESTDIR="$(STAGING_DIR_HOSTPKG)" \
+		install
 endef
 
 define Build/InstallDev
