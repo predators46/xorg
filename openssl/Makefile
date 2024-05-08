@@ -435,7 +435,7 @@ OPENSSL_HOST_TARGET:=linux-$(call qstrip,$(HOST_ARCH))-x86_64
 
 HOST_STAMP_CONFIGURED := $(HOST_STAMP_CONFIGURED)_$(shell echo $(OPENSSL_OPTIONS) | $(MKHASH) md5)
 
-define Build/Configure
+define Host/Configure
 	(cd $(HOST_BUILD_DIR); \
 		./Configure $(OPENSSL_HOST_TARGET) \
 			--prefix=/usr \
@@ -451,7 +451,7 @@ endef
 
 HOST_CFLAGS += $(FPIC)
 
-define Build/Compile
+define Host/Compile
 	+$(MAKE) $(PKG_JOBS) -C $(HOST_BUILD_DIR) \
 		CC="$(HOSTCC)" \
 		SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH) \
