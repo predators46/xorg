@@ -12,6 +12,7 @@ PKG_VERSION:=3.0.13
 PKG_RELEASE:=1
 PKG_BUILD_FLAGS:=no-mips16 gc-sections no-lto
 
+HOST_BUILD_PARALLEL:=1
 PKG_BUILD_PARALLEL:=1
 
 PKG_BASE:=$(subst $(space),.,$(wordlist 1,2,$(subst .,$(space),$(PKG_VERSION))))
@@ -63,6 +64,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_WITH_TLS13 \
 	CONFIG_OPENSSL_WITH_WHIRLPOOL
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/openssl-module.mk
 
@@ -429,6 +431,39 @@ define Package/openssl-util/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/openssl $(1)/usr/bin/
 endef
 
+OPENSSL_HOST_TARGET:=linux-$(call qstrip,$(HOST_ARCH))-x86_64
+
+HOST_STAMP_CONFIGURED := $(HOST_STAMP_CONFIGURED)_$(shell echo $(OPENSSL_OPTIONS) | $(MKHASH) md5)
+
+define Build/Configure
+	(cd $(HOST_BUILD_DIR); \
+		./Configure $(OPENSSL_HOST_TARGET) \
+			--prefix=/usr \
+			--libdir=lib \
+			--openssldir=/etc/ssl \
+			$(HOST_CFLAGS) \
+			$(HOST_CPPFLAGS) \
+			$(HOST_LDFLAGS) \
+			$(OPENSSL_OPTIONS) && \
+		{ [ -f $(HOST_STAMP_CONFIGURED) ] || make clean; } \
+	)
+endef
+
+HOST_CFLAGS += $(FPIC)
+
+define Build/Compile
+	+$(MAKE) $(PKG_JOBS) -C $(HOST_BUILD_DIR) \
+		CC="$(HOSTCC)" \
+		SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH) \
+		$(OPENSSL_MAKEFLAGS) \
+		all
+	$(MAKE) -C $(HOST_BUILD_DIR) \
+		CC="$(HOSTCC)" \
+		DESTDIR="$(STAGING_DIR_HOSTPKG)" \
+		$(OPENSSL_MAKEFLAGS) \
+		install_sw install_ssldirs
+endef
+
 $(eval $(call BuildPackage,libopenssl))
 $(eval $(call BuildPackage,libopenssl-conf))
 $(eval $(call BuildPackage,libopenssl-afalg))
@@ -436,3 +471,4 @@ $(eval $(call BuildPackage,libopenssl-devcrypto))
 $(eval $(call BuildPackage,libopenssl-legacy))
 $(eval $(call BuildPackage,libopenssl-padlock))
 $(eval $(call BuildPackage,openssl-util))
+$(eval $(call HostBuild))
