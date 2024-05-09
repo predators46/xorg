@@ -21,7 +21,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xrdp
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libturbojpeg-turbo +libice +libsm
+	DEPENDS:=+libx11 +libxfixes +libxrandr +libopenssl +libturbojpeg-turbo +libice +libsm +libpam
 	TITLE:=An open source RDP server
 	URL:=http://www.xrdp.org/
 endef
@@ -35,7 +35,7 @@ CONFIGURE_VARS += \
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
-	--disable-pam \
+	--enable-pam \
 	--enable-tjpeg
 
 define Build/InstallDev
