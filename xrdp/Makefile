@@ -38,17 +38,6 @@ CONFIGURE_ARGS += \
 	--disable-pam \
 	--enable-tjpeg
 
-define Build/Compile
-	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/common \
-		CC="$(HOSTCC)"
-	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/keygen \
-		CC="$(HOSTCC)"
-	$(MAKE) -C $(PKG_BUILD_DIR) \
-		CC="$(HOSTCC)" \
-		DESTDIR="$(STAGING_DIR_HOSTPKG)" \
-		install
-endef
-
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	 $(1)/usr/include \
