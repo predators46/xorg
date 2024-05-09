@@ -1,0 +1,11 @@
+--- a/keygen/Makefile.am
++++ b/keygen/Makefile.am
+@@ -20,7 +20,7 @@ xrdpsysconfdir = $(sysconfdir)/xrdp
+ install-data-hook:
+        umask 077 && \
+        if [ ! -f $(DESTDIR)$(xrdpsysconfdir)/rsakeys.ini ]; then \
+-         ./xrdp-keygen xrdp $(DESTDIR)$(xrdpsysconfdir)/rsakeys.ini; \
++         ./xrdp-keygen xrdp $(DESTDIR)$(xrdpsysconfdir)/rsakeys.ini || : ; \
+        fi && \
+        if [ ! -f $(DESTDIR)$(xrdpsysconfdir)/cert.pem ]; then \
+          $(OPENSSL) req -x509 -newkey rsa:2048 -sha256 -nodes \
