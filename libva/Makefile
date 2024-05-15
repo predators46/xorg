@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libva
@@ -13,27 +8,30 @@ PKG_SOURCE_URL:=https://github.com/intel/libva/releases/download/$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_HASH:=f7c3fffef3f04eb146e036dad2587d852bfb70e4926d014bf437244915ef7425
 
-##PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
-##PKG_BUILD_DEPENDS:=util-macros xorgproto
-PKG_INSTALL:=1
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=License
+PKG_LICENSE_FILES:=COPYING
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/libva
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11 +libxfixes +libxext +libdrm
-  TITLE:=Video Acceleration (VA) API for Linux
-  URL:=https://freedesktop.org/wiki/Software/vaapi
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Video Acceleration (VA) API for Linux
+	DEPENDS:=+libx11 +libxfixes +libxext +libdrm
+	URL:=https://freedesktop.org/wiki/Software/vaapi
 endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --enable-x11 \
-  --disable-glx \
-  --disable-wayland \
-  --disable-static \
-  --enable-shared
+define Package/libva/description
+	VA-API is an open-source library and API specification, which provides access to graphics hardware acceleration capabilities for video processing.
+	It consists of a main library and driver-specific acceleration backends for each supported hardware vendor.
+endef
+
+MESON_ARGS += \
+	-Dwith_x11=yes \
+	-Dwith_glx=no \
+	-Dwith_wayland=no
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -41,7 +39,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/va \
 	  $(1)/usr/include/
 
 	$(CP) \
