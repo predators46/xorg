@@ -18,11 +18,13 @@ PKG_BUILD_DEPENDS:=gobject-introspection/host python3/host
 PKG_BUILD_PARALLEL:=1
 HOST_BUILD_PARALLEL:=1
 PYTHON3_PKG_BUILD:=0
+PYTHON3_HOST_BUILD:=0
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
 
 define Package/gobject-introspection
 	SECTION:=libs
