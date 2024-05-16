@@ -1,0 +1,53 @@
+From 6ac11bba115a9a8919dca1023d251c3dd90b97f3 Mon Sep 17 00:00:00 2001
+From: Philip Chimento <philip.chimento@gmail.com>
+Date: Sun, 21 Apr 2024 15:20:08 -0700
+Subject: [PATCH] build: Remove custom target generated names
+
+Since Meson 0.60, names for custom targets are optional, and will be
+named after the output file if not specified.
+
+Generating these names depended on a broken feature, which recent Meson
+versions complain about: using a non-simple object in format().
+---
+ gir/meson.build   | 4 ++--
+ tests/meson.build | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/gir/meson.build b/gir/meson.build
+index 3a016831d..2c23d839a 100644
+--- a/gir/meson.build
++++ b/gir/meson.build
+@@ -520,7 +520,7 @@ gircompiler_command += [
+ ]
+ 
+ foreach gir: gir_files
+-  typelibs += custom_target('generate-typelib-@0@'.format(gir).underscorify(),
++  typelibs += custom_target(
+     input: gir,
+     output: '@BASENAME@.typelib',
+     depends: [gobject_gir, gircompiler, ],
+@@ -531,7 +531,7 @@ foreach gir: gir_files
+ endforeach
+ 
+ foreach gir: uninstalled_gir_files
+-  typelibs += custom_target('generate-typelib-@0@'.format(gir).underscorify(),
++  typelibs += custom_target(
+     input: gir,
+     output: '@BASENAME@.typelib',
+     depends: [gobject_gir, gircompiler, ],
+diff --git a/tests/meson.build b/tests/meson.build
+index 832fea44a..ecd45fed5 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -158,7 +158,7 @@ if (glib_dep.type_name() == 'pkgconfig' and
+   )]
+ 
+   foreach gir : test_gir_files
+-    test_typelibs += custom_target('generate-typelib-@0@'.format(gir).underscorify(),
++    test_typelibs += custom_target(
+       input: gir,
+       output: '@BASENAME@.typelib',
+       depends: [gobject_gir, ],
+-- 
+GitLab
+
