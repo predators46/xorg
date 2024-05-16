@@ -42,7 +42,7 @@ MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dgir_dir_prefix="$(STAGING_DIR_HOSTPKG)"
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
 MESON_ARGS += \
 	-Ddoctool=disabled \
