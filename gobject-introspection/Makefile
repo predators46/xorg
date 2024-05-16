@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING COPYING.GPL COPYING.LGPL
 
-HOST_BUILD_DEPENDS:=glib2/host pcre2/host python3/host python-setuptools-scm/host
+HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools-scm/host
 PKG_BUILD_DEPENDS:=gobject-introspection/host python3/host
 
 PKG_BUILD_PARALLEL:=1
@@ -30,7 +30,7 @@ define Package/gobject-introspection
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Introspection system for GObject-based libraries
-	DEPENDS:=+glib2 +libcairo
+	DEPENDS:=+glib2
 	URL:=https://wiki.gnome.org/action/show/Projects/GObjectIntrospection
 endef
 
@@ -46,9 +46,11 @@ MESON_HOST_ARGS += \
 	-Dbuild_introspection_data=false
 
 MESON_ARGS += \
+	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	-Dbuild_introspection_data=false
 
 define Meson/CreateNativeFile
 	$(STAGING_DIR_HOST)/bin/sed \
