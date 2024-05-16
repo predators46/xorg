@@ -30,7 +30,7 @@ define Package/gobject-introspection
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Introspection system for GObject-based libraries
-	DEPENDS:=+glib2 +python3 +python3-setuptools
+	DEPENDS:=+glib2 +libffi +python3 +python3-setuptools
 	URL:=https://wiki.gnome.org/action/show/Projects/GObjectIntrospection
 endef
 
