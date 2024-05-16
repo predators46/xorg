@@ -42,7 +42,8 @@ MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	-Dbuild_introspection_data=false
 
 MESON_ARGS += \
 	-Ddoctool=disabled \
