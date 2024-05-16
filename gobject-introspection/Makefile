@@ -46,10 +46,7 @@ MESON_HOST_ARGS += \
 	-Dbuild_introspection_data=false
 
 MESON_VARS += \
-	python= \
-	$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3) \
-	$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes) \
-	$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)
+	python="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
 MESON_ARGS += \
 	-Dcairo=disabled \
