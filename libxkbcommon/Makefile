@@ -11,8 +11,6 @@ PKG_HASH:=65782f0a10a4b455af9c6baab7040e2f537520caa2ec2092805cdfd36863b247
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=BSD-3-Clause
 
-PKG_BUILD_DEPENDS:=wayland wayland-protocols libx11 libxcb
-
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 
@@ -27,7 +25,7 @@ define Package/libxkbcommon
   CATEGORY:=Libraries
   TITLE:=libxkbcommon
   URL:=https://xkbcommon.org/
-  DEPENDS:=+libxml2 +xkeyboard-config
+  DEPENDS:=+libxml2 +libwayland +wayland-protocols +libx11 +libxcb +xkeyboard-config
 endef
 
 define Package/libxkbcommon/description
