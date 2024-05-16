@@ -1,49 +1,51 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gobject-introspection
 PKG_VERSION:=1.80.1
-_PKG_VERSION:=1.80
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/$(_PKG_VERSION)
+PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/1.80
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=a1df7c424e15bda1ab639c00e9051b9adf5cea1a9e512f8a603b53cd199bc6d8
 
-#PKG_BUILD_DEPENDS:=gobject-introspection/host python/host
-#PKG_BUILD_PARALLEL:=1
-#PKG_INSTALL:=1
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=GNU Library General Public License v2 only
+PKG_LICENSE_FILES:=COPYING COPYING.GPL COPYING.LGPL
+
+HOST_BUILD_DEPENDS:=glib2/host python3/host
+PKG_BUILD_DEPENDS:=gobject-introspection/host python3/host
+
+PKG_BUILD_PARALLEL:=1
 HOST_BUILD_PARALLEL:=1
-PKG_HOST_ONLY:=1
+PYTHON3_PKG_BUILD:=0
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/gobject-introspection
-  SECTION:=xorg
-  CATEGORY:=Xorg
-  DEPENDS:=+glib2 +cairo
-  TITLE:=Introspection system for GObject-based libraries
-  URL:=https://wiki.gnome.org/action/show/Projects/GObjectIntrospection
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Introspection system for GObject-based libraries
+	DEPENDS:=+glib2 +libcairo
+	URL:=https://wiki.gnome.org/action/show/Projects/GObjectIntrospection
 endef
 
-##MAKE_FLAGS+=GI_CROSS_LAUNCHER="$(STAGING_DIR_HOSTPKG)/bin/g-ir-compiler"
+define Package/gobject-introspection/description
+	The goal of the project is to describe the APIs and collect them in a uniform, machine readable format.
+endef
 
-TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+MESON_HOST_ARGS += \
+	-Dcairo=disabled \
+	-Ddoctool=disabled \
+	-Dgtk_doc=false \
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
-CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --disable-static \
-  --disable-doctool
-
-#HOST_CONFIGURE_ARGS += \
-#  --disable-static \
-#  --disable-doctool \
-#  --with-python=$(STAGING_DIR_HOSTPKG)/bin/python$(PYTHON_VERSION)
+MESON_ARGS += \
+	-Ddoctool=disabled \
+	-Dgtk_doc=false \
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
