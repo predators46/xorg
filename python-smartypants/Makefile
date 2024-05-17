@@ -5,7 +5,7 @@ PKG_VERSION:=2.0.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=smartypants.py-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/leohemsted/smartypants.py/archive/
+PKG_SOURCE_URL:=https://codeload.github.com/leohemsted/smartypants.py/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=b98191911ff3b4144ef8ad53e776a2d0ad24bd508a905c6ce523597c40022773
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
