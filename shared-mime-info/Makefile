@@ -1,129 +1,63 @@
 #
-# Copyright (C) 2007-2019 OpenWrt.org
-#
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=glib2
-PKG_VERSION:=2.74.7
+PKG_NAME:=shared-mime-info
+PKG_VERSION:=2.4
 PKG_RELEASE:=3
 
-PKG_SOURCE:=glib-$(PKG_VERSION).tar.xz
-PKG_SOURCE_URL:=@GNOME/glib/$(basename $(PKG_VERSION))
-PKG_HASH:=196ab86c27127a61b7a70c3ba6af7b97bdc01c07cd3b21abd5e778b955eccb1b
+PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
 
-PKG_MAINTAINER:=Peter Wagner <tripolar@gmx.at>
-PKG_LICENSE:=LGPL-2.1-or-later
+PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=COPYING
-PKG_CPE_ID:=cpe:/a:gnome:glib
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/glib-$(PKG_VERSION)
-PKG_CONFIG_DEPENDS:=CONFIG_BUILD_NLS
-PKG_FORTIFY_SOURCE:=0
-PKG_BUILD_FLAGS:=gc-sections
+PKG_SOURCE:=shared-mime-info-$(PKG_VERSION).tar.bz2
+PKG_SOURCE_URL:=https://gitlab.freedesktop.org/xdg/$(PKG_NAME)/-/archive/$(PKG_VERSION)
+PKG_HASH:=32dc32ae39ff1c1bf8434dd3b36770b48538a1772bc0298509d034f057005992
 
-HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/glib-$(PKG_VERSION)
-HOST_BUILD_DEPENDS:=pcre2/host libffi/host libiconv-full/host
+PKG_BUILD_DEPENDS:=gettext-full/host
 
-include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 include $(INCLUDE_DIR)/meson.mk
 
-define Package/glib2
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=$(ICONV_DEPENDS) $(INTL_DEPENDS) +zlib +libpthread +libffi +libattr +libpcre2
-  TITLE:=glib 2.0
-  URL:=http://www.gtk.org/
+define Package/shared-mime-info
+  SECTION:=utils
+  CATEGORY:=Utilities
+  DEPENDS:=+glib2 +libxml2 +libstdcpp
+  TITLE:=MIME-type information
+  URL:=https://freedesktop.org/wiki/Software/shared-mime-info/
 endef
 
-define Package/glib2/description
-  The GLib library of C routines
+define Package/shared-mime-info/description
+	The shared-mime-info package contains a database of MIME types and their file extensions.
 endef
-
-COMP_ARGS:=
-
-# default feature=auto see meson_options.txt
-COMP_ARGS+=-Dglib_debug=disabled
-
-# default feature=auto see meson_options.txt
-COMP_ARGS+=-Dlibmount=disabled
-
-# default feature=auto see meson_options.txt
-COMP_ARGS+=-Dselinux=disabled
-
-
-# default boolean=false see meson_options.txt
-COMP_ARGS+=-Dforce_posix_threads=true
-
-# default boolean=true see meson_options.txt
-COMP_ARGS+=-Dglib_assert=false
-
-# default boolean=true see meson_options.txt
-COMP_ARGS+=-Dtests=false
-
-
-MESON_HOST_ARGS += $(COMP_ARGS) -Dxattr=false -Ddefault_library=static -Dnls=disabled -Dforce_fallback_for=libpcre2-8
-MESON_ARGS += $(COMP_ARGS) -Dxattr=true -Db_lto=true -Ddefault_library=both -Dnls=$(if $(CONFIG_BUILD_NLS),en,dis)abled
 
 define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_DIR) $(1)/usr/share/
+	$(CP) \
+		$(PKG_INSTALL_DIR)/usr/share/* \
+		$(1)/usr/share/
+endef
+
+define Package/shared-mime-info/install
+	$(INSTALL_DIR) $(1)/usr/bin/
 	$(CP) \
 		$(PKG_INSTALL_DIR)/usr/bin/* \
 		$(1)/usr/bin/
-
-	$(INSTALL_DIR) $(1)/usr/include
+	$(INSTALL_DIR) $(1)/usr/share/
 	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/include/glib-2.0 \
-		$(1)/usr/include/
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/glib-2.0/include/*.h \
-		$(1)/usr/include/glib-2.0/
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/include/gio-unix-2.0 \
-		$(1)/usr/include/
-
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/glib-2.0 \
-		$(1)/usr/lib/
-
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/*.{so*,a} \
-		$(1)/usr/lib/
-
-	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
-	$(INSTALL_DATA) \
-		$(PKG_INSTALL_DIR)/usr/lib/pkgconfig/*.pc \
-		$(1)/usr/lib/pkgconfig
-	$(foreach BIN,glib_genmarshal glib_mkenums,
-		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/glib-2.0.pc
-	)
-	$(foreach BIN,glib_compile_resources gdbus_codegen,
-		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/gio-2.0.pc
-	)
-
-	$(INSTALL_DIR) $(2)/share/aclocal/
-	$(INSTALL_DATA) \
-		$(PKG_INSTALL_DIR)/usr/share/aclocal/*.m4  \
-		$(2)/share/aclocal/
-
-	$(INSTALL_DIR) $(1)/usr/share/glib-2.0
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/share/glib-2.0/codegen \
-		$(1)/usr/share/glib-2.0/
+		$(PKG_INSTALL_DIR)/usr/share/* \
+		$(1)/usr/share/
 endef
 
-define Package/glib2/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/*.so* \
-		$(1)/usr/lib/
+define Package/shared-mime-info/postinst
+#!/bin/sh
+
+update-mime-database /usr/share/mime/
 endef
 
-$(eval $(call HostBuild))
-$(eval $(call BuildPackage,glib2))
+$(eval $(call BuildPackage,shared-mime-info))
