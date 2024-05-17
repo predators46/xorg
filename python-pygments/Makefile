@@ -4,7 +4,7 @@ PKG_NAME:=python-pygments
 PKG_VERSION:=2.18.0
 PKG_RELEASE:=1
 
-PYPI_NAME:=Pygments
+PYPI_NAME:=pygments
 PKG_HASH:=786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
