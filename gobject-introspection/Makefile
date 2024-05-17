@@ -38,15 +38,19 @@ define Package/gobject-introspection/description
 	The goal of the project is to describe the APIs and collect them in a uniform, machine readable format.
 endef
 
+MESON_HOST_VARS += \
+	python="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	PYTHON_CPPFLAGS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)" \
+	PYTHON_LIBS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
+
 MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
 	-Dbuild_introspection_data=false
 
 MESON_VARS += \
-	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	python="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
 	PYTHON_CPPFLAGS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)" \
 	PYTHON_LIBS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
 
@@ -55,40 +59,6 @@ MESON_ARGS += \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
 	-Dbuild_introspection_data=false
-
-define Meson/CreateNativeFile
-	$(STAGING_DIR_HOST)/bin/sed \
-		-e "s|@CC@|$(foreach BIN,$(HOSTCC),'$(BIN)',)|" \
-		-e "s|@CXX@|$(foreach BIN,$(HOSTCXX),'$(BIN)',)|" \
-		-e "s|@PKGCONFIG@|$(PKG_CONFIG)|" \
-		-e "s|@CMAKE@|$(STAGING_DIR_HOST)/bin/cmake|" \
-		-e "s|@CFLAGS@|$(foreach FLAG,$(HOST_CFLAGS) $(HOST_CPPFLAGS),'$(FLAG)',)|" \
-		-e "s|@CXXFLAGS@|$(foreach FLAG,$(HOST_CXXFLAGS) $(HOST_CPPFLAGS),'$(FLAG)',)|" \
-		-e "s|@LDFLAGS@|$(foreach FLAG,$(HOST_LDFLAGS),'$(FLAG)',)|" \
-		-e "s|@PREFIX@|$(HOST_BUILD_PREFIX)|" \
-		< $(MESON_DIR)/openwrt-native.txt.in \
-		> $(1)
-endef
-
-define Meson/CreateCrossFile
-	$(STAGING_DIR_HOST)/bin/sed \
-		-e "s|@CC@|$(foreach BIN,$(TARGET_CC),'$(BIN)',)|" \
-		-e "s|@CXX@|$(foreach BIN,$(TARGET_CXX),'$(BIN)',)|" \
-		-e "s|@LD@|$(foreach FLAG,$(TARGET_LINKER),'$(FLAG)',)|" \
-		-e "s|@AR@|$(TARGET_AR)|" \
-		-e "s|@STRIP@|$(TARGET_CROSS)strip|" \
-		-e "s|@NM@|$(TARGET_NM)|" \
-		-e "s|@PKGCONFIG@|$(PKG_CONFIG)|" \
-		-e "s|@CMAKE@|$(STAGING_DIR_HOST)/bin/cmake|" \
-		-e "s|@CFLAGS@|$(foreach FLAG,$(TARGET_CFLAGS) $(EXTRA_CFLAGS) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS),'$(FLAG)',)|" \
-		-e "s|@CXXFLAGS@|$(foreach FLAG,$(TARGET_CXXFLAGS) $(EXTRA_CXXFLAGS) $(TARGET_CPPFLAGS) $(EXTRA_CPPFLAGS),'$(FLAG)',)|" \
-		-e "s|@LDFLAGS@|$(foreach FLAG,$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS),'$(FLAG)',)|" \
-		-e "s|@ARCH@|$(MESON_ARCH)|" \
-		-e "s|@CPU@|$(MESON_CPU)|" \
-		-e "s|@ENDIAN@|$(if $(CONFIG_BIG_ENDIAN),big,little)|" \
-		< $(MESON_DIR)/openwrt-cross.txt.in \
-		> $(1)
-endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
