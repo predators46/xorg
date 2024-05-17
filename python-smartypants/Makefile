@@ -13,10 +13,8 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=BSD-2-Clause license
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_REMOVE_FILES:=Makefile
-
-HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-cython/host
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host python-cython/host
+HOST_BUILD_DEPENDS:=python-setuptools-scm/host
+PKG_BUILD_DEPENDS:=python-setuptools-scm/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
