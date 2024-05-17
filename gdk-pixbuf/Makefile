@@ -33,7 +33,7 @@ endef
 
 MESON_ARGS += \
 	-Dgtk_doc=false \
-	-Dintrospection=false \
+	-Dintrospection=disabled \
 	-Dtests=false
 
 define Build/InstallDev
