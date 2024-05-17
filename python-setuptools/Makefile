@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-setuptools
 PKG_VERSION:=69.0.2
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PYPI_NAME:=setuptools
 PKG_HASH:=735896e78a4742605974de002ac60562d286fa8051a7e2299445e8e8fbb01aa6
@@ -19,9 +19,19 @@ PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Jeffery To <jeffery.to@gmail.com>
 CPE_ID:=cpe:/a:python:setuptools
 
-include ../pypi.mk
+HOST_BUILD_DEPENDS:= \
+	python3/host \
+	python-build/host \
+	python-installer/host \
+	python-wheel/host \
+	python-packaging/host \
+	python-typing-extensions/host
+
+include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
-include ../python3-package.mk
+include $(INCLUDE_DIR)/host-build.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
 
 define Package/python3-setuptools/Default
   SECTION:=lang
@@ -80,3 +90,4 @@ $(eval $(call BuildPackage,python3-setuptools))
 
 $(eval $(call BuildPackage,python3-pkg-resources-src))
 $(eval $(call BuildPackage,python3-setuptools-src))
+$(eval $(call HostBuild))
