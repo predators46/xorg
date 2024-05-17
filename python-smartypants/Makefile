@@ -4,7 +4,9 @@ PKG_NAME:=python-smartypants
 PKG_VERSION:=2.0.1
 PKG_RELEASE:=1
 
-PKG_SOURCE:=smartypants.py-$(PKG_VERSION).tar.gz
+PYPI_NAME:=smartypants.py
+
+#PKG_SOURCE:=smartypants.py-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/leohemsted/smartypants.py/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=b98191911ff3b4144ef8ad53e776a2d0ad24bd508a905c6ce523597c40022773
 
@@ -15,6 +17,7 @@ PKG_LICENSE_FILES:=LICENSE
 HOST_BUILD_DEPENDS:=python-setuptools-scm/host
 PKG_BUILD_DEPENDS:=python-setuptools-scm/host
 
+include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
