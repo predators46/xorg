@@ -12,6 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DEPENDS:=glib2/host
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
