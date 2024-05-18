@@ -21,13 +21,13 @@ HOST_BUILD_DEPENDS:= \
 	python-packaging/host \
 	python-pygments/host \
 	python-requests/host \
-	snowballstemmer/host \
-	sphinxcontrib-applehelp/host \
-	sphinxcontrib-devhelp/host \
-	sphinxcontrib-htmlhelp/host \
-	sphinxcontrib-jsmath/host \
-	sphinxcontrib-qthelp/host \
-	sphinxcontrib-serializinghtml/host
+	python-snowballstemmer/host \
+	python-sphinxcontrib-applehelp/host \
+	python-sphinxcontrib-devhelp/host \
+	python-sphinxcontrib-htmlhelp/host \
+	python-sphinxcontrib-jsmath/host \
+	python-sphinxcontrib-qthelp/host \
+	python-sphinxcontrib-serializinghtml/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
