@@ -52,7 +52,7 @@ define Build/InstallDev
 	  $(PKG_INSTALL_DIR)/usr/share/pkgconfig \
 	  $(1)/usr/share/
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/$(PYTHON3_PKG_DIR)/{gi_docgen-*,gidocgen} \
+	  $(PKG_INSTALL_DIR)/$(PYTHON3_PKG_DIR)/gidocgen \
 	  $(1)/$(PYTHON3_PKG_DIR)
 endef
 
