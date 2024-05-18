@@ -39,6 +39,10 @@ define Package/gobject-introspection/description
 	The goal of the project is to describe the APIs and collect them in a uniform, machine readable format.
 endef
 
+define Meson
+	$(2) $(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3) $(STAGING_DIR_HOST)/bin/meson.py $(1)
+endef
+
 define Meson/CreateNativeFile
 	$(STAGING_DIR_HOST)/bin/sed \
 		-e "s|@CC@|$(foreach BIN,$(HOSTCC),'$(BIN)',)|" \
