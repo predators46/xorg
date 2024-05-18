@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=gi-docgen
+PKG_NAME:=python-gi-docgen
 PKG_VERSION:=2023.3
 PKG_RELEASE:=1
 
@@ -52,3 +52,4 @@ $(eval $(call Py3Package,python3-gi-docgen))
 $(eval $(call BuildPackage,python3-gi-docgen))
 $(eval $(call BuildPackage,python3-gi-docgen-src))
 $(eval $(call HostBuild))
+
