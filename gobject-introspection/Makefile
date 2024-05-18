@@ -85,6 +85,11 @@ MESON_HOST_ARGS += \
 	-Dgtk_doc=false \
 	-Dbuild_introspection_data=false
 
+MESON_VARS += \
+	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	PYTHON_CPPFLAGS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)" \
+	PYTHON_LIBS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
+
 MESON_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
