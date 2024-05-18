@@ -65,7 +65,7 @@ define Package/gi-docgen/install
 	  $(PKG_INSTALL_DIR)/usr/bin/gi-docgen \
 	  $(1)/usr/bin/
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/$(PYTHON3_PKG_DIR)/{gi_docgen-*,gidocgen} \
+	  $(PKG_INSTALL_DIR)/$(PYTHON3_PKG_DIR)/gidocgen \
 	  $(1)/$(PYTHON3_PKG_DIR)
 endef
 
