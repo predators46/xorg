@@ -11,7 +11,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=License
 PKG_LICENSE_FILES:=LICENSE.txt
 
-HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-smartypants/host
+HOST_BUILD_DEPENDS:=python-setuptools-scm/host
 PKG_BUILD_DEPENDS:=python-setuptools-scm/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
@@ -26,7 +26,7 @@ define Package/python3-typogrify
   CATEGORY:=Languages
   TITLE:=Filters to enhance web typography, including support for Django & Jinja templates
   URL:=https://github.com/mintchaos/typogrify
-  DEPENDS:=+python3-smartypants
+  DEPENDS:=+python3
 endef
 
 define Package/python3-typogrify/description
