@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=sphinxcontrib-htmlhelp
+PKG_NAME:=python-sphinxcontrib-htmlhelp
 PKG_VERSION:=2.0.5
 PKG_RELEASE:=1
 
