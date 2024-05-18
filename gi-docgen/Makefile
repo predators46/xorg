@@ -39,8 +39,8 @@ define Package/gi-docgen/description
 endef
 
 define Meson
-	$(2) $(STAGING_DIR_HOSTPKG)/bin/$(PYTHON) \
-	$(STAGING_DIR_HOST)/bin/meson.py $(1)
+	$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON) \
+	$(STAGING_DIR_HOST)/bin/meson.py
 endef
 
 define Build/InstallDev
