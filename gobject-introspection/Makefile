@@ -13,7 +13,7 @@ PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING COPYING.GPL COPYING.LGPL
 
 HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools-scm/host
-#PKG_BUILD_DEPENDS:=gobject-introspection/host python3
+PKG_BUILD_DEPENDS:=glib2/host python3 python-setuptools-scm/host
 
 PKG_BUILD_PARALLEL:=1
 HOST_BUILD_PARALLEL:=1
