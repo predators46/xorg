@@ -22,6 +22,8 @@ include $(INCLUDE_DIR)/host-build.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
 
+MAKE_PATH:=docs
+
 define Package/python3-smartypants
   SUBMENU:=Python
   SECTION:=lang
