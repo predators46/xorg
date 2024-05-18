@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=snowballstemmer
+PKG_NAME:=python-snowballstemmer
 PKG_VERSION:=2.2.0
 PKG_RELEASE:=1
 
