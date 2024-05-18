@@ -24,6 +24,7 @@ include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include $(TOPDIR)/feeds/packages/lang/python/python3-host.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
 
 define Package/gobject-introspection
