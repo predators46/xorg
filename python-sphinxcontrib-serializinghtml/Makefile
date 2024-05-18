@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=sphinxcontrib-serializinghtml
+PKG_NAME:=python-sphinxcontrib-serializinghtml
 PKG_VERSION:=1.1.10
 PKG_RELEASE:=1
 
