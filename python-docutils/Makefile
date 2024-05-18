@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-docutils
 PKG_VERSION:=0.20.1
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PYPI_NAME:=docutils
 PKG_HASH:=f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b
