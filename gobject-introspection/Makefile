@@ -94,7 +94,8 @@ MESON_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dbuild_introspection_data=false
+	-Dpython="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
+	-Dbuild_introspection_data=true
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
