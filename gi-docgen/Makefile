@@ -14,6 +14,9 @@ PKG_LICENSE_FILES:=LICENSES
 
 HOST_BUILD_DEPENDS:=python3/host python-jinja2/host python-markdown/host python-markupsafe/host python-packaging/host python-pygments/host python-typogrify/host
 
+PYTHON3_HOST_BUILD:=0
+PYTHON3_PKG_BUILD:=0
+
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/meson.mk
