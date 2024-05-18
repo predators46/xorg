@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=sphinxcontrib-qthelp
+PKG_NAME:=python-sphinxcontrib-qthelp
 PKG_VERSION:=1.0.7
 PKG_RELEASE:=1
 
