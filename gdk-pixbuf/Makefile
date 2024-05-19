@@ -34,8 +34,11 @@ endef
 
 MESON_ARGS += \
 	-Dgtk_doc=false \
+	-Ddocs=false \
 	-Dintrospection=disabled \
-	-Dtests=false
+	-Dman=false \
+	-Dtests=false \
+	-Dinstalled_tests=false
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
