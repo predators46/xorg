@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING COPYING.GPL COPYING.LGPL
 
-HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools/host
+HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools/host pcre2/host
 PKG_BUILD_DEPENDS:=glib2/host python3 python-setuptools/host
 
 PKG_BUILD_PARALLEL:=1
@@ -37,13 +37,6 @@ endef
 
 define Package/gobject-introspection/description
 	The goal of the project is to describe the APIs and collect them in a uniform, machine readable format.
-endef
-
-TARGET_CPPFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)"
-#TARGET_LDFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
-
-define Meson
-	$(2) $(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3) $(STAGING_DIR_HOST)/bin/meson.py $(1)
 endef
 
 define Meson/CreateNativeFile
@@ -82,16 +75,13 @@ define Meson/CreateCrossFile
 		> $(1)
 endef
 
+HOST_LDFLAGS +=-lgobject-2.0 -lglib-2.0 -lpcre2-8
+
 MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
 	-Dgtk_doc=false \
-	-Dbuild_introspection_data=false
-
-MESON_VARS += \
-	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)" \
-	PYTHON_CPPFLAGS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)" \
-	PYTHON_LIBS="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
+	-Dbuild_introspection_data=true
 
 MESON_ARGS += \
 	-Dcairo=disabled \
