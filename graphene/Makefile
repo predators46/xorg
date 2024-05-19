@@ -1,41 +1,36 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=graphene
 PKG_VERSION:=1.10.8
-_PKG_VERSION:=1.10
 PKG_RELEASE:=1
 
-#PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=http://ftp.gnome.org/pub/GNOME/sources/$(PKG_NAME)/$(_PKG_VERSION)/
-##141PKG_SOURCE_VERSION:=b9f909aad03d845155e3da3c1ab9236adb1b3a16
-#PKG_SOURCE_VERSION:=729cd7f59471cd03e7d97908650acd2b2b0ba9ee
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=a37bb0e78a419dcbeaa9c7027bcff52f5ec2367c25ec859da31dfde2928f279a
+PKG_SOURCE_URL:=https://github.com/ebassi/graphene/archive/$(PKG_VERSION)
+PKG_HASH:=922dc109d2dc5dc56617a29bd716c79dd84db31721a8493a13a5f79109a4a4ed
 
-#HOST_BUILD_DEPENDS:=util-macros/host mkfontscale/host
-PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
-PKG_FIXUP:=autoreconf
+PKG_BUILD_DEPENDS:=glib2/host
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/graphene
-  SECTION:=xorg
-  CATEGORY:=Xorg
-  DEPENDS:=+glib2
-  TITLE:=A thin layer of types for graphic libraries
-  URL:=https://github.com/ebassi/graphene
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=A thin layer of graphic data types
+	DEPENDS:=+glib2
+	URL:=https://github.com/ebassi/graphene
 endef
 
-TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+define Package/graphene/description
+	A thin layer of types for graphic libraries
+endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr
+MESON_ARGS += \
+	-Dgtk_doc=false \
+	-Dgobject_types=false \
+	-Dintrospection=false \
+	-Dtests=false \
+	-Dinstalled_tests=false
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
