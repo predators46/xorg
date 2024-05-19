@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING COPYING.GPL COPYING.LGPL
 
-HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools/host pcre2/host
+HOST_BUILD_DEPENDS:=glib2/host python3/host python-setuptools-scm/host pcre2/host libffi/host
 PKG_BUILD_DEPENDS:=glib2/host python3 python-setuptools/host
 
 PKG_BUILD_PARALLEL:=1
