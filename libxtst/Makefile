@@ -21,7 +21,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/libxtst
 	SECTION:=libs
 	CATEGORY:=Libraries
-	TITLE:=TITLE:=X11 Testing -- Resource extension library
+	TITLE:=Xlib-based library for XTEST & RECORD extensions
 	DEPENDS:=+libx11 +libxext +libxi
 	URL:=https://xorg.freedesktop.org/
 endef
