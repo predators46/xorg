@@ -32,7 +32,7 @@ endef
 MESON_ARGS += \
 	-Dgtk_doc=false \
 	-Dgobject_types=false \
-	-Dintrospection=false \
+	-Dintrospection=disabled \
 	-Dtests=false \
 	-Dinstalled_tests=false
 
