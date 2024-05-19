@@ -43,7 +43,7 @@ define Build/InstallDev
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/graphene-1.0/include/*.h \
-	  $(1)/usr/include/graphene-1.0
+	  $(1)/usr/include/graphene-1.0/
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
