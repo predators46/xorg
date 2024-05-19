@@ -39,6 +39,9 @@ define Package/gobject-introspection/description
 	The goal of the project is to describe the APIs and collect them in a uniform, machine readable format.
 endef
 
+TARGET_CPPFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)"
+TARGET_LDFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
+
 define Meson
 	$(2) $(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3) $(STAGING_DIR_HOST)/bin/meson.py $(1)
 endef
