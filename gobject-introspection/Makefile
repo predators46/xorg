@@ -40,7 +40,7 @@ define Package/gobject-introspection/description
 endef
 
 TARGET_CPPFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --includes)"
-TARGET_LDFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
+#TARGET_LDFLAGS +="$(shell $(STAGING_DIR)/host/bin/$(PYTHON3)-config --libs)"
 
 define Meson
 	$(2) $(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3) $(STAGING_DIR_HOST)/bin/meson.py $(1)
