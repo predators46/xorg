@@ -4,7 +4,7 @@ PKG_NAME:=graphene
 PKG_VERSION:=1.10.8
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/ebassi/graphene/archive/$(PKG_VERSION)
 PKG_HASH:=922dc109d2dc5dc56617a29bd716c79dd84db31721a8493a13a5f79109a4a4ed
 
