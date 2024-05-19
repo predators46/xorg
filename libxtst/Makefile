@@ -22,7 +22,7 @@ define Package/libxtst
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Xlib-based library for XTEST & RECORD extensions
-	DEPENDS:=+libx11 +libxext +libxi
+	DEPENDS:=+libx11 +libxext +libxi +libxfixes
 	URL:=https://xorg.freedesktop.org/
 endef
 
