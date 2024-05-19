@@ -1,40 +1,45 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxtst
-_PKG_NAME:=libXtst
 PKG_VERSION:=1.2.4
 PKG_RELEASE:=1
 
+PKG_SOURCE:=libXtst-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=84f5f30b9254b4ffee14b5b0940e2622153b0d3aed8286a3c5b7eeb340ca33c8
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=X11 License
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXtst-$(PKG_VERSION)
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxtst
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11 +libxext +libxi
-  TITLE:=X11 Testing -- Resource extension library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=TITLE:=X11 Testing -- Resource extension library
+	DEPENDS:=+libx11 +libxext +libxi
+	URL:=https://xorg.freedesktop.org/
+endef
+
+define Package/libxtst/description
+	libXtst provides the Xlib-based client API for the XTEST & RECORD extensions.
+	The XTEST extension is a minimal set of client and server extensions required to completely test the X11 server with no user intervention.
+	This extension is not intended to support general journaling and playback of user actions.
+	The RECORD extension supports the recording and reporting of all core X protocol and arbitrary X extension protocol.
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --without-xmlto \
-  --without-fop \
-  --without-xsltproc
+	--prefix=/usr \
+	--without-xmlto \
+	--without-fop \
+	--without-xsltproc
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -42,7 +47,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
