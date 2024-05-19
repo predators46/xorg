@@ -8,6 +8,10 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/ebassi/graphene/archive/$(PKG_VERSION)
 PKG_HASH:=922dc109d2dc5dc56617a29bd716c79dd84db31721a8493a13a5f79109a4a4ed
 
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT license
+PKG_LICENSE_FILES:=LICENSE.txt
+
 PKG_BUILD_DEPENDS:=glib2/host
 
 include $(INCLUDE_DIR)/package.mk
