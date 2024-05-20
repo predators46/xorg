@@ -19,7 +19,7 @@ define Package/libva
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Video Acceleration (VA) API for Linux
-	DEPENDS:=+libx11 +libxcb +libxfixes +libxext +libdrm +libwayland
+	DEPENDS:=+libx11 +libxcb +libxfixes +libxext +libdrm
 	URL:=https://freedesktop.org/wiki/Software/vaapi
 endef
 
