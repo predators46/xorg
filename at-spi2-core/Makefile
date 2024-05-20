@@ -4,7 +4,7 @@ PKG_NAME:=at-spi2-core
 PKG_VERSION:=2.52.0
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://download.gnome.org/sources/2.52/$(_PKG_VERSION)
+PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/2.52/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=0ac3fc8320c8d01fa147c272ba7fa03806389c6b03d3c406d0823e30e35ff5ab
 
