@@ -1,43 +1,44 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=at-spi2-core
 PKG_VERSION:=2.52.0
-_PKG_VERSION:=2.52
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/$(_PKG_VERSION)
+PKG_SOURCE_URL:=https://download.gnome.org/sources/2.52/$(_PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_HASH:=0ac3fc8320c8d01fa147c272ba7fa03806389c6b03d3c406d0823e30e35ff5ab
 
-#HOST_BUILD_DEPENDS:=util-macros/host mkfontscale/host
-PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=GNU LGPLv2.1
+PKG_LICENSE_FILES:=COPYING
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/at-spi2-core
-  SECTION:=xorg
-  CATEGORY:=Xorg
-  DEPENDS:=+glib2 +dbus +libxtst +libx11 +libxi
-  TITLE:=Protocol definitions and daemon for D-Bus at-spi
-  URL:=http://www.linuxfoundation.org/en/AT-SPI_on_D-Bus
+	SECTION:=xorg
+	CATEGORY:=Xorg
+	TITLE:=Base DBus XML interfaces for accessibility, the accessibility registry daemon, and atspi library.
+	DEPENDS:=+glib2 +dbus +libxtst +libx11 +libxi
+	URL:=https://gitlab.gnome.org/GNOME/at-spi2-core
 endef
 
-#TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
-TARGET_LDFLAGS += -Wl,--as-needed
+define Package/at-spi2-core/description
+	This repository contains the DBus interface definitions for AT-SPI (Assistive Technology Service Provider Interface) — the core of an accessibility stack for free software systems.
+	It also contains the basic daemons of the accessibility stack, the ATK library to make applications and GUI toolkits accessible, and the internal hooks between AT-SPI and ATK.
+endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr
+MESON_ARGS += \
+	-Ddbus_daemon=/usr/bin/dbus-daemon \
+	-Dgtk_doc=false \
+	-Duse_systemd=false \
+	-Dintrospection=disable
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
-	  $(1)/usr/lib
+	  $(1)/usr/lib \
+	  $(1)/usr/share
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/include \
@@ -46,6 +47,10 @@ define Build/InstallDev
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share \
+	  $(1)/usr/
 endef
 
 define Package/at-spi2-core/install
