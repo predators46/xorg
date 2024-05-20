@@ -31,9 +31,8 @@ endef
 MESON_ARGS += \
 	-Dwith_x11=yes \
 	-Dwith_glx=no \
-	-Dwith_wayland=yes \
-	-Denable_docs=false \
-	-Dscanner_bin="$(STAGING_DIR_HOSTPKG)/bin/wayland-scanner"
+	-Dwith_wayland=no \
+	-Denable_docs=false
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
