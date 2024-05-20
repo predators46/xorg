@@ -4,8 +4,8 @@ PKG_NAME:=libva
 PKG_VERSION:=2.21.0
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://github.com/intel/libva/archive/$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/intel/libva/releases/download/$(PKG_VERSION)
 PKG_HASH:=f7c3fffef3f04eb146e036dad2587d852bfb70e4926d014bf437244915ef7425
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
