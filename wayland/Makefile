@@ -72,11 +72,13 @@ endef
 define Host/Install
 	$(call Host/Install/Meson)
 	$(INSTALL_DIR) \
-	  $(STAGING_DIR_HOSTPKG)/share/pkgconfig
+	  $(STAGING_DIR_HOST)/lib/pkgconfig
 
 	$(CP) \
-	  $(MESON_HOST_BUILD_DIR)/meson-private/*.pc \
-	  $(STAGING_DIR_HOSTPKG)/share/pkgconfig/
+	  $(MESON_HOST_BUILD_DIR)/wayland-scanner.pc \
+	  $(STAGING_DIR_HOST)/lib/pkgconfig/
+	$(foreach BIN,wayland_scanner,
+		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(STAGING_DIR_HOST)/lib/pkgconfig/wayland-scanner.pc)
 endef
 
 define Package/libwayland/install
