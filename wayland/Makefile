@@ -13,7 +13,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DEPENDS:=libffi/host libxml2/host wayland/host
-HOST_BUILD_DEPENDS:=$(PKG_BUILD_DEPENDS)
+HOST_BUILD_DEPENDS:=libffi/host libxml2/host wayland/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
