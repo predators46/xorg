@@ -47,7 +47,7 @@ CONFIGURE_ARGS += \
 	--with-png \
 	--without-ps \
 	--without-raw \
-	--with-svg \
+	--without-svg \
 	--with-tiff \
 	--with-webp \
 	--without-y4m \
@@ -79,9 +79,13 @@ endef
 
 define Package/imlib2/install
 	$(INSTALL_DIR) \
+	  $(1)/usr/bin \
 	  $(1)/usr/lib \
 	  $(1)/usr/lib/imlib2/{filters,loaders}
 
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/bin/* \
+	  $(1)/usr/bin/
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
 	  $(1)/usr/lib/
