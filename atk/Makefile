@@ -1,43 +1,37 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=atk
 PKG_VERSION:=2.38.0
-_PKG_VERSION:=2.38
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/$(_PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/2.38
 PKG_HASH:=ac4de2a4ef4bd5665052952fe169657e65e895c5057dffb3c2a810f6191a0c36
 
-#HOST_BUILD_DEPENDS:=util-macros/host mkfontscale/host
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=GNU Library General Public License v2 only
+PKG_LICENSE_FILES:=COPYING
+
 PKG_BUILD_DEPENDS:=glib2/host
-PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/atk
-  SECTION:=xorg
-  CATEGORY:=Xorg
-  DEPENDS:=+glib2
-  TITLE:=A library providing a set of interfaces for accessibility
-  URL:=https://www.gtk.org/
+	SECTION:=xorg
+	CATEGORY:=Xorg
+	TITLE:=A library providing a set of interfaces for accessibility
+	DEPENDS:=+glib2
+	URL:=https://gitlab.gnome.org/GNOME/at-spi2-core
 endef
 
-TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+define Package/atk/description
+	A library providing a set of interfaces for accessibility (development files)
+endef
 
-MAKE_FLAGS+= \
-  GLIB_COMPILE_RESOURCES=$(STAGING_DIR_HOSTPKG)/bin/glib-compile-resources \
-  GLIB_MKENUMS=$(STAGING_DIR_HOSTPKG)/bin/glib-mkenums \
-  GLIB_GENMARSHAL=$(STAGING_DIR_HOSTPKG)/bin/glib-genmarshal
-
-CONFIGURE_ARGS += \
-  --prefix=/usr
+MESON_ARGS += \
+	-Ddocs=false \
+	-Dintrospection=disabled
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -51,6 +45,10 @@ define Build/InstallDev
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share \
+	  $(1)/usr/
 endef
 
 define Package/atk/install
