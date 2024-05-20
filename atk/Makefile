@@ -22,7 +22,7 @@ define Package/atk
 	CATEGORY:=Xorg
 	TITLE:=A library providing a set of interfaces for accessibility
 	DEPENDS:=+glib2
-	URL:=https://gitlab.gnome.org/GNOME/at-spi2-core
+	URL:=https://www.gtk.org/
 endef
 
 define Package/atk/description
@@ -36,7 +36,8 @@ MESON_ARGS += \
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
-	  $(1)/usr/lib
+	  $(1)/usr/lib \
+	  $(1)/usr/share
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/include \
