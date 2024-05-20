@@ -32,7 +32,8 @@ MESON_ARGS += \
 	-Ddbus_daemon=/usr/bin/dbus-daemon \
 	-Dgtk_doc=false \
 	-Duse_systemd=false \
-	-Dintrospection=disable
+	-Dintrospection=disable \
+	-Dx11=enabled
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
