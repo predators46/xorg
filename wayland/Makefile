@@ -75,7 +75,7 @@ define Host/Install
 	  $(STAGING_DIR_HOST)/lib/pkgconfig
 
 	$(CP) \
-	  $(MESON_HOST_BUILD_DIR)/wayland-scanner.pc \
+	  $(MESON_HOST_BUILD_DIR)/meson-private/wayland-scanner.pc \
 	  $(STAGING_DIR_HOST)/lib/pkgconfig/
 	$(foreach BIN,wayland_scanner,
 		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(STAGING_DIR_HOST)/lib/pkgconfig/wayland-scanner.pc)
