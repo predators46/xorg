@@ -1,9 +1,24 @@
-option('driverdir', type : 'string', description : 'drivers path')
-option('disable_drm', type : 'boolean', value : false)
-option('with_x11', type : 'combo', choices : ['yes', 'no', 'auto'], value : 'auto')
-option('with_glx', type : 'combo', choices : ['yes', 'no', 'auto'], value : 'auto')
-option('with_wayland', type : 'combo', choices : ['yes', 'no', 'auto'], value : 'auto')
-option('with_win32', type : 'combo', choices : ['yes', 'no', 'auto'], value : 'auto')
-option('with_legacy', type : 'array', choices : ['emdg', 'nvctrl', 'fglrx'], value : [])
-option('enable_docs', type : 'boolean', value : false)
-option('scanner_bin', description: 'Path to wayland-scanner binary', type: 'string', value : '')
+--- a/meson.build
++++ b/meson.build
+@@ -119,8 +119,11 @@ if get_option('with_wayland') != 'no'
+                                    required : get_option('with_wayland') == 'yes',
+                                    native : true)
+   if wayland_scanner_dep.found()
+-    wl_scanner = find_program(wayland_scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))
+-  endif
++    if (get_option('scanner_bin') == '')
++	wl_scanner = find_program(wayland_scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))
++else
++	wl_scanner = find_program(get_option('scanner_bin'))
++endif
+   WITH_WAYLAND = wayland_dep.found() and wayland_scanner_dep.found()
+ endif
+ 
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -6,3 +6,4 @@ option('with_wayland', type : 'combo', choices : ['yes', 'no', 'auto'], value :
+ option('with_win32', type : 'combo', choices : ['yes', 'no', 'auto'], value : 'auto')
+ option('with_legacy', type : 'array', choices : ['emdg', 'nvctrl', 'fglrx'], value : [])
+ option('enable_docs', type : 'boolean', value : false)
++option('scanner_bin', description: 'Path to wayland-scanner binary', type: 'string', value : '')
+
