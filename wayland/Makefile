@@ -69,6 +69,16 @@ define Build/InstallDev
 		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/wayland-scanner.pc)
 endef
 
+define Host/Install
+	$(call Host/Install/Meson)
+	$(INSTALL_DIR) \
+	  $(STAGING_DIR_HOSTPKG)/share/pkgconfig
+
+	$(CP) \
+	  $(MESON_HOST_BUILD_DIR)/meson-private/*.pc \
+	  $(STAGING_DIR_HOSTPKG)/share/pkgconfig/
+endef
+
 define Package/libwayland/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so.* $(1)/usr/lib/
