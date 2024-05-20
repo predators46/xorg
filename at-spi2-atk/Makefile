@@ -51,7 +51,7 @@ define Package/at-spi2-atk/install
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
+	  $(PKG_INSTALL_DIR)/usr/lib/{gnome-settings-daemon-3.0,gtk-2.0,*.so* \
 	  $(1)/usr/lib/
 endef
 
