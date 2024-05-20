@@ -30,7 +30,7 @@ define Package/atk/description
 endef
 
 MESON_ARGS += \
-	-Ddocs=false \
+	-Ddocs=disabled \
 	-Dintrospection=disabled
 
 define Build/InstallDev
