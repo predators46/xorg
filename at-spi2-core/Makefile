@@ -22,7 +22,7 @@ define Package/at-spi2-core
 	CATEGORY:=Xorg
 	TITLE:=Base DBus XML interfaces for accessibility, the accessibility registry daemon, and atspi library.
 	DEPENDS:=+glib2 +dbus +libxtst +libx11 +libxi +libxml2
-	URL:=https://gitlab.gnome.org/GNOME/at-spi2-core
+	URL:=https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/
 endef
 
 define Package/at-spi2-core/description
