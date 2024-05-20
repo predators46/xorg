@@ -56,8 +56,7 @@ MESON_ARGS += \
 	-Dscanner=true \
 	-Dlibraries=true \
 	-Ddocumentation=false \
-	-Ddtd_validation=true \
-	-Dscanner_bin="$(STAGING_DIR_HOSTPKG)/bin/wayland-scanner"
+	-Ddtd_validation=true
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
@@ -66,6 +65,8 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/*.pc $(1)/usr/lib/pkgconfig
+	$(foreach BIN,wayland_scanner,
+		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/wayland-scanner.pc)
 endef
 
 define Package/libwayland/install
