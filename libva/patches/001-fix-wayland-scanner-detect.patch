@@ -1,18 +1,16 @@
 --- a/meson.build
 +++ b/meson.build
-@@ -119,8 +119,11 @@ if get_option('with_wayland') != 'no'
+@@ -119,6 +119,9 @@ if get_option('with_wayland') != 'no'
                                     required : get_option('with_wayland') == 'yes',
                                     native : true)
    if wayland_scanner_dep.found()
--    wl_scanner = find_program(wayland_scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))
--  endif
 +    if (get_option('scanner_bin') == '')
-+	wl_scanner = find_program(wayland_scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))
-+else
-+	wl_scanner = find_program(get_option('scanner_bin'))
++    wl_scanner = find_program(get_option('scanner_bin'))
++    else
+     wl_scanner = find_program(wayland_scanner_dep.get_variable(pkgconfig: 'wayland_scanner'))
+   endif
    WITH_WAYLAND = wayland_dep.found() and wayland_scanner_dep.found()
- endif
- 
+
 --- a/meson_options.txt
 +++ b/meson_options.txt
 @@ -6,3 +6,4 @@ option('with_wayland', type : 'combo', choices : ['yes', 'no', 'auto'], value :
