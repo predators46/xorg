@@ -12,6 +12,8 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DEPENDS:=glib2/host
+
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 
@@ -19,7 +21,7 @@ define Package/at-spi2-core
 	SECTION:=xorg
 	CATEGORY:=Xorg
 	TITLE:=Base DBus XML interfaces for accessibility, the accessibility registry daemon, and atspi library.
-	DEPENDS:=+glib2 +dbus +libxtst +libx11 +libxi
+	DEPENDS:=+glib2 +dbus +libxtst +libx11 +libxi +libxml2
 	URL:=https://gitlab.gnome.org/GNOME/at-spi2-core
 endef
 
