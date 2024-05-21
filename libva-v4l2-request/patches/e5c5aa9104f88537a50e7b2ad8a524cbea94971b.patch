@@ -16,7 +16,7 @@ index e396268..8fcff10 100644
  
  #include <mpeg2-ctrls.h>
 -#include <h264-ctrls.h>
-+
++#include <linux/v4l2-controls.h>
  #include <hevc-ctrls.h>
  
  #include "utils.h"
