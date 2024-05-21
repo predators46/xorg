@@ -1,0 +1,22 @@
+From 7bab669cf1a407319b4c96f8e8d1cbe38b3a2539 Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Tue, 21 May 2024 20:10:11 +0800
+Subject: [PATCH] Update h264.c
+
+---
+ src/h264.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/h264.c b/src/h264.c
+index 25bc8cb..7c8fe16 100644
+--- a/src/h264.c
++++ b/src/h264.c
+@@ -33,7 +33,7 @@
+ #include <sys/mman.h>
+ 
+ #include <linux/videodev2.h>
+-#include <h264-ctrls.h>
++#include <linux/v4l2-controls.h>
+ 
+ #include "request.h"
+ #include "surface.h"
