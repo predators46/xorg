@@ -1,0 +1,57 @@
+From 12acd5c90859963383e6835b729594412b789205 Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Wed, 22 May 2024 07:49:29 +0800
+Subject: [PATCH] Update h264.c
+
+---
+ src/h264.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/h264.c b/src/h264.c
+index 25bc8cb..b7ee3d0 100644
+--- a/src/h264.c
++++ b/src/h264.c
+@@ -33,7 +33,7 @@
+ #include <sys/mman.h>
+ 
+ #include <linux/videodev2.h>
+-#include <h264-ctrls.h>
++#include <linux/v4l2-controls.h>
+ 
+ #include "request.h"
+ #include "surface.h"
+@@ -436,29 +436,29 @@ int h264_set_controls(struct request_data *driver_data,
+ 			      &surface->params.h264.picture, &slice);
+ 
+ 	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
+-			      V4L2_CID_MPEG_VIDEO_H264_DECODE_PARAMS, &decode,
++			      V4L2_CID_STATELESS_H264_DECODE_PARAMS, &decode,
+ 			      sizeof(decode));
+ 	if (rc < 0)
+ 		return VA_STATUS_ERROR_OPERATION_FAILED;
+ 
+ 	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
+-			      V4L2_CID_MPEG_VIDEO_H264_SLICE_PARAMS, &slice,
++			      V4L2_CID_STATELESS_H264_SLICE_PARAMS, &slice,
+ 			      sizeof(slice));
+ 	if (rc < 0)
+ 		return VA_STATUS_ERROR_OPERATION_FAILED;
+ 
+ 	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
+-			      V4L2_CID_MPEG_VIDEO_H264_PPS, &pps, sizeof(pps));
++			      V4L2_CID_STATELESS_H264_PPS, &pps, sizeof(pps));
+ 	if (rc < 0)
+ 		return VA_STATUS_ERROR_OPERATION_FAILED;
+ 
+ 	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
+-			      V4L2_CID_MPEG_VIDEO_H264_SPS, &sps, sizeof(sps));
++			      V4L2_CID_STATELESS_H264_SPS, &sps, sizeof(sps));
+ 	if (rc < 0)
+ 		return VA_STATUS_ERROR_OPERATION_FAILED;
+ 
+ 	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
+-			      V4L2_CID_MPEG_VIDEO_H264_SCALING_MATRIX, &matrix,
++			      V4L2_CID_STATELESS_H264_SCALING_MATRIX, &matrix,
+ 			      sizeof(matrix));
+ 	if (rc < 0)
+ 		return VA_STATUS_ERROR_OPERATION_FAILED;
