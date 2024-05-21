@@ -11,23 +11,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=License
 PKG_LICENSE_FILES:=LICENSE.rst
 
-HOST_BUILD_DEPENDS:= \
-	python3/host \
-	python-alabaster/host \
-	python-babel/host \
-	python-docutils/host \
-	python-imagesize/host \
-	python-jinja2/host \
-	python-packaging/host \
-	python-pygments/host \
-	python-requests/host \
-	python-snowballstemmer/host \
-	python-sphinxcontrib-applehelp/host \
-	python-sphinxcontrib-devhelp/host \
-	python-sphinxcontrib-htmlhelp/host \
-	python-sphinxcontrib-jsmath/host \
-	python-sphinxcontrib-qthelp/host \
-	python-sphinxcontrib-serializinghtml/host
+HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-flit-core/host
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
