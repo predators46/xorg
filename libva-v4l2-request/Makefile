@@ -4,15 +4,14 @@ PKG_NAME:=libva-v4l2-request
 PKG_VERSION:=2019.03
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-release-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/bootlin/libva-v4l2-request/archive/release-$(PKG_VERSION)
-PKG_HASH:=16332f8f7257004652ff7afe8ecabd6a6a3f803e9ae1f4d886bbe8edd5f2fed6
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/bootlin/libva-v4l2-request.git
+PKG_SOURCE_VERSION:=a3c2476de19e6635458273ceeaeceff124fabd63
+PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=License LGPL-2.1 license
 PKG_LICENSE_FILES:=COPYING COPYING.LGPL COPYING.MIT
-
-PKG_BUILD_DIR:=$(BUILD_DIR)/libva-v4l2-request-release-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
