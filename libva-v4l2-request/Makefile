@@ -9,8 +9,8 @@ PKG_SOURCE_URL:=https://github.com/bootlin/libva-v4l2-request/archive/release-$(
 PKG_HASH:=16332f8f7257004652ff7afe8ecabd6a6a3f803e9ae1f4d886bbe8edd5f2fed6
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
-PKG_LICENSE:=License
-PKG_LICENSE_FILES:=COPYING
+PKG_LICENSE:=License LGPL-2.1 license
+PKG_LICENSE_FILES:=COPYING COPYING.LGPL COPYING.MIT
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/libva-v4l2-request-release-$(PKG_VERSION)
 
