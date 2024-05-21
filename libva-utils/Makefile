@@ -4,7 +4,7 @@ PKG_NAME:=libva-utils
 PKG_VERSION:=2.21.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/intel/libva-utils/archive/$(PKG_VERSION)
 PKG_HASH:=15ca12bd11c7001c04af5079512754fea6ba8d79151b9f07908c99b27622714e
 
