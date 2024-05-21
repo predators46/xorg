@@ -21,7 +21,7 @@ define Package/libva-v4l2-request
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=LibVA implementation for the Linux Video4Linux2 Request API
-	DEPENDS:= +libdrm +libva +libva-utils
+	DEPENDS:= +libdrm +libva
 	URL:=https://github.com/bootlin/libva-v4l2-request
 endef
 
