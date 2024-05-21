@@ -1,0 +1,24 @@
+From e169b470b93ccbf9990de9888f599e94eaac7f88 Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Wed, 22 May 2024 06:07:04 +0800
+Subject: [PATCH] Update context.c
+
+---
+ src/context.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/context.c b/src/context.c
+index 04ba9a6..a3a4a8f 100644
+--- a/src/context.c
++++ b/src/context.c
+@@ -40,8 +40,8 @@
+ #include <linux/videodev2.h>
+ 
+ #include <mpeg2-ctrls.h>
+-#include <h264-ctrls.h>
+-#include <hevc-ctrls.h>
++#include <linux/v4l2-controls.h>
++
+ 
+ #include "utils.h"
+ #include "v4l2.h"
