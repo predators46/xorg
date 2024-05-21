@@ -26,7 +26,7 @@ define Package/libmd
 endef
 
 define Package/libmd/description
-	libXfont - X font handling library for server & utilities
+	This library provides message digest functions found on BSD systems either on their libc (NetBSD, OpenBSD) or libmd (FreeBSD, DragonflyBSD, macOS, Solaris) libraries and lacking on others like GNU systems.
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
