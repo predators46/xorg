@@ -1,38 +1,38 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libepoxy
-PKG_VERSION:=1.5.3
+PKG_VERSION:=1.5.10
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://github.com/anholt/libepoxy/releases/download/$(PKG_VERSION)/
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=002958c5528321edd53440235d3c44e71b5b1e09b9177e8daf677450b6c4433d
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/anholt/libepoxy/archive/$(PKG_VERSION)
+PKG_HASH:=a7ced37f4102b745ac86d6a70a9da399cc139ff168ba6b8002b4d8d43c900c15
 
-PKG_BUILD_DEPENDS:=util-macros python3/host
-#PKG_FIXUP:=autoreconf
-PKG_FIXUP:=libtool
-
-PKG_INSTALL:=1
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=License
+PKG_LICENSE_FILES:=COPYING
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/libepoxy
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+mesa +libx11
-  TITLE:=Direct Rendering Manager runtime library
-  URL:=https://github.com/anholt/libepoxy
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Direct Rendering Manager runtime library
+	DEPENDS:=+libx11
+	URL:=https://github.com/anholt/libepoxy
 endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --disable-static \
-  --enable-shared
+define Package/libepoxy/description
+	Epoxy is a library for handling OpenGL function pointer management for you
+endef
+
+MESON_ARGS += \
+	-Ddocs=false \
+	-Dglx=no \
+	-Degl=no \
+	-Dx11=true \
+	-Dtests=false
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -40,7 +40,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/epoxy \
 	  $(1)/usr/include/
 
 	$(CP) \
