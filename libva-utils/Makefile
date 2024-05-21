@@ -19,7 +19,7 @@ define Package/libva-utils
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Intel VA-API Media Applications and Scripts for libva
-	DEPENDS:=+libx11 +libxcb +libxfixes +libxext +libdrm +libwayland +libva
+	DEPENDS:= +libstdcpp +libx11 +libxcb +libxfixes +libxext +libdrm +libwayland +libva
 	URL:=https://freedesktop.org/wiki/Software/vaapi
 endef
 
