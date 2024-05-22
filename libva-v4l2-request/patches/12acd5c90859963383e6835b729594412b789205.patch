@@ -1,14 +1,14 @@
-From 708772d9a28aedcae5b29ea8879afb188aeb9afb Mon Sep 17 00:00:00 2001
+From 389db1d2a01b32a1633d5901c495b6ec2da08f2c Mon Sep 17 00:00:00 2001
 From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 22 May 2024 12:21:54 +0800
+Date: Wed, 22 May 2024 13:08:38 +0800
 Subject: [PATCH] Update h264.c
 
 ---
- src/h264.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ src/h264.c | 31 +++++++++++++++----------------
+ 1 file changed, 15 insertions(+), 16 deletions(-)
 
 diff --git a/src/h264.c b/src/h264.c
-index 25bc8cb..6612c7b 100644
+index 25bc8cb..2002f82 100644
 --- a/src/h264.c
 +++ b/src/h264.c
 @@ -33,7 +33,7 @@
@@ -47,7 +47,7 @@ index 25bc8cb..6612c7b 100644
  		}
  	}
  
-@@ -375,21 +375,21 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -375,21 +375,20 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  			if (!entry)
  				continue;
  
@@ -57,13 +57,14 @@ index 25bc8cb..6612c7b 100644
  	}
  
  	if (VASlice->direct_spatial_mv_pred_flag)
- 		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
+-		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
++		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED
++
++		VASlice->chroma_log2_weight_denom
  
 -	slice->pred_weight_table.chroma_log2_weight_denom =
-+
- 		VASlice->chroma_log2_weight_denom;
+-		VASlice->chroma_log2_weight_denom;
 -	slice->pred_weight_table.luma_log2_weight_denom =
-+
  		VASlice->luma_log2_weight_denom;
  
  	if (((VASlice->slice_type % 5) == H264_SLICE_P) ||
@@ -73,7 +74,7 @@ index 25bc8cb..6612c7b 100644
  				     slice->num_ref_idx_l0_active_minus1 + 1,
  				     VASlice->luma_weight_l0,
  				     VASlice->luma_offset_l0,
-@@ -397,7 +397,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -397,7 +396,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  				     VASlice->chroma_offset_l0);
  
  	if ((VASlice->slice_type % 5) == H264_SLICE_B)
@@ -82,7 +83,7 @@ index 25bc8cb..6612c7b 100644
  				     slice->num_ref_idx_l1_active_minus1 + 1,
  				     VASlice->luma_weight_l1,
  				     VASlice->luma_offset_l1,
-@@ -436,29 +436,29 @@ int h264_set_controls(struct request_data *driver_data,
+@@ -436,29 +435,29 @@ int h264_set_controls(struct request_data *driver_data,
  			      &surface->params.h264.picture, &slice);
  
  	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
