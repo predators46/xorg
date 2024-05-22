@@ -22,7 +22,7 @@ define Package/gtk3
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=The GTK plus Toolkit (v3)
-	DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib +libexpat +libpango +libxrandr +libxinerama +libxi +libxfixes +libxdamage +libepoxy +fontconfig +libcairo +atk +gdk-pixbuf +graphene +at-spi2-atk +libwayland
+	DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib +libexpat +libpango +libxrandr +libxinerama +libxi +libxfixes +libxdamage +libepoxy +fontconfig +libcairo +atk +gdk-pixbuf +graphene +at-spi2-atk +libwayland +libxkbcommon
 	URL:=https://www.gtk.org/
 endef
 
