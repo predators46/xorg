@@ -17,8 +17,7 @@ include $(INCLUDE_DIR)/meson.mk
 MESON_ARGS += \
 	-Denable-x11=true \
 	-Denable-docs=false \
-	-Denable-wayland=true \
-	-Dscanner_bin="$(STAGING_DIR_HOSTPKG)/bin/wayland-scanner"
+	-Denable-wayland=true
 
 define Package/libxkbcommon
   SECTION:=libs
