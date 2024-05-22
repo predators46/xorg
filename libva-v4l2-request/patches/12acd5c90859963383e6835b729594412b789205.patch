@@ -1,14 +1,14 @@
-From f354386554e1907f0d3ab695e0eba6424079a1a2 Mon Sep 17 00:00:00 2001
+From 98747c80d1279c771b8add8348088f11a87fde8f Mon Sep 17 00:00:00 2001
 From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 22 May 2024 16:49:32 +0800
+Date: Wed, 22 May 2024 17:32:41 +0800
 Subject: [PATCH] Update h264.c
 
 ---
- src/h264.c | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
+ src/h264.c | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/src/h264.c b/src/h264.c
-index 25bc8cb..d5d1adb 100644
+index 25bc8cb..57f8e42 100644
 --- a/src/h264.c
 +++ b/src/h264.c
 @@ -33,7 +33,7 @@
@@ -62,16 +62,16 @@ index 25bc8cb..d5d1adb 100644
  		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
  
 -	slice->pred_weight_table.chroma_log2_weight_denom =
-+	slice->pred_weights.chroma_log2_weight_denom =
++	weights->pred_weights.chroma_log2_weight_denom =
  		VASlice->chroma_log2_weight_denom;
 -	slice->pred_weight_table.luma_log2_weight_denom =
-+	slice->pred_weights.luma_log2_weight_denom =
++	weights->pred_weights.luma_log2_weight_denom =
  		VASlice->luma_log2_weight_denom;
  
  	if (((VASlice->slice_type % 5) == H264_SLICE_P) ||
  	    ((VASlice->slice_type % 5) == H264_SLICE_B))
 -		h264_copy_pred_table(&slice->pred_weight_table.weight_factors[0],
-+		h264_copy_pred_table(&slice->pred_weights.weight_factors[0],
++		h264_copy_pred_table(&weights->pred_weights.weight_factors[0],
  				     slice->num_ref_idx_l0_active_minus1 + 1,
  				     VASlice->luma_weight_l0,
  				     VASlice->luma_offset_l0,
@@ -80,7 +80,7 @@ index 25bc8cb..d5d1adb 100644
  
  	if ((VASlice->slice_type % 5) == H264_SLICE_B)
 -		h264_copy_pred_table(&slice->pred_weight_table.weight_factors[1],
-+		h264_copy_pred_table(&slice->pred_weights.weight_factors[1],
++		h264_copy_pred_table(&weights->pred_weights.weight_factors[1],
  				     slice->num_ref_idx_l1_active_minus1 + 1,
  				     VASlice->luma_weight_l1,
  				     VASlice->luma_offset_l1,
@@ -92,8 +92,12 @@ index 25bc8cb..d5d1adb 100644
  	struct v4l2_ctrl_h264_pps pps = { 0 };
  	struct v4l2_ctrl_h264_sps sps = { 0 };
  	struct h264_dpb_entry *output;
-@@ -436,29 +436,29 @@ int h264_set_controls(struct request_data *driver_data,
- 			      &surface->params.h264.picture, &slice);
+@@ -433,32 +433,32 @@ int h264_set_controls(struct request_data *driver_data,
+ 			       &surface->params.h264.matrix, &matrix);
+ 	h264_va_slice_to_v4l2(driver_data, context,
+ 			      &surface->params.h264.slice,
+-			      &surface->params.h264.picture, &slice);
++			      &surface->params.h264.picture, &slice, &weights);
  
  	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
 -			      V4L2_CID_MPEG_VIDEO_H264_DECODE_PARAMS, &decode,
