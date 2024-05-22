@@ -1,14 +1,14 @@
-From fbcfbe8e49573c3ae8e35702a3ce6b64683a2e09 Mon Sep 17 00:00:00 2001
+From bedfcaecdf16429e630b709c3ee1181c0aa7b442 Mon Sep 17 00:00:00 2001
 From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 22 May 2024 13:51:25 +0800
+Date: Wed, 22 May 2024 14:26:32 +0800
 Subject: [PATCH] Update h264.c
 
 ---
- src/h264.c | 34 ++++++++--------------------------
- 1 file changed, 8 insertions(+), 26 deletions(-)
+ src/h264.c | 35 ++++++++---------------------------
+ 1 file changed, 8 insertions(+), 27 deletions(-)
 
 diff --git a/src/h264.c b/src/h264.c
-index 25bc8cb..2dc61c4 100644
+index 25bc8cb..63d392e 100644
 --- a/src/h264.c
 +++ b/src/h264.c
 @@ -33,7 +33,7 @@
@@ -45,7 +45,7 @@ index 25bc8cb..2dc61c4 100644
  		}
  	}
  
-@@ -375,34 +373,18 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -375,35 +373,18 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  			if (!entry)
  				continue;
  
@@ -78,10 +78,11 @@ index 25bc8cb..2dc61c4 100644
 -				     VASlice->luma_offset_l1,
 -				     VASlice->chroma_weight_l1,
 -				     VASlice->chroma_offset_l1);
- }
+-}
  
  int h264_set_controls(struct request_data *driver_data,
-@@ -436,29 +418,29 @@ int h264_set_controls(struct request_data *driver_data,
+ 		      struct object_context *context,
+@@ -436,29 +417,29 @@ int h264_set_controls(struct request_data *driver_data,
  			      &surface->params.h264.picture, &slice);
  
  	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
