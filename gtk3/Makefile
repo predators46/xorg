@@ -1,52 +1,43 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gtk3
-_PKG_NAME:=gtk+
-PKG_VERSION:=3.24.41
-_PKG_VERSION:=3.24
+PKG_VERSION:=3.24.42
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://download.gnome.org/sources/$(_PKG_NAME)/$(_PKG_VERSION)
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=47da61487af3087a94bc49296fd025ca0bc02f96ef06c556e7c8988bd651b6fa
+PKG_SOURCE:=gtk+-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://download.gnome.org/sources/gtk+/3.24
+PKG_HASH:=50f89f615092d4dd01bbd759719f8bd380e5f149f6fd78a94725e2de112377e2
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
-PKG_BUILD_DEPENDS:=glib2 glib2/host gobject-introspection/host
-PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
-#PKG_FIXUP:=autoreconf
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=GNU Library General Public License v2 only
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/gtk+-$(PKG_VERSION)
+PKG_BUILD_DEPENDS:=glib2 glib2/host
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/gtk3
-  SECTION:=xorg
-  CATEGORY:=Xorg
-  DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib \
-	    +libexpat +pango +libxrandr +libxinerama +libxi +libxfixes +libxdamage \
-	    +libepoxy +fontconfig +cairo +atk +gdk-pixbuf +graphene +at-spi2-atk
-  TITLE:=The GTK plus Toolkit (v3)
-  URL:=https://www.gtk.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=The GTK plus Toolkit (v3)
+	DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib +libexpat +libpango +libxrandr +libxinerama +libxi +libxfixes +libxdamage +libepoxy +fontconfig +libcairo +atk +gdk-pixbuf +graphene +at-spi2-atk
+	URL:=https://www.gtk.org/
 endef
 
-MAKE_FLAGS+= \
-  GLIB_COMPILE_RESOURCES=$(STAGING_DIR_HOSTPKG)/bin/glib-compile-resources \
-  GLIB_MKENUMS=$(STAGING_DIR_HOSTPKG)/bin/glib-mkenums \
-  GLIB_GENMARSHAL=$(STAGING_DIR_HOSTPKG)/bin/glib-genmarshal
+define Package/gtk3/description
+	GTK is a multi-platform toolkit for creating graphical user interfaces.
+endef
 
-TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
-
-CONFIGURE_ARGS += \
-  --prefix=/usr \
-  --disable-cloudprint \
-  --disable-papi \
-  --disable-cups \
-  --disable-glibtest
-
+MESON_ARGS += \
+	-Dgtk_doc=false \
+	-Dman=false \
+	-Dintrospection=false \
+	-Ddemos=true \
+	-Dexamples=false \
+	-Dtests=false \
+	-Dinstalled_tests=false
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -55,11 +46,14 @@ define Build/InstallDev
 	  $(1)/usr/share
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/{gail-3.0,gtk-3.0} \
 	  $(1)/usr/include/
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share \
+	  $(1)/usr/
 endef
 
 define Package/gtk3/install
