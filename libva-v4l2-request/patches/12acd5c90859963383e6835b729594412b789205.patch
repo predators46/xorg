@@ -1,14 +1,14 @@
-From 2ede8d7212b4a3aac0eba5ea88c8a5c4933549d2 Mon Sep 17 00:00:00 2001
+From 708772d9a28aedcae5b29ea8879afb188aeb9afb Mon Sep 17 00:00:00 2001
 From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 22 May 2024 11:17:03 +0800
+Date: Wed, 22 May 2024 12:21:54 +0800
 Subject: [PATCH] Update h264.c
 
 ---
- src/h264.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ src/h264.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
 diff --git a/src/h264.c b/src/h264.c
-index 25bc8cb..a1b07fa 100644
+index 25bc8cb..6612c7b 100644
 --- a/src/h264.c
 +++ b/src/h264.c
 @@ -33,7 +33,7 @@
@@ -38,7 +38,24 @@ index 25bc8cb..a1b07fa 100644
  	slice->header_bit_size = VASlice->slice_data_bit_offset;
  	slice->first_mb_in_slice = VASlice->first_mb_in_slice;
  	slice->slice_type = VASlice->slice_type;
-@@ -382,14 +382,14 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -356,7 +356,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+ 			if (!entry)
+ 				continue;
+ 
+-			slice->ref_pic_list0[i] = idx;
++			slice->ref_pic_list0[i].index = idx;
+ 		}
+ 	}
+ 
+@@ -375,21 +375,21 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+ 			if (!entry)
+ 				continue;
+ 
+-			slice->ref_pic_list1[i] = idx;
++			slice->ref_pic_list1[i].index = idx;
+ 		}
+ 	}
+ 
  	if (VASlice->direct_spatial_mv_pred_flag)
  		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
  
