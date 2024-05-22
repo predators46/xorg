@@ -1,14 +1,14 @@
-From 389db1d2a01b32a1633d5901c495b6ec2da08f2c Mon Sep 17 00:00:00 2001
+From fbcfbe8e49573c3ae8e35702a3ce6b64683a2e09 Mon Sep 17 00:00:00 2001
 From: esaaprillia <esaapriliasalsabila@gmail.com>
-Date: Wed, 22 May 2024 13:08:38 +0800
+Date: Wed, 22 May 2024 13:51:25 +0800
 Subject: [PATCH] Update h264.c
 
 ---
- src/h264.c | 31 +++++++++++++++----------------
- 1 file changed, 15 insertions(+), 16 deletions(-)
+ src/h264.c | 34 ++++++++--------------------------
+ 1 file changed, 8 insertions(+), 26 deletions(-)
 
 diff --git a/src/h264.c b/src/h264.c
-index 25bc8cb..2002f82 100644
+index 25bc8cb..2dc61c4 100644
 --- a/src/h264.c
 +++ b/src/h264.c
 @@ -33,7 +33,7 @@
@@ -20,25 +20,23 @@ index 25bc8cb..2002f82 100644
  
  #include "request.h"
  #include "surface.h"
-@@ -220,7 +220,7 @@ static void h264_va_picture_to_v4l2(struct request_data *driver_data,
+@@ -220,7 +220,6 @@ static void h264_va_picture_to_v4l2(struct request_data *driver_data,
  {
  	h264_fill_dpb(driver_data, context, decode);
  
 -	decode->num_slices = surface->slices_count;
-+
  	decode->top_field_order_cnt = VAPicture->CurrPic.TopFieldOrderCnt;
  	decode->bottom_field_order_cnt = VAPicture->CurrPic.BottomFieldOrderCnt;
  
-@@ -329,7 +329,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -329,7 +328,6 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  				  VAPictureParameterBufferH264 *VAPicture,
  				  struct v4l2_ctrl_h264_slice_params *slice)
  {
 -	slice->size = VASlice->slice_data_size;
-+
  	slice->header_bit_size = VASlice->slice_data_bit_offset;
  	slice->first_mb_in_slice = VASlice->first_mb_in_slice;
  	slice->slice_type = VASlice->slice_type;
-@@ -356,7 +356,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -356,7 +354,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  			if (!entry)
  				continue;
  
@@ -47,7 +45,7 @@ index 25bc8cb..2002f82 100644
  		}
  	}
  
-@@ -375,21 +375,20 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
+@@ -375,34 +373,18 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
  			if (!entry)
  				continue;
  
@@ -57,33 +55,33 @@ index 25bc8cb..2002f82 100644
  	}
  
  	if (VASlice->direct_spatial_mv_pred_flag)
--		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
-+		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED
-+
-+		VASlice->chroma_log2_weight_denom
+ 		slice->flags |= V4L2_H264_SLICE_FLAG_DIRECT_SPATIAL_MV_PRED;
  
 -	slice->pred_weight_table.chroma_log2_weight_denom =
 -		VASlice->chroma_log2_weight_denom;
 -	slice->pred_weight_table.luma_log2_weight_denom =
- 		VASlice->luma_log2_weight_denom;
+-		VASlice->luma_log2_weight_denom;
  
  	if (((VASlice->slice_type % 5) == H264_SLICE_P) ||
  	    ((VASlice->slice_type % 5) == H264_SLICE_B))
 -		h264_copy_pred_table(&slice->pred_weight_table.weight_factors[0],
-+
- 				     slice->num_ref_idx_l0_active_minus1 + 1,
- 				     VASlice->luma_weight_l0,
- 				     VASlice->luma_offset_l0,
-@@ -397,7 +396,7 @@ static void h264_va_slice_to_v4l2(struct request_data *driver_data,
- 				     VASlice->chroma_offset_l0);
+-				     slice->num_ref_idx_l0_active_minus1 + 1,
+-				     VASlice->luma_weight_l0,
+-				     VASlice->luma_offset_l0,
+-				     VASlice->chroma_weight_l0,
+-				     VASlice->chroma_offset_l0);
  
  	if ((VASlice->slice_type % 5) == H264_SLICE_B)
 -		h264_copy_pred_table(&slice->pred_weight_table.weight_factors[1],
-+
- 				     slice->num_ref_idx_l1_active_minus1 + 1,
- 				     VASlice->luma_weight_l1,
- 				     VASlice->luma_offset_l1,
-@@ -436,29 +435,29 @@ int h264_set_controls(struct request_data *driver_data,
+-				     slice->num_ref_idx_l1_active_minus1 + 1,
+-				     VASlice->luma_weight_l1,
+-				     VASlice->luma_offset_l1,
+-				     VASlice->chroma_weight_l1,
+-				     VASlice->chroma_offset_l1);
+ }
+ 
+ int h264_set_controls(struct request_data *driver_data,
+@@ -436,29 +418,29 @@ int h264_set_controls(struct request_data *driver_data,
  			      &surface->params.h264.picture, &slice);
  
  	rc = v4l2_set_control(driver_data->video_fd, surface->request_fd,
