@@ -20,7 +20,7 @@ PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/libXxf86vm
+define Package/libxxf86vm
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Xlib-based library for the XFree86-VidMode X extension
@@ -28,7 +28,7 @@ define Package/libXxf86vm
 	URL:=https://gitlab.freedesktop.org/xorg/lib/libxxf86vm
 endef
 
-define Package/libXxf86vm/description
+define Package/libxxf86vm/description
 	libXxf86vm - Extension library for the XFree86-VidMode X extension
 endef
 
@@ -52,7 +52,7 @@ define Build/InstallDev
 	  $(1)/usr/lib/
 endef
 
-define Package/libXxf86vm/install
+define Package/libxxf86vm/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/lib
 
@@ -61,4 +61,4 @@ define Package/libXxf86vm/install
 	  $(1)/usr/lib/
 endef
 
-$(eval $(call BuildPackage,libXxf86vm))
+$(eval $(call BuildPackage,libxxf86vm))
