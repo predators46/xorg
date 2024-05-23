@@ -1,18 +1,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mesa
-PKG_VERSION:=21.3.0
-PKG_RELEASE:=$(AUTORELEASE)
+PKG_VERSION:=24.1.0
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://archive.mesa3d.org/
-PKG_HASH:=a2753c09deef0ba14d35ae8a2ceff3fe5cd13698928c7bb62c2ec8736eb09ce1
+PKG_HASH:=b7eac8c79244806b1c276eeeacc329e4a5b31a370804c4b0c7cd16837783f78b
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=BSD-3-Clause
 
-PKG_INSTALL:=1
-PKG_BUILD_DEPENDS:=python-mako/host
+PKG_BUILD_DEPENDS:=python-mako/host libarchive lua5.3
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_LIBDRM_INTEL \
@@ -70,7 +69,7 @@ define Package/libxatracker
   SUBMENU:=Video
   TITLE:=Mesa3D libxatracker
   URL:=https://www.mesa3d.org
-  DEPENDS:=+libstdcpp +zlib +libdrm +libexpat +libzstd @(aarch64||arm||i386||i686||x86_64)
+  DEPENDS:=+libstdcpp +zlib +libdrm +libexpat +libzstd +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva @(aarch64||arm||i386||i686||x86_64)
 endef
 
 define Package/libxatracker/description
@@ -92,7 +91,7 @@ define Package/libmesa
   SECTION:=libs
   CATEGORY:=Libraries
   SUBMENU:=Video
-  DEPENDS:=+libglapi +libstdcpp +zlib +libdrm +libwayland +wayland-protocols
+  DEPENDS:=+libglapi +libstdcpp +zlib +libdrm +libwayland +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva
   TITLE:=Mesa3D OpenGL and friends
   URL:=https://www.mesa3d.org
 endef
@@ -104,7 +103,7 @@ define Package/libosmesa
   SECTION:=libs
   CATEGORY:=Libraries
   SUBMENU:=Video
-  DEPENDS:=+libglapi +libstdcpp +zlib +libwayland +libzstd +wayland-protocols
+  DEPENDS:=+libglapi +libstdcpp +zlib +libwayland +libzstd +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva
   TITLE:=off-screen Mesa library
   URL:=https://www.mesa3d.org
 endef
@@ -231,7 +230,7 @@ endif
 
 MESON_ARGS += \
 	-Dplatforms=wayland \
-	-Dglx=disabled \
+	-Dglx=enabled \
 	-Ddri3=enabled \
 	-Degl=enabled \
 	-Dgbm=enabled \
@@ -247,8 +246,7 @@ MESON_ARGS += \
 	-Dtools= \
 	-Dllvm=disabled \
 	-Dshared-glapi=enabled \
-	-Ddraw-use-llvm=false \
-	-Dscanner_bin="$(STAGING_DIR_HOSTPKG)/bin/wayland-scanner"
+	-Ddraw-use-llvm=false
 
 TARGET_CFLAGS += -I$(MESON_BUILD_DIR)/src/broadcom/
 
