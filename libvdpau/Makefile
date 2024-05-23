@@ -1,8 +1,3 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libvdpau
@@ -13,22 +8,30 @@ PKG_SOURCE_URL:=https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/$(PKG_VE
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_HASH:=66490802f30426d30ff9e8af35263bbbbaa23b52d0a2d797d06959c3d19638fd
 
-##PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=COPYING
+
 PKG_BUILD_DEPENDS:=xorgproto
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/libvdpau
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libx11 +libxext
-  TITLE:=Hardware-accelerated video playback library
-  URL:=https://cgit.freedesktop.org/~aplattner/libvdpau
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Hardware-accelerated video playback library
+	DEPENDS:=+libx11 +libxext
+	URL:=https://cgit.freedesktop.org/~aplattner/libvdpau
 endef
 
-CONFIGURE_ARGS += \
-  --prefix=/usr
+define Package/libvdpau/description
+	Hardware-accelerated video playback library (development files)
+endef
+
+MESON_ARGS += \
+	-Ddocumentation=false \
+	-Ddri2=true
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -36,7 +39,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/vdpau \
 	  $(1)/usr/include/
 
 	$(CP) \
