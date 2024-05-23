@@ -31,8 +31,8 @@ endef
 
 MESON_ARGS += \
 	-Ddocs=false \
-	-Dglx=true \
-	-Degl=true \
+	-Dglx=yes \
+	-Degl=yes \
 	-Dx11=true \
 	-Dtests=false
 
