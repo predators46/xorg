@@ -69,7 +69,7 @@ define Package/libxatracker
   SUBMENU:=Video
   TITLE:=Mesa3D libxatracker
   URL:=https://www.mesa3d.org
-  DEPENDS:=+libstdcpp +zlib +libdrm +libexpat +libzstd +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva @(aarch64||arm||i386||i686||x86_64)
+  DEPENDS:=+libstdcpp +zlib +libdrm +libexpat +libzstd +libx11 +libxcb +libxext +libxfixes +libxshmfence @(aarch64||arm||i386||i686||x86_64)
 endef
 
 define Package/libxatracker/description
@@ -91,7 +91,7 @@ define Package/libmesa
   SECTION:=libs
   CATEGORY:=Libraries
   SUBMENU:=Video
-  DEPENDS:=+libglapi +libstdcpp +zlib +libdrm +libwayland +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva
+  DEPENDS:=+libglapi +libstdcpp +zlib +libdrm +libwayland +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence
   TITLE:=Mesa3D OpenGL and friends
   URL:=https://www.mesa3d.org
 endef
@@ -103,7 +103,7 @@ define Package/libosmesa
   SECTION:=libs
   CATEGORY:=Libraries
   SUBMENU:=Video
-  DEPENDS:=+libglapi +libstdcpp +zlib +libwayland +libzstd +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence +libvdpau +libva
+  DEPENDS:=+libglapi +libstdcpp +zlib +libwayland +libzstd +wayland-protocols +libx11 +libxcb +libxext +libxfixes +libxshmfence
   TITLE:=off-screen Mesa library
   URL:=https://www.mesa3d.org
 endef
