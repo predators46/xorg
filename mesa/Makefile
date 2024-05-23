@@ -229,8 +229,8 @@ ifneq ($(CONFIG_PACKAGE_libvulkan-intel),)
 endif
 
 MESON_ARGS += \
-	-Dplatforms=wayland \
-	-Dglx=true \
+	-Dplatforms=x11,wayland \
+	-Dglx=dri \
 	-Ddri3=enabled \
 	-Degl=enabled \
 	-Dgbm=enabled \
@@ -246,7 +246,9 @@ MESON_ARGS += \
 	-Dtools= \
 	-Dllvm=disabled \
 	-Dshared-glapi=enabled \
-	-Ddraw-use-llvm=false
+	-Ddraw-use-llvm=false \
+	-Dgallium-va=enabled \
+	-Dgallium-vdpau=enabled
 
 TARGET_CFLAGS += -I$(MESON_BUILD_DIR)/src/broadcom/
 
