@@ -230,7 +230,7 @@ endif
 
 MESON_ARGS += \
 	-Dplatforms=wayland \
-	-Dglx=enabled \
+	-Dglx=true \
 	-Ddri3=enabled \
 	-Degl=enabled \
 	-Dgbm=enabled \
