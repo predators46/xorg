@@ -11,7 +11,7 @@ PKG_HASH:=b7eac8c79244806b1c276eeeacc329e4a5b31a370804c4b0c7cd16837783f78b
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=BSD-3-Clause
 
-PKG_BUILD_DEPENDS:=python-mako/host libarchive lua5.3 libvdpau libva
+PKG_BUILD_DEPENDS:=python-mako/host libarchive lua5.3
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_LIBDRM_INTEL \
@@ -245,9 +245,7 @@ MESON_ARGS += \
 	-Dtools= \
 	-Dllvm=disabled \
 	-Dshared-glapi=enabled \
-	-Ddraw-use-llvm=false \
-	-Dgallium-va=enabled \
-	-Dgallium-vdpau=enabled
+	-Ddraw-use-llvm=false
 
 TARGET_CFLAGS += -I$(MESON_BUILD_DIR)/src/broadcom/
 
