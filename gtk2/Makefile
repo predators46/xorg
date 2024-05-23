@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=gtk+-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://download.gnome.org/sources/gtk+/2.24/
-PKG_HASH:=247fef48b3e0e7e67129e41f1e789e8d006ba47dba1c0cdce684b9b703f888e7
+PKG_HASH:=ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU Library General Public License v2 only
