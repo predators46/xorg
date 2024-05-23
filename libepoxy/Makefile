@@ -12,6 +12,8 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=License
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DEPENDS:=mesa
+
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 
@@ -29,8 +31,8 @@ endef
 
 MESON_ARGS += \
 	-Ddocs=false \
-	-Dglx=no \
-	-Degl=no \
+	-Dglx=true \
+	-Degl=true \
 	-Dx11=true \
 	-Dtests=false
 
