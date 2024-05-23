@@ -13,7 +13,7 @@ PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/gtk+-$(PKG_VERSION)
-PKG_BUILD_DEPENDS:=glib2 glib2/host
+PKG_BUILD_DEPENDS:=glib2 glib2/host libxml2/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
