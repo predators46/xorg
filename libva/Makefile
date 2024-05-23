@@ -12,8 +12,6 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=License
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DEPENDS:=mesa
-
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 
@@ -21,7 +19,7 @@ define Package/libva
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Video Acceleration (VA) API for Linux
-	DEPENDS:=+libx11 +libxcb +libxfixes +libxext +libdrm +libwayland
+	DEPENDS:=+libx11 +libxcb +libxfixes +libxext +libdrm +libwayland +libmesa
 	URL:=https://freedesktop.org/wiki/Software/vaapi
 endef
 
