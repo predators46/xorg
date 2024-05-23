@@ -30,7 +30,7 @@ endef
 
 MESON_ARGS += \
 	-Dwith_x11=yes \
-	-Dwith_glx=no \
+	-Dwith_glx=yes \
 	-Dwith_wayland=yes \
 	-Denable_docs=false
 
