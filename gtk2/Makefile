@@ -41,7 +41,10 @@ CONFIGURE_ARGS += \
 	--with-xinput=yes \
 	--without-libjasper \
 	--with-included-loaders=png \
-	--with-gdktarget=x11
+	--with-gdktarget=x11 \
+	--disable-test-print-backend \
+	--disable-introspection \
+	--disable-gtk-doc-html
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
