@@ -24,7 +24,7 @@ define Package/gtk2
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=The GTK plus Toolkit (v2)
-	DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib +libexpat +libpango +libxrandr +libxinerama +libxi +libxfixes +libxdamage +fontconfig +libcairo +atk +gdk-pixbuf +at-spi2-core +hicolor-icon-theme +shared-mime-info +libcups
+	DEPENDS:=+libx11 +libxau +libxext +libxmu +libxaw +libxpm +libtiff +zlib +libexpat +libxcursor +libxcomposite +libice +libpango +libxrandr +libxinerama +libxi +libxfixes +libxdamage +fontconfig +libcairo +atk +gdk-pixbuf +at-spi2-core +hicolor-icon-theme +shared-mime-info +libcups
 	URL:=https://www.gtk.org/
 endef
 
