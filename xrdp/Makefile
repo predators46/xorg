@@ -38,8 +38,8 @@ CONFIGURE_ARGS = \
 	--host=$(GNU_TARGET_NAME) \
 	--build=$(GNU_HOST_NAME) \
 	--prefix=$(CONFIGURE_PREFIX) \
-	--disable-pam \
-	--disable-tjpeg
+	--enable-pam \
+	--enable-tjpeg
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
