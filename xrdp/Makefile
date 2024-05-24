@@ -33,13 +33,22 @@ endef
 CONFIGURE_VARS += \
 	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
-CONFIGURE_ARGS = \
-	--target=$(GNU_TARGET_NAME) \
-	--host=$(GNU_TARGET_NAME) \
-	--build=$(GNU_HOST_NAME) \
-	--prefix=$(CONFIGURE_PREFIX) \
-	--enable-pam \
-	--enable-tjpeg
+CONFIGURE_ARGS += \
+    --build=$(GNU_HOST_NAME) \
+    --host=$(GNU_HOST_NAME) \
+    --target=$(REAL_GNU_TARGET_NAME) \
+    --prefix=/usr \
+    --disable-pam \
+    --disable-tjpeg
+
+define Build/Compile
+	$(HOST_CFLAGS)" LDFLAGS="" CC="$(HOSTCC)" \
+	    $(MAKE) -C $(PKG_BUILD_DIR)/common \
+	    $(MAKE) -C $(PKG_BUILD_DIR)/keygen
+	    $(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
+	    $(CP) $(PKG_BUILD_DIR)/keygen/xrdp-keygen $(STAGING_DIR_HOSTPKG)/bin
+	$(call Build/Compile/Default)
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
