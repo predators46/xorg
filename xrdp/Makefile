@@ -39,8 +39,8 @@ CONFIGURE_VARS += \
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
-	--enable-pam \
-	--enable-tjpeg
+	--disable-pam \
+	--disable-tjpeg
 
 # We can't use the default, as the default passes $(MAKE_ARGS), which
 # overrides CC, CFLAGS, etc. and defeats the *_FOR_BUILD definitions
