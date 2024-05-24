@@ -16,6 +16,7 @@ PKG_HASH:=1a00b7fa08c7b506a24c40f7cc8d9e0e59be748d731af8f7aa0b4d722bd8ccbe
 PKG_CPE_ID:=cpe:/a:pkgconf:pkgconf
 
 include $(INCLUDE_DIR)/host-build.mk
+include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
 
 unexport PKG_CONFIG
@@ -38,3 +39,4 @@ define Host/Clean
 endef
 
 $(eval $(call HostBuild))
+$(eval $(call BuildPackage,pkgconf))
