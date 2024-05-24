@@ -1,37 +1,41 @@
-# Copyright (C) 2019 Lucian Cristian <lucian.cristian@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxcursor
-_PKG_NAME:=libXcursor
 PKG_VERSION:=1.2.2
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib/
-PKG_SOURCE:=$(_PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE:=libXcursor-$(PKG_VERSION).tar.xz
 PKG_HASH:=53d071bd2cc56e517a30998d5e685c8a74556ddada43c6985d14da9a023a88ee
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=LICENSE
+PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libXcursor-$(PKG_VERSION)
+
+PKG_BUILD_DEPENDS:=xorgproto util-macros
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libxcursor
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+libxrender +libxfixes
-  TITLE:=X Cursor management library
-  URL:=http://xorg.freedesktop.org/
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=X Cursor management library
+	DEPENDS:=+libx11 +libxrender +libxfixes
+	URL:=https://gitlab.freedesktop.org/xorg/lib/libxcursor
+endef
+
+define Package/libxcursor/description
+	libXcursor - X Window System Cursor management library
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-  --prefix=/usr \
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -39,7 +43,7 @@ define Build/InstallDev
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(PKG_INSTALL_DIR)/usr/include/X11 \
 	  $(1)/usr/include/
 
 	$(CP) \
