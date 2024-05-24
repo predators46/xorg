@@ -35,8 +35,8 @@ endef
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS += \
-    --prefix=/usr \
-    --enable-imlib2
+	--prefix=/usr \
+	--enable-imlib2
 
 define Package/fluxbox/install
 	$(INSTALL_DIR) \
