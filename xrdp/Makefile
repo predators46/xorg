@@ -33,13 +33,13 @@ endef
 CONFIGURE_VARS += \
 	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
-CONFIGURE_ARGS += \
-    --build=$(GNU_HOST_NAME) \
-    --host=$(GNU_HOST_NAME) \
-    --target=$(REAL_GNU_TARGET_NAME) \
-    --prefix=/usr \
-    --disable-pam \
-    --disable-tjpeg
+CONFIGURE_VARS += \
+	--build=$(GNU_HOST_NAME) \
+	--host=$(GNU_HOST_NAME) \
+	--target=$(REAL_GNU_TARGET_NAME) \
+	--prefix=/usr \
+	--disable-pam \
+	--disable-tjpeg
 
 define Build/Compile
 	$(HOST_CFLAGS)" LDFLAGS="" CC="$(HOSTCC)" \
