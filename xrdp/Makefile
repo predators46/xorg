@@ -42,11 +42,10 @@ CONFIGURE_ARGS += \
 	--disable-tjpeg
 
 define Build/Compile
-	$(HOST_CFLAGS)" LDFLAGS="" CC="$(HOSTCC)" \
-	    $(MAKE) -C $(PKG_BUILD_DIR)/common \
-	    $(MAKE) -C $(PKG_BUILD_DIR)/keygen
-	    $(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
-	    $(CP) $(PKG_BUILD_DIR)/keygen/xrdp-keygen $(STAGING_DIR_HOSTPKG)/bin
+	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) -C $(PKG_BUILD_DIR)/common
+	CC="$(HOSTCC) $(HOST_CFLAGS) $(HOST_CPPFLAGS) $(HOST_LDFLAGS)" $(MAKE) -C $(PKG_BUILD_DIR)/keygen
+	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
+	$(CP) $(PKG_BUILD_DIR)/keygen/xrdp-keygen $(STAGING_DIR_HOSTPKG)/bin
 	$(call Build/Compile/Default)
 endef
 
