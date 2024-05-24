@@ -30,9 +30,6 @@ define Package/xrdp/description
 	xrdp provides a graphical login to remote machines using Microsoft Remote Desktop Protocol (RDP).
 endef
 
-#CONFIGURE_VARS += \
-	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
-
 CONFIGURE_VARS += \
 	LDFLAGS="$(HOST_LDFLAGS)" \
 	CPPFLAGS="$(HOST_CPPFLAGS)" \
