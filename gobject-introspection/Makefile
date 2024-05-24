@@ -75,13 +75,12 @@ define Meson/CreateCrossFile
 		> $(1)
 endef
 
-HOST_LDFLAGS +=-lgobject-2.0 -lglib-2.0 -lpcre2-8
+TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
-	-Dgtk_doc=false \
-	-Dbuild_introspection_data=true
+	-Dgtk_doc=false
 
 MESON_ARGS += \
 	-Dcairo=disabled \
