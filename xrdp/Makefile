@@ -30,13 +30,27 @@ define Package/xrdp/description
 	xrdp provides a graphical login to remote machines using Microsoft Remote Desktop Protocol (RDP).
 endef
 
+#CONFIGURE_VARS += \
+	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
+
 CONFIGURE_VARS += \
+	LDFLAGS="$(HOST_LDFLAGS)" \
+	CPPFLAGS="$(HOST_CPPFLAGS)" \
+	CFLAGS="$(HOST_CFLAGS)" \
+	CC="$(HOSTCC)" \
 	TURBOJPEG_PATH="$(STAGING_DIR)/usr"
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
 	--enable-pam \
 	--enable-tjpeg
+
+# We can't use the default, as the default passes $(MAKE_ARGS), which
+# overrides CC, CFLAGS, etc. and defeats the *_FOR_BUILD definitions
+# passed in CONFIGURE_VARS
+define Build/Compile
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH)
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
