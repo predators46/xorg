@@ -67,7 +67,7 @@ COMP_ARGS+=-Dglib_assert=false
 COMP_ARGS+=-Dtests=false
 
 
-MESON_HOST_ARGS += $(COMP_ARGS) -Dxattr=false -Ddefault_library=static -Dnls=disabled -Dforce_fallback_for=libpcre2-8
+MESON_HOST_ARGS += $(COMP_ARGS) -Dxattr=false -Ddefault_library=static -Dnls=disabled -Dforce_fallback_for=pcre2
 MESON_ARGS += $(COMP_ARGS) -Dxattr=true -Db_lto=true -Ddefault_library=both -Dnls=$(if $(CONFIG_BUILD_NLS),en,dis)abled
 
 define Build/InstallDev
