@@ -13,6 +13,7 @@ PKG_LICENSE:=GNU Library General Public License v2 only
 PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DEPENDS:=glib2/host
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
