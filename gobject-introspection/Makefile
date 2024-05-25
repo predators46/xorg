@@ -75,13 +75,14 @@ define Meson/CreateCrossFile
 		> $(1)
 endef
 
-LDFLAGS="$(HOST_LDFLAGS) -lpcre2-8"
+#LDFLAGS="$(HOST_LDFLAGS) -lpcre2-8"
 #TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 
 MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
-	-Dgtk_doc=false
+	-Dgtk_doc=false \
+	-Dc_link_args=-lpcre2-8
 
 MESON_ARGS += \
 	-Dcairo=disabled \
