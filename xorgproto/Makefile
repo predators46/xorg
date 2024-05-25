@@ -14,6 +14,7 @@ PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DEPENDS:=util-macros
 HOST_BUILD_DEPENDS:=util-macros/host
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
