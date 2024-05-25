@@ -22,7 +22,7 @@ define Package/librsvg
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=SAX-based renderer for SVG files into a GdkPixbuf
-	DEPENDS:=$(RUST_ARCH_DEPENDS) +libcairo +libfreetype2 +gdk-pixbuf +glib2 +harfbuzz +libxml2 +libpango
+	DEPENDS:=$(RUST_ARCH_DEPENDS) +libcairo +libfreetype +gdk-pixbuf +glib2 +harfbuzz +libxml2 +libpango
 	URL:=https://gitlab.gnome.org/GNOME/librsvg
 endef
 
