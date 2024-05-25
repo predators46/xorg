@@ -13,6 +13,7 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DEPENDS:=wayland/host
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/meson.mk
