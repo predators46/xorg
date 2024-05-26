@@ -12,9 +12,9 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_BUILD_DEPENDS:=rust/host
+#HOST_BUILD_DEPENDS:=rust/host
 
-PKG_HOST_ONLY:=1
+#PKG_HOST_ONLY:=1
 PKG_BUILD_FLAGS:=no-mips16
 
 RUST_HOST_FEATURES:=
