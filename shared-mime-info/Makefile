@@ -38,6 +38,9 @@ define Package/shared-mime-info/description
 	The shared-mime-info package contains a database of MIME types and their file extensions.
 endef
 
+MESON_HOST_ARGS += \
+	-Dbuild-tests=false
+
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/share/
 	$(CP) \
