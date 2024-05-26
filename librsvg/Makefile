@@ -33,7 +33,7 @@ define Package/librsvg/description
 endef
 
 MESON_ARGS += \
-	-Dintrospection=false \
+	-Dintrospection=disabled \
 	-Ddocs=false \
 	-Dtests=false
 
