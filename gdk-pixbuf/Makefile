@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING
 
-HOST_BUILD_DEPENDS:=glib2/host libtiff/host shared-mime-info/host
+HOST_BUILD_DEPENDS:=glib2/host libtiff/host libjpeg-turbo/host libpng/host shared-mime-info/host
 PKG_BUILD_DEPENDS:=glib2/host
 PKG_BUILD_PARALLEL:=1
 
