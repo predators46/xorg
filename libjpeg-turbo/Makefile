@@ -16,6 +16,7 @@ PKG_CPE_ID:=cpe:/a:libjpeg-turbo:libjpeg-turbo
 # Allows ASM compilation for speed
 PKG_BUILD_FLAGS:=no-mips16
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
@@ -107,6 +108,7 @@ define Package/libjpeg-turbo-utils/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/jpegtran $(1)/usr/bin
 endef
 
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,libjpeg-turbo))
 $(eval $(call BuildPackage,libturbojpeg-turbo))
 $(eval $(call BuildPackage,libjpeg-turbo-utils))
