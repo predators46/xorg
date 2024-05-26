@@ -81,8 +81,7 @@ endef
 MESON_HOST_ARGS += \
 	-Dcairo=disabled \
 	-Ddoctool=disabled \
-	-Dgtk_doc=false \
-	-Dc_link_args=-lpcre2-8
+	-Dgtk_doc=false
 
 MESON_ARGS += \
 	-Dcairo=disabled \
