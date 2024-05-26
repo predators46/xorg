@@ -39,4 +39,4 @@ endef
 
 $(eval $(call RustBinHostBuild,cargo-c))
 $(eval $(call BuildPackage,cargo-c))
-#$(eval $(call HostBuild))
+$(eval $(call HostBuild))
