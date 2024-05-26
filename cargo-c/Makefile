@@ -28,7 +28,7 @@ define Package/cargo-c
   CATEGORY:=Languages
   SUBMENU:=Rust
   TITLE:=build and install C-compatible libraries
-  DEPENDS:=$(RUST_ARCH_DEPENDS)
+  DEPENDS:=
   URL:=https://github.com/lu-zero/cargo-c
 endef
 
