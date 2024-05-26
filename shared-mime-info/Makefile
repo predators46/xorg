@@ -48,6 +48,16 @@ define Build/InstallDev
 		$(1)/usr/share/
 endef
 
+define Host/Install
+	$(call Host/Install/Meson)
+	$(INSTALL_DIR) \
+	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
+
+	$(CP) \
+	  $(MESON_HOST_BUILD_DIR)/shared-mime-info.pc \
+	  $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/
+endef
+
 define Package/shared-mime-info/install
 	$(INSTALL_DIR) $(1)/usr/bin/
 	$(CP) \
