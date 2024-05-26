@@ -18,8 +18,10 @@ PKG_SOURCE:=shared-mime-info-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://gitlab.freedesktop.org/xdg/$(PKG_NAME)/-/archive/$(PKG_VERSION)
 PKG_HASH:=32dc32ae39ff1c1bf8434dd3b36770b48538a1772bc0298509d034f057005992
 
+HOST_BUILD_DEPENDS:=gettext-full/host glib2/host libxml2/host
 PKG_BUILD_DEPENDS:=gettext-full/host
 
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 include $(INCLUDE_DIR)/meson.mk
@@ -60,4 +62,5 @@ define Package/shared-mime-info/postinst
 update-mime-database /usr/share/mime/
 endef
 
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,shared-mime-info))
