@@ -34,9 +34,6 @@ define Package/gdk-pixbuf/description
 endef
 
 MESON_HOST_ARGS += \
-	-Dpng=disabled \
-	-Djpeg=disabled \
-	-Dgif=disabled \
 	-Dgtk_doc=false \
 	-Ddocs=false \
 	-Dintrospection=disabled \
