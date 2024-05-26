@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gobject-introspection
-PKG_VERSION:=1.80.1
+PKG_VERSION:=1.74.0
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://download.gnome.org/sources/$(PKG_NAME)/1.80
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=a1df7c424e15bda1ab639c00e9051b9adf5cea1a9e512f8a603b53cd199bc6d8
+PKG_HASH:=347b3a719e68ba4c69ff2d57ee2689233ea8c07fc492205e573386779e42d653
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU Library General Public License v2 only
