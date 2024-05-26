@@ -103,7 +103,7 @@ define Build/InstallDev
 	$(foreach BIN,glib_genmarshal glib_mkenums,
 		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/glib-2.0.pc
 	)
-	$(foreach BIN,glib_compile_resources gdbus_codegen,
+	$(foreach BIN,glib_compile_schemas glib_compile_resources gdbus_codegen,
 		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/gio-2.0.pc
 	)
 
