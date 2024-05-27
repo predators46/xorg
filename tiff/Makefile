@@ -20,7 +20,7 @@ PKG_LICENSE:=libtiff
 PKG_LICENSE_FILES:=COPYRIGHT
 PKG_CPE_ID:=cpe:/a:libtiff:libtiff
 
-HOST_BUILD_DEPENDS:=libjpeg-turbo/host
+HOST_BUILD_DEPENDS:=libjpeg-turbo/host zlib
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
