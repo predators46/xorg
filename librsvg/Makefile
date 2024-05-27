@@ -31,6 +31,9 @@ define Package/librsvg/description
 	It renders SVG files to Cairo surfaces.  Cairo is the 2D, antialiased drawing library that GNOME uses to draw things to the screen or to generate output for printing.
 endef
 
+CONFIGURE_VARS += \
+	RUST_TARGET=--target=$(RUSTC_TARGET_ARCH)
+
 CONFIGURE_ARGS += \
 	--enable-shared \
 	--disable-static \
@@ -42,8 +45,6 @@ CONFIGURE_ARGS += \
 	--disable-debug \
 	--disable-introspection \
 	--disable-vala
-
-MAKE_VARS += RUST_TARGET=$(RUSTC_TARGET_ARCH)
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
