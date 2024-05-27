@@ -20,6 +20,8 @@ PKG_LICENSE:=libtiff
 PKG_LICENSE_FILES:=COPYRIGHT
 PKG_CPE_ID:=cpe:/a:libtiff:libtiff
 
+HOST_BUILD_DEPENDS:=libjpeg-turbo/host
+
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
@@ -34,7 +36,7 @@ $(call Package/tiff/Default)
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE+= library
-  DEPENDS:=+zlib +libjpeg
+  DEPENDS:=+zlib +libjpeg-turbo
   ABI_VERSION:=6
 endef
 
