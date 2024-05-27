@@ -32,7 +32,7 @@ define Package/librsvg/description
 endef
 
 CONFIGURE_VARS += \
-	RUST_TARGET=--target=$(RUSTC_TARGET_ARCH)
+	RUST_TARGET=$(RUSTC_TARGET_ARCH)
 
 CONFIGURE_ARGS += \
 	--enable-shared \
