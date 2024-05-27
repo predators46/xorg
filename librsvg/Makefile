@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING.LIB
 
-PKG_BUILD_DEPENDS:=glib2/host rust/host cargo-c/host vala/host dejavu-fonts-ttf
+PKG_BUILD_DEPENDS:=glib2/host rust/host vala/host dejavu-fonts-ttf
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
