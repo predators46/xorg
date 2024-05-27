@@ -12,8 +12,12 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
+HOST_BUILD_DEPENDS:=rust/host
+
 PKG_HOST_ONLY:=1
 PKG_BUILD_FLAGS:=no-mips16
+
+RUST_HOST_FEATURES:=
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
@@ -24,6 +28,7 @@ define Package/cargo-c
   CATEGORY:=Languages
   SUBMENU:=Rust
   TITLE:=build and install C-compatible libraries
+  DEPENDS:=
   URL:=https://github.com/lu-zero/cargo-c
 endef
 
@@ -34,4 +39,3 @@ endef
 
 $(eval $(call RustBinHostBuild,cargo-c))
 $(eval $(call BuildPackage,cargo-c))
-$(eval $(call HostBuild))
