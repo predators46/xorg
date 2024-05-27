@@ -12,14 +12,13 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_BUILD_DEPENDS:=rust/host
+PKG_BUILD_DEPENDS:=rust/host
 
 PKG_HOST_ONLY:=1
 PKG_BUILD_FLAGS:=no-mips16
 
 RUST_HOST_FEATURES:=
 
-include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/rust/rust-host-build.mk
 
