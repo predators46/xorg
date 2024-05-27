@@ -41,6 +41,8 @@ CONFIGURE_ARGS += \
 	--disable-installed-tests \
 	--disable-always-build-tests \
 	--disable-pixbuf-loader \
+	--disable-Bsymbolic \
+	--disable-debug \
 	--disable-introspection \
 	--disable-vala
 
