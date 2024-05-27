@@ -16,7 +16,7 @@ PKG_BUILD_DEPENDS:=glib2/host rust/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/rust/rust-package.mk
+include $(TOPDIR)/feeds/packages/lang/rust/rust-values.mk
 
 define Package/librsvg
 	SECTION:=libs
