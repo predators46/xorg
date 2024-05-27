@@ -63,6 +63,10 @@ define Package/libjpeg-turbo-utils/description
 	These are the JPEG utilities that come with libjpeg-turbo.
 endef
 
+CMAKE_HOST_OPTIONS += \
+	-DENABLE_SHARED=OFF \
+	-DENABLE_STATIC=ON
+
 CMAKE_OPTIONS += \
 	-DWITH_SIMD=O$(if $(findstring mips,$(CONFIG_ARCH)),FF,N) \
 	-DWITH_TURBOJPEG=ON
