@@ -50,7 +50,16 @@ $(call Package/tiff/Default)
 endef
 
 CMAKE_HOST_OPTIONS += \
-	-DBUILD_SHARED_LIBS=OFF
+	-DBUILD_SHARED_LIBS=OFF \
+	-Dld-version-script=OFF \
+	-Dold-jpeg=OFF \
+	-Djbig=OFF \
+	-Dlzma=OFF \
+	-Dzstd=OFF \
+	-Dwebp=OFF \
+	-Djpeg12=OFF \
+	-Dcxx=OFF \
+	-Dlibdeflate=OFF
 
 CMAKE_OPTIONS += \
 	-Dld-version-script=OFF \
