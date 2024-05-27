@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING.LIB
 
-PKG_BUILD_DEPENDS:=glib2/host rust/host vala/host
+PKG_BUILD_DEPENDS:=glib2/host rust/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -39,7 +39,7 @@ CONFIGURE_ARGS += \
 	--disable-always-build-tests \
 	--disable-pixbuf-loader \
 	--disable-introspection \
-	--enable-vala
+	--disable-vala
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
