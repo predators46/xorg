@@ -34,6 +34,7 @@ endef
 
 MESON_ARGS += \
 	-Dintrospection=disabled \
+	-Dpixbuf-loader=disabled \
 	-Ddocs=disabled \
 	-Dtests=false
 
