@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING
 
-HOST_BUILD_DEPENDS:=glib2/host libjpeg-turbo/host libpng/host shared-mime-info/host
+HOST_BUILD_DEPENDS:=glib2/host shared-mime-info/host
 PKG_BUILD_DEPENDS:=glib2/host
 PKG_BUILD_PARALLEL:=1
 
@@ -34,13 +34,18 @@ define Package/gdk-pixbuf/description
 endef
 
 MESON_HOST_ARGS += \
+	-Dpng=disabled \
+	-Dtiff=disabled \
+	-Djpeg=disabled \
 	-Dgif=disabled \
+	-Dbuiltin_loaders='none' \
 	-Dgtk_doc=false \
 	-Ddocs=false \
 	-Dintrospection=disabled \
 	-Dman=false \
 	-Dtests=false \
-	-Dinstalled_tests=false
+	-Dinstalled_tests=false \
+	-Dgio_sniffing=false
 
 MESON_ARGS += \
 	-Dgtk_doc=false \
