@@ -46,8 +46,6 @@ CONFIGURE_ARGS += \
 	--disable-introspection \
 	--disable-vala
 
-Build/Compile = $(call Build/Compile/Cargo,librsvg-c)
-
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
