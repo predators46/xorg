@@ -46,6 +46,11 @@ CONFIGURE_ARGS += \
 	--disable-introspection \
 	--disable-vala
 
+CARGO_PKG_VARS= \
+	$(CARGO_PKG_CONFIG_VARS) \
+	CC=$(HOSTCC_NOCACHE) \
+	MAKEFLAGS="$(PKG_JOBS)"
+
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
