@@ -16,7 +16,7 @@ PKG_BUILD_DEPENDS:=glib2/host rust/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/rust/rust-values.mk
+include $(TOPDIR)/feeds/packages/lang/rust/rust-package.mk
 
 define Package/librsvg
 	SECTION:=libs
@@ -46,10 +46,7 @@ CONFIGURE_ARGS += \
 	--disable-introspection \
 	--disable-vala
 
-CARGO_PKG_VARS= \
-	$(CARGO_PKG_CONFIG_VARS) \
-	CC=$(HOSTCC_NOCACHE) \
-	MAKEFLAGS="$(PKG_JOBS)"
+Build/Compile = $(call Build/Compile/Cargo,librsvg-c)
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
