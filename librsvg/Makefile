@@ -32,17 +32,17 @@ define Package/librsvg/description
 	It renders SVG files to Cairo surfaces.  Cairo is the 2D, antialiased drawing library that GNOME uses to draw things to the screen or to generate output for printing.
 endef
 
-MESON_VARS += \
-	$(CARGO_PKG_CONFIG_VARS) \
-	CC=$(HOSTCC_NOCACHE) \
-	MAKEFLAGS="$(PKG_JOBS)"
-
 MESON_ARGS += \
 	-Dintrospection=disabled \
 	-Dpixbuf-loader=disabled \
 	-Ddocs=disabled \
 	-Dtests=false \
 	-Dtriplet=$(RUSTC_TARGET_ARCH)
+
+define Build/Compile/Meson
+	$(CARGO_PKG_CONFIG_VARS) \
+	$(CARGO_PKG_PROFILE)
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
