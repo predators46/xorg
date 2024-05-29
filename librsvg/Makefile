@@ -40,8 +40,7 @@ MESON_ARGS += \
 	-Dtriplet=$(RUSTC_TARGET_ARCH)
 
 define Build/Compile/Meson
-	$(CARGO_PKG_CONFIG_VARS) \
-	$(CARGO_PKG_PROFILE)
+	$(CARGO_PKG_CONFIG_VARS)
 endef
 
 define Build/InstallDev
