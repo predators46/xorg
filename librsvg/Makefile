@@ -1,22 +1,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=librsvg
-PKG_VERSION:=2.58.1
+PKG_VERSION:=2.58.91
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://download.gnome.org/sources/librsvg/2.58/
-PKG_HASH:=3728596290a8576d305d06ec8afdf473516feee9dff22e03235eac433d56824e
+PKG_HASH:=65846ae57c11aba288bf3a6fe517f800f7e38e7fbc79b98c99a8177634ed29f7
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GNU LGPLv2.1
 PKG_LICENSE_FILES:=COPYING.LIB
 
-PKG_BUILD_DEPENDS:=glib2/host rust/host
+PKG_BUILD_DEPENDS:=glib2/host rust/host cargo-c/host vala/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/rust/rust-package.mk
+include $(TOPDIR)/feeds/packages/lang/rust/rust-values.mk
+include $(INCLUDE_DIR)/meson.mk
 
 define Package/librsvg
 	SECTION:=libs
@@ -31,20 +32,15 @@ define Package/librsvg/description
 	It renders SVG files to Cairo surfaces.  Cairo is the 2D, antialiased drawing library that GNOME uses to draw things to the screen or to generate output for printing.
 endef
 
-CONFIGURE_VARS += \
-	RUST_TARGET=$(RUSTC_TARGET_ARCH)
+MESON_VARS += \
+	$(CARGO_PKG_VARS)
 
-CONFIGURE_ARGS += \
-	--enable-shared \
-	--disable-static \
-	--disable-gtk-doc \
-	--disable-installed-tests \
-	--disable-always-build-tests \
-	--disable-pixbuf-loader \
-	--disable-Bsymbolic \
-	--disable-debug \
-	--disable-introspection \
-	--disable-vala
+MESON_ARGS += \
+	-Dintrospection=disabled \
+	-Dpixbuf-loader=disabled \
+	-Ddocs=disabled \
+	-Dtests=false \
+	-Dtriplet=$(RUSTC_TARGET_ARCH)
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
