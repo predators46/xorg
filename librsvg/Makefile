@@ -33,7 +33,9 @@ define Package/librsvg/description
 endef
 
 MESON_VARS += \
-	$(CARGO_PKG_VARS)
+	$(CARGO_PKG_CONFIG_VARS) \
+	CC=$(HOSTCC_NOCACHE) \
+	MAKEFLAGS="$(PKG_JOBS)"
 
 MESON_ARGS += \
 	-Dintrospection=disabled \
