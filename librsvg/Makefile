@@ -39,8 +39,15 @@ MESON_ARGS += \
 	-Dtests=false \
 	-Dtriplet=$(RUSTC_TARGET_ARCH)
 
-define Build/Compile/Meson
-	$(call Build/Compile/Cargo)
+define Build/Compile/Cargo
+	+$(CARGO_PKG_VARS) \
+	cargo install -v \
+		--profile $(CARGO_PKG_PROFILE) \
+		$(if $(strip $(RUST_PKG_FEATURES)),--features "$(strip $(RUST_PKG_FEATURES))") \
+		--root $(PKG_BUILD_DIR) \
+		--path "$(PKG_BUILD_DIR)/$(if $(strip $(1)),$(strip $(1)))" \
+		$(if $(filter --jobserver%,$(PKG_JOBS)),,-j1) \
+		$(2)
 endef
 
 define Build/InstallDev
