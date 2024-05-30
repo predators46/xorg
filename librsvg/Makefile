@@ -16,7 +16,7 @@ PKG_BUILD_DEPENDS:=glib2/host rust/host cargo-c/host vala/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/xorg/rust/rust-package.mk
+include $(TOPDIR)/feeds/xorg/rust/rust-values.mk
 include $(INCLUDE_DIR)/meson.mk
 
 define Package/librsvg
