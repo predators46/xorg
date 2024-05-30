@@ -38,5 +38,10 @@ define Package/cargo-c/description
   C libraries.
 endef
 
+define Build/Compile
+  cd $(PKG_BUILD_DIR) && \
+  $(CARGO)
+endef
+
 $(eval $(call HostBuild))
 $(eval $(call BuildPackage,cargo-c))
