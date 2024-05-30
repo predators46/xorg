@@ -40,7 +40,7 @@ endef
 
 define Host/Compile
   cd $(HOST_BUILD_DIR) && \
-  $(CARGO)
+  $(CARGO) $(CARGO_PKG_CONFIG_ARGS)
 endef
 
 $(eval $(call HostBuild))
