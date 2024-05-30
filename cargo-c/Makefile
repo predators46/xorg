@@ -38,6 +38,5 @@ define Package/cargo-c/description
   C libraries.
 endef
 
-$(eval $(call RustBinHostBuild))
 $(eval $(call HostBuild))
 $(eval $(call BuildPackage,cargo-c))
