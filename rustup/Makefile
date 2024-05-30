@@ -1,70 +1,108 @@
+# SPDX-License-Identifier: GPL-2.0-only
 #
-# Copyright (C) 2006-2015 OpenWrt.org
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-#
+# Copyright (C) 2023 Luca Barbato and Donald Hoskins
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=libpng
-PKG_VERSION:=1.6.43
+PKG_NAME:=rustup
+PKG_VERSION:=1.27.1
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_SOURCE_URL:=@SF/libpng
-PKG_HASH:=6a5ca0652392a2d7c9db2ae5b40210843c0bbc081cbd410825ab00cc59f14a6c
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/rust-lang/rustup/tar.gz/$(PKG_VERSION)?
+PKG_HASH:=f5ba37f2ba68efec101198dca1585e6e7dd7640ca9c526441b729a79062d3b77
 
-PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
-PKG_LICENSE:=Libpng GPL-2.0-or-later BSD-3-Clause
-PKG_LICENSE_FILES:=LICENSE contrib/gregbook/COPYING contrib/gregbook/LICENSE
-PKG_CPE_ID:=cpe:/a:libpng:libpng
+PKG_LICENSE_FILES:=LICENSE-APACHE LICENSE-MIT
+PKG_SOURCE:=rustup-$(PKG_VERSION).tar.gz
+PKG_MAINTAINER:=Donald Hoskins <grommish@gmail.com>
+
+PKG_HOST_ONLY:=1
+PKG_BUILD_FLAGS:=no-mips16
+PKG_USE_MIPS16:=0
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/cmake.mk
+include rust-values.mk
 
-define Package/libpng
-  SECTION:=libs
-  CATEGORY:=Libraries
-  DEPENDS:=+zlib
-  TITLE:=A PNG format files handling library
-  URL:=http://www.libpng.org/pub/png/libpng.html
+define Package/rustup
+  SECTION:=lang
+  CATEGORY:=Languages
+  SUBMENU:=Rustup
+  TITLE:=Rust Programming Language Compiler
+  URL:=https://www.rust-lang.org/
+  DEPENDS:=$(RUST_ARCH_DEPENDS)
 endef
 
-CMAKE_HOST_OPTIONS += \
-	-DBUILD_SHARED_LIBS=OFF \
-	-DPNG_TOOLS=OFF \
-	-DPNG_TESTS=OFF \
-	-DPNG_FRAMEWORK=OFF
-
-CMAKE_OPTIONS += \
-	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-	-DPNG_TOOLS=OFF \
-	-DPNG_TESTS=OFF \
-	-DPNG_FRAMEWORK=OFF \
-	-DPNG_HARDWARE_OPTIMIZATIONS=O$(if $(findstring powerpc,$(CONFIG_ARCH))$(findstring mips,$(CONFIG_ARCH)),FF,N) \
-	-DPNG_ARM_NEON=$(if $(or $(findstring aarch64,$(CONFIG_ARCH)),$(findstring neon,$(CONFIG_CPU_TYPE))),on,off) \
-	-Dld-version-script=OFF
-
-define Build/InstallDev
-	$(call Build/InstallDev/cmake,$(1))
-	$(SED) 's,^\(prefix\|exec_prefix\)=.*,\1=$(STAGING_DIR)/usr,g' $(1)/usr/bin/libpng{,16}-config
-	$(SED) '/^includedir=/s|/usr|$$$${prefix}|' $(1)/usr/bin/libpng{,16}-config
-	$(SED) '/^libdir=/s|/usr|$$$${prefix}|' $(1)/usr/bin/libpng{,16}-config
-	$(SED) 's,/usr/include,$$$${prefix}/include,g' $(1)/usr/lib/pkgconfig/libpng16.pc
-	$(SED) 's,/usr/lib,$$$${exec_prefix}/lib,g' $(1)/usr/lib/pkgconfig/libpng16.pc
-	$(INSTALL_DIR) $(2)/bin
-	for f in libpng{,16}-config; do \
-		$(LN) ../../usr/bin/$$$$f $(2)/bin/ ; \
-	done
+define Package/rustup/description
+  Rustup is the toolchain manager for Rust-Lang
 endef
 
-define Package/libpng/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpng16.so* $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libpng.so $(1)/usr/lib/
+
+# Arguments Used:
+# --verbose Verbosity
+# -y Disable the Confirmation Prompts
+# --profile complete Profile to install [default: default] [possible values: minimal, default, complete]
+# --no-modify-path Don't configure the PATH environment variable
+# --default-host <default-host> Choose a default host triple
+# --default-toolchain <default-toolchain> Choose a default toolchain to install. Use 'none' to not install any toolchains at all
+RUSTUP_ARGS = \
+	--verbose \
+	-y \
+	--profile complete \
+	--no-modify-path \
+	--default-host $(RUSTUP_HOST_ARCH) \
+	--default-toolchain nightly
+
+define Host/Uninstall
+	$(RM) -r $(CARGO_HOME)
+	$(RM) -r $(RUSTUP_HOME)
+
+	$(RM) $(STAGING_DIR_HOST)/bin/cargo
+	$(RM) $(STAGING_DIR_HOST)/bin/cargo-clippy
+	$(RM) $(STAGING_DIR_HOST)/bin/cargo-fmt
+	$(RM) $(STAGING_DIR_HOST)/bin/cargo-miri
+	$(RM) $(STAGING_DIR_HOST)/bin/clippy-driver
+	$(RM) $(STAGING_DIR_HOST)/bin/cross
+	$(RM) $(STAGING_DIR_HOST)/bin/cross-util
+	$(RM) $(STAGING_DIR_HOST)/bin/rls
+	$(RM) $(STAGING_DIR_HOST)/bin/rust-analyzer
+	$(RM) $(STAGING_DIR_HOST)/bin/rust-gdb
+	$(RM) $(STAGING_DIR_HOST)/bin/rust-gdbgui
+	$(RM) $(STAGING_DIR_HOST)/bin/rust-lldb
+	$(RM) $(STAGING_DIR_HOST)/bin/rustc
+	$(RM) $(STAGING_DIR_HOST)/bin/rustdoc
+	$(RM) $(STAGING_DIR_HOST)/bin/rustfmt
+	$(RM) $(STAGING_DIR_HOST)/bin/rustup
+endef
+
+define Host/Compile
+	CARGO_HOME=$(CARGO_HOME) \
+	RUSTUP_HOME=$(RUSTUP_HOME) \
+	$(BASH) $(HOST_BUILD_DIR)/rustup-init.sh $(RUSTUP_ARGS)
+endef
+
+define Host/Install
+	ln -s $(CARGO_HOME)/bin/cargo $(STAGING_DIR_HOST)/bin/cargo
+	ln -s $(CARGO_HOME)/bin/cargo-clippy $(STAGING_DIR_HOST)/bin/cargo-clippy
+	ln -s $(CARGO_HOME)/bin/cargo-fmt $(STAGING_DIR_HOST)/bin/cargo-fmt
+	ln -s $(CARGO_HOME)/bin/cargo-miri $(STAGING_DIR_HOST)/bin/cargo-miri
+	ln -s $(CARGO_HOME)/bin/clippy-driver $(STAGING_DIR_HOST)/bin/clippy-driver
+	ln -s $(CARGO_HOME)/bin/cross $(STAGING_DIR_HOST)/bin/cross
+	ln -s $(CARGO_HOME)/bin/cross-util $(STAGING_DIR_HOST)/bin/cross-util
+	ln -s $(CARGO_HOME)/bin/rls $(STAGING_DIR_HOST)/bin/rls
+	ln -s $(CARGO_HOME)/bin/rust-analyzer $(STAGING_DIR_HOST)/bin/rust-analyzer
+	ln -s $(CARGO_HOME)/bin/rust-gdb $(STAGING_DIR_HOST)/bin/rust-gdb
+	ln -s $(CARGO_HOME)/bin/rust-gdbgui $(STAGING_DIR_HOST)/bin/rust-gdbgui
+	ln -s $(CARGO_HOME)/bin/rust-lldb $(STAGING_DIR_HOST)/bin/rust-lldb
+	ln -s $(CARGO_HOME)/bin/rustc $(STAGING_DIR_HOST)/bin/rustc
+	ln -s $(CARGO_HOME)/bin/rustdoc $(STAGING_DIR_HOST)/bin/rustdoc
+	ln -s $(CARGO_HOME)/bin/rustfmt $(STAGING_DIR_HOST)/bin/rustfmt
+	ln -s $(CARGO_HOME)/bin/rustup $(STAGING_DIR_HOST)/bin/rustup
+
+	CARGO_HOME=$(CARGO_HOME) \
+	RUSTUP_HOME=$(RUSTUP_HOME) \
+	cargo install cross
 endef
 
 $(eval $(call HostBuild))
-$(eval $(call BuildPackage,libpng))
+$(eval $(call BuildPackage,rustup))
