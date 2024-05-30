@@ -39,7 +39,7 @@ define Package/cargo-c/description
 endef
 
 define Host/Compile
-  cd $(PKG_BUILD_DIR) && \
+  cd $(HOST_BUILD_DIR) && \
   $(CARGO)
 endef
 
