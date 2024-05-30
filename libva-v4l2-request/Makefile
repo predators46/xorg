@@ -30,11 +30,11 @@ endef
 
 define Package/libva-v4l2-request/install
 	$(INSTALL_DIR) \
-	  $(1)/usr/bin
+	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/bin/* \
-	  $(1)/usr/bin/
+	  $(PKG_INSTALL_DIR)/usr/lib/dri \
+	  $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libva-v4l2-request))
