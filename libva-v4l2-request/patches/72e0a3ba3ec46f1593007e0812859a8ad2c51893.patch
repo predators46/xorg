@@ -1,0 +1,21 @@
+From 72e0a3ba3ec46f1593007e0812859a8ad2c51893 Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Thu, 30 May 2024 19:20:24 +0800
+Subject: [PATCH] Add files via upload
+
+---
+ src/meson.build | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/meson.build b/src/meson.build
+index d73abb1..48d4738 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -44,7 +44,6 @@ sources = [
+ 	'v4l2.c',
+ 	'mpeg2.c',
+ 	'h264.c',
+-	'h265.c'
+ ]
+ 
+ headers = [
