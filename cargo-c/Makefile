@@ -38,7 +38,7 @@ define Package/cargo-c/description
   C libraries.
 endef
 
-define Build/Compile
+define Host/Compile
   cd $(PKG_BUILD_DIR) && \
   $(CARGO)
 endef
