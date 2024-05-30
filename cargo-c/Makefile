@@ -16,13 +16,13 @@ PKG_MAINTAINER:=Luca Barbato <lu_zero@luminem.org>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-HOST_BUILD_DEPENDS:=rust/host
+HOST_BUILD_DEPENDS:=rustup/host
 HOST_BUILD_PARALLEL:=1
 PKG_HOST_ONLY:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/rust/rust-host-build.mk
+include $(TOPDIR)/feeds/xorg/rustup/rust-values.mk
 
 define Package/cargo-c
   SECTION:=lang
