@@ -35,8 +35,11 @@ It can be easily used from almost any programming language.
 endef
 
 CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_SYSTEM_NAME=Linux
+	-DCMAKE_BUILD_TYPE=Release
+
+define Build/Configure
+	cd $(PKG_BUILD_DIR)/build && cmake --build . --target prepare_cross_compiling
+endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
