@@ -35,10 +35,12 @@ It can be easily used from almost any programming language.
 endef
 
 CMAKE_HOST_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release
+	-DCMAKE_BUILD_TYPE=Release \
+	-DBUILD_SHARED_LIBS=OFF
 
 CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release
+	-DCMAKE_BUILD_TYPE=Release \
+	-DBUILD_SHARED_LIBS=ON
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
