@@ -34,11 +34,8 @@ TDLib (Telegram Database library) is a cross-platform library for building Teleg
 It can be easily used from almost any programming language.
 endef
 
-CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release
-
-define Build/Configure
-	cd $(PKG_BUILD_DIR)/build && cmake --build . --target prepare_cross_compiling
+define Build/Compile
+	+$(NINJA) -C $(CMAKE_BINARY_DIR)/generate
 endef
 
 define Build/InstallDev
