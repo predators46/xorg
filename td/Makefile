@@ -15,7 +15,7 @@ PKG_LICENSE_FILES:=LICENSE
 CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=gperf/host openssl zlib
-PKG_BUILD_DEPENDS:=gperf/host td/host
+PKG_BUILD_DEPENDS:=gperf/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
@@ -36,7 +36,7 @@ endef
 
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_CROSSCOMPILING=True
+	-DCMAKE_SYSTEM_NAME=Linux
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
