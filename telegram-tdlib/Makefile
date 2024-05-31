@@ -1,10 +1,10 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=td
+PKG_NAME:=telegram-tdlib
 PKG_VERSION:=1.8.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=td-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/tdlib/td/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=skip
 
@@ -12,16 +12,19 @@ PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
+HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/td-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/td-$(PKG_VERSION)
+
 CMAKE_BINARY_SUBDIR := build
 
-HOST_BUILD_DEPENDS:=gperf/host openssl zlib
-PKG_BUILD_DEPENDS:=gperf/host td/host
+HOST_BUILD_DEPENDS:=gperf/host
+PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
-define Package/td
+define Package/telegram-tdlib
   SECTION:=net
   CATEGORY:=Network
   TITLE:=Cross-platform library for building Telegram clients
@@ -29,7 +32,7 @@ define Package/td
   DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
 endef
 
-define Package/td/description
+define Package/telegram-tdlib/description
 TDLib (Telegram Database library) is a cross-platform library for building Telegram clients.
 It can be easily used from almost any programming language.
 endef
@@ -53,10 +56,17 @@ define Build/Prepare
 endef
 
 define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include $(1)/usr
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib $(1)/usr
+	$(INSTALL_DIR) \
+	  $(1)/usr/include \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/include/td \
+	  $(1)/usr/include/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,cmake,*.so*,*.a} \
+	  $(1)/usr/lib/
 endef
 
 define Host/Install
@@ -69,10 +79,14 @@ define Host/Install
 	  $(STAGING_DIR)/usr/include/
 endef
 
-define Package/td/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libtdjson.so* $(1)/usr/lib/
+define Package/telegram-tdlib/install
+	$(INSTALL_DIR) \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
+	  $(1)/usr/lib/
 endef
 
-$(eval $(call BuildPackage,td))
+$(eval $(call BuildPackage,telegram-tdlib))
 $(eval $(call HostBuild))
