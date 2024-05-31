@@ -13,10 +13,10 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=BSD 1-Clause License
 PKG_LICENSE_FILES:=COPYING
 
-CMAKE_BINARY_SUBDIR := build
-
 HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
+
+CMAKE_BINARY_SUBDIR := build
 CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
