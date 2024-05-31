@@ -15,7 +15,7 @@ PKG_LICENSE_FILES:=LICENSE
 CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=gperf/host openssl zlib
-PKG_BUILD_DEPENDS:=gperf/host
+PKG_BUILD_DEPENDS:=gperf/host td/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
@@ -34,15 +34,30 @@ TDLib (Telegram Database library) is a cross-platform library for building Teleg
 It can be easily used from almost any programming language.
 endef
 
-define Build/Compile
-	+$(NINJA) -C $(CMAKE_BINARY_DIR)/td/generate
-endef
+CMAKE_HOST_OPTIONS += \
+	-DCMAKE_BUILD_TYPE=Release
+
+CMAKE_OPTIONS += \
+	-DCMAKE_BUILD_TYPE=Release
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(CP) $(PKG_INSTALL_DIR)/usr/include $(1)/usr
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib $(1)/usr
+endef
+
+define Host/Install
+	$(call Host/Install/Default)
+	$(INSTALL_DIR) \
+	  $(1)/usr/include
+
+	$(CP) \
+	  $(HOST_CMAKE_BINARY_DIR)/td/generate/auto/td/telegram/*.h \
+	  $(1)/usr/include/td/telegram/
+	$(CP) \
+	  $(HOST_CMAKE_BINARY_DIR)/td/generate/auto/td/mtproto/*.h \
+	  $(1)/usr/include/td/mtproto/
 endef
 
 define Package/td/install
