@@ -45,6 +45,9 @@ define Build/Prepare
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto \
 	  $(PKG_BUILD_DIR)/td/generate/
+	$(CP) \
+	  $(HOST_BUILD_DIR)/tdutils/generate/auto \
+	  $(PKG_BUILD_DIR)/tdutils/generate/
 endef
 
 define Build/InstallDev
