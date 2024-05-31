@@ -33,7 +33,8 @@ It can be easily used from almost any programming language.
 endef
 
 CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release
+	-DCMAKE_BUILD_TYPE=Release \
+	-Dprepare_cross_compiling
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
