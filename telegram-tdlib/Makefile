@@ -48,7 +48,7 @@ define Build/Prepare
 	  $(PKG_BUILD_DIR)/td/generate/auto/td/telegram/
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
 	  $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto/
 
 	$(CP) \
@@ -60,7 +60,7 @@ define Build/Prepare
 	  $(STAGING_DIR)/usr/include/td/telegram/
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
 	  $(STAGING_DIR)/usr/include/td/mtproto/
 endef
 
