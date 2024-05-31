@@ -34,7 +34,7 @@ endef
 
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
-	-Dprepare_cross_compiling
+	-DCMAKE_CROSSCOMPILING=True
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
