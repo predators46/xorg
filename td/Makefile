@@ -40,6 +40,13 @@ CMAKE_HOST_OPTIONS += \
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	$(CP) \
+	  $(HOST_BUILD_DIR)/td/generate/auto \
+	  $(PKG_BUILD_DIR)/td/generate/
+endef
+
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(CP) $(PKG_INSTALL_DIR)/usr/include $(1)/usr
