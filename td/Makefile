@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-CMAKE_BINARY_SUBDIR := build
+#CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=gperf/host openssl zlib
 PKG_BUILD_DEPENDS:=gperf/host
