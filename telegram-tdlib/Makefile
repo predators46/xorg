@@ -17,7 +17,6 @@ HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
 
 CMAKE_BINARY_SUBDIR := build
-CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
