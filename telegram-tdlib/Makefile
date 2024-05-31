@@ -37,18 +37,31 @@ endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
+	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/telegram
+	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto
+	mkdir -p $(PKG_BUILD_DIR)/tdutils/generate/auto
+	mkdir -p $(STAGING_DIR)/usr/include/td/telegram
+	mkdir -p $(STAGING_DIR)/usr/include/td/mtproto
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto \
-	  $(PKG_BUILD_DIR)/td/generate/
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp} \
+	  $(PKG_BUILD_DIR)/td/generate/auto/td/telegram/
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/tdutils/generate/auto \
-	  $(PKG_BUILD_DIR)/tdutils/generate/
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
+	  $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto/
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td \
-	  $(STAGING_DIR)/usr/include/
+	  $(HOST_BUILD_DIR)/tdutils/generate/auto/{extension_to_mime_type.cpp,mime_type_to_extension.cpp} \
+	  $(PKG_BUILD_DIR)/tdutils/generate/auto/
+
+	$(CP) \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp} \
+	  $(STAGING_DIR)/usr/include/td/telegram/
+
+	$(CP) \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
+	  $(STAGING_DIR)/usr/include/td/mtproto/
 endef
 
 define Build/InstallDev
