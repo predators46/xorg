@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-#CMAKE_BINARY_SUBDIR := build
+CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=gperf/host openssl zlib
 PKG_BUILD_DEPENDS:=gperf/host
@@ -35,7 +35,7 @@ It can be easily used from almost any programming language.
 endef
 
 define Build/Compile
-	+$(NINJA) -C $(CMAKE_BINARY_DIR)/generate
+	+$(NINJA) -C $(CMAKE_BINARY_DIR)/td/generate
 endef
 
 define Build/InstallDev
