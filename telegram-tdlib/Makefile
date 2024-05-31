@@ -46,9 +46,6 @@ define Build/Prepare
 	  $(HOST_BUILD_DIR)/tdutils/generate/auto \
 	  $(PKG_BUILD_DIR)/tdutils/generate/
 
-	$(INSTALL_DIR) \
-	  $(STAGING_DIR)/usr/include
-
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto/td \
 	  $(STAGING_DIR)/usr/include/
