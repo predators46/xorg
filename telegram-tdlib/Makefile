@@ -9,9 +9,9 @@ PKG_SOURCE_URL:=https://github.com/tdlib/td.git
 PKG_SOURCE_VERSION:=fab354add5a257a8121a4a7f1ff6b1b9fa9a9073
 PKG_MIRROR_HASH:=skip
 
-PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
-PKG_LICENSE:=MIT
-PKG_LICENSE_FILES:=LICENSE
+PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
+PKG_LICENSE:=BSD 1-Clause License
+PKG_LICENSE_FILES:=COPYING
 
 CMAKE_BINARY_SUBDIR := build
 
@@ -24,34 +24,35 @@ include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/telegram-tdlib
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=Cross-platform library for building Telegram clients
-  URL:=https://github.com/tdlib/td
-  DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Cross-platform library for building Telegram clients
+	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
+	URL:=https://github.com/tdlib/td
 endef
 
 define Package/telegram-tdlib/description
-TDLib (Telegram Database library) is a cross-platform library for building Telegram clients.
-It can be easily used from almost any programming language.
+	TDLib (Telegram Database library) is a cross-platform library for building Telegram clients.
+	It can be easily used from almost any programming language.
 endef
-
-CMAKE_HOST_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DBUILD_SHARED_LIBS=OFF
-
-CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DBUILD_SHARED_LIBS=ON
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
+
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto \
 	  $(PKG_BUILD_DIR)/td/generate/
+
 	$(CP) \
 	  $(HOST_BUILD_DIR)/tdutils/generate/auto \
 	  $(PKG_BUILD_DIR)/tdutils/generate/
+
+	$(INSTALL_DIR) \
+	  $(STAGING_DIR)/usr/include
+
+	$(CP) \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td \
+	  $(STAGING_DIR)/usr/include/
 endef
 
 define Build/InstallDev
@@ -77,15 +78,5 @@ define Package/telegram-tdlib/install
 	  $(1)/usr/lib/
 endef
 
-define Host/Install
-	$(call Host/Install/Default)
-	$(INSTALL_DIR) \
-	  $(STAGING_DIR)/usr/include
-
-	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td \
-	  $(STAGING_DIR)/usr/include/
-endef
-
-$(eval $(call BuildPackage,telegram-tdlib))
 $(eval $(call HostBuild))
+$(eval $(call BuildPackage,telegram-tdlib))
