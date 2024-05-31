@@ -17,14 +17,15 @@ CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
+CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/telegram-tdlib
-  SECTION:=net
-  CATEGORY:=Network
+  SECTION:=libs
+  CATEGORY:=Libraries
   TITLE:=Cross-platform library for building Telegram clients
   URL:=https://github.com/tdlib/td
   DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
