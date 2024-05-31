@@ -50,14 +50,14 @@ endef
 define Host/Install
 	$(call Host/Install/Default)
 	$(INSTALL_DIR) \
-	  $(1)/usr/include
+	  $(STAGING_DIR)/usr/include
 
 	$(CP) \
-	  $(HOST_CMAKE_BINARY_DIR)/td/generate/auto/td/telegram/*.h \
-	  $(1)/usr/include/td/telegram/
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/*.h \
+	  $(STAGING_DIR)/usr/include/td/telegram/
 	$(CP) \
-	  $(HOST_CMAKE_BINARY_DIR)/td/generate/auto/td/mtproto/*.h \
-	  $(1)/usr/include/td/mtproto/
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/*.h \
+	  $(STAGING_DIR)/usr/include/td/mtproto/
 endef
 
 define Package/td/install
