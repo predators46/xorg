@@ -70,6 +70,15 @@ define Build/InstallDev
 	  $(1)/usr/lib/
 endef
 
+define Package/telegram-tdlib/install
+	$(INSTALL_DIR) \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
+	  $(1)/usr/lib/
+endef
+
 define Host/Install
 	$(call Host/Install/Default)
 	$(INSTALL_DIR) \
@@ -78,15 +87,6 @@ define Host/Install
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto/td \
 	  $(STAGING_DIR)/usr/include/
-endef
-
-define Package/telegram-tdlib/install
-	$(INSTALL_DIR) \
-	  $(1)/usr/lib
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
-	  $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,telegram-tdlib))
