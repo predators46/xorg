@@ -44,7 +44,7 @@ define Build/Prepare
 	mkdir -p $(STAGING_DIR)/usr/include/td/mtproto
 
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp,td_api.h,td_api_json.h} \
+	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp,td_api.h,td_api_json.h,td_api_json.cpp} \
 	  $(PKG_BUILD_DIR)/td/generate/auto/td/telegram/
 
 	$(CP) \
