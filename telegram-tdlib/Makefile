@@ -15,17 +15,18 @@ PKG_LICENSE_FILES:=COPYING
 
 CMAKE_BINARY_SUBDIR := build
 
+HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/telegram-tdlib
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Cross-platform library for building Telegram clients
-	DEPENDS:=+libopenssl-devcrypto +libstdcpp +zlib +PACKAGE_libopenssl:libopenssl @!OPENSSL_ENGINE_BUILTIN
+	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib +PACKAGE_libopenssl:libopenssl @!OPENSSL_ENGINE_BUILTIN
 	URL:=https://github.com/tdlib/td
 endef
 
@@ -75,4 +76,5 @@ define Package/telegram-tdlib/install
 	  $(1)/usr/lib/
 endef
 
+$(eval $(call HostBuild))
 $(eval $(call BuildPackage,telegram-tdlib))
