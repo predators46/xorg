@@ -10,8 +10,8 @@ PKG_SOURCE_VERSION:=fab354add5a257a8121a4a7f1ff6b1b9fa9a9073
 PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
-PKG_LICENSE:=BSD 1-Clause License
-PKG_LICENSE_FILES:=COPYING
+PKG_LICENSE:=BSL-1.0 license
+PKG_LICENSE_FILES:=LICENSE_1_0.txt
 
 CMAKE_BINARY_SUBDIR := build
 
