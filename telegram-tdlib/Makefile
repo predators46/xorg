@@ -16,6 +16,7 @@ PKG_LICENSE_FILES:=COPYING
 CMAKE_BINARY_SUBDIR := build
 
 PKG_BUILD_DEPENDS:=gperf/host
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
