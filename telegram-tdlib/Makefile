@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=telegram-tdlib
+PKG_NAME:=td
 PKG_VERSION:=1.8.30
 PKG_RELEASE:=1
 
@@ -14,29 +14,34 @@ PKG_LICENSE:=BSD 1-Clause License
 PKG_LICENSE_FILES:=COPYING
 
 HOST_BUILD_DEPENDS:=gperf/host
-PKG_BUILD_DEPENDS:=gperf/host
+PKG_BUILD_DEPENDS:=gperf/host td/host
 
 CMAKE_BINARY_SUBDIR := build
-PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
-define Package/telegram-tdlib
-	SECTION:=libs
-	CATEGORY:=Libraries
-	TITLE:=Cross-platform library for building Telegram clients
-	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
-	URL:=https://github.com/tdlib/td
+define Package/td/Default
+  SECTION:=libs
+  CATEGORY:=Libraries
+  TITLE:=Cross-platform library for building Telegram clients
+  URL:=https://github.com/tdlib/td
 endef
 
-define Package/telegram-tdlib/description
+define Package/tdlib
+	$(call Package/td/Default)
+	TITLE:=Telegram Database Library
+	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
+endef
+
+define Package/tdlib/description
 	TDLib (Telegram Database library) is a cross-platform library for building Telegram clients.
 	It can be easily used from almost any programming language.
 endef
 
-define Build/Compile
+define Build/Prepare
+	$(call Build/Prepare/Default)
 	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/telegram
 	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto
 	mkdir -p $(PKG_BUILD_DIR)/tdutils/generate/auto
@@ -62,15 +67,23 @@ define Build/Compile
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
 	  $(STAGING_DIR)/usr/include/td/mtproto/
-
-	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
-	$(call Build/InstallDev/cmake,$(1))
+	$(INSTALL_DIR) \
+	  $(1)/usr/include \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/include/td \
+	  $(1)/usr/include/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,cmake,*.so*,*.a} \
+	  $(1)/usr/lib/
 endef
 
-define Package/telegram-tdlib/install
+define Package/tdlib/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/lib
 
@@ -80,4 +93,4 @@ define Package/telegram-tdlib/install
 endef
 
 $(eval $(call HostBuild))
-$(eval $(call BuildPackage,telegram-tdlib))
+$(eval $(call BuildPackage,tdlib))
