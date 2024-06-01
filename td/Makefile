@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=td
+PKG_NAME:=telegram-tdlib
 PKG_VERSION:=1.8.30
 PKG_RELEASE:=1
 
@@ -13,61 +13,42 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=BSD 1-Clause License
 PKG_LICENSE_FILES:=COPYING
 
-HOST_BUILD_DEPENDS:=gperf/host
-PKG_BUILD_DEPENDS:=gperf/host td/host
-
 CMAKE_BINARY_SUBDIR := build
+
+HOST_BUILD_DEPENDS:=gperf/host
+PKG_BUILD_DEPENDS:=gperf/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
-define Package/td/Default
+define Package/telegram-tdlib
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Cross-platform library for building Telegram clients
+	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
 	URL:=https://github.com/tdlib/td
 endef
 
-define Package/tdlib
-	$(call Package/td/Default)
-	TITLE:=Telegram Database Library
-	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib
-endef
-
-define Package/tdlib/description
+define Package/telegram-tdlib/description
 	TDLib (Telegram Database library) is a cross-platform library for building Telegram clients.
 	It can be easily used from almost any programming language.
 endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
-	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/telegram
-	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto
-	mkdir -p $(PKG_BUILD_DIR)/tdutils/generate/auto
-	mkdir -p $(STAGING_DIR)/usr/include/td/telegram
-	mkdir -p $(STAGING_DIR)/usr/include/td/mtproto
-
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp,td_api.h,td_api_json.h,td_api_json.cpp} \
-	  $(PKG_BUILD_DIR)/td/generate/auto/td/telegram/
-
+	  $(HOST_BUILD_DIR)/td/generate/auto \
+	  $(PKG_BUILD_DIR)/td/generate/
 	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
-	  $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto/
-
-	$(CP) \
-	  $(HOST_BUILD_DIR)/tdutils/generate/auto/{extension_to_mime_type.cpp,mime_type_to_extension.cpp} \
-	  $(PKG_BUILD_DIR)/tdutils/generate/auto/
-
-	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/telegram/{telegram_api.cpp,telegram_api.h,telegram_api.hpp,secret_api.cpp,secret_api.h,secret_api.hpp,td_api.cpp,td_api.h,td_api.hpp,td_api.h,td_api_json.h} \
-	  $(STAGING_DIR)/usr/include/td/telegram/
-
-	$(CP) \
-	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
-	  $(STAGING_DIR)/usr/include/td/mtproto/
+	  $(HOST_BUILD_DIR)/tdutils/generate/auto \
+	  $(PKG_BUILD_DIR)/tdutils/generate/
 endef
+
+CMAKE_OPTIONS += \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_CROSSCOMPILING=ON \
+	-DBUILD_SHARED_LIBS=ON
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
@@ -83,7 +64,7 @@ define Build/InstallDev
 	  $(1)/usr/lib/
 endef
 
-define Package/tdlib/install
+define Package/telegram-tdlib/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/lib
 
@@ -92,5 +73,5 @@ define Package/tdlib/install
 	  $(1)/usr/lib/
 endef
 
+$(eval $(call BuildPackage,telegram-tdlib))
 $(eval $(call HostBuild))
-$(eval $(call BuildPackage,tdlib))
