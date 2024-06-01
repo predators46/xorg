@@ -27,7 +27,7 @@ define Package/python3-telegram
   CATEGORY:=Languages
   TITLE:=Python client for the Telegram's tdlib
   URL:=https://github.com/alexander-akhmetov/python-telegram
-  DEPENDS:=+python3 +python3-telegram-text +telegram-tdlib
+  DEPENDS:=+python3 +python3-telegram-text +python3-pydoc +telegram-tdlib
 endef
 
 define Package/python3-telegram/description
