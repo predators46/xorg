@@ -18,8 +18,8 @@ CMAKE_BINARY_SUBDIR := build
 HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host
 
-include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
+include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/telegram-tdlib
