@@ -23,10 +23,10 @@ include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/td/Default
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=Cross-platform library for building Telegram clients
-  URL:=https://github.com/tdlib/td
+	SECTION:=libs
+	CATEGORY:=Libraries
+	TITLE:=Cross-platform library for building Telegram clients
+	URL:=https://github.com/tdlib/td
 endef
 
 define Package/tdlib
