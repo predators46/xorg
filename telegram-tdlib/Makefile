@@ -26,7 +26,7 @@ define Package/telegram-tdlib
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=Cross-platform library for building Telegram clients
-	DEPENDS:=+libopenssl +libopenssl-devcrypto +libstdcpp +zlib +PACKAGE_libopenssl:libopenssl @!OPENSSL_ENGINE_BUILTIN
+	DEPENDS:=+libstdcpp +zlib +PACKAGE_libopenssl:libopenssl @!OPENSSL_ENGINE_BUILTIN
 	URL:=https://github.com/tdlib/td
 endef
 
