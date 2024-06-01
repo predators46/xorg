@@ -17,6 +17,7 @@ HOST_BUILD_DEPENDS:=gperf/host
 PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
 
 CMAKE_BINARY_SUBDIR := build
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
@@ -35,8 +36,7 @@ define Package/telegram-tdlib/description
 	It can be easily used from almost any programming language.
 endef
 
-define Build/Prepare
-	$(call Build/Prepare/Default)
+define Build/Compile
 	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/telegram
 	mkdir -p $(PKG_BUILD_DIR)/td/generate/auto/td/mtproto
 	mkdir -p $(PKG_BUILD_DIR)/tdutils/generate/auto
@@ -62,20 +62,12 @@ define Build/Prepare
 	$(CP) \
 	  $(HOST_BUILD_DIR)/td/generate/auto/td/mtproto/{mtproto_api.cpp,mtproto_api.h,mtproto_api.hpp} \
 	  $(STAGING_DIR)/usr/include/td/mtproto/
+
+	$(call Build/Compile/Default)
 endef
 
 define Build/InstallDev
-	$(INSTALL_DIR) \
-	  $(1)/usr/include \
-	  $(1)/usr/lib
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/td \
-	  $(1)/usr/include/
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,cmake,*.so*,*.a} \
-	  $(1)/usr/lib/
+	$(call Build/InstallDev/cmake,$(1))
 endef
 
 define Package/telegram-tdlib/install
