@@ -25,7 +25,7 @@ define Package/nchat
   SECTION:=net
   CATEGORY:=Network
   TITLE:=nchat is a terminal-based
-  DEPENDS:=+libncurses +libopenssl +libsqlite3 +file +zlib +libreadline
+  DEPENDS:=+libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +telegram-tdlib
   URL:=https://github.com/d99kris/nchat
 endef
 
