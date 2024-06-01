@@ -14,7 +14,7 @@ PKG_LICENSE:=BSD 1-Clause License
 PKG_LICENSE_FILES:=COPYING
 
 HOST_BUILD_DEPENDS:=gperf/host
-PKG_BUILD_DEPENDS:=gperf/host telegram-tdlib/host
+PKG_BUILD_DEPENDS:=gperf/host
 
 CMAKE_BINARY_SUBDIR := build
 PKG_INSTALL:=1
