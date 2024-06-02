@@ -14,24 +14,53 @@ PKG_LICENSE_FILES:=LICENSE
 
 CMAKE_BINARY_SUBDIR := build
 
-HOST_BUILD_DEPENDS:=ncurses/host gperf/host
-PKG_BUILD_DEPENDS:=ncurses/host gperf/host
+HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
+PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/nchat
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
-	DEPENDS:=+libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +libstdcpp
+	DEPENDS:=$(GO_ARCH_DEPENDS) +libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +libstdcpp
 	URL:=https://github.com/d99kris/nchat
 endef
 
 define Package/nchat/description
 	nchat is a terminal-based chat client for Linux and macOS with support for Telegram and WhatsApp.
 endef
+
+MAKE_VARS += \
+	GO_INSTALL_BIN_PATH="$(strip $(GO_PKG_INSTALL_BIN_PATH))" \
+	BUILD_DIR="$(PKG_BUILD_DIR)" \
+	GO_BUILD_DIR="$(GO_PKG_BUILD_DIR)" \
+	GO_BUILD_BIN_DIR="$(GO_PKG_BUILD_BIN_DIR)" \
+	GO_BUILD_DEPENDS_PATH="$(GO_PKG_BUILD_DEPENDS_PATH)" \
+	GO_BUILD_DEPENDS_SRC="$(GO_PKG_BUILD_DEPENDS_SRC)" \
+	GOOS="$(GO_OS)" \
+	GOARCH="$(GO_ARCH)" \
+	CC="$(TARGET_CC)" \
+	CXX="$(TARGET_CXX)" \
+	CGO_CFLAGS="$(filter-out $(GO_CFLAGS_TO_REMOVE),$(TARGET_CFLAGS))" \
+	CGO_CPPFLAGS="$(TARGET_CPPFLAGS)" \
+	CGO_CXXFLAGS="$(filter-out $(GO_CFLAGS_TO_REMOVE),$(TARGET_CXXFLAGS))" \
+	CGO_LDFLAGS="$(TARGET_LDFLAGS)" \
+	GOPATH="$(GO_PKG_BUILD_DIR)" \
+	GOCACHE="$(GO_BUILD_CACHE_DIR)" \
+	GOMODCACHE="$(GO_MOD_CACHE_DIR)" \
+	GOFLAGS="$(GO_PKG_GCFLAGS)" \
+	GO_PKG_CFLAGS="$(GO_PKG_CFLAGS)" \
+	CGO_ENABLED=1 \
+	GOENV=off \
+	PREFIX=/usr \
+	LIBEXECDIR=/usr/lib \
+	ETCDIR=/etc \
+	BUILDTAGS="$(GO_PKG_TAGS)" \
+	EXTRA_LDFLAGS="$(GO_PKG_LDFLAGS)"
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
@@ -50,7 +79,7 @@ CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DHAS_DUMMY=ON \
 	-DHAS_TELEGRAM=ON \
-	-DHAS_WHATSAPP=OFF \
+	-DHAS_WHATSAPP=ON \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
 	-DHAS_COREDUMP=ON
