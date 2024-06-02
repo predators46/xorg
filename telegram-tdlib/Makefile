@@ -38,13 +38,13 @@ endef
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
-	  ./files/usr/include/td \
+	  ./files2/td/generate/auto/td \
 	  $(STAGING_DIR)/usr/include/
 	$(CP) \
-	  ./files/td/generate/auto \
+	  ./files2/td/generate/auto \
 	  $(PKG_BUILD_DIR)/td/generate/
 	$(CP) \
-	  ./files/tdutils/generate/auto \
+	  ./files2/tdutils/generate/auto \
 	  $(PKG_BUILD_DIR)/tdutils/generate/
 endef
 
