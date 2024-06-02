@@ -17,6 +17,11 @@ CMAKE_BINARY_SUBDIR := build
 HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 
+GO_PKG_BUILD_PKG:=$(PKG_NAME)-$(PKG_VERSION)/lib/wmchat/go/*.go
+GO_PKG_LDFLAGS_X:= \
+	$(GO_PKG)/core.build=OpenWrt \
+	$(GO_PKG)/core.version=$(PKG_VERSION)
+
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
