@@ -36,5 +36,5 @@ define Package/whatsmeow/description
   whatsmeow is a Go library for the WhatsApp web multidevice API.
 endef
 
-$(eval $(call GoBinPackage,whatsmeow))
+#$(eval $(call GoBinPackage,whatsmeow))
 $(eval $(call BuildPackage,whatsmeow))
