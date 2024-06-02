@@ -1,0 +1,21 @@
+From 1e1f87a04de1ae4da3cea91c668727b29fde893c Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Sun, 2 Jun 2024 15:35:16 +0800
+Subject: [PATCH] Update CMakeLists.txt
+
+---
+ lib/wmchat/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/wmchat/CMakeLists.txt b/lib/wmchat/CMakeLists.txt
+index c0213cc7..61500641 100644
+--- a/lib/wmchat/CMakeLists.txt
++++ b/lib/wmchat/CMakeLists.txt
+@@ -40,5 +40,5 @@ set_target_properties(wmchat PROPERTIES COMPILE_FLAGS
+                        -Wcast-align")
+ 
+ # Linking
+-message(STATUS "Go libraries: ${GO_LIBRARIES}")
+-target_link_libraries(wmchat PUBLIC ref-cgowm ncutil ${GO_LIBRARIES})
++message(STATUS "Go libraries: ${STAGING_DIR_HOSTPKG/lib/go-cross}")
++target_link_libraries(wmchat PUBLIC ref-cgowm ncutil ${STAGING_DIR_HOSTPKG/lib/go-cross})

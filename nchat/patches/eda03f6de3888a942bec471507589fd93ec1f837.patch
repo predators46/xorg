@@ -1,0 +1,26 @@
+From eda03f6de3888a942bec471507589fd93ec1f837 Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Sun, 2 Jun 2024 15:38:50 +0800
+Subject: [PATCH] Update CMakeLists.txt
+
+---
+ lib/wmchat/go/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/wmchat/go/CMakeLists.txt b/lib/wmchat/go/CMakeLists.txt
+index de4d220c..737d3263 100644
+--- a/lib/wmchat/go/CMakeLists.txt
++++ b/lib/wmchat/go/CMakeLists.txt
+@@ -16,10 +16,10 @@ endif ()
+ execute_process(COMMAND bash "-c" "go version | grep -v -q gccgo" RESULT_VARIABLE GO_GCC)
+ if (GO_GCC EQUAL "1")
+   message(STATUS "Go gccgo.")
+-  set(GO_LIBRARIES "go" PARENT_SCOPE)
++  set(STAGING_DIR_HOSTPKG/lib/go-cross "go" PARENT_SCOPE)
+ else ()
+   message(STATUS "Go golang.")
+-  set(GO_LIBRARIES "" PARENT_SCOPE)
++  set(STAGING_DIR_HOSTPKG/lib/go-cross "" PARENT_SCOPE)
+ endif ()
+ 
+ # Build Go library / C archive
