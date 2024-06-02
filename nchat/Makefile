@@ -26,7 +26,7 @@ define Package/nchat
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
-	DEPENDS:=$(GO_ARCH_DEPENDS) +libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +telegram-tdlib
+	DEPENDS:=$(GO_ARCH_DEPENDS) +libncurses +libopenssl +libsqlite3 +file +zlib +libreadline
 	URL:=https://github.com/d99kris/nchat
 endef
 
@@ -36,6 +36,9 @@ endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
+	$(CP) \
+	  ./files/lib/tgchat/ext/td/td/generate/auto/td \
+	  $(STAGING_DIR)/usr/include/
 	$(CP) \
 	  ./files/lib/tgchat/ext/td/td/generate/auto \
 	  $(PKG_BUILD_DIR)/lib/tgchat/ext/td/td/generate/
