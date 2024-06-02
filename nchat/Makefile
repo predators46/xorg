@@ -58,7 +58,9 @@ CMAKE_OPTIONS += \
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
-	  $(1)/usr/bin
+	  $(1)/usr/bin \
+	  $(1)/usr/lib \
+	  $(1)/usr/share
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/bin/nchat \
