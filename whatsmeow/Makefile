@@ -19,7 +19,7 @@ PKG_USE_MIPS16:=0
 PKG_BUILD_FLAGS:=no-mips16
 
 GO_PKG:=go.mau.fi/whatsmeow
-GO_PKG_BUILD_PKG:=$(GO_PKG)./...
+GO_PKG_BUILD_PKG:=$(GO_PKG)/...
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
