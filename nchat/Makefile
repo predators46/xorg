@@ -16,7 +16,7 @@ HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 
 CMAKE_BINARY_SUBDIR := build
-GO_PKG:=github.com/d99kris/nchat/lib/wmchat/go
+GO_PKG:=$(PKG_BUILD_DIR)/lib/wmchat/go
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
