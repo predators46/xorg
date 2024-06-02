@@ -44,6 +44,9 @@ define Build/Prepare
 	  $(PKG_BUILD_DIR)/lib/tgchat/ext/td/tdutils/generate/
 endef
 
+MAKE_VARS += \
+	GOARCH=$(GO_ARCH)
+
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DHAS_DUMMY=ON \
