@@ -34,6 +34,19 @@ define Package/telegram-bot-api/description
 	The Telegram Bot API provides an HTTP API for creating Telegram Bots.
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	$(CP) \
+	  ./files/td/generate/auto/td \
+	  $(STAGING_DIR)/usr/include/
+	$(CP) \
+	  ./files/td/generate/auto \
+	  $(PKG_BUILD_DIR)/td/generate/
+	$(CP) \
+	  ./files/tdutils/generate/auto \
+	  $(PKG_BUILD_DIR)/tdutils/generate/
+endef
+
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release
 
