@@ -37,27 +37,13 @@ endef
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release
 
-define Build/InstallDev
-	$(INSTALL_DIR) \
-	  $(1)/usr/include \
-	  $(1)/usr/lib
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include/td \
-	  $(1)/usr/include/
-
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,cmake,*.so*,*.a} \
-	  $(1)/usr/lib/
-endef
-
 define Package/telegram-bot-api/install
 	$(INSTALL_DIR) \
-	  $(1)/usr/lib
+	  $(1)/usr/bin
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
-	  $(1)/usr/lib/
+	  $(PKG_INSTALL_DIR)/usr/bin/telegram-bot-api \
+	  $(1)/usr/bin/
 endef
 
 $(eval $(call HostBuild))
