@@ -24,7 +24,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/telegram-cli
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
+	TITLE:=telegram-cli
 	DEPENDS:=+libconfig +libopenssl +libreadline +libevent2 +jansson +libpthread +libncurses +liblua +zlib
 	URL:=https://github.com/vysheng/tg
 endef
