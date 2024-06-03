@@ -16,6 +16,7 @@ PKG_LICENSE_FILES:=LICENSE
 PKG_REMOVE_FILES:=ax_lua.m4
 PKG_FIXUP:=autoreconf
 
+HOST_BUILD_DEPENDS:=libevent2/host
 PKG_BUILD_DEPENDS:=telegram-cli/host
 
 include $(INCLUDE_DIR)/host-build.mk
@@ -24,7 +25,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/telegram-cli
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
+	TITLE:=telegram-cli
 	DEPENDS:=+libconfig +libopenssl +libreadline +libevent2 +jansson +libpthread +libncurses +liblua +zlib
 	URL:=https://github.com/vysheng/tg
 endef
