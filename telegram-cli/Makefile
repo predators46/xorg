@@ -47,6 +47,10 @@ CONFIGURE_ARGS += \
 	--disable-valgrind \
 	--with-zlib=$(STAGING_DIR)/usr
 
+define Host/Configure
+	( cd $(HOST_BUILD_DIR)/tgl; ./configure; )
+endef
+
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
 endef
