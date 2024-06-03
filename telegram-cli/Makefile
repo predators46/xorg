@@ -39,7 +39,8 @@ HOST_CONFIGURE_ARGS += \
 
 CONFIGURE_ARGS += \
 	--disable-python \
-	--disable-valgrind
+	--disable-valgrind \
+	--with-zlib=$(STAGING_DIR)/usr
 
 define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
