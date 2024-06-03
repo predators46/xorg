@@ -17,6 +17,7 @@ PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 
 CMAKE_BINARY_SUBDIR := build
 GO_PKG:=github.com/d99kris/nchat
+GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go/...
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
@@ -59,7 +60,7 @@ CMAKE_OPTIONS += \
 	-DHAS_MULTIPROTOCOL=ON \
 	-DHAS_COREDUMP=ON
 
-MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG)/lib/wmchat/go
+MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG_BUILD_PKG)
 MAKE_VARS += \
 	$(GO_PKG_VARS)
 
