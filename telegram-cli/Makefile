@@ -36,10 +36,10 @@ endef
 
 HOST_CONFIGURE_ARGS += \
 	--disable-python \
-	--disable-libconfig
-	--disable-liblua
+	--disable-libconfig \
+	--disable-liblua \
 	--disable-python \
-	--disable-json
+	--disable-json \
 	--disable-valgrind
 
 CONFIGURE_ARGS += \
