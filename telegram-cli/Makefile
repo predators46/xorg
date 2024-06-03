@@ -33,24 +33,12 @@ define Package/telegram-cli/description
 	Command-line interface for Telegram. Uses readline interface.
 endef
 
-CONFIGURE_VARS += \
-	LIBS=-lncursesw \
-	LUA_INCLUDE="-I$(STAGING_DIR)/usr/include" \
-	LUA_LIB="-L$(STAGING_DIR)/usr/lib -llua"
-
-HOST_CONFIGURE_ARGS += \
-	--disable-python \
-	--disable-valgrind
-
 CONFIGURE_ARGS += \
 	--disable-python \
+	--without-python \
 	--disable-valgrind \
 	--disable-liblua \
 	--with-zlib=$(STAGING_DIR)/usr
-
-define Host/Compile
-	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
-endef
 
 define Package/telegram-cli/install
 	$(INSTALL_DIR) $(1)/usr/bin
