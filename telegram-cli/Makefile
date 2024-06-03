@@ -57,14 +57,14 @@ endef
 
 define Host/Install
 	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
-	$(CP) $(HOST_BUILD_DIR)/tgl/bin/* $(STAGING_DIR_HOSTPKG)/bin
+	$(CP) $(HOST_BUILD_DIR)/tgl/bin/* $(STAGING_DIR_HOSTPKG)/bin/
 endef
 
 define Package/telegram-cli/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/telegram-cli $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/telegram-cli $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/etc/telegram-cli
-	$(INSTALL_CONF) $(PKG_BUILD_DIR)/tg-server.pub $(1)/etc/telegram-cli
+	$(INSTALL_CONF) $(PKG_BUILD_DIR)/tg-server.pub $(1)/etc/telegram-cli/
 endef
 
 define Package/telegram-cli/postinst
