@@ -16,7 +16,7 @@ PKG_LICENSE_FILES:=LICENSE
 #PKG_REMOVE_FILES:=ax_lua.m4
 PKG_FIXUP:=autoreconf
 
-PKG_BUILD_DEPENDS:=telegram-cli/host
+#PKG_BUILD_DEPENDS:=telegram-cli/host
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
