@@ -13,10 +13,10 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GPL-2.0 license
 PKG_LICENSE_FILES:=LICENSE
 
-#PKG_REMOVE_FILES:=ax_lua.m4
+PKG_REMOVE_FILES:=ax_lua.m4
 PKG_FIXUP:=autoreconf
 
-#PKG_BUILD_DEPENDS:=telegram-cli/host
+PKG_BUILD_DEPENDS:=telegram-cli/host
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
@@ -24,7 +24,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/telegram-cli
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=telegram-cli
+	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
 	DEPENDS:=+libconfig +libopenssl +libreadline +libevent2 +jansson +libpthread +libncurses +liblua +zlib
 	URL:=https://github.com/vysheng/tg
 endef
@@ -33,12 +33,22 @@ define Package/telegram-cli/description
 	Command-line interface for Telegram. Uses readline interface.
 endef
 
+HOST_CONFIGURE_ARGS += \
+	--disable-python \
+	--disable-libconfig
+	--disable-liblua
+	--disable-python \
+	--disable-json
+	--disable-valgrind
+
 CONFIGURE_ARGS += \
 	--disable-python \
-	--without-python \
 	--disable-valgrind \
-	--disable-liblua \
 	--with-zlib=$(STAGING_DIR)/usr
+
+define Host/Compile
+	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
+endef
 
 define Package/telegram-cli/install
 	$(INSTALL_DIR) $(1)/usr/bin
