@@ -55,8 +55,8 @@ define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
 endef
 
-define Host/Install/Default
-	$(call Host/Compile/Default,install)
+define Host/Install
+	$(MAKE) -C $(HOST_BUILD_DIR)/tgl install
 endef
 
 define Package/telegram-cli/install
