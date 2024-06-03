@@ -38,13 +38,13 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
 	  ./files/td/generate/auto/td \
-	  $(PKG_BUILD_DIR)/
+	  $(PKG_BUILD_DIR)/td/
 	$(CP) \
 	  ./files/td/generate/auto \
-	  $(PKG_BUILD_DIR)/td/generate/
+	  $(PKG_BUILD_DIR)/td/td/generate/
 	$(CP) \
 	  ./files/tdutils/generate/auto \
-	  $(PKG_BUILD_DIR)/tdutils/generate/
+	  $(PKG_BUILD_DIR)/td/tdutils/generate/
 endef
 
 CMAKE_OPTIONS += \
