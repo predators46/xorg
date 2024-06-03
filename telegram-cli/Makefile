@@ -13,7 +13,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=GPL-2.0 license
 PKG_LICENSE_FILES:=LICENSE
 
-#PKG_REMOVE_FILES:=ax_lua.m4
+PKG_REMOVE_FILES:=ax_lua.m4
 PKG_FIXUP:=autoreconf
 
 #PKG_BUILD_DEPENDS:=telegram-cli/host
