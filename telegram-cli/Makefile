@@ -47,14 +47,6 @@ CONFIGURE_ARGS += \
 	--disable-valgrind \
 	--with-zlib=$(STAGING_DIR)/usr
 
-define Host/Configure
-	( cd $(HOST_BUILD_DIR)/tgl; ./configure; )
-endef
-
-define Host/Compile
-	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
-endef
-
 define Package/telegram-cli/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/telegram-cli $(1)/usr/bin
