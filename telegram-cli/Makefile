@@ -45,6 +45,7 @@ HOST_CONFIGURE_ARGS += \
 CONFIGURE_ARGS += \
 	--disable-python \
 	--disable-valgrind \
+	--disable-liblua \
 	--with-zlib=$(STAGING_DIR)/usr
 
 define Host/Compile
