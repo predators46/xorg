@@ -39,7 +39,7 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
 	  ./files/td/generate/auto/td \
-	  $(STAGING_DIR)/usr/include/
+	  $(PKG_BUILD_DIR)/
 	$(CP) \
 	  ./files/td/generate/auto \
 	  $(PKG_BUILD_DIR)/td/generate/
