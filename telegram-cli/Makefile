@@ -56,7 +56,8 @@ define Host/Compile
 endef
 
 define Host/Install
-	$(MAKE) -C $(HOST_BUILD_DIR)/tgl install
+	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
+	$(CP) $(HOST_BUILD_DIR)/tgl/bin/* $(STAGING_DIR_HOSTPKG)/bin
 endef
 
 define Package/telegram-cli/install
