@@ -13,8 +13,6 @@ PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
 CMAKE_BINARY_SUBDIR := build
-GO_PKG:=github.com/d99kris/nchat
-GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go/
 
 HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
@@ -53,14 +51,11 @@ CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DHAS_DUMMY=ON \
 	-DHAS_TELEGRAM=ON \
-	-DHAS_WHATSAPP=OFF \
+	-DHAS_WHATSAPP=ON \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
-	-DHAS_COREDUMP=ON
-
-MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG_BUILD_PKG)
-MAKE_VARS += \
-	$(GO_PKG_VARS)
+	-DHAS_COREDUMP=ON \
+	-DGOPATH=$(GO_PKG_BUILD_DIR)
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
