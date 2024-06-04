@@ -47,6 +47,10 @@ define Build/Prepare
 	  $(PKG_BUILD_DIR)/lib/tgchat/ext/td/tdutils/generate/
 endef
 
+TARGET_CFLAGS += $(CGO_CFLAGS)
+TARGET_CXXFLAGS += $(CGO_CXXFLAGS)
+TARGET_LDFLAGS += $(CGO_LDFLAGS)
+
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DHAS_DUMMY=ON \
@@ -54,8 +58,7 @@ CMAKE_OPTIONS += \
 	-DHAS_WHATSAPP=ON \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
-	-DHAS_COREDUMP=ON \
-	-DGOPATH=$(GO_PKG_BUILD_DIR)
+	-DHAS_COREDUMP=ON
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
