@@ -55,6 +55,12 @@ define Host/Compile
 	$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/tgl $(HOST_MAKE_FLAGS)
 endef
 
+define Build/Compile
+	mkdir -p $(PKG_BUILD_DIR)/bin
+	$(CP) $(STAGING_DIR_HOSTPKG)/bin/{generate,tl-parser} $(PKG_BUILD_DIR)/bin/
+	$(call Build/Compile/Default)
+endef
+
 define Host/Install
 	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin
 	$(CP) $(HOST_BUILD_DIR)/tgl/bin/{generate,tl-parser} $(STAGING_DIR_HOSTPKG)/bin/
