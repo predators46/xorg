@@ -471,6 +471,30 @@ class autoSaveSettings final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class availableEffect final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool premium_required_;
+  int64 id_;
+  string emoticon_;
+  int64 static_icon_id_;
+  int64 effect_sticker_id_;
+  int64 effect_animation_id_;
+  enum Flags : std::int32_t { STATIC_ICON_ID_MASK = 1, EFFECT_ANIMATION_ID_MASK = 2 };
+
+  availableEffect();
+
+  static const std::int32_t ID = -1815879042;
+
+  static object_ptr<availableEffect> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class Document;
 
 class availableReaction final : public Object {
@@ -615,6 +639,33 @@ class baseThemeArctic final : public BaseTheme {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class birthday final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int32 day_;
+  int32 month_;
+  int32 year_;
+  enum Flags : std::int32_t { YEAR_MASK = 1 };
+
+  birthday();
+
+  birthday(int32 flags_, int32 day_, int32 month_, int32 year_);
+
+  static const std::int32_t ID = 1821253126;
+
+  static object_ptr<birthday> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class boost final : public Object {
   std::int32_t get_id() const final {
     return ID;
@@ -688,6 +739,29 @@ class botApp final : public BotApp {
   static const std::int32_t ID = -1778593322;
 
   static object_ptr<BotApp> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class botBusinessConnection final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool can_reply_;
+  bool disabled_;
+  string connection_id_;
+  int64 user_id_;
+  int32 dc_id_;
+  int32 date_;
+
+  botBusinessConnection();
+
+  static const std::int32_t ID = -1989921868;
+
+  static object_ptr<botBusinessConnection> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -1186,6 +1260,94 @@ class botMenuButton final : public BotMenuButton {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class broadcastRevenueBalances final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 current_balance_;
+  int64 available_balance_;
+  int64 overall_revenue_;
+
+  static const std::int32_t ID = -2076642874;
+
+  static object_ptr<broadcastRevenueBalances> fetch(TlBufferParser &p);
+
+  explicit broadcastRevenueBalances(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class BroadcastRevenueTransaction: public Object {
+ public:
+
+  static object_ptr<BroadcastRevenueTransaction> fetch(TlBufferParser &p);
+};
+
+class broadcastRevenueTransactionProceeds final : public BroadcastRevenueTransaction {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 amount_;
+  int32 from_date_;
+  int32 to_date_;
+
+  static const std::int32_t ID = 1434332356;
+
+  static object_ptr<BroadcastRevenueTransaction> fetch(TlBufferParser &p);
+
+  explicit broadcastRevenueTransactionProceeds(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class broadcastRevenueTransactionWithdrawal final : public BroadcastRevenueTransaction {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool pending_;
+  bool failed_;
+  int64 amount_;
+  int32 date_;
+  string provider_;
+  int32 transaction_date_;
+  string transaction_url_;
+  enum Flags : std::int32_t { TRANSACTION_DATE_MASK = 2, TRANSACTION_URL_MASK = 2 };
+
+  broadcastRevenueTransactionWithdrawal();
+
+  static const std::int32_t ID = 1515784568;
+
+  static object_ptr<BroadcastRevenueTransaction> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class broadcastRevenueTransactionRefund final : public BroadcastRevenueTransaction {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 amount_;
+  int32 date_;
+  string provider_;
+
+  static const std::int32_t ID = 1121127726;
+
+  static object_ptr<BroadcastRevenueTransaction> fetch(TlBufferParser &p);
+
+  explicit broadcastRevenueTransactionRefund(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class BusinessAwayMessageSchedule;
 
 class businessRecipients;
@@ -1277,6 +1439,55 @@ class businessAwayMessageScheduleCustom final : public BusinessAwayMessageSchedu
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class businessBotRecipients final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool existing_chats_;
+  bool new_chats_;
+  bool contacts_;
+  bool non_contacts_;
+  bool exclude_selected_;
+  array<int64> users_;
+  array<int64> exclude_users_;
+
+  businessBotRecipients();
+
+  static const std::int32_t ID = -1198722189;
+
+  static object_ptr<businessBotRecipients> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class MessageEntity;
+
+class businessChatLink final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string link_;
+  string message_;
+  array<object_ptr<MessageEntity>> entities_;
+  string title_;
+  int32 views_;
+  enum Flags : std::int32_t { TITLE_MASK = 2 };
+
+  businessChatLink();
+
+  static const std::int32_t ID = -1263638929;
+
+  static object_ptr<businessChatLink> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class businessRecipients;
 
 class businessGreetingMessage final : public Object {
@@ -1294,6 +1505,28 @@ class businessGreetingMessage final : public Object {
   static object_ptr<businessGreetingMessage> fetch(TlBufferParser &p);
 
   explicit businessGreetingMessage(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Document;
+
+class businessIntro final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string title_;
+  string description_;
+  object_ptr<Document> sticker_;
+
+  businessIntro();
+
+  static const std::int32_t ID = 1510606445;
+
+  static object_ptr<businessIntro> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -3067,11 +3300,12 @@ class chatFull final : public ChatFull {
   int32 requests_pending_;
   array<int64> recent_requesters_;
   object_ptr<ChatReactions> available_reactions_;
-  enum Flags : std::int32_t { PINNED_MSG_ID_MASK = 64, FOLDER_ID_MASK = 2048, TTL_PERIOD_MASK = 16384, THEME_EMOTICON_MASK = 65536, REQUESTS_PENDING_MASK = 131072 };
+  int32 reactions_limit_;
+  enum Flags : std::int32_t { PINNED_MSG_ID_MASK = 64, FOLDER_ID_MASK = 2048, TTL_PERIOD_MASK = 16384, THEME_EMOTICON_MASK = 65536, REQUESTS_PENDING_MASK = 131072, REACTIONS_LIMIT_MASK = 1048576 };
 
   chatFull();
 
-  static const std::int32_t ID = -908914376;
+  static const std::int32_t ID = 640893467;
 
   static object_ptr<ChatFull> fetch(TlBufferParser &p);
 
@@ -3100,6 +3334,8 @@ class channelFull final : public ChatFull {
   bool translations_disabled_;
   bool stories_pinned_available_;
   bool view_forum_as_messages_;
+  bool restricted_sponsored_;
+  bool can_view_revenue_;
   int64 id_;
   string about_;
   int32 participants_count_;
@@ -3135,16 +3371,17 @@ class channelFull final : public ChatFull {
   array<int64> recent_requesters_;
   object_ptr<Peer> default_send_as_;
   object_ptr<ChatReactions> available_reactions_;
+  int32 reactions_limit_;
   object_ptr<peerStories> stories_;
   object_ptr<WallPaper> wallpaper_;
   int32 boosts_applied_;
   int32 boosts_unrestrict_;
   object_ptr<stickerSet> emojiset_;
-  enum Flags : std::int32_t { PARTICIPANTS_COUNT_MASK = 1, ADMINS_COUNT_MASK = 2, KICKED_COUNT_MASK = 4, BANNED_COUNT_MASK = 4, ONLINE_COUNT_MASK = 8192, MIGRATED_FROM_CHAT_ID_MASK = 16, MIGRATED_FROM_MAX_ID_MASK = 16, PINNED_MSG_ID_MASK = 32, AVAILABLE_MIN_ID_MASK = 512, FOLDER_ID_MASK = 2048, LINKED_CHAT_ID_MASK = 16384, SLOWMODE_SECONDS_MASK = 131072, SLOWMODE_NEXT_SEND_DATE_MASK = 262144, STATS_DC_MASK = 4096, TTL_PERIOD_MASK = 16777216, THEME_EMOTICON_MASK = 134217728, REQUESTS_PENDING_MASK = 268435456, BOOSTS_APPLIED_MASK = 256, BOOSTS_UNRESTRICT_MASK = 512 };
+  enum Flags : std::int32_t { PARTICIPANTS_COUNT_MASK = 1, ADMINS_COUNT_MASK = 2, KICKED_COUNT_MASK = 4, BANNED_COUNT_MASK = 4, ONLINE_COUNT_MASK = 8192, MIGRATED_FROM_CHAT_ID_MASK = 16, MIGRATED_FROM_MAX_ID_MASK = 16, PINNED_MSG_ID_MASK = 32, AVAILABLE_MIN_ID_MASK = 512, FOLDER_ID_MASK = 2048, LINKED_CHAT_ID_MASK = 16384, SLOWMODE_SECONDS_MASK = 131072, SLOWMODE_NEXT_SEND_DATE_MASK = 262144, STATS_DC_MASK = 4096, TTL_PERIOD_MASK = 16777216, THEME_EMOTICON_MASK = 134217728, REQUESTS_PENDING_MASK = 268435456, REACTIONS_LIMIT_MASK = 8192, BOOSTS_APPLIED_MASK = 256, BOOSTS_UNRESTRICT_MASK = 512 };
 
   channelFull();
 
-  static const std::int32_t ID = 1153455271;
+  static const std::int32_t ID = -1146407795;
 
   static object_ptr<ChatFull> fetch(TlBufferParser &p);
 
@@ -3506,12 +3743,13 @@ class codeSettings final : public Object {
   bool allow_app_hash_;
   bool allow_missed_call_;
   bool allow_firebase_;
+  bool unknown_number_;
   array<bytes> logout_tokens_;
   string token_;
   bool app_sandbox_;
-  enum Flags : std::int32_t { ALLOW_FLASHCALL_MASK = 1, CURRENT_NUMBER_MASK = 2, ALLOW_APP_HASH_MASK = 16, ALLOW_MISSED_CALL_MASK = 32, ALLOW_FIREBASE_MASK = 128, LOGOUT_TOKENS_MASK = 64, TOKEN_MASK = 256, APP_SANDBOX_MASK = 256 };
+  enum Flags : std::int32_t { ALLOW_FLASHCALL_MASK = 1, CURRENT_NUMBER_MASK = 2, ALLOW_APP_HASH_MASK = 16, ALLOW_MISSED_CALL_MASK = 32, ALLOW_FIREBASE_MASK = 128, UNKNOWN_NUMBER_MASK = 512, LOGOUT_TOKENS_MASK = 64, TOKEN_MASK = 256, APP_SANDBOX_MASK = 256 };
 
-  codeSettings(int32 flags_, bool allow_flashcall_, bool current_number_, bool allow_app_hash_, bool allow_missed_call_, bool allow_firebase_, array<bytes> &&logout_tokens_, string const &token_, bool app_sandbox_);
+  codeSettings(int32 flags_, bool allow_flashcall_, bool current_number_, bool allow_app_hash_, bool allow_missed_call_, bool allow_firebase_, bool unknown_number_, array<bytes> &&logout_tokens_, string const &token_, bool app_sandbox_);
 
   static const std::int32_t ID = -1390068360;
 
@@ -3591,7 +3829,7 @@ class config final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class businessRecipients;
+class businessBotRecipients;
 
 class connectedBot final : public Object {
   std::int32_t get_id() const final {
@@ -3602,11 +3840,11 @@ class connectedBot final : public Object {
   int32 flags_;
   bool can_reply_;
   int64 bot_id_;
-  object_ptr<businessRecipients> recipients_;
+  object_ptr<businessBotRecipients> recipients_;
 
   connectedBot();
 
-  static const std::int32_t ID = -404121113;
+  static const std::int32_t ID = -1123645951;
 
   static object_ptr<connectedBot> fetch(TlBufferParser &p);
 
@@ -3627,6 +3865,26 @@ class contact final : public Object {
   static object_ptr<contact> fetch(TlBufferParser &p);
 
   explicit contact(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class birthday;
+
+class contactBirthday final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 contact_id_;
+  object_ptr<birthday> birthday_;
+
+  static const std::int32_t ID = 496600883;
+
+  static object_ptr<contactBirthday> fetch(TlBufferParser &p);
+
+  explicit contactBirthday(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -4388,7 +4646,13 @@ class emailVerifyPurposePassport final : public EmailVerifyPurpose {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class emojiGroup final : public Object {
+class EmojiGroup: public Object {
+ public:
+
+  static object_ptr<EmojiGroup> fetch(TlBufferParser &p);
+};
+
+class emojiGroup final : public EmojiGroup {
   std::int32_t get_id() const final {
     return ID;
   }
@@ -4400,9 +4664,46 @@ class emojiGroup final : public Object {
 
   static const std::int32_t ID = 2056961449;
 
-  static object_ptr<emojiGroup> fetch(TlBufferParser &p);
+  static object_ptr<EmojiGroup> fetch(TlBufferParser &p);
 
   explicit emojiGroup(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class emojiGroupGreeting final : public EmojiGroup {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string title_;
+  int64 icon_emoji_id_;
+  array<string> emoticons_;
+
+  static const std::int32_t ID = -2133693241;
+
+  static object_ptr<EmojiGroup> fetch(TlBufferParser &p);
+
+  explicit emojiGroupGreeting(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class emojiGroupPremium final : public EmojiGroup {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string title_;
+  int64 icon_emoji_id_;
+
+  static const std::int32_t ID = 154914612;
+
+  static object_ptr<EmojiGroup> fetch(TlBufferParser &p);
+
+  explicit emojiGroupPremium(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -4960,6 +5261,30 @@ class exportedStoryLink final : public Object {
   static object_ptr<exportedStoryLink> fetch(TlBufferParser &p);
 
   explicit exportedStoryLink(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class textWithEntities;
+
+class factCheck final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool need_check_;
+  string country_;
+  object_ptr<textWithEntities> text_;
+  int64 hash_;
+  enum Flags : std::int32_t { COUNTRY_MASK = 2 };
+
+  factCheck();
+
+  static const std::int32_t ID = -1197736753;
+
+  static object_ptr<factCheck> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -6052,6 +6377,60 @@ class inputBusinessAwayMessage final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class InputUser;
+
+class inputBusinessBotRecipients final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool existing_chats_;
+  bool new_chats_;
+  bool contacts_;
+  bool non_contacts_;
+  bool exclude_selected_;
+  array<object_ptr<InputUser>> users_;
+  array<object_ptr<InputUser>> exclude_users_;
+  enum Flags : std::int32_t { EXISTING_CHATS_MASK = 1, NEW_CHATS_MASK = 2, CONTACTS_MASK = 4, NON_CONTACTS_MASK = 8, EXCLUDE_SELECTED_MASK = 32, USERS_MASK = 16, EXCLUDE_USERS_MASK = 64 };
+
+  inputBusinessBotRecipients(int32 flags_, bool existing_chats_, bool new_chats_, bool contacts_, bool non_contacts_, bool exclude_selected_, array<object_ptr<InputUser>> &&users_, array<object_ptr<InputUser>> &&exclude_users_);
+
+  static const std::int32_t ID = -991587810;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class MessageEntity;
+
+class inputBusinessChatLink final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string message_;
+  array<object_ptr<MessageEntity>> entities_;
+  string title_;
+  enum Flags : std::int32_t { ENTITIES_MASK = 1, TITLE_MASK = 2 };
+
+  inputBusinessChatLink(int32 flags_, string const &message_, array<object_ptr<MessageEntity>> &&entities_, string const &title_);
+
+  static const std::int32_t ID = 292003751;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class inputBusinessRecipients;
 
 class inputBusinessGreetingMessage final : public Object {
@@ -6067,6 +6446,31 @@ class inputBusinessGreetingMessage final : public Object {
   inputBusinessGreetingMessage(int32 shortcut_id_, object_ptr<inputBusinessRecipients> &&recipients_, int32 no_activity_days_);
 
   static const std::int32_t ID = 26528571;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class InputDocument;
+
+class inputBusinessIntro final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string title_;
+  string description_;
+  object_ptr<InputDocument> sticker_;
+  enum Flags : std::int32_t { STICKER_MASK = 1 };
+
+  inputBusinessIntro(int32 flags_, string const &title_, string const &description_, object_ptr<InputDocument> &&sticker_);
+
+  static const std::int32_t ID = 163867085;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -6317,6 +6721,48 @@ class inputClientProxy final : public Object {
   int32 port_;
 
   static const std::int32_t ID = 1968737087;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class InputCollectible: public Object {
+ public:
+};
+
+class inputCollectibleUsername final : public InputCollectible {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string username_;
+
+  explicit inputCollectibleUsername(string const &username_);
+
+  static const std::int32_t ID = -476815191;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class inputCollectiblePhone final : public InputCollectible {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string phone_;
+
+  explicit inputCollectiblePhone(string const &phone_);
+
+  static const std::int32_t ID = -1562241884;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -7024,6 +7470,8 @@ class InputStorePaymentPurpose;
 
 class premiumGiftCodeOption;
 
+class starsTopupOption;
+
 class InputInvoice: public Object {
  public:
 };
@@ -7079,6 +7527,25 @@ class inputInvoicePremiumGiftCode final : public InputInvoice {
   inputInvoicePremiumGiftCode(object_ptr<InputStorePaymentPurpose> &&purpose_, object_ptr<premiumGiftCodeOption> &&option_);
 
   static const std::int32_t ID = -1734841331;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class inputInvoiceStars final : public InputInvoice {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<starsTopupOption> option_;
+
+  explicit inputInvoiceStars(object_ptr<starsTopupOption> &&option_);
+
+  static const std::int32_t ID = 497236696;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -7423,13 +7890,13 @@ class inputMediaInvoice final : public InputMedia {
   object_ptr<dataJSON> provider_data_;
   string start_param_;
   object_ptr<InputMedia> extended_media_;
-  enum Flags : std::int32_t { PHOTO_MASK = 1, START_PARAM_MASK = 2, EXTENDED_MEDIA_MASK = 4 };
+  enum Flags : std::int32_t { PHOTO_MASK = 1, PROVIDER_MASK = 8, START_PARAM_MASK = 2, EXTENDED_MEDIA_MASK = 4 };
 
   inputMediaInvoice();
 
   inputMediaInvoice(int32 flags_, string const &title_, string const &description_, object_ptr<inputWebDocument> &&photo_, object_ptr<invoice> &&invoice_, bytes &&payload_, string const &provider_, object_ptr<dataJSON> &&provider_data_, string const &start_param_, object_ptr<InputMedia> &&extended_media_);
 
-  static const std::int32_t ID = -1900697899;
+  static const std::int32_t ID = 1080028941;
 
   static object_ptr<InputMedia> fetch(TlBufferParser &p);
 
@@ -8256,6 +8723,22 @@ class inputPrivacyKeyAbout final : public InputPrivacyKey {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class inputPrivacyKeyBirthday final : public InputPrivacyKey {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -698740276;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class InputUser;
 
 class InputPrivacyRule: public Object {
@@ -8410,6 +8893,22 @@ class inputPrivacyValueAllowCloseFriends final : public InputPrivacyRule {
  public:
 
   static const std::int32_t ID = 793067081;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class inputPrivacyValueAllowPremium final : public InputPrivacyRule {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 2009975281;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -9026,6 +9525,28 @@ class inputStorePaymentPremiumGiveaway final : public InputStorePaymentPurpose {
   inputStorePaymentPremiumGiveaway(int32 flags_, bool only_new_subscribers_, bool winners_are_visible_, object_ptr<InputPeer> &&boost_peer_, array<object_ptr<InputPeer>> &&additional_peers_, array<string> &&countries_iso2_, string const &prize_description_, int64 random_id_, int32 until_date_, string const &currency_, int64 amount_);
 
   static const std::int32_t ID = 369444042;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class inputStorePaymentStars final : public InputStorePaymentPurpose {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 stars_;
+  string currency_;
+  int64 amount_;
+
+  inputStorePaymentStars(int32 flags_, int64 stars_, string const &currency_, int64 amount_);
+
+  static const std::int32_t ID = 1326377183;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -10032,6 +10553,37 @@ class keyboardButtonRequestPeer final : public KeyboardButton {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class inputKeyboardButtonRequestPeer final : public KeyboardButton {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool name_requested_;
+  bool username_requested_;
+  bool photo_requested_;
+  string text_;
+  int32 button_id_;
+  object_ptr<RequestPeerType> peer_type_;
+  int32 max_quantity_;
+  enum Flags : std::int32_t { NAME_REQUESTED_MASK = 1, USERNAME_REQUESTED_MASK = 2, PHOTO_REQUESTED_MASK = 4 };
+
+  inputKeyboardButtonRequestPeer();
+
+  inputKeyboardButtonRequestPeer(int32 flags_, bool name_requested_, bool username_requested_, bool photo_requested_, string const &text_, int32 button_id_, object_ptr<RequestPeerType> &&peer_type_, int32 max_quantity_);
+
+  static const std::int32_t ID = -916050683;
+
+  static object_ptr<KeyboardButton> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class KeyboardButton;
 
 class keyboardButtonRow final : public Object {
@@ -10439,6 +10991,8 @@ class Peer;
 
 class ReplyMarkup;
 
+class factCheck;
+
 class messageFwdHeader;
 
 class messageReactions;
@@ -10490,6 +11044,8 @@ class message final : public Message {
   bool pinned_;
   bool noforwards_;
   bool invert_media_;
+  int32 flags2_;
+  bool offline_;
   int32 id_;
   object_ptr<Peer> from_id_;
   int32 from_boosts_applied_;
@@ -10497,6 +11053,7 @@ class message final : public Message {
   object_ptr<Peer> saved_peer_id_;
   object_ptr<messageFwdHeader> fwd_from_;
   int64 via_bot_id_;
+  int64 via_business_bot_id_;
   object_ptr<MessageReplyHeader> reply_to_;
   int32 date_;
   string message_;
@@ -10513,13 +11070,15 @@ class message final : public Message {
   array<object_ptr<restrictionReason>> restriction_reason_;
   int32 ttl_period_;
   int32 quick_reply_shortcut_id_;
-  enum Flags : std::int32_t { FROM_BOOSTS_APPLIED_MASK = 536870912, VIA_BOT_ID_MASK = 2048, VIEWS_MASK = 1024, FORWARDS_MASK = 1024, EDIT_DATE_MASK = 32768, POST_AUTHOR_MASK = 65536, GROUPED_ID_MASK = 131072, TTL_PERIOD_MASK = 33554432, QUICK_REPLY_SHORTCUT_ID_MASK = 1073741824 };
+  int64 effect_;
+  object_ptr<factCheck> factcheck_;
+  enum Flags : std::int32_t { FROM_BOOSTS_APPLIED_MASK = 536870912, VIA_BOT_ID_MASK = 2048, VIA_BUSINESS_BOT_ID_MASK = 1, VIEWS_MASK = 1024, FORWARDS_MASK = 1024, EDIT_DATE_MASK = 32768, POST_AUTHOR_MASK = 65536, GROUPED_ID_MASK = 131072, TTL_PERIOD_MASK = 33554432, QUICK_REPLY_SHORTCUT_ID_MASK = 1073741824, EFFECT_MASK = 4 };
 
   message();
 
-  message(int32 flags_, bool out_, bool mentioned_, bool media_unread_, bool silent_, bool post_, bool from_scheduled_, bool legacy_, bool edit_hide_, bool pinned_, bool noforwards_, bool invert_media_, int32 id_, object_ptr<Peer> &&from_id_, int32 from_boosts_applied_, object_ptr<Peer> &&peer_id_, object_ptr<Peer> &&saved_peer_id_, object_ptr<messageFwdHeader> &&fwd_from_, int64 via_bot_id_, object_ptr<MessageReplyHeader> &&reply_to_, int32 date_, string const &message_, object_ptr<MessageMedia> &&media_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 views_, int32 forwards_, object_ptr<messageReplies> &&replies_, int32 edit_date_, string const &post_author_, int64 grouped_id_, object_ptr<messageReactions> &&reactions_, array<object_ptr<restrictionReason>> &&restriction_reason_, int32 ttl_period_, int32 quick_reply_shortcut_id_);
+  message(int32 flags_, bool out_, bool mentioned_, bool media_unread_, bool silent_, bool post_, bool from_scheduled_, bool legacy_, bool edit_hide_, bool pinned_, bool noforwards_, bool invert_media_, int32 flags2_, bool offline_, int32 id_, object_ptr<Peer> &&from_id_, int32 from_boosts_applied_, object_ptr<Peer> &&peer_id_, object_ptr<Peer> &&saved_peer_id_, object_ptr<messageFwdHeader> &&fwd_from_, int64 via_bot_id_, int64 via_business_bot_id_, object_ptr<MessageReplyHeader> &&reply_to_, int32 date_, string const &message_, object_ptr<MessageMedia> &&media_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 views_, int32 forwards_, object_ptr<messageReplies> &&replies_, int32 edit_date_, string const &post_author_, int64 grouped_id_, object_ptr<messageReactions> &&reactions_, array<object_ptr<restrictionReason>> &&restriction_reason_, int32 ttl_period_, int32 quick_reply_shortcut_id_, int64 effect_, object_ptr<factCheck> &&factcheck_);
 
-  static const std::int32_t ID = -1502839044;
+  static const std::int32_t ID = -1808510398;
 
   static object_ptr<Message> fetch(TlBufferParser &p);
 
@@ -10564,6 +11123,8 @@ class Peer;
 class PhoneCallDiscardReason;
 
 class Photo;
+
+class RequestedPeer;
 
 class SecureValueType;
 
@@ -11345,6 +11906,24 @@ class messageActionBoostApply final : public MessageAction {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class messageActionRequestedPeerSentMe final : public MessageAction {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 button_id_;
+  array<object_ptr<RequestedPeer>> peers_;
+
+  static const std::int32_t ID = -1816979384;
+
+  static object_ptr<MessageAction> fetch(TlBufferParser &p);
+
+  explicit messageActionRequestedPeerSentMe(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class InputUser;
 
 class MessageEntity: public Object {
@@ -11844,16 +12423,19 @@ class messageEntityBlockquote final : public MessageEntity {
   }
 
  public:
+  int32 flags_;
+  bool collapsed_;
   int32 offset_;
   int32 length_;
+  enum Flags : std::int32_t { COLLAPSED_MASK = 1 };
 
-  messageEntityBlockquote(int32 offset_, int32 length_);
+  messageEntityBlockquote();
 
-  static const std::int32_t ID = 34469328;
+  messageEntityBlockquote(int32 flags_, bool collapsed_, int32 offset_, int32 length_);
+
+  static const std::int32_t ID = -238245204;
 
   static object_ptr<MessageEntity> fetch(TlBufferParser &p);
-
-  explicit messageEntityBlockquote(TlBufferParser &p);
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -12875,6 +13457,26 @@ class inputMessagesFilterPinned final : public MessagesFilter {
   void store(TlStorerCalcLength &s) const final;
 
   void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class missingInvitee final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool premium_would_allow_invite_;
+  bool premium_required_for_pm_;
+  int64 user_id_;
+
+  missingInvitee();
+
+  static const std::int32_t ID = 1653379620;
+
+  static object_ptr<missingInvitee> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -14208,14 +14810,18 @@ class peerSettings final : public Object {
   bool autoarchived_;
   bool invite_members_;
   bool request_chat_broadcast_;
+  bool business_bot_paused_;
+  bool business_bot_can_reply_;
   int32 geo_distance_;
   string request_chat_title_;
   int32 request_chat_date_;
-  enum Flags : std::int32_t { GEO_DISTANCE_MASK = 64, REQUEST_CHAT_TITLE_MASK = 512, REQUEST_CHAT_DATE_MASK = 512 };
+  int64 business_bot_id_;
+  string business_bot_manage_url_;
+  enum Flags : std::int32_t { GEO_DISTANCE_MASK = 64, REQUEST_CHAT_TITLE_MASK = 512, REQUEST_CHAT_DATE_MASK = 512, BUSINESS_BOT_ID_MASK = 8192, BUSINESS_BOT_MANAGE_URL_MASK = 8192 };
 
   peerSettings();
 
-  static const std::int32_t ID = -1525149427;
+  static const std::int32_t ID = -1395233698;
 
   static object_ptr<peerSettings> fetch(TlBufferParser &p);
 
@@ -14250,6 +14856,8 @@ class peerStories final : public Object {
 class PhoneCallDiscardReason;
 
 class PhoneConnection;
+
+class dataJSON;
 
 class phoneCallProtocol;
 
@@ -14371,10 +14979,11 @@ class phoneCall final : public PhoneCall {
   object_ptr<phoneCallProtocol> protocol_;
   array<object_ptr<PhoneConnection>> connections_;
   int32 start_date_;
+  object_ptr<dataJSON> custom_parameters_;
 
   phoneCall();
 
-  static const std::int32_t ID = -1770029977;
+  static const std::int32_t ID = 810769141;
 
   static object_ptr<PhoneCall> fetch(TlBufferParser &p);
 
@@ -14745,6 +15354,8 @@ class photoPathSize final : public PhotoSize {
 
 class pollAnswer;
 
+class textWithEntities;
+
 class poll final : public Object {
   std::int32_t get_id() const final {
     return ID;
@@ -14757,7 +15368,7 @@ class poll final : public Object {
   bool public_voters_;
   bool multiple_choice_;
   bool quiz_;
-  string question_;
+  object_ptr<textWithEntities> question_;
   array<object_ptr<pollAnswer>> answers_;
   int32 close_period_;
   int32 close_date_;
@@ -14765,9 +15376,9 @@ class poll final : public Object {
 
   poll();
 
-  poll(int64 id_, int32 flags_, bool closed_, bool public_voters_, bool multiple_choice_, bool quiz_, string const &question_, array<object_ptr<pollAnswer>> &&answers_, int32 close_period_, int32 close_date_);
+  poll(int64 id_, int32 flags_, bool closed_, bool public_voters_, bool multiple_choice_, bool quiz_, object_ptr<textWithEntities> &&question_, array<object_ptr<pollAnswer>> &&answers_, int32 close_period_, int32 close_date_);
 
-  static const std::int32_t ID = -2032041631;
+  static const std::int32_t ID = 1484026161;
 
   static object_ptr<poll> fetch(TlBufferParser &p);
 
@@ -14778,18 +15389,20 @@ class poll final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class textWithEntities;
+
 class pollAnswer final : public Object {
   std::int32_t get_id() const final {
     return ID;
   }
 
  public:
-  string text_;
+  object_ptr<textWithEntities> text_;
   bytes option_;
 
-  pollAnswer(string const &text_, bytes &&option_);
+  pollAnswer(object_ptr<textWithEntities> &&text_, bytes &&option_);
 
-  static const std::int32_t ID = 1823064809;
+  static const std::int32_t ID = -15277366;
 
   static object_ptr<pollAnswer> fetch(TlBufferParser &p);
 
@@ -15190,6 +15803,20 @@ class privacyKeyAbout final : public PrivacyKey {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class privacyKeyBirthday final : public PrivacyKey {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 536913176;
+
+  static object_ptr<PrivacyKey> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class PrivacyRule: public Object {
  public:
 
@@ -15328,6 +15955,20 @@ class privacyValueAllowCloseFriends final : public PrivacyRule {
  public:
 
   static const std::int32_t ID = -135735141;
+
+  static object_ptr<PrivacyRule> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class privacyValueAllowPremium final : public PrivacyRule {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -320241333;
 
   static object_ptr<PrivacyRule> fetch(TlBufferParser &p);
 
@@ -15490,6 +16131,80 @@ class reactionCount final : public Object {
   static const std::int32_t ID = -1546531968;
 
   static object_ptr<reactionCount> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class ReactionNotificationsFrom: public Object {
+ public:
+
+  static object_ptr<ReactionNotificationsFrom> fetch(TlBufferParser &p);
+};
+
+class reactionNotificationsFromContacts final : public ReactionNotificationsFrom {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -1161583078;
+
+  static object_ptr<ReactionNotificationsFrom> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class reactionNotificationsFromAll final : public ReactionNotificationsFrom {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 1268654752;
+
+  static object_ptr<ReactionNotificationsFrom> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class NotificationSound;
+
+class ReactionNotificationsFrom;
+
+class reactionsNotifySettings final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  object_ptr<ReactionNotificationsFrom> messages_notify_from_;
+  object_ptr<ReactionNotificationsFrom> stories_notify_from_;
+  object_ptr<NotificationSound> sound_;
+  bool show_previews_;
+  enum Flags : std::int32_t { MESSAGES_NOTIFY_FROM_MASK = 1, STORIES_NOTIFY_FROM_MASK = 2 };
+
+  reactionsNotifySettings();
+
+  reactionsNotifySettings(int32 flags_, object_ptr<ReactionNotificationsFrom> &&messages_notify_from_, object_ptr<ReactionNotificationsFrom> &&stories_notify_from_, object_ptr<NotificationSound> &&sound_, bool show_previews_);
+
+  static const std::int32_t ID = 1457736048;
+
+  static object_ptr<reactionsNotifySettings> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -15994,6 +16709,80 @@ class requestPeerTypeBroadcast final : public RequestPeerType {
   void store(TlStorerCalcLength &s) const final;
 
   void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Photo;
+
+class RequestedPeer: public Object {
+ public:
+
+  static object_ptr<RequestedPeer> fetch(TlBufferParser &p);
+};
+
+class requestedPeerUser final : public RequestedPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 user_id_;
+  string first_name_;
+  string last_name_;
+  string username_;
+  object_ptr<Photo> photo_;
+  enum Flags : std::int32_t { FIRST_NAME_MASK = 1, LAST_NAME_MASK = 1, USERNAME_MASK = 2 };
+
+  requestedPeerUser();
+
+  static const std::int32_t ID = -701500310;
+
+  static object_ptr<RequestedPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class requestedPeerChat final : public RequestedPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 chat_id_;
+  string title_;
+  object_ptr<Photo> photo_;
+  enum Flags : std::int32_t { TITLE_MASK = 1 };
+
+  requestedPeerChat();
+
+  static const std::int32_t ID = 1929860175;
+
+  static object_ptr<RequestedPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class requestedPeerChannel final : public RequestedPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 channel_id_;
+  string title_;
+  string username_;
+  object_ptr<Photo> photo_;
+  enum Flags : std::int32_t { TITLE_MASK = 1, USERNAME_MASK = 2 };
+
+  requestedPeerChannel();
+
+  static const std::int32_t ID = -1952185372;
+
+  static object_ptr<RequestedPeer> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -17683,15 +18472,11 @@ class smsJob final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class BotApp;
-
-class ChatInvite;
-
 class MessageEntity;
 
-class Peer;
+class Photo;
 
-class sponsoredWebPage;
+class peerColor;
 
 class sponsoredMessage final : public Object {
   std::int32_t get_id() const final {
@@ -17701,49 +18486,196 @@ class sponsoredMessage final : public Object {
  public:
   int32 flags_;
   bool recommended_;
-  bool show_peer_photo_;
+  bool can_report_;
   bytes random_id_;
-  object_ptr<Peer> from_id_;
-  object_ptr<ChatInvite> chat_invite_;
-  string chat_invite_hash_;
-  int32 channel_post_;
-  string start_param_;
-  object_ptr<sponsoredWebPage> webpage_;
-  object_ptr<BotApp> app_;
+  string url_;
+  string title_;
   string message_;
   array<object_ptr<MessageEntity>> entities_;
+  object_ptr<Photo> photo_;
+  object_ptr<peerColor> color_;
   string button_text_;
   string sponsor_info_;
   string additional_info_;
-  enum Flags : std::int32_t { CHAT_INVITE_HASH_MASK = 16, CHANNEL_POST_MASK = 4, START_PARAM_MASK = 1, BUTTON_TEXT_MASK = 2048, SPONSOR_INFO_MASK = 128, ADDITIONAL_INFO_MASK = 256 };
+  enum Flags : std::int32_t { SPONSOR_INFO_MASK = 128, ADDITIONAL_INFO_MASK = 256 };
 
   sponsoredMessage();
 
-  static const std::int32_t ID = -313293833;
+  static const std::int32_t ID = -1108478618;
 
   static object_ptr<sponsoredMessage> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class Photo;
+class sponsoredMessageReportOption final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
 
-class sponsoredWebPage final : public Object {
+ public:
+  string text_;
+  bytes option_;
+
+  static const std::int32_t ID = 1124938064;
+
+  static object_ptr<sponsoredMessageReportOption> fetch(TlBufferParser &p);
+
+  explicit sponsoredMessageReportOption(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTopupOption final : public Object {
   std::int32_t get_id() const final {
     return ID;
   }
 
  public:
   int32 flags_;
-  string url_;
-  string site_name_;
-  object_ptr<Photo> photo_;
+  bool extended_;
+  int64 stars_;
+  string store_product_;
+  string currency_;
+  int64 amount_;
+  enum Flags : std::int32_t { EXTENDED_MASK = 2, STORE_PRODUCT_MASK = 1 };
 
-  sponsoredWebPage();
+  starsTopupOption();
 
-  static const std::int32_t ID = 1035529315;
+  starsTopupOption(int32 flags_, bool extended_, int64 stars_, string const &store_product_, string const &currency_, int64 amount_);
 
-  static object_ptr<sponsoredWebPage> fetch(TlBufferParser &p);
+  static const std::int32_t ID = 198776256;
+
+  static object_ptr<starsTopupOption> fetch(TlBufferParser &p);
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class StarsTransactionPeer;
+
+class WebDocument;
+
+class starsTransaction final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool refund_;
+  string id_;
+  int64 stars_;
+  int32 date_;
+  object_ptr<StarsTransactionPeer> peer_;
+  string title_;
+  string description_;
+  object_ptr<WebDocument> photo_;
+  enum Flags : std::int32_t { TITLE_MASK = 1, DESCRIPTION_MASK = 2 };
+
+  starsTransaction();
+
+  static const std::int32_t ID = -865044046;
+
+  static object_ptr<starsTransaction> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Peer;
+
+class StarsTransactionPeer: public Object {
+ public:
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+};
+
+class starsTransactionPeerUnsupported final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -1779253276;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTransactionPeerAppStore final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -1269320843;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTransactionPeerPlayMarket final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 2069236235;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTransactionPeerPremiumBot final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 621656824;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTransactionPeerFragment final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -382740222;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class starsTransactionPeer final : public StarsTransactionPeer {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<Peer> peer_;
+
+  static const std::int32_t ID = -670195363;
+
+  static object_ptr<StarsTransactionPeer> fetch(TlBufferParser &p);
+
+  explicit starsTransactionPeer(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -17982,11 +18914,10 @@ class stickerSet final : public Object {
   bool archived_;
   bool official_;
   bool masks_;
-  bool animated_;
-  bool videos_;
   bool emojis_;
   bool text_color_;
   bool channel_emoji_status_;
+  bool creator_;
   int32 installed_date_;
   int64 id_;
   int64 access_hash_;
@@ -18773,7 +19704,11 @@ class WebPage;
 
 class boost;
 
+class botBusinessConnection;
+
 class botCommand;
+
+class broadcastRevenueBalances;
 
 class chatBannedRights;
 
@@ -20921,23 +21856,6 @@ class updateAutoSaveSettings final : public Update {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class updateGroupInvitePrivacyForbidden final : public Update {
-  std::int32_t get_id() const final {
-    return ID;
-  }
-
- public:
-  int64 user_id_;
-
-  static const std::int32_t ID = -856651050;
-
-  static object_ptr<Update> fetch(TlBufferParser &p);
-
-  explicit updateGroupInvitePrivacyForbidden(TlBufferParser &p);
-
-  void store(TlStorerToString &s, const char *field_name) const final;
-};
-
 class updateStory final : public Update {
   std::int32_t get_id() const final {
     return ID;
@@ -21283,6 +22201,140 @@ class updateDeleteQuickReplyMessages final : public Update {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class updateBotBusinessConnect final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<botBusinessConnection> connection_;
+  int32 qts_;
+
+  static const std::int32_t ID = -1964652166;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  explicit updateBotBusinessConnect(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateBotNewBusinessMessage final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string connection_id_;
+  object_ptr<Message> message_;
+  object_ptr<Message> reply_to_message_;
+  int32 qts_;
+
+  updateBotNewBusinessMessage();
+
+  static const std::int32_t ID = -1646578564;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateBotEditBusinessMessage final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string connection_id_;
+  object_ptr<Message> message_;
+  object_ptr<Message> reply_to_message_;
+  int32 qts_;
+
+  updateBotEditBusinessMessage();
+
+  static const std::int32_t ID = 132077692;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateBotDeleteBusinessMessage final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string connection_id_;
+  object_ptr<Peer> peer_;
+  array<int32> messages_;
+  int32 qts_;
+
+  static const std::int32_t ID = -1607821266;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  explicit updateBotDeleteBusinessMessage(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateNewStoryReaction final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 story_id_;
+  object_ptr<Peer> peer_;
+  object_ptr<Reaction> reaction_;
+
+  static const std::int32_t ID = 405070859;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  explicit updateNewStoryReaction(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateBroadcastRevenueTransactions final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<Peer> peer_;
+  object_ptr<broadcastRevenueBalances> balances_;
+
+  static const std::int32_t ID = -539401739;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  explicit updateBroadcastRevenueTransactions(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class updateStarsBalance final : public Update {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 balance_;
+
+  static const std::int32_t ID = 263737752;
+
+  static object_ptr<Update> fetch(TlBufferParser &p);
+
+  explicit updateStarsBalance(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class Chat;
 
 class MessageEntity;
@@ -21598,6 +22650,7 @@ class user final : public User {
   bool stories_hidden_;
   bool stories_unavailable_;
   bool contact_require_premium_;
+  bool bot_business_;
   int64 id_;
   int64 access_hash_;
   string first_name_;
@@ -21619,7 +22672,7 @@ class user final : public User {
 
   user();
 
-  user(int32 flags_, bool self_, bool contact_, bool mutual_contact_, bool deleted_, bool bot_, bool bot_chat_history_, bool bot_nochats_, bool verified_, bool restricted_, bool min_, bool bot_inline_geo_, bool support_, bool scam_, bool apply_min_photo_, bool fake_, bool bot_attach_menu_, bool premium_, bool attach_menu_enabled_, int32 flags2_, bool bot_can_edit_, bool close_friend_, bool stories_hidden_, bool stories_unavailable_, bool contact_require_premium_, int64 id_, int64 access_hash_, string const &first_name_, string const &last_name_, string const &username_, string const &phone_, object_ptr<UserProfilePhoto> &&photo_, object_ptr<UserStatus> &&status_, int32 bot_info_version_, array<object_ptr<restrictionReason>> &&restriction_reason_, string const &bot_inline_placeholder_, string const &lang_code_, object_ptr<EmojiStatus> &&emoji_status_, array<object_ptr<username>> &&usernames_, int32 stories_max_id_, object_ptr<peerColor> &&color_, object_ptr<peerColor> &&profile_color_);
+  user(int32 flags_, bool self_, bool contact_, bool mutual_contact_, bool deleted_, bool bot_, bool bot_chat_history_, bool bot_nochats_, bool verified_, bool restricted_, bool min_, bool bot_inline_geo_, bool support_, bool scam_, bool apply_min_photo_, bool fake_, bool bot_attach_menu_, bool premium_, bool attach_menu_enabled_, int32 flags2_, bool bot_can_edit_, bool close_friend_, bool stories_hidden_, bool stories_unavailable_, bool contact_require_premium_, bool bot_business_, int64 id_, int64 access_hash_, string const &first_name_, string const &last_name_, string const &username_, string const &phone_, object_ptr<UserProfilePhoto> &&photo_, object_ptr<UserStatus> &&status_, int32 bot_info_version_, array<object_ptr<restrictionReason>> &&restriction_reason_, string const &bot_inline_placeholder_, string const &lang_code_, object_ptr<EmojiStatus> &&emoji_status_, array<object_ptr<username>> &&usernames_, int32 stories_max_id_, object_ptr<peerColor> &&color_, object_ptr<peerColor> &&profile_color_);
 
   static const std::int32_t ID = 559694904;
 
@@ -21632,11 +22685,15 @@ class Photo;
 
 class WallPaper;
 
+class birthday;
+
 class botInfo;
 
 class businessAwayMessage;
 
 class businessGreetingMessage;
+
+class businessIntro;
 
 class businessLocation;
 
@@ -21673,6 +22730,7 @@ class userFull final : public Object {
   bool contact_require_premium_;
   bool read_dates_private_;
   int32 flags2_;
+  bool sponsored_enabled_;
   int64 id_;
   string about_;
   object_ptr<peerSettings> settings_;
@@ -21696,11 +22754,15 @@ class userFull final : public Object {
   object_ptr<businessLocation> business_location_;
   object_ptr<businessGreetingMessage> business_greeting_message_;
   object_ptr<businessAwayMessage> business_away_message_;
-  enum Flags : std::int32_t { ABOUT_MASK = 2, PINNED_MSG_ID_MASK = 64, FOLDER_ID_MASK = 2048, TTL_PERIOD_MASK = 16384, THEME_EMOTICON_MASK = 32768, PRIVATE_FORWARD_NAME_MASK = 65536 };
+  object_ptr<businessIntro> business_intro_;
+  object_ptr<birthday> birthday_;
+  int64 personal_channel_id_;
+  int32 personal_channel_message_;
+  enum Flags : std::int32_t { ABOUT_MASK = 2, PINNED_MSG_ID_MASK = 64, FOLDER_ID_MASK = 2048, TTL_PERIOD_MASK = 16384, THEME_EMOTICON_MASK = 32768, PRIVATE_FORWARD_NAME_MASK = 65536, PERSONAL_CHANNEL_ID_MASK = 64, PERSONAL_CHANNEL_MESSAGE_MASK = 64 };
 
   userFull();
 
-  static const std::int32_t ID = 587153029;
+  static const std::int32_t ID = -862357728;
 
   static object_ptr<userFull> fetch(TlBufferParser &p);
 
@@ -22294,6 +23356,26 @@ class webPageAttributeStory final : public WebPageAttribute {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class webPageAttributeStickerSet final : public WebPageAttribute {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool emojis_;
+  bool text_color_;
+  array<object_ptr<Document>> stickers_;
+
+  webPageAttributeStickerSet();
+
+  static const std::int32_t ID = 1355547603;
+
+  static object_ptr<WebPageAttribute> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class InputBotInlineMessageID;
 
 class webViewMessageSent final : public Object {
@@ -22430,6 +23512,31 @@ class account_autoSaveSettings final : public Object {
   static object_ptr<account_autoSaveSettings> fetch(TlBufferParser &p);
 
   explicit account_autoSaveSettings(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Chat;
+
+class User;
+
+class businessChatLink;
+
+class account_businessChatLinks final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  array<object_ptr<businessChatLink>> links_;
+  array<object_ptr<Chat>> chats_;
+  array<object_ptr<User>> users_;
+
+  static const std::int32_t ID = -331111727;
+
+  static object_ptr<account_businessChatLinks> fetch(TlBufferParser &p);
+
+  explicit account_businessChatLinks(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -22719,6 +23826,36 @@ class account_resetPasswordOk final : public account_ResetPasswordResult {
   static const std::int32_t ID = -383330754;
 
   static object_ptr<account_ResetPasswordResult> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Chat;
+
+class MessageEntity;
+
+class Peer;
+
+class User;
+
+class account_resolvedBusinessChatLinks final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  object_ptr<Peer> peer_;
+  string message_;
+  array<object_ptr<MessageEntity>> entities_;
+  array<object_ptr<Chat>> chats_;
+  array<object_ptr<User>> users_;
+
+  account_resolvedBusinessChatLinks();
+
+  static const std::int32_t ID = -1708937439;
+
+  static object_ptr<account_resolvedBusinessChatLinks> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -23411,14 +24548,53 @@ class auth_sentCodeTypeFirebaseSms final : public auth_SentCodeType {
  public:
   int32 flags_;
   bytes nonce_;
+  bytes play_integrity_nonce_;
   string receipt_;
   int32 push_timeout_;
   int32 length_;
-  enum Flags : std::int32_t { NONCE_MASK = 1, RECEIPT_MASK = 2, PUSH_TIMEOUT_MASK = 2 };
+  enum Flags : std::int32_t { NONCE_MASK = 1, PLAY_INTEGRITY_NONCE_MASK = 4, RECEIPT_MASK = 2, PUSH_TIMEOUT_MASK = 2 };
 
   auth_sentCodeTypeFirebaseSms();
 
-  static const std::int32_t ID = -444918734;
+  static const std::int32_t ID = 331943703;
+
+  static object_ptr<auth_SentCodeType> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class auth_sentCodeTypeSmsWord final : public auth_SentCodeType {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string beginning_;
+  enum Flags : std::int32_t { BEGINNING_MASK = 1 };
+
+  auth_sentCodeTypeSmsWord();
+
+  static const std::int32_t ID = -1542017919;
+
+  static object_ptr<auth_SentCodeType> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class auth_sentCodeTypeSmsPhrase final : public auth_SentCodeType {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  string beginning_;
+  enum Flags : std::int32_t { BEGINNING_MASK = 1 };
+
+  auth_sentCodeTypeSmsPhrase();
+
+  static const std::int32_t ID = -1284008785;
 
   static object_ptr<auth_SentCodeType> fetch(TlBufferParser &p);
 
@@ -23561,6 +24737,60 @@ class channels_sendAsPeers final : public Object {
   static object_ptr<channels_sendAsPeers> fetch(TlBufferParser &p);
 
   explicit channels_sendAsPeers(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class sponsoredMessageReportOption;
+
+class channels_SponsoredMessageReportResult: public Object {
+ public:
+
+  static object_ptr<channels_SponsoredMessageReportResult> fetch(TlBufferParser &p);
+};
+
+class channels_sponsoredMessageReportResultChooseOption final : public channels_SponsoredMessageReportResult {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string title_;
+  array<object_ptr<sponsoredMessageReportOption>> options_;
+
+  static const std::int32_t ID = -2073059774;
+
+  static object_ptr<channels_SponsoredMessageReportResult> fetch(TlBufferParser &p);
+
+  explicit channels_sponsoredMessageReportResultChooseOption(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class channels_sponsoredMessageReportResultAdsHidden final : public channels_SponsoredMessageReportResult {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 1044107055;
+
+  static object_ptr<channels_SponsoredMessageReportResult> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class channels_sponsoredMessageReportResultReported final : public channels_SponsoredMessageReportResult {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -1384544183;
+
+  static object_ptr<channels_SponsoredMessageReportResult> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -23746,6 +24976,30 @@ class contacts_blockedSlice final : public contacts_Blocked {
 
 class User;
 
+class contactBirthday;
+
+class contacts_contactBirthdays final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  array<object_ptr<contactBirthday>> contacts_;
+  array<object_ptr<User>> users_;
+
+  contacts_contactBirthdays(array<object_ptr<contactBirthday>> &&contacts_, array<object_ptr<User>> &&users_);
+
+  static const std::int32_t ID = 290452237;
+
+  static object_ptr<contacts_contactBirthdays> fetch(TlBufferParser &p);
+
+  explicit contacts_contactBirthdays(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class User;
+
 class contact;
 
 class contacts_Contacts: public Object {
@@ -23919,6 +25173,28 @@ class contacts_topPeersDisabled final : public contacts_TopPeers {
   static const std::int32_t ID = -1255369827;
 
   static object_ptr<contacts_TopPeers> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class fragment_collectibleInfo final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 purchase_date_;
+  string currency_;
+  int64 amount_;
+  string crypto_currency_;
+  int64 crypto_amount_;
+  string url_;
+
+  static const std::int32_t ID = 1857945489;
+
+  static object_ptr<fragment_collectibleInfo> fetch(TlBufferParser &p);
+
+  explicit fragment_collectibleInfo(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -24741,6 +26017,49 @@ class messages_archivedStickers final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class Document;
+
+class availableEffect;
+
+class messages_AvailableEffects: public Object {
+ public:
+
+  static object_ptr<messages_AvailableEffects> fetch(TlBufferParser &p);
+};
+
+class messages_availableEffectsNotModified final : public messages_AvailableEffects {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -772957605;
+
+  static object_ptr<messages_AvailableEffects> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class messages_availableEffects final : public messages_AvailableEffects {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 hash_;
+  array<object_ptr<availableEffect>> effects_;
+  array<object_ptr<Document>> documents_;
+
+  static const std::int32_t ID = -1109696146;
+
+  static object_ptr<messages_AvailableEffects> fetch(TlBufferParser &p);
+
+  explicit messages_availableEffects(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class availableReaction;
 
 class messages_AvailableReactions: public Object {
@@ -25159,7 +26478,7 @@ class messages_discussionMessage final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
-class emojiGroup;
+class EmojiGroup;
 
 class messages_EmojiGroups: public Object {
  public:
@@ -25188,7 +26507,7 @@ class messages_emojiGroups final : public messages_EmojiGroups {
 
  public:
   int32 hash_;
-  array<object_ptr<emojiGroup>> groups_;
+  array<object_ptr<EmojiGroup>> groups_;
 
   static const std::int32_t ID = -2011186869;
 
@@ -25514,6 +26833,28 @@ class messages_inactiveChats final : public Object {
   void store(TlStorerToString &s, const char *field_name) const final;
 };
 
+class Updates;
+
+class missingInvitee;
+
+class messages_invitedUsers final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<Updates> updates_;
+  array<object_ptr<missingInvitee>> missing_invitees_;
+
+  static const std::int32_t ID = 2136862630;
+
+  static object_ptr<messages_invitedUsers> fetch(TlBufferParser &p);
+
+  explicit messages_invitedUsers(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
 class messages_messageEditData final : public Object {
   std::int32_t get_id() const final {
     return ID;
@@ -25683,6 +27024,26 @@ class messages_messagesNotModified final : public messages_Messages {
   static object_ptr<messages_Messages> fetch(TlBufferParser &p);
 
   explicit messages_messagesNotModified(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class StickerSetCovered;
+
+class messages_myStickers final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 count_;
+  array<object_ptr<StickerSetCovered>> sets_;
+
+  static const std::int32_t ID = -83926371;
+
+  static object_ptr<messages_myStickers> fetch(TlBufferParser &p);
+
+  explicit messages_myStickers(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -26559,7 +27920,13 @@ class paymentRequestedInfo;
 
 class paymentSavedCredentialsCard;
 
-class payments_paymentForm final : public Object {
+class payments_PaymentForm: public Object {
+ public:
+
+  static object_ptr<payments_PaymentForm> fetch(TlBufferParser &p);
+};
+
+class payments_paymentForm final : public payments_PaymentForm {
   std::int32_t get_id() const final {
     return ID;
   }
@@ -26588,7 +27955,31 @@ class payments_paymentForm final : public Object {
 
   static const std::int32_t ID = -1610250415;
 
-  static object_ptr<payments_paymentForm> fetch(TlBufferParser &p);
+  static object_ptr<payments_PaymentForm> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class payments_paymentFormStars final : public payments_PaymentForm {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 form_id_;
+  int64 bot_id_;
+  string title_;
+  string description_;
+  object_ptr<WebDocument> photo_;
+  object_ptr<invoice> invoice_;
+  array<object_ptr<User>> users_;
+
+  payments_paymentFormStars();
+
+  static const std::int32_t ID = 2079764828;
+
+  static object_ptr<payments_PaymentForm> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -26603,7 +27994,13 @@ class paymentRequestedInfo;
 
 class shippingOption;
 
-class payments_paymentReceipt final : public Object {
+class payments_PaymentReceipt: public Object {
+ public:
+
+  static object_ptr<payments_PaymentReceipt> fetch(TlBufferParser &p);
+};
+
+class payments_paymentReceipt final : public payments_PaymentReceipt {
   std::int32_t get_id() const final {
     return ID;
   }
@@ -26630,7 +28027,34 @@ class payments_paymentReceipt final : public Object {
 
   static const std::int32_t ID = 1891958275;
 
-  static object_ptr<payments_paymentReceipt> fetch(TlBufferParser &p);
+  static object_ptr<payments_PaymentReceipt> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class payments_paymentReceiptStars final : public payments_PaymentReceipt {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int32 date_;
+  int64 bot_id_;
+  string title_;
+  string description_;
+  object_ptr<WebDocument> photo_;
+  object_ptr<invoice> invoice_;
+  string currency_;
+  int64 total_amount_;
+  string transaction_id_;
+  array<object_ptr<User>> users_;
+
+  payments_paymentReceiptStars();
+
+  static const std::int32_t ID = -625215430;
+
+  static object_ptr<payments_PaymentReceipt> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -26694,6 +28118,35 @@ class payments_savedInfo final : public Object {
   static const std::int32_t ID = -74456004;
 
   static object_ptr<payments_savedInfo> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class Chat;
+
+class User;
+
+class starsTransaction;
+
+class payments_starsStatus final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 balance_;
+  array<object_ptr<starsTransaction>> history_;
+  string next_offset_;
+  array<object_ptr<Chat>> chats_;
+  array<object_ptr<User>> users_;
+  enum Flags : std::int32_t { NEXT_OFFSET_MASK = 1 };
+
+  payments_starsStatus();
+
+  static const std::int32_t ID = -1930105248;
+
+  static object_ptr<payments_starsStatus> fetch(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -27072,6 +28525,67 @@ class smsjobs_status final : public Object {
   static const std::int32_t ID = 720277905;
 
   static object_ptr<smsjobs_status> fetch(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class StatsGraph;
+
+class broadcastRevenueBalances;
+
+class stats_broadcastRevenueStats final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<StatsGraph> top_hours_graph_;
+  object_ptr<StatsGraph> revenue_graph_;
+  object_ptr<broadcastRevenueBalances> balances_;
+  double usd_rate_;
+
+  static const std::int32_t ID = 1409802903;
+
+  static object_ptr<stats_broadcastRevenueStats> fetch(TlBufferParser &p);
+
+  explicit stats_broadcastRevenueStats(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class BroadcastRevenueTransaction;
+
+class stats_broadcastRevenueTransactions final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 count_;
+  array<object_ptr<BroadcastRevenueTransaction>> transactions_;
+
+  static const std::int32_t ID = -2028632986;
+
+  static object_ptr<stats_broadcastRevenueTransactions> fetch(TlBufferParser &p);
+
+  explicit stats_broadcastRevenueTransactions(TlBufferParser &p);
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+};
+
+class stats_broadcastRevenueWithdrawalUrl final : public Object {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string url_;
+
+  static const std::int32_t ID = -328886473;
+
+  static object_ptr<stats_broadcastRevenueWithdrawalUrl> fetch(TlBufferParser &p);
+
+  explicit stats_broadcastRevenueWithdrawalUrl(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -27497,16 +29011,18 @@ class stories_stories final : public Object {
   }
 
  public:
+  int32 flags_;
   int32 count_;
   array<object_ptr<StoryItem>> stories_;
+  array<int32> pinned_to_top_;
   array<object_ptr<Chat>> chats_;
   array<object_ptr<User>> users_;
 
-  static const std::int32_t ID = 1574486984;
+  stories_stories();
+
+  static const std::int32_t ID = 1673780490;
 
   static object_ptr<stories_stories> fetch(TlBufferParser &p);
-
-  explicit stories_stories(TlBufferParser &p);
 
   void store(TlStorerToString &s, const char *field_name) const final;
 };
@@ -28135,6 +29651,33 @@ class account_confirmPhone final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class businessChatLink;
+
+class inputBusinessChatLink;
+
+class account_createBusinessChatLink final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<inputBusinessChatLink> link_;
+
+  explicit account_createBusinessChatLink(object_ptr<inputBusinessChatLink> &&link_);
+
+  static const std::int32_t ID = -2007898482;
+
+  using ReturnType = object_ptr<businessChatLink>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class InputDocument;
 
 class inputThemeSettings;
@@ -28239,6 +29782,29 @@ class account_deleteAutoSaveExceptions final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class account_deleteBusinessChatLink final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string slug_;
+
+  explicit account_deleteBusinessChatLink(string const &slug_);
+
+  static const std::int32_t ID = 1611085428;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class SecureValueType;
 
 class account_deleteSecureValue final : public Function {
@@ -28254,6 +29820,59 @@ class account_deleteSecureValue final : public Function {
   static const std::int32_t ID = -1199522741;
 
   using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class account_disablePeerConnectedBot final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+
+  explicit account_disablePeerConnectedBot(object_ptr<InputPeer> &&peer_);
+
+  static const std::int32_t ID = 1581481689;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class businessChatLink;
+
+class inputBusinessChatLink;
+
+class account_editBusinessChatLink final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string slug_;
+  object_ptr<inputBusinessChatLink> link_;
+
+  account_editBusinessChatLink(string const &slug_, object_ptr<inputBusinessChatLink> &&link_);
+
+  static const std::int32_t ID = -1942744913;
+
+  using ReturnType = object_ptr<businessChatLink>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -28417,6 +30036,53 @@ class account_getAutoSaveSettings final : public Function {
   static const std::int32_t ID = -1379156774;
 
   using ReturnType = object_ptr<account_autoSaveSettings>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class Updates;
+
+class account_getBotBusinessConnection final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string connection_id_;
+
+  explicit account_getBotBusinessConnection(string const &connection_id_);
+
+  static const std::int32_t ID = 1990746736;
+
+  using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class account_businessChatLinks;
+
+class account_getBusinessChatLinks final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 1869667809;
+
+  using ReturnType = object_ptr<account_businessChatLinks>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -28840,6 +30506,28 @@ class account_getPrivacy final : public Function {
   static const std::int32_t ID = -623130288;
 
   using ReturnType = object_ptr<account_privacyRules>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class reactionsNotifySettings;
+
+class account_getReactionsNotifySettings final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = 115172684;
+
+  using ReturnType = object_ptr<reactionsNotifySettings>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -29464,6 +31152,31 @@ class account_resetWebAuthorizations final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class account_resolvedBusinessChatLinks;
+
+class account_resolveBusinessChatLink final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string slug_;
+
+  explicit account_resolveBusinessChatLink(string const &slug_);
+
+  static const std::int32_t ID = 1418913262;
+
+  using ReturnType = object_ptr<account_resolvedBusinessChatLinks>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class autoDownloadSettings;
 
 class account_saveAutoDownloadSettings final : public Function {
@@ -29903,6 +31616,80 @@ class account_setPrivacy final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class reactionsNotifySettings;
+
+class account_setReactionsNotifySettings final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<reactionsNotifySettings> settings_;
+
+  explicit account_setReactionsNotifySettings(object_ptr<reactionsNotifySettings> &&settings_);
+
+  static const std::int32_t ID = 829220168;
+
+  using ReturnType = object_ptr<reactionsNotifySettings>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class account_toggleConnectedBotPaused final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+  bool paused_;
+
+  account_toggleConnectedBotPaused(object_ptr<InputPeer> &&peer_, bool paused_);
+
+  static const std::int32_t ID = 1684934807;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class account_toggleSponsoredMessages final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  bool enabled_;
+
+  explicit account_toggleSponsoredMessages(bool enabled_);
+
+  static const std::int32_t ID = -1176919155;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class account_toggleUsername final : public Function {
   std::int32_t get_id() const final {
     return ID;
@@ -29940,6 +31727,34 @@ class account_unregisterDevice final : public Function {
   account_unregisterDevice(int32 token_type_, string const &token_, array<int64> &&other_uids_);
 
   static const std::int32_t ID = 1779249670;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class birthday;
+
+class account_updateBirthday final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  object_ptr<birthday> birthday_;
+  enum Flags : std::int32_t { BIRTHDAY_MASK = 1 };
+  mutable int32 var0;
+
+  account_updateBirthday(int32 flags_, object_ptr<birthday> &&birthday_);
+
+  static const std::int32_t ID = -865203183;
 
   using ReturnType = bool;
 
@@ -29996,6 +31811,34 @@ class account_updateBusinessGreetingMessage final : public Function {
   account_updateBusinessGreetingMessage(int32 flags_, object_ptr<inputBusinessGreetingMessage> &&message_);
 
   static const std::int32_t ID = 1724755908;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class inputBusinessIntro;
+
+class account_updateBusinessIntro final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  object_ptr<inputBusinessIntro> intro_;
+  enum Flags : std::int32_t { INTRO_MASK = 1 };
+  mutable int32 var0;
+
+  account_updateBusinessIntro(int32 flags_, object_ptr<inputBusinessIntro> &&intro_);
+
+  static const std::int32_t ID = -1508585420;
 
   using ReturnType = bool;
 
@@ -30097,7 +31940,7 @@ class InputUser;
 
 class Updates;
 
-class inputBusinessRecipients;
+class inputBusinessBotRecipients;
 
 class account_updateConnectedBot final : public Function {
   std::int32_t get_id() const final {
@@ -30109,13 +31952,13 @@ class account_updateConnectedBot final : public Function {
   bool can_reply_;
   bool deleted_;
   object_ptr<InputUser> bot_;
-  object_ptr<inputBusinessRecipients> recipients_;
+  object_ptr<inputBusinessBotRecipients> recipients_;
   enum Flags : std::int32_t { CAN_REPLY_MASK = 1, DELETED_MASK = 2 };
   mutable int32 var0;
 
-  account_updateConnectedBot(int32 flags_, bool can_reply_, bool deleted_, object_ptr<InputUser> &&bot_, object_ptr<inputBusinessRecipients> &&recipients_);
+  account_updateConnectedBot(int32 flags_, bool can_reply_, bool deleted_, object_ptr<InputUser> &&bot_, object_ptr<inputBusinessBotRecipients> &&recipients_);
 
-  static const std::int32_t ID = -1674751363;
+  static const std::int32_t ID = 1138250269;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -30220,6 +32063,31 @@ class account_updatePasswordSettings final : public Function {
   account_updatePasswordSettings(object_ptr<InputCheckPasswordSRP> &&password_, object_ptr<account_passwordInputSettings> &&new_settings_);
 
   static const std::int32_t ID = -1516564433;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
+class account_updatePersonalChannel final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputChannel> channel_;
+
+  explicit account_updatePersonalChannel(object_ptr<InputChannel> &&channel_);
+
+  static const std::int32_t ID = -649919008;
 
   using ReturnType = bool;
 
@@ -30860,6 +32728,31 @@ class auth_recoverPassword final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class auth_reportMissingCode final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string phone_number_;
+  string phone_code_hash_;
+  string mnc_;
+
+  auth_reportMissingCode(string const &phone_number_, string const &phone_code_hash_, string const &mnc_);
+
+  static const std::int32_t ID = -878841866;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class auth_requestFirebaseSms final : public Function {
   std::int32_t get_id() const final {
     return ID;
@@ -30870,13 +32763,14 @@ class auth_requestFirebaseSms final : public Function {
   string phone_number_;
   string phone_code_hash_;
   string safety_net_token_;
+  string play_integrity_token_;
   string ios_push_secret_;
-  enum Flags : std::int32_t { SAFETY_NET_TOKEN_MASK = 1, IOS_PUSH_SECRET_MASK = 2 };
+  enum Flags : std::int32_t { SAFETY_NET_TOKEN_MASK = 1, PLAY_INTEGRITY_TOKEN_MASK = 4, IOS_PUSH_SECRET_MASK = 2 };
   mutable int32 var0;
 
-  auth_requestFirebaseSms(int32 flags_, string const &phone_number_, string const &phone_code_hash_, string const &safety_net_token_, string const &ios_push_secret_);
+  auth_requestFirebaseSms(int32 flags_, string const &phone_number_, string const &phone_code_hash_, string const &safety_net_token_, string const &play_integrity_token_, string const &ios_push_secret_);
 
-  static const std::int32_t ID = -1991881904;
+  static const std::int32_t ID = -1908857314;
 
   using ReturnType = bool;
 
@@ -30919,12 +32813,16 @@ class auth_resendCode final : public Function {
   }
 
  public:
+  int32 flags_;
   string phone_number_;
   string phone_code_hash_;
+  string reason_;
+  enum Flags : std::int32_t { REASON_MASK = 1 };
+  mutable int32 var0;
 
-  auth_resendCode(string const &phone_number_, string const &phone_code_hash_);
+  auth_resendCode(int32 flags_, string const &phone_number_, string const &phone_code_hash_, string const &reason_);
 
-  static const std::int32_t ID = 1056025023;
+  static const std::int32_t ID = -890997469;
 
   using ReturnType = object_ptr<auth_SentCode>;
 
@@ -32145,10 +34043,11 @@ class channels_getAdminedPublicChannels final : public Function {
   int32 flags_;
   bool by_location_;
   bool check_limit_;
-  enum Flags : std::int32_t { BY_LOCATION_MASK = 1, CHECK_LIMIT_MASK = 2 };
+  bool for_personal_;
+  enum Flags : std::int32_t { BY_LOCATION_MASK = 1, CHECK_LIMIT_MASK = 2, FOR_PERSONAL_MASK = 4 };
   mutable int32 var0;
 
-  channels_getAdminedPublicChannels(int32 flags_, bool by_location_, bool check_limit_);
+  channels_getAdminedPublicChannels(int32 flags_, bool by_location_, bool check_limit_, bool for_personal_);
 
   static const std::int32_t ID = -122669393;
 
@@ -32173,11 +34072,14 @@ class channels_getChannelRecommendations final : public Function {
   }
 
  public:
+  int32 flags_;
   object_ptr<InputChannel> channel_;
+  enum Flags : std::int32_t { CHANNEL_MASK = 1 };
+  mutable int32 var0;
 
-  explicit channels_getChannelRecommendations(object_ptr<InputChannel> &&channel_);
+  channels_getChannelRecommendations(int32 flags_, object_ptr<InputChannel> &&channel_);
 
-  static const std::int32_t ID = -2085155433;
+  static const std::int32_t ID = 631707458;
 
   using ReturnType = object_ptr<messages_Chats>;
 
@@ -32527,7 +34429,7 @@ class InputChannel;
 
 class InputUser;
 
-class Updates;
+class messages_invitedUsers;
 
 class channels_inviteToChannel final : public Function {
   std::int32_t get_id() const final {
@@ -32540,9 +34442,9 @@ class channels_inviteToChannel final : public Function {
 
   channels_inviteToChannel(object_ptr<InputChannel> &&channel_, array<object_ptr<InputUser>> &&users_);
 
-  static const std::int32_t ID = 429865580;
+  static const std::int32_t ID = -907854508;
 
-  using ReturnType = object_ptr<Updates>;
+  using ReturnType = object_ptr<messages_invitedUsers>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -32762,6 +34664,94 @@ class channels_reportSpam final : public Function {
   static const std::int32_t ID = -196443371;
 
   using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
+class channels_SponsoredMessageReportResult;
+
+class channels_reportSponsoredMessage final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputChannel> channel_;
+  bytes random_id_;
+  bytes option_;
+
+  channels_reportSponsoredMessage(object_ptr<InputChannel> &&channel_, bytes &&random_id_, bytes &&option_);
+
+  static const std::int32_t ID = -1349519687;
+
+  using ReturnType = object_ptr<channels_SponsoredMessageReportResult>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
+class Updates;
+
+class channels_restrictSponsoredMessages final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputChannel> channel_;
+  bool restricted_;
+
+  channels_restrictSponsoredMessages(object_ptr<InputChannel> &&channel_, bool restricted_);
+
+  static const std::int32_t ID = -1696000743;
+
+  using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class messages_Messages;
+
+class channels_searchPosts final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string hashtag_;
+  int32 offset_rate_;
+  object_ptr<InputPeer> offset_peer_;
+  int32 offset_id_;
+  int32 limit_;
+
+  channels_searchPosts(string const &hashtag_, int32 offset_rate_, object_ptr<InputPeer> &&offset_peer_, int32 offset_id_, int32 limit_);
+
+  static const std::int32_t ID = -778069893;
+
+  using ReturnType = object_ptr<messages_Messages>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -33832,6 +35822,28 @@ class contacts_exportContactToken final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class contacts_contactBirthdays;
+
+class contacts_getBirthdays final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -621959068;
+
+  using ReturnType = object_ptr<contacts_contactBirthdays>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class contacts_Blocked;
 
 class contacts_getBlocked final : public Function {
@@ -34299,6 +36311,33 @@ class folders_editPeerFolders final : public Function {
   static const std::int32_t ID = 1749536939;
 
   using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputCollectible;
+
+class fragment_collectibleInfo;
+
+class fragment_getCollectibleInfo final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputCollectible> collectible_;
+
+  explicit fragment_getCollectibleInfo(object_ptr<InputCollectible> &&collectible_);
+
+  static const std::int32_t ID = -1105295942;
+
+  using ReturnType = object_ptr<fragment_collectibleInfo>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -34916,6 +36955,83 @@ class help_setBotUpdatesStatus final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class error;
+
+class invokeWithApnsSecretPrefix final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string nonce_;
+  string secret_;
+
+  invokeWithApnsSecretPrefix(string const &nonce_, string const &secret_);
+
+  static const std::int32_t ID = 229528824;
+
+  using ReturnType = object_ptr<error>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class error;
+
+class invokeWithBusinessConnectionPrefix final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string connection_id_;
+
+  explicit invokeWithBusinessConnectionPrefix(string const &connection_id_);
+
+  static const std::int32_t ID = -584540274;
+
+  using ReturnType = object_ptr<error>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class error;
+
+class invokeWithGooglePlayIntegrityPrefix final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  string nonce_;
+  string token_;
+
+  invokeWithGooglePlayIntegrityPrefix(string const &nonce_, string const &token_);
+
+  static const std::int32_t ID = 502868356;
+
+  using ReturnType = object_ptr<error>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class langPackDifference;
 
 class langpack_getDifference final : public Function {
@@ -35112,7 +37228,7 @@ class messages_acceptUrlAuth final : public Function {
 
 class InputUser;
 
-class Updates;
+class messages_invitedUsers;
 
 class messages_addChatUser final : public Function {
   std::int32_t get_id() const final {
@@ -35126,9 +37242,9 @@ class messages_addChatUser final : public Function {
 
   messages_addChatUser(int64 chat_id_, object_ptr<InputUser> &&user_id_, int32 fwd_limit_);
 
-  static const std::int32_t ID = -230206493;
+  static const std::int32_t ID = -876162809;
 
-  using ReturnType = object_ptr<Updates>;
+  using ReturnType = object_ptr<messages_invitedUsers>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -35307,7 +37423,7 @@ class messages_clearRecentStickers final : public Function {
 
 class InputUser;
 
-class Updates;
+class messages_invitedUsers;
 
 class messages_createChat final : public Function {
   std::int32_t get_id() const final {
@@ -35324,9 +37440,9 @@ class messages_createChat final : public Function {
 
   messages_createChat(int32 flags_, array<object_ptr<InputUser>> &&users_, string const &title_, int32 ttl_period_);
 
-  static const std::int32_t ID = 3450904;
+  static const std::int32_t ID = -1831936556;
 
-  using ReturnType = object_ptr<Updates>;
+  using ReturnType = object_ptr<messages_invitedUsers>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -35408,6 +37524,34 @@ class messages_deleteExportedChatInvite final : public Function {
   static const std::int32_t ID = -731601877;
 
   using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class Updates;
+
+class messages_deleteFactCheck final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+  int32 msg_id_;
+
+  messages_deleteFactCheck(object_ptr<InputPeer> &&peer_, int32 msg_id_);
+
+  static const std::int32_t ID = -774204404;
+
+  using ReturnType = object_ptr<Updates>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -35848,6 +37992,37 @@ class messages_editExportedChatInvite final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class InputPeer;
+
+class Updates;
+
+class textWithEntities;
+
+class messages_editFactCheck final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+  int32 msg_id_;
+  object_ptr<textWithEntities> text_;
+
+  messages_editFactCheck(object_ptr<InputPeer> &&peer_, int32 msg_id_, object_ptr<textWithEntities> &&text_);
+
+  static const std::int32_t ID = 92925557;
+
+  using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class InputBotInlineMessageID;
 
 class InputMedia;
@@ -36237,6 +38412,31 @@ class messages_getAttachedStickers final : public Function {
   static const std::int32_t ID = -866424884;
 
   using ReturnType = array<object_ptr<StickerSetCovered>>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class messages_AvailableEffects;
+
+class messages_getAvailableEffects final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 hash_;
+
+  explicit messages_getAvailableEffects(int32 hash_);
+
+  static const std::int32_t ID = -559805895;
+
+  using ReturnType = object_ptr<messages_AvailableEffects>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -36812,6 +39012,31 @@ class messages_getEmojiStatusGroups final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class messages_EmojiGroups;
+
+class messages_getEmojiStickerGroups final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 hash_;
+
+  explicit messages_getEmojiStickerGroups(int32 hash_);
+
+  static const std::int32_t ID = 500711669;
+
+  using ReturnType = object_ptr<messages_EmojiGroups>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class messages_AllStickers;
 
 class messages_getEmojiStickers final : public Function {
@@ -36945,6 +39170,34 @@ class messages_getExtendedMedia final : public Function {
   static const std::int32_t ID = -2064119788;
 
   using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class factCheck;
+
+class messages_getFactCheck final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+  array<int32> msg_id_;
+
+  messages_getFactCheck(object_ptr<InputPeer> &&peer_, array<int32> &&msg_id_);
+
+  static const std::int32_t ID = -1177696786;
+
+  using ReturnType = array<object_ptr<factCheck>>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -37379,6 +39632,32 @@ class messages_getMessagesViews final : public Function {
   static const std::int32_t ID = 1468322785;
 
   using ReturnType = object_ptr<messages_messageViews>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class messages_myStickers;
+
+class messages_getMyStickers final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int64 offset_id_;
+  int32 limit_;
+
+  messages_getMyStickers(int64 offset_id_, int32 limit_);
+
+  static const std::int32_t ID = -793386500;
+
+  using ReturnType = object_ptr<messages_myStickers>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -39522,6 +41801,7 @@ class messages_searchGlobal final : public Function {
 
  public:
   int32 flags_;
+  bool broadcasts_only_;
   int32 folder_id_;
   string q_;
   object_ptr<MessagesFilter> filter_;
@@ -39531,10 +41811,10 @@ class messages_searchGlobal final : public Function {
   object_ptr<InputPeer> offset_peer_;
   int32 offset_id_;
   int32 limit_;
-  enum Flags : std::int32_t { FOLDER_ID_MASK = 1 };
+  enum Flags : std::int32_t { BROADCASTS_ONLY_MASK = 2, FOLDER_ID_MASK = 1 };
   mutable int32 var0;
 
-  messages_searchGlobal(int32 flags_, int32 folder_id_, string const &q_, object_ptr<MessagesFilter> &&filter_, int32 min_date_, int32 max_date_, int32 offset_rate_, object_ptr<InputPeer> &&offset_peer_, int32 offset_id_, int32 limit_);
+  messages_searchGlobal(int32 flags_, bool broadcasts_only_, int32 folder_id_, string const &q_, object_ptr<MessagesFilter> &&filter_, int32 min_date_, int32 max_date_, int32 offset_rate_, object_ptr<InputPeer> &&offset_peer_, int32 offset_id_, int32 limit_);
 
   static const std::int32_t ID = 1271290010;
 
@@ -39818,12 +42098,13 @@ class messages_sendMedia final : public Function {
   int32 schedule_date_;
   object_ptr<InputPeer> send_as_;
   object_ptr<InputQuickReplyShortcut> quick_reply_shortcut_;
-  enum Flags : std::int32_t { SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, REPLY_MARKUP_MASK = 4, ENTITIES_MASK = 8, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072 };
+  int64 effect_;
+  enum Flags : std::int32_t { SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, REPLY_MARKUP_MASK = 4, ENTITIES_MASK = 8, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072, EFFECT_MASK = 262144 };
   mutable int32 var0;
 
-  messages_sendMedia(int32 flags_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, object_ptr<InputMedia> &&media_, string const &message_, int64 random_id_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_);
+  messages_sendMedia(int32 flags_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, object_ptr<InputMedia> &&media_, string const &message_, int64 random_id_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_, int64 effect_);
 
-  static const std::int32_t ID = 2077646913;
+  static const std::int32_t ID = 2018673486;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -39871,12 +42152,13 @@ class messages_sendMessage final : public Function {
   int32 schedule_date_;
   object_ptr<InputPeer> send_as_;
   object_ptr<InputQuickReplyShortcut> quick_reply_shortcut_;
-  enum Flags : std::int32_t { NO_WEBPAGE_MASK = 2, SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, REPLY_MARKUP_MASK = 4, ENTITIES_MASK = 8, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072 };
+  int64 effect_;
+  enum Flags : std::int32_t { NO_WEBPAGE_MASK = 2, SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, REPLY_MARKUP_MASK = 4, ENTITIES_MASK = 8, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072, EFFECT_MASK = 262144 };
   mutable int32 var0;
 
-  messages_sendMessage(int32 flags_, bool no_webpage_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, string const &message_, int64 random_id_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_);
+  messages_sendMessage(int32 flags_, bool no_webpage_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, string const &message_, int64 random_id_, object_ptr<ReplyMarkup> &&reply_markup_, array<object_ptr<MessageEntity>> &&entities_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_, int64 effect_);
 
-  static const std::int32_t ID = -537394132;
+  static const std::int32_t ID = -1740662971;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -39918,12 +42200,13 @@ class messages_sendMultiMedia final : public Function {
   int32 schedule_date_;
   object_ptr<InputPeer> send_as_;
   object_ptr<InputQuickReplyShortcut> quick_reply_shortcut_;
-  enum Flags : std::int32_t { SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072 };
+  int64 effect_;
+  enum Flags : std::int32_t { SILENT_MASK = 32, BACKGROUND_MASK = 64, CLEAR_DRAFT_MASK = 128, NOFORWARDS_MASK = 16384, UPDATE_STICKERSETS_ORDER_MASK = 32768, INVERT_MEDIA_MASK = 65536, REPLY_TO_MASK = 1, SCHEDULE_DATE_MASK = 1024, SEND_AS_MASK = 8192, QUICK_REPLY_SHORTCUT_MASK = 131072, EFFECT_MASK = 262144 };
   mutable int32 var0;
 
-  messages_sendMultiMedia(int32 flags_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, array<object_ptr<inputSingleMedia>> &&multi_media_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_);
+  messages_sendMultiMedia(int32 flags_, bool silent_, bool background_, bool clear_draft_, bool noforwards_, bool update_stickersets_order_, bool invert_media_, object_ptr<InputPeer> &&peer_, object_ptr<InputReplyTo> &&reply_to_, array<object_ptr<inputSingleMedia>> &&multi_media_, int32 schedule_date_, object_ptr<InputPeer> &&send_as_, object_ptr<InputQuickReplyShortcut> &&quick_reply_shortcut_, int64 effect_);
 
-  static const std::int32_t ID = 211175177;
+  static const std::int32_t ID = 934757205;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -39948,10 +42231,12 @@ class messages_sendQuickReplyMessages final : public Function {
  public:
   object_ptr<InputPeer> peer_;
   int32 shortcut_id_;
+  array<int32> id_;
+  array<int64> random_id_;
 
-  messages_sendQuickReplyMessages(object_ptr<InputPeer> &&peer_, int32 shortcut_id_);
+  messages_sendQuickReplyMessages(object_ptr<InputPeer> &&peer_, int32 shortcut_id_, array<int32> &&id_, array<int64> &&random_id_);
 
-  static const std::int32_t ID = 857029332;
+  static const std::int32_t ID = 1819610593;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -40246,12 +42531,16 @@ class messages_setChatAvailableReactions final : public Function {
   }
 
  public:
+  int32 flags_;
   object_ptr<InputPeer> peer_;
   object_ptr<ChatReactions> available_reactions_;
+  int32 reactions_limit_;
+  enum Flags : std::int32_t { REACTIONS_LIMIT_MASK = 1 };
+  mutable int32 var0;
 
-  messages_setChatAvailableReactions(object_ptr<InputPeer> &&peer_, object_ptr<ChatReactions> &&available_reactions_);
+  messages_setChatAvailableReactions(int32 flags_, object_ptr<InputPeer> &&peer_, object_ptr<ChatReactions> &&available_reactions_, int32 reactions_limit_);
 
-  static const std::int32_t ID = -21928079;
+  static const std::int32_t ID = 1511328724;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -41140,12 +43429,16 @@ class messages_uploadMedia final : public Function {
   }
 
  public:
+  int32 flags_;
+  string business_connection_id_;
   object_ptr<InputPeer> peer_;
   object_ptr<InputMedia> media_;
+  enum Flags : std::int32_t { BUSINESS_CONNECTION_ID_MASK = 1 };
+  mutable int32 var0;
 
-  messages_uploadMedia(object_ptr<InputPeer> &&peer_, object_ptr<InputMedia> &&media_);
+  messages_uploadMedia(int32 flags_, string const &business_connection_id_, object_ptr<InputPeer> &&peer_, object_ptr<InputMedia> &&media_);
 
-  static const std::int32_t ID = 1369162417;
+  static const std::int32_t ID = 345405816;
 
   using ReturnType = object_ptr<MessageMedia>;
 
@@ -41402,7 +43695,7 @@ class InputInvoice;
 
 class dataJSON;
 
-class payments_paymentForm;
+class payments_PaymentForm;
 
 class payments_getPaymentForm final : public Function {
   std::int32_t get_id() const final {
@@ -41420,7 +43713,7 @@ class payments_getPaymentForm final : public Function {
 
   static const std::int32_t ID = 924093883;
 
-  using ReturnType = object_ptr<payments_paymentForm>;
+  using ReturnType = object_ptr<payments_PaymentForm>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -41433,7 +43726,7 @@ class payments_getPaymentForm final : public Function {
 
 class InputPeer;
 
-class payments_paymentReceipt;
+class payments_PaymentReceipt;
 
 class payments_getPaymentReceipt final : public Function {
   std::int32_t get_id() const final {
@@ -41448,7 +43741,7 @@ class payments_getPaymentReceipt final : public Function {
 
   static const std::int32_t ID = 611897804;
 
-  using ReturnType = object_ptr<payments_paymentReceipt>;
+  using ReturnType = object_ptr<payments_PaymentReceipt>;
 
   void store(TlStorerCalcLength &s) const final;
 
@@ -41513,6 +43806,88 @@ class payments_getSavedInfo final : public Function {
 
 class InputPeer;
 
+class payments_starsStatus;
+
+class payments_getStarsStatus final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+
+  explicit payments_getStarsStatus(object_ptr<InputPeer> &&peer_);
+
+  static const std::int32_t ID = 273665959;
+
+  using ReturnType = object_ptr<payments_starsStatus>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class starsTopupOption;
+
+class payments_getStarsTopupOptions final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+
+  static const std::int32_t ID = -1072773165;
+
+  using ReturnType = array<object_ptr<starsTopupOption>>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
+class payments_starsStatus;
+
+class payments_getStarsTransactions final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool inbound_;
+  bool outbound_;
+  object_ptr<InputPeer> peer_;
+  string offset_;
+  enum Flags : std::int32_t { INBOUND_MASK = 1, OUTBOUND_MASK = 2 };
+  mutable int32 var0;
+
+  payments_getStarsTransactions(int32 flags_, bool inbound_, bool outbound_, object_ptr<InputPeer> &&peer_, string const &offset_);
+
+  static const std::int32_t ID = 1731904249;
+
+  using ReturnType = object_ptr<payments_starsStatus>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputPeer;
+
 class InputStorePaymentPurpose;
 
 class Updates;
@@ -41530,6 +43905,34 @@ class payments_launchPrepaidGiveaway final : public Function {
   payments_launchPrepaidGiveaway(object_ptr<InputPeer> &&peer_, int64 giveaway_id_, object_ptr<InputStorePaymentPurpose> &&purpose_);
 
   static const std::int32_t ID = 1609928480;
+
+  using ReturnType = object_ptr<Updates>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputUser;
+
+class Updates;
+
+class payments_refundStarsCharge final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputUser> user_id_;
+  string charge_id_;
+
+  payments_refundStarsCharge(object_ptr<InputUser> &&user_id_, string const &charge_id_);
+
+  static const std::int32_t ID = 632196938;
 
   using ReturnType = object_ptr<Updates>;
 
@@ -41567,6 +43970,36 @@ class payments_sendPaymentForm final : public Function {
   payments_sendPaymentForm(int32 flags_, int64 form_id_, object_ptr<InputInvoice> &&invoice_, string const &requested_info_id_, string const &shipping_option_id_, object_ptr<InputPaymentCredentials> &&credentials_, int64 tip_amount_);
 
   static const std::int32_t ID = 755192367;
+
+  using ReturnType = object_ptr<payments_PaymentResult>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputInvoice;
+
+class payments_PaymentResult;
+
+class payments_sendStarsForm final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  int64 form_id_;
+  object_ptr<InputInvoice> invoice_;
+  mutable int32 var0;
+
+  payments_sendStarsForm(int32 flags_, int64 form_id_, object_ptr<InputInvoice> &&invoice_);
+
+  static const std::int32_t ID = 45839133;
 
   using ReturnType = object_ptr<payments_PaymentResult>;
 
@@ -43014,6 +45447,96 @@ class smsjobs_updateSettings final : public Function {
 
 class InputChannel;
 
+class stats_broadcastRevenueStats;
+
+class stats_getBroadcastRevenueStats final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  int32 flags_;
+  bool dark_;
+  object_ptr<InputChannel> channel_;
+  enum Flags : std::int32_t { DARK_MASK = 1 };
+  mutable int32 var0;
+
+  stats_getBroadcastRevenueStats(int32 flags_, bool dark_, object_ptr<InputChannel> &&channel_);
+
+  static const std::int32_t ID = 1977595505;
+
+  using ReturnType = object_ptr<stats_broadcastRevenueStats>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
+class stats_broadcastRevenueTransactions;
+
+class stats_getBroadcastRevenueTransactions final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputChannel> channel_;
+  int32 offset_;
+  int32 limit_;
+
+  stats_getBroadcastRevenueTransactions(object_ptr<InputChannel> &&channel_, int32 offset_, int32 limit_);
+
+  static const std::int32_t ID = 6891535;
+
+  using ReturnType = object_ptr<stats_broadcastRevenueTransactions>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
+class InputCheckPasswordSRP;
+
+class stats_broadcastRevenueWithdrawalUrl;
+
+class stats_getBroadcastRevenueWithdrawalUrl final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputChannel> channel_;
+  object_ptr<InputCheckPasswordSRP> password_;
+
+  stats_getBroadcastRevenueWithdrawalUrl(object_ptr<InputChannel> &&channel_, object_ptr<InputCheckPasswordSRP> &&password_);
+
+  static const std::int32_t ID = 711323507;
+
+  using ReturnType = object_ptr<stats_broadcastRevenueWithdrawalUrl>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputChannel;
+
 class stats_broadcastStats;
 
 class stats_getBroadcastStats final : public Function {
@@ -43359,8 +45882,6 @@ class stickers_createStickerSet final : public Function {
  public:
   int32 flags_;
   bool masks_;
-  bool animated_;
-  bool videos_;
   bool emojis_;
   bool text_color_;
   object_ptr<InputUser> user_id_;
@@ -43369,10 +45890,10 @@ class stickers_createStickerSet final : public Function {
   object_ptr<InputDocument> thumb_;
   array<object_ptr<inputStickerSetItem>> stickers_;
   string software_;
-  enum Flags : std::int32_t { MASKS_MASK = 1, ANIMATED_MASK = 2, VIDEOS_MASK = 16, EMOJIS_MASK = 32, TEXT_COLOR_MASK = 64, THUMB_MASK = 4, SOFTWARE_MASK = 8 };
+  enum Flags : std::int32_t { MASKS_MASK = 1, EMOJIS_MASK = 32, TEXT_COLOR_MASK = 64, THUMB_MASK = 4, SOFTWARE_MASK = 8 };
   mutable int32 var0;
 
-  stickers_createStickerSet(int32 flags_, bool masks_, bool animated_, bool videos_, bool emojis_, bool text_color_, object_ptr<InputUser> &&user_id_, string const &title_, string const &short_name_, object_ptr<InputDocument> &&thumb_, array<object_ptr<inputStickerSetItem>> &&stickers_, string const &software_);
+  stickers_createStickerSet(int32 flags_, bool masks_, bool emojis_, bool text_color_, object_ptr<InputUser> &&user_id_, string const &title_, string const &short_name_, object_ptr<InputDocument> &&thumb_, array<object_ptr<inputStickerSetItem>> &&stickers_, string const &software_);
 
   static const std::int32_t ID = -1876841625;
 
@@ -43455,6 +45976,36 @@ class stickers_renameStickerSet final : public Function {
   stickers_renameStickerSet(object_ptr<InputStickerSet> &&stickerset_, string const &title_);
 
   static const std::int32_t ID = 306912256;
+
+  using ReturnType = object_ptr<messages_StickerSet>;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
+class InputDocument;
+
+class inputStickerSetItem;
+
+class messages_StickerSet;
+
+class stickers_replaceSticker final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputDocument> sticker_;
+  object_ptr<inputStickerSetItem> new_sticker_;
+
+  stickers_replaceSticker(object_ptr<InputDocument> &&sticker_, object_ptr<inputStickerSetItem> &&new_sticker_);
+
+  static const std::int32_t ID = 1184253338;
 
   using ReturnType = object_ptr<messages_StickerSet>;
 
@@ -44235,6 +46786,32 @@ class stories_togglePinned final : public Function {
   static ReturnType fetch_result(TlBufferParser &p);
 };
 
+class InputPeer;
+
+class stories_togglePinnedToTop final : public Function {
+  std::int32_t get_id() const final {
+    return ID;
+  }
+
+ public:
+  object_ptr<InputPeer> peer_;
+  array<int32> id_;
+
+  stories_togglePinnedToTop(object_ptr<InputPeer> &&peer_, array<int32> &&id_);
+
+  static const std::int32_t ID = 187268763;
+
+  using ReturnType = bool;
+
+  void store(TlStorerCalcLength &s) const final;
+
+  void store(TlStorerUnsafe &s) const final;
+
+  void store(TlStorerToString &s, const char *field_name) const final;
+
+  static ReturnType fetch_result(TlBufferParser &p);
+};
+
 class inputAppEvent;
 
 class test_parseInputAppEvent final : public Function {
@@ -44269,28 +46846,6 @@ class test_useConfigSimple final : public Function {
   static const std::int32_t ID = -105401795;
 
   using ReturnType = object_ptr<help_configSimple>;
-
-  void store(TlStorerCalcLength &s) const final;
-
-  void store(TlStorerUnsafe &s) const final;
-
-  void store(TlStorerToString &s, const char *field_name) const final;
-
-  static ReturnType fetch_result(TlBufferParser &p);
-};
-
-class error;
-
-class test_useError final : public Function {
-  std::int32_t get_id() const final {
-    return ID;
-  }
-
- public:
-
-  static const std::int32_t ID = -294277375;
-
-  using ReturnType = object_ptr<error>;
 
   void store(TlStorerCalcLength &s) const final;
 

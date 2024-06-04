@@ -124,6 +124,27 @@ Result<int32> tl_constructor_from_string(td_api::BusinessAwayMessageSchedule *ob
   return it->second;
 }
 
+Result<int32> tl_constructor_from_string(td_api::BusinessFeature *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"businessFeatureLocation", -1064304004},
+    {"businessFeatureOpeningHours", 461054701},
+    {"businessFeatureQuickReplies", -1674048894},
+    {"businessFeatureGreetingMessage", 1789424756},
+    {"businessFeatureAwayMessage", 1090119901},
+    {"businessFeatureAccountLinks", 1878693646},
+    {"businessFeatureStartPage", 401471457},
+    {"businessFeatureBots", 275084773},
+    {"businessFeatureEmojiStatus", -846282523},
+    {"businessFeatureChatFolderTags", -543880918},
+    {"businessFeatureUpgradedStories", -1812245550}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
 Result<int32> tl_constructor_from_string(td_api::CallProblem *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"callProblemEcho", 801116548},
@@ -183,8 +204,8 @@ Result<int32> tl_constructor_from_string(td_api::ChatAction *object, const std::
 
 Result<int32> tl_constructor_from_string(td_api::ChatAvailableReactions *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
-    {"chatAvailableReactionsAll", -537887666},
-    {"chatAvailableReactionsSome", -640810821}
+    {"chatAvailableReactionsAll", 694160279},
+    {"chatAvailableReactionsSome", 152513153}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -251,6 +272,18 @@ Result<int32> tl_constructor_from_string(td_api::ChatPhotoStickerType *object, c
   return it->second;
 }
 
+Result<int32> tl_constructor_from_string(td_api::CollectibleItemType *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"collectibleItemTypeUsername", 458680273},
+    {"collectibleItemTypePhoneNumber", 1256251714}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
 Result<int32> tl_constructor_from_string(td_api::DeviceToken *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"deviceTokenFirebaseCloudMessaging", -797881849},
@@ -289,6 +322,7 @@ Result<int32> tl_constructor_from_string(td_api::EmailAddressAuthentication *obj
 Result<int32> tl_constructor_from_string(td_api::EmojiCategoryType *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"emojiCategoryTypeDefault", 1188782699},
+    {"emojiCategoryTypeRegularStickers", -1337484846},
     {"emojiCategoryTypeEmojiStatus", 1381282631},
     {"emojiCategoryTypeChatPhoto", 1059063081}
   };
@@ -477,12 +511,12 @@ Result<int32> tl_constructor_from_string(td_api::InputInvoice *object, const std
 Result<int32> tl_constructor_from_string(td_api::InputMessageContent *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"inputMessageText", -212805484},
-    {"inputMessageAnimation", 850750601},
+    {"inputMessageAnimation", -210404059},
     {"inputMessageAudio", -626786126},
     {"inputMessageDocument", 1633383097},
-    {"inputMessagePhoto", -1460959289},
+    {"inputMessagePhoto", -810129442},
     {"inputMessageSticker", 1072805625},
-    {"inputMessageVideo", 1914220652},
+    {"inputMessageVideo", 615537686},
     {"inputMessageVideoNote", -714598691},
     {"inputMessageVoiceNote", 1461977004},
     {"inputMessageLocation", 648735088},
@@ -491,7 +525,7 @@ Result<int32> tl_constructor_from_string(td_api::InputMessageContent *object, co
     {"inputMessageDice", 841574313},
     {"inputMessageGame", 1252944610},
     {"inputMessageInvoice", 885857632},
-    {"inputMessagePoll", 2054629900},
+    {"inputMessagePoll", -263337164},
     {"inputMessageStory", 554278243},
     {"inputMessageForwarded", 1696232440}
   };
@@ -592,6 +626,7 @@ Result<int32> tl_constructor_from_string(td_api::InternalLinkType *object, const
     {"internalLinkTypeBotAddToChannel", 1401602752},
     {"internalLinkTypeBotStart", 1066950637},
     {"internalLinkTypeBotStartInGroup", -905081650},
+    {"internalLinkTypeBusinessChat", -1606751785},
     {"internalLinkTypeChangePhoneNumber", -265856255},
     {"internalLinkTypeChatBoost", -716571328},
     {"internalLinkTypeChatFolderInvite", -1984804546},
@@ -613,7 +648,7 @@ Result<int32> tl_constructor_from_string(td_api::InternalLinkType *object, const
     {"internalLinkTypePremiumGiftCode", -564356974},
     {"internalLinkTypePrivacyAndSecuritySettings", -1386255665},
     {"internalLinkTypeProxy", -1313788694},
-    {"internalLinkTypePublicChat", -1485547717},
+    {"internalLinkTypePublicChat", -450728610},
     {"internalLinkTypeQrCodeAuthentication", -1089332956},
     {"internalLinkTypeRestorePurchases", 606090371},
     {"internalLinkTypeSettings", 393561524},
@@ -624,7 +659,7 @@ Result<int32> tl_constructor_from_string(td_api::InternalLinkType *object, const
     {"internalLinkTypeThemeSettings", -1051903722},
     {"internalLinkTypeUnknownDeepLink", 625596379},
     {"internalLinkTypeUnsupportedProxy", -566649079},
-    {"internalLinkTypeUserPhoneNumber", -1955751319},
+    {"internalLinkTypeUserPhoneNumber", 2009104529},
     {"internalLinkTypeUserToken", -1462248615},
     {"internalLinkTypeVideoChat", -2020149068},
     {"internalLinkTypeWebApp", -57094065}
@@ -658,8 +693,8 @@ Result<int32> tl_constructor_from_string(td_api::KeyboardButtonType *object, con
     {"keyboardButtonTypeRequestPhoneNumber", -1529235527},
     {"keyboardButtonTypeRequestLocation", -125661955},
     {"keyboardButtonTypeRequestPoll", 1902435512},
-    {"keyboardButtonTypeRequestUsers", 2120478608},
-    {"keyboardButtonTypeRequestChat", 272541602},
+    {"keyboardButtonTypeRequestUsers", -1738765315},
+    {"keyboardButtonTypeRequestChat", 1511138485},
     {"keyboardButtonTypeWebApp", 1892220770}
   };
   auto it = m.find(str);
@@ -842,6 +877,19 @@ Result<int32> tl_constructor_from_string(td_api::PassportElementType *object, co
   return it->second;
 }
 
+Result<int32> tl_constructor_from_string(td_api::PhoneNumberCodeType *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"phoneNumberCodeTypeChange", 87144986},
+    {"phoneNumberCodeTypeVerify", -1029402661},
+    {"phoneNumberCodeTypeConfirmOwnership", -485404696}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
 Result<int32> tl_constructor_from_string(td_api::PollType *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"pollTypeRegular", 641265698},
@@ -877,7 +925,8 @@ Result<int32> tl_constructor_from_string(td_api::PremiumFeature *object, const s
     {"premiumFeatureBackgroundForBoth", 575074042},
     {"premiumFeatureSavedMessagesTags", 1003219334},
     {"premiumFeatureMessagePrivacy", 802322678},
-    {"premiumFeatureLastSeenTimes", -762230129}
+    {"premiumFeatureLastSeenTimes", -762230129},
+    {"premiumFeatureBusiness", -1503619324}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -919,6 +968,7 @@ Result<int32> tl_constructor_from_string(td_api::PremiumSource *object, const st
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"premiumSourceLimitExceeded", -2052159742},
     {"premiumSourceFeature", 445813541},
+    {"premiumSourceBusinessFeature", -1492946340},
     {"premiumSourceStoryFeature", -1030737556},
     {"premiumSourceLink", 2135071132},
     {"premiumSourceSettings", -285702859}
@@ -964,6 +1014,19 @@ Result<int32> tl_constructor_from_string(td_api::PublicChatType *object, const s
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"publicChatTypeHasUsername", 350789758},
     {"publicChatTypeIsLocationBased", 1183735952}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
+Result<int32> tl_constructor_from_string(td_api::ReactionNotificationSource *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"reactionNotificationSourceNone", 366374940},
+    {"reactionNotificationSourceContacts", 555501621},
+    {"reactionNotificationSourceAll", 1241689234}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -1018,6 +1081,18 @@ Result<int32> tl_constructor_from_string(td_api::ReportReason *object, const std
   return it->second;
 }
 
+Result<int32> tl_constructor_from_string(td_api::ResendCodeReason *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"resendCodeReasonUserRequest", -441923456},
+    {"resendCodeReasonVerificationFailed", 529870273}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
 Result<int32> tl_constructor_from_string(td_api::SearchMessagesFilter *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"searchMessagesFilterEmpty", -869395657},
@@ -1037,6 +1112,18 @@ Result<int32> tl_constructor_from_string(td_api::SearchMessagesFilter *object, c
     {"searchMessagesFilterUnreadReaction", -1379651328},
     {"searchMessagesFilterFailedToSend", -596322564},
     {"searchMessagesFilterPinned", 371805512}
+  };
+  auto it = m.find(str);
+  if (it == m.end()) {
+    return Status::Error(PSLICE() << "Unknown class \"" << str << "\"");
+  }
+  return it->second;
+}
+
+Result<int32> tl_constructor_from_string(td_api::StarTransactionDirection *object, const std::string &str) {
+  static const FlatHashMap<Slice, int32, SliceHash> m = {
+    {"starTransactionDirectionIncoming", -1295335866},
+    {"starTransactionDirectionOutgoing", 1854125472}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -1076,7 +1163,8 @@ Result<int32> tl_constructor_from_string(td_api::StorePaymentPurpose *object, co
     {"storePaymentPurposePremiumSubscription", 1263894804},
     {"storePaymentPurposeGiftedPremium", 1916846289},
     {"storePaymentPurposePremiumGiftCodes", -1527840798},
-    {"storePaymentPurposePremiumGiveaway", 1346867417}
+    {"storePaymentPurposePremiumGiveaway", 1346867417},
+    {"storePaymentPurposeStars", -1803497708}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -1122,7 +1210,9 @@ Result<int32> tl_constructor_from_string(td_api::SuggestedAction *object, const 
     {"suggestedActionUpgradePremium", 1890220539},
     {"suggestedActionRestorePremium", -385229468},
     {"suggestedActionSubscribeToAnnualPremium", 373913787},
-    {"suggestedActionGiftPremiumForChristmas", -1816924561}
+    {"suggestedActionGiftPremiumForChristmas", -1816924561},
+    {"suggestedActionSetBirthdate", -356672766},
+    {"suggestedActionExtendPremium", -566207286}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -1165,7 +1255,8 @@ Result<int32> tl_constructor_from_string(td_api::TargetChat *object, const std::
 Result<int32> tl_constructor_from_string(td_api::TelegramPaymentPurpose *object, const std::string &str) {
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"telegramPaymentPurposePremiumGiftCodes", -1637144394},
-    {"telegramPaymentPurposePremiumGiveaway", -1076583897}
+    {"telegramPaymentPurposePremiumGiveaway", -1076583897},
+    {"telegramPaymentPurposeStars", -495718830}
   };
   auto it = m.find(str);
   if (it == m.end()) {
@@ -1193,6 +1284,7 @@ Result<int32> tl_constructor_from_string(td_api::TextEntityType *object, const s
     {"textEntityTypePre", 1648958606},
     {"textEntityTypePreCode", -945325397},
     {"textEntityTypeBlockQuote", -1003999032},
+    {"textEntityTypeExpandableBlockQuote", 36572261},
     {"textEntityTypeTextUrl", 445719651},
     {"textEntityTypeMentionName", -1570974289},
     {"textEntityTypeCustomEmoji", 1724820677},
@@ -1241,6 +1333,7 @@ Result<int32> tl_constructor_from_string(td_api::UserPrivacySetting *object, con
     {"userPrivacySettingShowLinkInForwardedMessages", 592688870},
     {"userPrivacySettingShowPhoneNumber", -791567831},
     {"userPrivacySettingShowBio", 959981409},
+    {"userPrivacySettingShowBirthdate", 1167504607},
     {"userPrivacySettingAllowChatInvites", 1271668007},
     {"userPrivacySettingAllowCalls", -906967291},
     {"userPrivacySettingAllowPeerToPeerCalls", 352500032},
@@ -1258,6 +1351,7 @@ Result<int32> tl_constructor_from_string(td_api::UserPrivacySettingRule *object,
   static const FlatHashMap<Slice, int32, SliceHash> m = {
     {"userPrivacySettingRuleAllowAll", -1967186881},
     {"userPrivacySettingRuleAllowContacts", -1892733680},
+    {"userPrivacySettingRuleAllowPremiumUsers", 1624147265},
     {"userPrivacySettingRuleAllowUsers", 1110988334},
     {"userPrivacySettingRuleAllowChatMembers", -2048749863},
     {"userPrivacySettingRuleRestrictAll", -1406495408},
@@ -1289,6 +1383,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"backgroundTypePattern", 1290213117},
     {"backgroundTypeFill", 993008684},
     {"backgroundTypeChatTheme", 1299879762},
+    {"birthdate", 1644064030},
     {"blockListMain", 1352930172},
     {"blockListStories", 103323228},
     {"botCommand", -1032140601},
@@ -1305,11 +1400,22 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"businessAwayMessageScheduleCustom", -1967108654},
     {"businessAwayMessageSettings", 353084137},
     {"businessConnectedBot", -330241321},
+    {"businessFeatureLocation", -1064304004},
+    {"businessFeatureOpeningHours", 461054701},
+    {"businessFeatureQuickReplies", -1674048894},
+    {"businessFeatureGreetingMessage", 1789424756},
+    {"businessFeatureAwayMessage", 1090119901},
+    {"businessFeatureAccountLinks", 1878693646},
+    {"businessFeatureStartPage", 401471457},
+    {"businessFeatureBots", 275084773},
+    {"businessFeatureEmojiStatus", -846282523},
+    {"businessFeatureChatFolderTags", -543880918},
+    {"businessFeatureUpgradedStories", -1812245550},
     {"businessGreetingMessageSettings", 1689140754},
     {"businessLocation", -1084969126},
     {"businessOpeningHours", 816603700},
     {"businessOpeningHoursInterval", -1108322732},
-    {"businessRecipients", 581049873},
+    {"businessRecipients", 868656909},
     {"callProblemEcho", 801116548},
     {"callProblemNoise", 1053065359},
     {"callProblemInterruptions", 1119493218},
@@ -1339,8 +1445,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"chatActionWatchingAnimations", 2052990641},
     {"chatActionCancel", 1160523958},
     {"chatAdministratorRights", 1599049796},
-    {"chatAvailableReactionsAll", -537887666},
-    {"chatAvailableReactionsSome", -640810821},
+    {"chatAvailableReactionsAll", 694160279},
+    {"chatAvailableReactionsSome", 152513153},
     {"chatEventLogFilters", 1648261677},
     {"chatFolder", -474905057},
     {"chatFolderIcon", -146104090},
@@ -1368,6 +1474,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"chatPhotoSticker", -1459387485},
     {"chatPhotoStickerTypeRegularOrMask", -415147620},
     {"chatPhotoStickerTypeCustomEmoji", -266224943},
+    {"collectibleItemTypeUsername", 458680273},
+    {"collectibleItemTypePhoneNumber", 1256251714},
     {"contact", -1993844876},
     {"date", -277956960},
     {"deviceTokenFirebaseCloudMessaging", -797881849},
@@ -1387,6 +1495,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"emailAddressAuthenticationAppleId", 633948265},
     {"emailAddressAuthenticationGoogleId", -19142846},
     {"emojiCategoryTypeDefault", 1188782699},
+    {"emojiCategoryTypeRegularStickers", -1337484846},
     {"emojiCategoryTypeEmojiStatus", 1381282631},
     {"emojiCategoryTypeChatPhoto", 1059063081},
     {"emojiStatus", -606529994},
@@ -1433,6 +1542,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"inputBackgroundLocal", -1747094364},
     {"inputBackgroundRemote", -274976231},
     {"inputBackgroundPrevious", -351905954},
+    {"inputBusinessChatLink", 237858296},
+    {"inputBusinessStartPage", -327383072},
     {"inputChatPhotoPrevious", 23128529},
     {"inputChatPhotoStatic", 1979179699},
     {"inputChatPhotoAnimation", 90846242},
@@ -1462,12 +1573,12 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"inputInvoiceName", -1312155917},
     {"inputInvoiceTelegram", -1762853139},
     {"inputMessageText", -212805484},
-    {"inputMessageAnimation", 850750601},
+    {"inputMessageAnimation", -210404059},
     {"inputMessageAudio", -626786126},
     {"inputMessageDocument", 1633383097},
-    {"inputMessagePhoto", -1460959289},
+    {"inputMessagePhoto", -810129442},
     {"inputMessageSticker", 1072805625},
-    {"inputMessageVideo", 1914220652},
+    {"inputMessageVideo", 615537686},
     {"inputMessageVideoNote", -714598691},
     {"inputMessageVoiceNote", 1461977004},
     {"inputMessageLocation", 648735088},
@@ -1476,7 +1587,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"inputMessageDice", 841574313},
     {"inputMessageGame", 1252944610},
     {"inputMessageInvoice", 885857632},
-    {"inputMessagePoll", 2054629900},
+    {"inputMessagePoll", -263337164},
     {"inputMessageStory", 554278243},
     {"inputMessageForwarded", 1696232440},
     {"inputMessageReplyToMessage", 300154230},
@@ -1505,7 +1616,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"inputPassportElementErrorSourceFile", -298492469},
     {"inputPassportElementErrorSourceFiles", -2008541640},
     {"inputPersonalDocument", 1676966826},
-    {"inputSticker", 735226185},
+    {"inputSticker", 1589392402},
     {"inputStoryArea", 122859135},
     {"inputStoryAreaTypeLocation", 1749669730},
     {"inputStoryAreaTypeFoundVenue", -1395809130},
@@ -1524,6 +1635,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"internalLinkTypeBotAddToChannel", 1401602752},
     {"internalLinkTypeBotStart", 1066950637},
     {"internalLinkTypeBotStartInGroup", -905081650},
+    {"internalLinkTypeBusinessChat", -1606751785},
     {"internalLinkTypeChangePhoneNumber", -265856255},
     {"internalLinkTypeChatBoost", -716571328},
     {"internalLinkTypeChatFolderInvite", -1984804546},
@@ -1545,7 +1657,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"internalLinkTypePremiumGiftCode", -564356974},
     {"internalLinkTypePrivacyAndSecuritySettings", -1386255665},
     {"internalLinkTypeProxy", -1313788694},
-    {"internalLinkTypePublicChat", -1485547717},
+    {"internalLinkTypePublicChat", -450728610},
     {"internalLinkTypeQrCodeAuthentication", -1089332956},
     {"internalLinkTypeRestorePurchases", 606090371},
     {"internalLinkTypeSettings", 393561524},
@@ -1556,7 +1668,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"internalLinkTypeThemeSettings", -1051903722},
     {"internalLinkTypeUnknownDeepLink", 625596379},
     {"internalLinkTypeUnsupportedProxy", -566649079},
-    {"internalLinkTypeUserPhoneNumber", -1955751319},
+    {"internalLinkTypeUserPhoneNumber", 2009104529},
     {"internalLinkTypeUserToken", -1462248615},
     {"internalLinkTypeVideoChat", -2020149068},
     {"internalLinkTypeWebApp", -57094065},
@@ -1573,8 +1685,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"keyboardButtonTypeRequestPhoneNumber", -1529235527},
     {"keyboardButtonTypeRequestLocation", -125661955},
     {"keyboardButtonTypeRequestPoll", 1902435512},
-    {"keyboardButtonTypeRequestUsers", 2120478608},
-    {"keyboardButtonTypeRequestChat", 272541602},
+    {"keyboardButtonTypeRequestUsers", -1738765315},
+    {"keyboardButtonTypeRequestChat", 1511138485},
     {"keyboardButtonTypeWebApp", 1892220770},
     {"labeledPricePart", 552789798},
     {"languagePackInfo", 542199642},
@@ -1593,12 +1705,12 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"maskPointChin", 534995335},
     {"maskPosition", -2097433026},
     {"messageAutoDeleteTime", 1972045589},
-    {"messageCopyOptions", 1208442937},
+    {"messageCopyOptions", 1079772090},
     {"messageSchedulingStateSendAtDate", -1485570073},
     {"messageSchedulingStateSendWhenOnline", 2092947464},
     {"messageSelfDestructTypeTimer", 1351440333},
     {"messageSelfDestructTypeImmediately", -1036218363},
-    {"messageSendOptions", -1664442445},
+    {"messageSendOptions", -2105243218},
     {"messageSenderUser", -336109341},
     {"messageSenderChat", -239660751},
     {"messageSourceChatHistory", -1090386116},
@@ -1641,7 +1753,10 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"passportElementTypePhoneNumber", -995361172},
     {"passportElementTypeEmailAddress", -79321405},
     {"personalDetails", -1061656137},
-    {"phoneNumberAuthenticationSettings", -493266762},
+    {"phoneNumberAuthenticationSettings", 1881885547},
+    {"phoneNumberCodeTypeChange", 87144986},
+    {"phoneNumberCodeTypeVerify", -1029402661},
+    {"phoneNumberCodeTypeConfirmOwnership", -485404696},
     {"pollTypeRegular", 641265698},
     {"pollTypeQuiz", 657013913},
     {"premiumFeatureIncreasedLimits", 1785455031},
@@ -1666,6 +1781,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"premiumFeatureSavedMessagesTags", 1003219334},
     {"premiumFeatureMessagePrivacy", 802322678},
     {"premiumFeatureLastSeenTimes", -762230129},
+    {"premiumFeatureBusiness", -1503619324},
     {"premiumGiveawayParameters", 1168346872},
     {"premiumLimitTypeSupergroupCount", -247467131},
     {"premiumLimitTypePinnedChatCount", -998947871},
@@ -1688,6 +1804,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"premiumLimitTypeSimilarChatCount", -1563549935},
     {"premiumSourceLimitExceeded", -2052159742},
     {"premiumSourceFeature", 445813541},
+    {"premiumSourceBusinessFeature", -1492946340},
     {"premiumSourceStoryFeature", -1030737556},
     {"premiumSourceLink", 2135071132},
     {"premiumSourceSettings", -285702859},
@@ -1703,6 +1820,10 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"proxyTypeMtproto", -1964826627},
     {"publicChatTypeHasUsername", 350789758},
     {"publicChatTypeIsLocationBased", 1183735952},
+    {"reactionNotificationSettings", 733017684},
+    {"reactionNotificationSourceNone", 366374940},
+    {"reactionNotificationSourceContacts", 555501621},
+    {"reactionNotificationSourceAll", 1241689234},
     {"reactionTypeEmoji", -1942084920},
     {"reactionTypeCustomEmoji", -989117709},
     {"readDatePrivacySettings", 1654842920},
@@ -1720,6 +1841,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"reportReasonIllegalDrugs", -61599200},
     {"reportReasonPersonalDetails", -1588882414},
     {"reportReasonCustom", -1380459917},
+    {"resendCodeReasonUserRequest", -441923456},
+    {"resendCodeReasonVerificationFailed", 529870273},
     {"scopeAutosaveSettings", 1546821427},
     {"scopeNotificationSettings", -599105185},
     {"searchMessagesFilterEmpty", -869395657},
@@ -1740,6 +1863,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"searchMessagesFilterFailedToSend", -596322564},
     {"searchMessagesFilterPinned", 371805512},
     {"shippingOption", 1425690001},
+    {"starTransactionDirectionIncoming", -1295335866},
+    {"starTransactionDirectionOutgoing", 1854125472},
     {"stickerFormatWebp", -2123043040},
     {"stickerFormatTgs", 1614588662},
     {"stickerFormatWebm", -2070162097},
@@ -1750,6 +1875,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"storePaymentPurposeGiftedPremium", 1916846289},
     {"storePaymentPurposePremiumGiftCodes", -1527840798},
     {"storePaymentPurposePremiumGiveaway", 1346867417},
+    {"storePaymentPurposeStars", -1803497708},
     {"storyAreaPosition", 104371833},
     {"storyFullId", 1880961525},
     {"storyListMain", -672222209},
@@ -1768,6 +1894,8 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"suggestedActionRestorePremium", -385229468},
     {"suggestedActionSubscribeToAnnualPremium", 373913787},
     {"suggestedActionGiftPremiumForChristmas", -1816924561},
+    {"suggestedActionSetBirthdate", -356672766},
+    {"suggestedActionExtendPremium", -566207286},
     {"supergroupMembersFilterRecent", 1178199509},
     {"supergroupMembersFilterContacts", -1282910856},
     {"supergroupMembersFilterAdministrators", -2097380265},
@@ -1781,6 +1909,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"targetChatInternalLink", -579301408},
     {"telegramPaymentPurposePremiumGiftCodes", -1637144394},
     {"telegramPaymentPurposePremiumGiveaway", -1076583897},
+    {"telegramPaymentPurposeStars", -495718830},
     {"testInt", -574804983},
     {"testString", -27891572},
     {"textEntity", -1951688280},
@@ -1801,6 +1930,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"textEntityTypePre", 1648958606},
     {"textEntityTypePreCode", -945325397},
     {"textEntityTypeBlockQuote", -1003999032},
+    {"textEntityTypeExpandableBlockQuote", 36572261},
     {"textEntityTypeTextUrl", 445719651},
     {"textEntityTypeMentionName", -1570974289},
     {"textEntityTypeCustomEmoji", 1724820677},
@@ -1820,6 +1950,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"userPrivacySettingShowLinkInForwardedMessages", 592688870},
     {"userPrivacySettingShowPhoneNumber", -791567831},
     {"userPrivacySettingShowBio", 959981409},
+    {"userPrivacySettingShowBirthdate", 1167504607},
     {"userPrivacySettingAllowChatInvites", 1271668007},
     {"userPrivacySettingAllowCalls", -906967291},
     {"userPrivacySettingAllowPeerToPeerCalls", 352500032},
@@ -1827,6 +1958,7 @@ Result<int32> tl_constructor_from_string(td_api::Object *object, const std::stri
     {"userPrivacySettingAllowPrivateVoiceAndVideoNoteMessages", 338112060},
     {"userPrivacySettingRuleAllowAll", -1967186881},
     {"userPrivacySettingRuleAllowContacts", -1892733680},
+    {"userPrivacySettingRuleAllowPremiumUsers", 1624147265},
     {"userPrivacySettingRuleAllowUsers", 1110988334},
     {"userPrivacySettingRuleAllowChatMembers", -2048749863},
     {"userPrivacySettingRuleRestrictAll", -1406495408},
@@ -1849,8 +1981,8 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"acceptTermsOfService", 2130576356},
     {"activateStoryStealthMode", -1009023855},
     {"addChatFolderByInviteLink", -858593816},
-    {"addChatMember", 499426810},
-    {"addChatMembers", -519951226},
+    {"addChatMember", 1720144407},
+    {"addChatMembers", -1675991329},
     {"addChatToList", -80523595},
     {"addContact", 1869640000},
     {"addCustomServerLanguagePack", 4492771},
@@ -1861,6 +1993,9 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"addMessageReaction", 1419269613},
     {"addNetworkStatistics", 1264825305},
     {"addProxy", 331529432},
+    {"addQuickReplyShortcutInlineQueryResultMessage", -2017449468},
+    {"addQuickReplyShortcutMessage", 1058573098},
+    {"addQuickReplyShortcutMessageAlbum", 1348436244},
     {"addRecentSticker", -1478109026},
     {"addRecentlyFoundChat", -1746396787},
     {"addSavedAnimation", -1538525088},
@@ -1880,7 +2015,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"blockMessageSenderFromReplies", -1214384757},
     {"boostChat", 1945750252},
     {"canBotSendMessages", 544052364},
-    {"canPurchasePremium", -371319616},
+    {"canPurchaseFromStore", 1017811816},
     {"canSendMessageToUser", 1529489462},
     {"canSendStory", -1226825365},
     {"canTransferOwnership", 634602508},
@@ -1889,14 +2024,12 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"cancelPreliminaryUploadFile", 823412414},
     {"cancelRecoveryEmailAddressVerification", -1516728691},
     {"changeImportedContacts", 1968207955},
-    {"changePhoneNumber", -124666973},
     {"changeStickerSet", 449357293},
     {"checkAuthenticationBotToken", 639321206},
     {"checkAuthenticationCode", -302103382},
     {"checkAuthenticationEmailCode", -582827361},
     {"checkAuthenticationPassword", -2025698400},
     {"checkAuthenticationPasswordRecoveryCode", -603309083},
-    {"checkChangePhoneNumberCode", -1720278429},
     {"checkChatFolderInviteLink", 522557851},
     {"checkChatInviteLink", -496940997},
     {"checkChatUsername", -119119344},
@@ -1904,8 +2037,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"checkEmailAddressVerificationCode", -426386685},
     {"checkLoginEmailAddressCode", -1454244766},
     {"checkPasswordRecoveryCode", -200794600},
-    {"checkPhoneNumberConfirmationCode", -1348060966},
-    {"checkPhoneNumberVerificationCode", 1497462718},
+    {"checkPhoneNumberCode", -603626079},
     {"checkPremiumGiftCode", -1786063260},
     {"checkQuickReplyShortcutName", 2101203241},
     {"checkRecoveryEmailAddressCode", -1997039589},
@@ -1918,6 +2050,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"clearRecentReactions", 1298253650},
     {"clearRecentStickers", -321242684},
     {"clearRecentlyFoundChats", -285582542},
+    {"clearSearchedForHashtags", 1885569548},
     {"clickAnimatedEmojiMessage", 196179554},
     {"clickChatSponsoredMessage", -641687573},
     {"clickPremiumSubscriptionButton", -369319162},
@@ -1929,15 +2062,16 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"confirmQrCodeAuthentication", -376199379},
     {"confirmSession", -674647009},
     {"createBasicGroupChat", 1972024548},
+    {"createBusinessChatLink", -1861018304},
     {"createCall", -1104663024},
     {"createChatFolder", 1015399680},
     {"createChatFolderInviteLink", -2037911099},
     {"createChatInviteLink", 287744833},
     {"createForumTopic", -1040570140},
     {"createInvoiceLink", 216787233},
-    {"createNewBasicGroupChat", 624404360},
+    {"createNewBasicGroupChat", 1806454709},
     {"createNewSecretChat", -620682651},
-    {"createNewStickerSet", 1057318406},
+    {"createNewStickerSet", -481065727},
     {"createNewSupergroupChat", 804058822},
     {"createPrivateChat", -947758327},
     {"createSecretChat", 1930285615},
@@ -1947,6 +2081,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"deleteAccount", 1395816134},
     {"deleteAllCallMessages", -1466445325},
     {"deleteAllRevokedChatInviteLinks", 1112020698},
+    {"deleteBusinessChatLink", -1101895865},
     {"deleteBusinessConnectedBot", -1633976747},
     {"deleteChat", -171253666},
     {"deleteChatBackground", 320267896},
@@ -1980,23 +2115,25 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"disconnectAllWebsites", -1082985981},
     {"disconnectWebsite", -778767395},
     {"downloadFile", 1059402292},
+    {"editBusinessChatLink", 1594947110},
     {"editChatFolder", 53672754},
     {"editChatFolderInviteLink", -2141872095},
     {"editChatInviteLink", 1320303996},
     {"editCustomLanguagePackInfo", 1320751257},
     {"editForumTopic", -1485402016},
-    {"editInlineMessageCaption", -760985929},
-    {"editInlineMessageLiveLocation", -156902912},
+    {"editInlineMessageCaption", 1409762552},
+    {"editInlineMessageLiveLocation", 2134352044},
     {"editInlineMessageMedia", 23553921},
     {"editInlineMessageReplyMarkup", -67565858},
     {"editInlineMessageText", -855457307},
-    {"editMessageCaption", 1154677038},
-    {"editMessageLiveLocation", -14047982},
+    {"editMessageCaption", -2020117951},
+    {"editMessageLiveLocation", -1890511980},
     {"editMessageMedia", -1152678125},
     {"editMessageReplyMarkup", 332127881},
     {"editMessageSchedulingState", -1372976192},
     {"editMessageText", 196272567},
     {"editProxy", -1605883821},
+    {"editQuickReplyMessage", 80517006},
     {"editStory", 1584013745},
     {"enableProxy", 1494450838},
     {"endGroupCall", 573131959},
@@ -2028,7 +2165,11 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getBotInfoDescription", -762841035},
     {"getBotInfoShortDescription", 1243358740},
     {"getBotName", -1707118036},
+    {"getBusinessChatLinkInfo", 797670986},
+    {"getBusinessChatLinks", 710287703},
     {"getBusinessConnectedBot", 911058883},
+    {"getBusinessConnection", -2114706400},
+    {"getBusinessFeatures", -997171199},
     {"getCallbackQueryAnswer", 116357727},
     {"getCallbackQueryMessage", -1121939086},
     {"getChat", 1866601536},
@@ -2063,7 +2204,10 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getChatMessagePosition", 136051911},
     {"getChatNotificationSettingsExceptions", 201199121},
     {"getChatPinnedMessage", 359865008},
-    {"getChatPinnedStories", 87851681},
+    {"getChatPostedToChatPageStories", -46414037},
+    {"getChatRevenueStatistics", 701995836},
+    {"getChatRevenueTransactions", 1194264341},
+    {"getChatRevenueWithdrawalUrl", 506595104},
     {"getChatScheduledMessages", -549638149},
     {"getChatSimilarChatCount", 1178506894},
     {"getChatSimilarChats", -1152348285},
@@ -2075,6 +2219,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getChatsForChatFolderInviteLink", 1873561929},
     {"getChatsToSendStories", 586802084},
     {"getCloseFriends", -1445628722},
+    {"getCollectibleItemInfo", -217797238},
     {"getCommands", 1488621559},
     {"getConnectedWebsites", -170536110},
     {"getContacts", -1417722768},
@@ -2109,6 +2254,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getForumTopicLink", -914650933},
     {"getForumTopics", -72647334},
     {"getGameHighScores", 15746459},
+    {"getGreetingStickers", 374873372},
     {"getGroupCall", 1468491406},
     {"getGroupCallInviteLink", 719407396},
     {"getGroupCallStreamSegment", -2077959515},
@@ -2142,6 +2288,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getMessage", -1821196160},
     {"getMessageAddedReactions", 2110172754},
     {"getMessageAvailableReactions", 1994098354},
+    {"getMessageEffect", -1638843116},
     {"getMessageEmbeddingCode", 1654967561},
     {"getMessageFileType", -490270764},
     {"getMessageImportConfirmationText", 390627752},
@@ -2158,6 +2305,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getNetworkStatistics", -986228706},
     {"getNewChatPrivacySettings", -1295299657},
     {"getOption", -1572495746},
+    {"getOwnedStickerSets", 1493074208},
     {"getPassportAuthorizationForm", 1636107398},
     {"getPassportAuthorizationFormAvailableElements", 1068700924},
     {"getPassportElement", -1882398342},
@@ -2185,6 +2333,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getRecentlyOpenedChats", -1924156893},
     {"getRecentlyVisitedTMeUrls", 806754961},
     {"getRecommendedChatFolders", -145540217},
+    {"getRecommendedChats", -649884303},
     {"getRecoveryEmailAddress", -1594770947},
     {"getRemoteFile", 2137204530},
     {"getRepliedMessage", -641918531},
@@ -2196,7 +2345,10 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getSavedNotificationSounds", -1070305368},
     {"getSavedOrderInfo", -1152016675},
     {"getScopeNotificationSettings", -995613361},
+    {"getSearchedForHashtags", -360431875},
     {"getSecretChat", 40599169},
+    {"getStarPaymentOptions", 1838351940},
+    {"getStarTransactions", -255402600},
     {"getStatisticalGraph", 1100975515},
     {"getStickerEmojis", -1895508665},
     {"getStickerSet", 1052318659},
@@ -2212,6 +2364,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getSuggestedFileName", -2049399674},
     {"getSuggestedStickerSetName", -1340995520},
     {"getSuitableDiscussionChats", 49044982},
+    {"getSuitablePersonalChats", -1870357515},
     {"getSupergroup", 989663458},
     {"getSupergroupFullInfo", 1099776056},
     {"getSupergroupMembers", -570940984},
@@ -2238,6 +2391,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"getWebAppUrl", 1690578110},
     {"getWebPageInstantView", -1962649975},
     {"getWebPagePreview", -1471104808},
+    {"hideContactCloseBirthdays", -1163065221},
     {"hideSuggestedAction", -1561384065},
     {"importContacts", -215132767},
     {"importMessages", -1864116784},
@@ -2277,12 +2431,15 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"readAllMessageThreadReactions", -792975554},
     {"readChatList", -1117480790},
     {"readFilePart", 906798861},
+    {"readdQuickReplyShortcutMessages", 387399566},
     {"recognizeSpeech", 1741947577},
     {"recoverAuthenticationPassword", -131001053},
     {"recoverPassword", -1524262541},
+    {"refundStarPayment", -1804165035},
     {"registerDevice", 366088823},
     {"registerUser", -1012247828},
     {"removeAllFilesFromDownloads", -1186433402},
+    {"removeBusinessConnectedBotFromChat", 2020766707},
     {"removeChatActionBar", -1650968070},
     {"removeContacts", 1943858054},
     {"removeFavoriteSticker", 1152945264},
@@ -2297,6 +2454,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"removeRecentlyFoundChat", 717340444},
     {"removeSavedAnimation", -495605479},
     {"removeSavedNotificationSound", -480032946},
+    {"removeSearchedForHashtag", -1400046365},
     {"removeStickerFromSet", 1642196644},
     {"removeTopChat", -1907876267},
     {"reorderActiveUsernames", -455399375},
@@ -2306,23 +2464,25 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"reorderQuickReplyShortcuts", -2052799232},
     {"reorderSupergroupActiveUsernames", -1962466095},
     {"replacePrimaryChatInviteLink", 1067350941},
+    {"replaceStickerInSet", -406311399},
     {"replaceVideoChatRtmpUrl", 558862304},
+    {"reportAuthenticationCodeMissing", -1846555064},
     {"reportChat", -1071617544},
     {"reportChatPhoto", -646966648},
+    {"reportChatSponsoredMessage", -868330562},
     {"reportMessageReactions", 919111719},
+    {"reportPhoneNumberCodeMissing", -895175341},
     {"reportStory", -1688244069},
     {"reportSupergroupAntiSpamFalsePositive", -516050872},
     {"reportSupergroupSpam", -94825000},
     {"requestAuthenticationPasswordRecovery", 1393896118},
     {"requestPasswordRecovery", -13777582},
     {"requestQrCodeAuthentication", 1363496527},
-    {"resendAuthenticationCode", -814377191},
-    {"resendChangePhoneNumberCode", -786772060},
+    {"resendAuthenticationCode", -1506755656},
     {"resendEmailAddressVerificationCode", -1872416732},
     {"resendLoginEmailAddressCode", 292966933},
     {"resendMessages", -2010327226},
-    {"resendPhoneNumberConfirmationCode", 2069068522},
-    {"resendPhoneNumberVerificationCode", 1367629820},
+    {"resendPhoneNumberCode", 1808704551},
     {"resendRecoveryEmailAddressCode", 433483548},
     {"resetAllNotificationSettings", -174020359},
     {"resetAuthenticationEmailAddress", -415075796},
@@ -2345,10 +2505,11 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"searchFileDownloads", 706611286},
     {"searchHashtags", 1043637617},
     {"searchInstalledStickerSets", 2120122276},
-    {"searchMessages", 714016935},
+    {"searchMessages", 838452169},
     {"searchOutgoingDocumentMessages", -1071397762},
     {"searchPublicChat", 857135533},
     {"searchPublicChats", 970385337},
+    {"searchPublicHashtagMessages", 745229323},
     {"searchQuote", 1751384351},
     {"searchRecentlyFoundChats", 1647445393},
     {"searchSavedMessages", -1969512554},
@@ -2357,16 +2518,18 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"searchStickerSets", 262801004},
     {"searchStickers", -1709577973},
     {"searchStringsByPrefix", -2023251463},
-    {"searchUserByPhoneNumber", -1562236142},
+    {"searchUserByPhoneNumber", -343757368},
     {"searchUserByToken", -666766282},
     {"searchWebApp", -1241740747},
     {"sendAuthenticationFirebaseSms", 364994111},
     {"sendBotStartMessage", -1435877650},
+    {"sendBusinessMessage", 159888387},
+    {"sendBusinessMessageAlbum", 788608366},
     {"sendCallDebugInformation", 2019243839},
     {"sendCallLog", 1057638353},
     {"sendCallRating", -1402719502},
     {"sendCallSignalingData", 1412280732},
-    {"sendChatAction", 2096947540},
+    {"sendChatAction", -2010910050},
     {"sendCustomRequest", 285045153},
     {"sendEmailAddressVerificationCode", -221621379},
     {"sendInlineQueryResultMessage", 1182553208},
@@ -2374,21 +2537,23 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"sendMessageAlbum", -1985013029},
     {"sendPassportAuthorizationForm", 652160701},
     {"sendPaymentForm", -965855094},
-    {"sendPhoneNumberConfirmationCode", -1901171495},
-    {"sendPhoneNumberVerificationCode", 2081689035},
+    {"sendPhoneNumberCode", 1084112144},
+    {"sendPhoneNumberFirebaseSms", 261910660},
     {"sendQuickReplyShortcutMessages", 232068765},
-    {"sendStory", 1936218299},
+    {"sendStory", -424987902},
     {"sendWebAppCustomRequest", 922705352},
     {"sendWebAppData", -1423978996},
     {"setAccentColor", 1669974841},
     {"setAccountTtl", 701389032},
     {"setAlarm", -873497067},
+    {"setApplicationVerificationToken", 927248261},
     {"setArchiveChatListSettings", -884650998},
     {"setAuthenticationEmailAddress", 1773323522},
     {"setAuthenticationPhoneNumber", 868276259},
     {"setAutoDownloadSettings", -353671948},
     {"setAutosaveSettings", 6846656},
     {"setBio", -1619582124},
+    {"setBirthdate", 1319755160},
     {"setBotInfoDescription", 693574984},
     {"setBotInfoShortDescription", 982956771},
     {"setBotName", -761922959},
@@ -2399,6 +2564,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setBusinessGreetingMessageSettings", -873120707},
     {"setBusinessLocation", -344717547},
     {"setBusinessOpeningHours", -462379918},
+    {"setBusinessStartPage", -1628616290},
     {"setChatAccentColor", 882857930},
     {"setChatActiveStoriesList", -521970415},
     {"setChatAvailableReactions", 267075078},
@@ -2415,6 +2581,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setChatNotificationSettings", 777199614},
     {"setChatPermissions", 2138507006},
     {"setChatPhoto", -377778941},
+    {"setChatPinnedStories", -669062355},
     {"setChatProfileAccentColor", 1109896826},
     {"setChatSlowModeDelay", -540350914},
     {"setChatTheme", -1895234925},
@@ -2445,6 +2612,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setLogVerbosityLevel", -303429678},
     {"setLoginEmailAddress", 935019476},
     {"setMenuButton", -1269841599},
+    {"setMessageFactCheck", -4309752},
     {"setMessageReactions", -372524900},
     {"setMessageSenderBlockList", -1987355503},
     {"setName", 1711693584},
@@ -2454,6 +2622,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setPassportElement", 2068173212},
     {"setPassportElementErrors", -2056754881},
     {"setPassword", -1193589027},
+    {"setPersonalChat", -1068782668},
     {"setPinnedChats", -695640000},
     {"setPinnedForumTopics", -475084011},
     {"setPinnedSavedMessagesTopics", -194818924},
@@ -2461,6 +2630,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setProfileAccentColor", -1986281112},
     {"setProfilePhoto", -2048260627},
     {"setQuickReplyShortcutName", 186709105},
+    {"setReactionNotificationSettings", 1186124949},
     {"setReadDatePrivacySettings", 493913782},
     {"setRecoveryEmailAddress", -1981836385},
     {"setSavedMessagesTagLabel", -1338323696},
@@ -2469,7 +2639,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"setStickerKeywords", 137223565},
     {"setStickerMaskPosition", 1202280912},
     {"setStickerPositionInSet", 2075281185},
-    {"setStickerSetThumbnail", 1870737953},
+    {"setStickerSetThumbnail", 1677617458},
     {"setStickerSetTitle", 1693004706},
     {"setStoryPrivacySettings", -655801550},
     {"setStoryReaction", -1400156249},
@@ -2510,6 +2680,7 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"toggleAllDownloadsArePaused", 1251512322},
     {"toggleBotIsAddedToAttachmentMenu", -1906712934},
     {"toggleBotUsernameIsActive", 2036569097},
+    {"toggleBusinessConnectedBotChatIsPaused", 1328957509},
     {"toggleChatDefaultDisableNotification", 314794002},
     {"toggleChatFolderTags", -2092209084},
     {"toggleChatHasProtectedContent", 975231309},
@@ -2528,10 +2699,12 @@ Result<int32> tl_constructor_from_string(td_api::Function *object, const std::st
     {"toggleGroupCallParticipantIsHandRaised", -1896127519},
     {"toggleGroupCallParticipantIsMuted", -1308093433},
     {"toggleGroupCallScreenSharingIsPaused", -1602530464},
+    {"toggleHasSponsoredMessagesEnabled", 1963285740},
     {"toggleSavedMessagesTopicIsPinned", -1588378164},
     {"toggleSessionCanAcceptCalls", 1819027208},
     {"toggleSessionCanAcceptSecretChats", 1000843390},
-    {"toggleStoryIsPinned", -1265388786},
+    {"toggleStoryIsPostedToChatPage", -300987649},
+    {"toggleSupergroupCanHaveSponsoredMessages", -1098204302},
     {"toggleSupergroupHasAggressiveAntiSpamEnabled", 1748956943},
     {"toggleSupergroupHasHiddenMembers", -1537892918},
     {"toggleSupergroupIsAllHistoryAvailable", 1155110478},
@@ -2656,6 +2829,13 @@ Status from_json(td_api::backgroundTypeChatTheme &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::birthdate &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.day_, from.extract_field("day")));
+  TRY_STATUS(from_json(to.month_, from.extract_field("month")));
+  TRY_STATUS(from_json(to.year_, from.extract_field("year")));
+  return Status::OK();
+}
+
 Status from_json(td_api::blockListMain &to, JsonObject &from) {
   return Status::OK();
 }
@@ -2737,6 +2917,50 @@ Status from_json(td_api::businessConnectedBot &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::businessFeatureLocation &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureOpeningHours &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureQuickReplies &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureGreetingMessage &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureAwayMessage &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureAccountLinks &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureStartPage &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureBots &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureEmojiStatus &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureChatFolderTags &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::businessFeatureUpgradedStories &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::businessGreetingMessageSettings &to, JsonObject &from) {
   TRY_STATUS(from_json(to.shortcut_id_, from.extract_field("shortcut_id")));
   TRY_STATUS(from_json(to.recipients_, from.extract_field("recipients")));
@@ -2764,6 +2988,7 @@ Status from_json(td_api::businessOpeningHoursInterval &to, JsonObject &from) {
 
 Status from_json(td_api::businessRecipients &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_ids_, from.extract_field("chat_ids")));
+  TRY_STATUS(from_json(to.excluded_chat_ids_, from.extract_field("excluded_chat_ids")));
   TRY_STATUS(from_json(to.select_existing_chats_, from.extract_field("select_existing_chats")));
   TRY_STATUS(from_json(to.select_new_chats_, from.extract_field("select_new_chats")));
   TRY_STATUS(from_json(to.select_contacts_, from.extract_field("select_contacts")));
@@ -2919,11 +3144,13 @@ Status from_json(td_api::chatAdministratorRights &to, JsonObject &from) {
 }
 
 Status from_json(td_api::chatAvailableReactionsAll &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.max_reaction_count_, from.extract_field("max_reaction_count")));
   return Status::OK();
 }
 
 Status from_json(td_api::chatAvailableReactionsSome &to, JsonObject &from) {
   TRY_STATUS(from_json(to.reactions_, from.extract_field("reactions")));
+  TRY_STATUS(from_json(to.max_reaction_count_, from.extract_field("max_reaction_count")));
   return Status::OK();
 }
 
@@ -3120,6 +3347,16 @@ Status from_json(td_api::chatPhotoStickerTypeCustomEmoji &to, JsonObject &from) 
   return Status::OK();
 }
 
+Status from_json(td_api::collectibleItemTypeUsername &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.username_, from.extract_field("username")));
+  return Status::OK();
+}
+
+Status from_json(td_api::collectibleItemTypePhoneNumber &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
+  return Status::OK();
+}
+
 Status from_json(td_api::contact &to, JsonObject &from) {
   TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
   TRY_STATUS(from_json(to.first_name_, from.extract_field("first_name")));
@@ -3226,6 +3463,10 @@ Status from_json(td_api::emailAddressAuthenticationGoogleId &to, JsonObject &fro
 }
 
 Status from_json(td_api::emojiCategoryTypeDefault &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::emojiCategoryTypeRegularStickers &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -3439,6 +3680,19 @@ Status from_json(td_api::inputBackgroundRemote &to, JsonObject &from) {
 
 Status from_json(td_api::inputBackgroundPrevious &to, JsonObject &from) {
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::inputBusinessChatLink &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.text_, from.extract_field("text")));
+  TRY_STATUS(from_json(to.title_, from.extract_field("title")));
+  return Status::OK();
+}
+
+Status from_json(td_api::inputBusinessStartPage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.title_, from.extract_field("title")));
+  TRY_STATUS(from_json(to.message_, from.extract_field("message")));
+  TRY_STATUS(from_json(to.sticker_, from.extract_field("sticker")));
   return Status::OK();
 }
 
@@ -3692,6 +3946,7 @@ Status from_json(td_api::inputMessageAnimation &to, JsonObject &from) {
   TRY_STATUS(from_json(to.width_, from.extract_field("width")));
   TRY_STATUS(from_json(to.height_, from.extract_field("height")));
   TRY_STATUS(from_json(to.caption_, from.extract_field("caption")));
+  TRY_STATUS(from_json(to.show_caption_above_media_, from.extract_field("show_caption_above_media")));
   TRY_STATUS(from_json(to.has_spoiler_, from.extract_field("has_spoiler")));
   return Status::OK();
 }
@@ -3721,6 +3976,7 @@ Status from_json(td_api::inputMessagePhoto &to, JsonObject &from) {
   TRY_STATUS(from_json(to.width_, from.extract_field("width")));
   TRY_STATUS(from_json(to.height_, from.extract_field("height")));
   TRY_STATUS(from_json(to.caption_, from.extract_field("caption")));
+  TRY_STATUS(from_json(to.show_caption_above_media_, from.extract_field("show_caption_above_media")));
   TRY_STATUS(from_json(to.self_destruct_type_, from.extract_field("self_destruct_type")));
   TRY_STATUS(from_json(to.has_spoiler_, from.extract_field("has_spoiler")));
   return Status::OK();
@@ -3744,6 +4000,7 @@ Status from_json(td_api::inputMessageVideo &to, JsonObject &from) {
   TRY_STATUS(from_json(to.height_, from.extract_field("height")));
   TRY_STATUS(from_json(to.supports_streaming_, from.extract_field("supports_streaming")));
   TRY_STATUS(from_json(to.caption_, from.extract_field("caption")));
+  TRY_STATUS(from_json(to.show_caption_above_media_, from.extract_field("show_caption_above_media")));
   TRY_STATUS(from_json(to.self_destruct_type_, from.extract_field("self_destruct_type")));
   TRY_STATUS(from_json(to.has_spoiler_, from.extract_field("has_spoiler")));
   return Status::OK();
@@ -3977,6 +4234,7 @@ Status from_json(td_api::inputPersonalDocument &to, JsonObject &from) {
 
 Status from_json(td_api::inputSticker &to, JsonObject &from) {
   TRY_STATUS(from_json(to.sticker_, from.extract_field("sticker")));
+  TRY_STATUS(from_json(to.format_, from.extract_field("format")));
   TRY_STATUS(from_json(to.emojis_, from.extract_field("emojis")));
   TRY_STATUS(from_json(to.mask_position_, from.extract_field("mask_position")));
   TRY_STATUS(from_json(to.keywords_, from.extract_field("keywords")));
@@ -4092,6 +4350,11 @@ Status from_json(td_api::internalLinkTypeBotStartInGroup &to, JsonObject &from) 
   return Status::OK();
 }
 
+Status from_json(td_api::internalLinkTypeBusinessChat &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.link_name_, from.extract_field("link_name")));
+  return Status::OK();
+}
+
 Status from_json(td_api::internalLinkTypeChangePhoneNumber &to, JsonObject &from) {
   return Status::OK();
 }
@@ -4203,6 +4466,7 @@ Status from_json(td_api::internalLinkTypeProxy &to, JsonObject &from) {
 
 Status from_json(td_api::internalLinkTypePublicChat &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_username_, from.extract_field("chat_username")));
+  TRY_STATUS(from_json(to.draft_text_, from.extract_field("draft_text")));
   return Status::OK();
 }
 
@@ -4256,6 +4520,7 @@ Status from_json(td_api::internalLinkTypeUnsupportedProxy &to, JsonObject &from)
 
 Status from_json(td_api::internalLinkTypeUserPhoneNumber &to, JsonObject &from) {
   TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
+  TRY_STATUS(from_json(to.draft_text_, from.extract_field("draft_text")));
   return Status::OK();
 }
 
@@ -4362,6 +4627,9 @@ Status from_json(td_api::keyboardButtonTypeRequestUsers &to, JsonObject &from) {
   TRY_STATUS(from_json(to.restrict_user_is_premium_, from.extract_field("restrict_user_is_premium")));
   TRY_STATUS(from_json(to.user_is_premium_, from.extract_field("user_is_premium")));
   TRY_STATUS(from_json(to.max_quantity_, from.extract_field("max_quantity")));
+  TRY_STATUS(from_json(to.request_name_, from.extract_field("request_name")));
+  TRY_STATUS(from_json(to.request_username_, from.extract_field("request_username")));
+  TRY_STATUS(from_json(to.request_photo_, from.extract_field("request_photo")));
   return Status::OK();
 }
 
@@ -4376,6 +4644,9 @@ Status from_json(td_api::keyboardButtonTypeRequestChat &to, JsonObject &from) {
   TRY_STATUS(from_json(to.user_administrator_rights_, from.extract_field("user_administrator_rights")));
   TRY_STATUS(from_json(to.bot_administrator_rights_, from.extract_field("bot_administrator_rights")));
   TRY_STATUS(from_json(to.bot_is_member_, from.extract_field("bot_is_member")));
+  TRY_STATUS(from_json(to.request_title_, from.extract_field("request_title")));
+  TRY_STATUS(from_json(to.request_username_, from.extract_field("request_username")));
+  TRY_STATUS(from_json(to.request_photo_, from.extract_field("request_photo")));
   return Status::OK();
 }
 
@@ -4496,6 +4767,7 @@ Status from_json(td_api::messageCopyOptions &to, JsonObject &from) {
   TRY_STATUS(from_json(to.send_copy_, from.extract_field("send_copy")));
   TRY_STATUS(from_json(to.replace_caption_, from.extract_field("replace_caption")));
   TRY_STATUS(from_json(to.new_caption_, from.extract_field("new_caption")));
+  TRY_STATUS(from_json(to.new_show_caption_above_media_, from.extract_field("new_show_caption_above_media")));
   return Status::OK();
 }
 
@@ -4523,6 +4795,7 @@ Status from_json(td_api::messageSendOptions &to, JsonObject &from) {
   TRY_STATUS(from_json(to.protect_content_, from.extract_field("protect_content")));
   TRY_STATUS(from_json(to.update_order_of_installed_sticker_sets_, from.extract_field("update_order_of_installed_sticker_sets")));
   TRY_STATUS(from_json(to.scheduling_state_, from.extract_field("scheduling_state")));
+  TRY_STATUS(from_json(to.effect_id_, from.extract_field("effect_id")));
   TRY_STATUS(from_json(to.sending_id_, from.extract_field("sending_id")));
   TRY_STATUS(from_json(to.only_preview_, from.extract_field("only_preview")));
   return Status::OK();
@@ -4728,9 +5001,23 @@ Status from_json(td_api::phoneNumberAuthenticationSettings &to, JsonObject &from
   TRY_STATUS(from_json(to.allow_flash_call_, from.extract_field("allow_flash_call")));
   TRY_STATUS(from_json(to.allow_missed_call_, from.extract_field("allow_missed_call")));
   TRY_STATUS(from_json(to.is_current_phone_number_, from.extract_field("is_current_phone_number")));
+  TRY_STATUS(from_json(to.has_unknown_phone_number_, from.extract_field("has_unknown_phone_number")));
   TRY_STATUS(from_json(to.allow_sms_retriever_api_, from.extract_field("allow_sms_retriever_api")));
   TRY_STATUS(from_json(to.firebase_authentication_settings_, from.extract_field("firebase_authentication_settings")));
   TRY_STATUS(from_json(to.authentication_tokens_, from.extract_field("authentication_tokens")));
+  return Status::OK();
+}
+
+Status from_json(td_api::phoneNumberCodeTypeChange &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::phoneNumberCodeTypeVerify &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::phoneNumberCodeTypeConfirmOwnership &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.hash_, from.extract_field("hash")));
   return Status::OK();
 }
 
@@ -4833,6 +5120,10 @@ Status from_json(td_api::premiumFeatureLastSeenTimes &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::premiumFeatureBusiness &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::premiumGiveawayParameters &to, JsonObject &from) {
   TRY_STATUS(from_json(to.boosted_chat_id_, from.extract_field("boosted_chat_id")));
   TRY_STATUS(from_json(to.additional_chat_ids_, from.extract_field("additional_chat_ids")));
@@ -4930,6 +5221,11 @@ Status from_json(td_api::premiumSourceFeature &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::premiumSourceBusinessFeature &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.feature_, from.extract_field("feature")));
+  return Status::OK();
+}
+
 Status from_json(td_api::premiumSourceStoryFeature &to, JsonObject &from) {
   TRY_STATUS(from_json(to.feature_, from.extract_field("feature")));
   return Status::OK();
@@ -4995,6 +5291,26 @@ Status from_json(td_api::publicChatTypeHasUsername &to, JsonObject &from) {
 }
 
 Status from_json(td_api::publicChatTypeIsLocationBased &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::reactionNotificationSettings &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.message_reaction_source_, from.extract_field("message_reaction_source")));
+  TRY_STATUS(from_json(to.story_reaction_source_, from.extract_field("story_reaction_source")));
+  TRY_STATUS(from_json(to.sound_id_, from.extract_field("sound_id")));
+  TRY_STATUS(from_json(to.show_preview_, from.extract_field("show_preview")));
+  return Status::OK();
+}
+
+Status from_json(td_api::reactionNotificationSourceNone &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::reactionNotificationSourceContacts &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::reactionNotificationSourceAll &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -5076,6 +5392,15 @@ Status from_json(td_api::reportReasonPersonalDetails &to, JsonObject &from) {
 }
 
 Status from_json(td_api::reportReasonCustom &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::resendCodeReasonUserRequest &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::resendCodeReasonVerificationFailed &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.error_message_, from.extract_field("error_message")));
   return Status::OK();
 }
 
@@ -5174,6 +5499,14 @@ Status from_json(td_api::shippingOption &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::starTransactionDirectionIncoming &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::starTransactionDirectionOutgoing &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::stickerFormatWebp &to, JsonObject &from) {
   return Status::OK();
 }
@@ -5223,6 +5556,13 @@ Status from_json(td_api::storePaymentPurposePremiumGiveaway &to, JsonObject &fro
   TRY_STATUS(from_json(to.parameters_, from.extract_field("parameters")));
   TRY_STATUS(from_json(to.currency_, from.extract_field("currency")));
   TRY_STATUS(from_json(to.amount_, from.extract_field("amount")));
+  return Status::OK();
+}
+
+Status from_json(td_api::storePaymentPurposeStars &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.currency_, from.extract_field("currency")));
+  TRY_STATUS(from_json(to.amount_, from.extract_field("amount")));
+  TRY_STATUS(from_json(to.star_count_, from.extract_field("star_count")));
   return Status::OK();
 }
 
@@ -5310,6 +5650,15 @@ Status from_json(td_api::suggestedActionGiftPremiumForChristmas &to, JsonObject 
   return Status::OK();
 }
 
+Status from_json(td_api::suggestedActionSetBirthdate &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::suggestedActionExtendPremium &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.manage_premium_subscription_url_, from.extract_field("manage_premium_subscription_url")));
+  return Status::OK();
+}
+
 Status from_json(td_api::supergroupMembersFilterRecent &to, JsonObject &from) {
   return Status::OK();
 }
@@ -5380,6 +5729,13 @@ Status from_json(td_api::telegramPaymentPurposePremiumGiveaway &to, JsonObject &
   TRY_STATUS(from_json(to.amount_, from.extract_field("amount")));
   TRY_STATUS(from_json(to.winner_count_, from.extract_field("winner_count")));
   TRY_STATUS(from_json(to.month_count_, from.extract_field("month_count")));
+  return Status::OK();
+}
+
+Status from_json(td_api::telegramPaymentPurposeStars &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.currency_, from.extract_field("currency")));
+  TRY_STATUS(from_json(to.amount_, from.extract_field("amount")));
+  TRY_STATUS(from_json(to.star_count_, from.extract_field("star_count")));
   return Status::OK();
 }
 
@@ -5466,6 +5822,10 @@ Status from_json(td_api::textEntityTypePreCode &to, JsonObject &from) {
 }
 
 Status from_json(td_api::textEntityTypeBlockQuote &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::textEntityTypeExpandableBlockQuote &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -5563,6 +5923,10 @@ Status from_json(td_api::userPrivacySettingShowBio &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::userPrivacySettingShowBirthdate &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::userPrivacySettingAllowChatInvites &to, JsonObject &from) {
   return Status::OK();
 }
@@ -5588,6 +5952,10 @@ Status from_json(td_api::userPrivacySettingRuleAllowAll &to, JsonObject &from) {
 }
 
 Status from_json(td_api::userPrivacySettingRuleAllowContacts &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::userPrivacySettingRuleAllowPremiumUsers &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -5735,6 +6103,29 @@ Status from_json(td_api::addProxy &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::addQuickReplyShortcutInlineQueryResultMessage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.shortcut_name_, from.extract_field("shortcut_name")));
+  TRY_STATUS(from_json(to.reply_to_message_id_, from.extract_field("reply_to_message_id")));
+  TRY_STATUS(from_json(to.query_id_, from.extract_field("query_id")));
+  TRY_STATUS(from_json(to.result_id_, from.extract_field("result_id")));
+  TRY_STATUS(from_json(to.hide_via_bot_, from.extract_field("hide_via_bot")));
+  return Status::OK();
+}
+
+Status from_json(td_api::addQuickReplyShortcutMessage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.shortcut_name_, from.extract_field("shortcut_name")));
+  TRY_STATUS(from_json(to.reply_to_message_id_, from.extract_field("reply_to_message_id")));
+  TRY_STATUS(from_json(to.input_message_content_, from.extract_field("input_message_content")));
+  return Status::OK();
+}
+
+Status from_json(td_api::addQuickReplyShortcutMessageAlbum &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.shortcut_name_, from.extract_field("shortcut_name")));
+  TRY_STATUS(from_json(to.reply_to_message_id_, from.extract_field("reply_to_message_id")));
+  TRY_STATUS(from_json(to.input_message_contents_, from.extract_field("input_message_contents")));
+  return Status::OK();
+}
+
 Status from_json(td_api::addRecentSticker &to, JsonObject &from) {
   TRY_STATUS(from_json(to.is_attached_, from.extract_field("is_attached")));
   TRY_STATUS(from_json(to.sticker_, from.extract_field("sticker")));
@@ -5858,7 +6249,7 @@ Status from_json(td_api::canBotSendMessages &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::canPurchasePremium &to, JsonObject &from) {
+Status from_json(td_api::canPurchaseFromStore &to, JsonObject &from) {
   TRY_STATUS(from_json(to.purpose_, from.extract_field("purpose")));
   return Status::OK();
 }
@@ -5902,12 +6293,6 @@ Status from_json(td_api::changeImportedContacts &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::changePhoneNumber &to, JsonObject &from) {
-  TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
-  TRY_STATUS(from_json(to.settings_, from.extract_field("settings")));
-  return Status::OK();
-}
-
 Status from_json(td_api::changeStickerSet &to, JsonObject &from) {
   TRY_STATUS(from_json(to.set_id_, from.extract_field("set_id")));
   TRY_STATUS(from_json(to.is_installed_, from.extract_field("is_installed")));
@@ -5937,11 +6322,6 @@ Status from_json(td_api::checkAuthenticationPassword &to, JsonObject &from) {
 
 Status from_json(td_api::checkAuthenticationPasswordRecoveryCode &to, JsonObject &from) {
   TRY_STATUS(from_json(to.recovery_code_, from.extract_field("recovery_code")));
-  return Status::OK();
-}
-
-Status from_json(td_api::checkChangePhoneNumberCode &to, JsonObject &from) {
-  TRY_STATUS(from_json(to.code_, from.extract_field("code")));
   return Status::OK();
 }
 
@@ -5981,12 +6361,7 @@ Status from_json(td_api::checkPasswordRecoveryCode &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::checkPhoneNumberConfirmationCode &to, JsonObject &from) {
-  TRY_STATUS(from_json(to.code_, from.extract_field("code")));
-  return Status::OK();
-}
-
-Status from_json(td_api::checkPhoneNumberVerificationCode &to, JsonObject &from) {
+Status from_json(td_api::checkPhoneNumberCode &to, JsonObject &from) {
   TRY_STATUS(from_json(to.code_, from.extract_field("code")));
   return Status::OK();
 }
@@ -6043,6 +6418,10 @@ Status from_json(td_api::clearRecentStickers &to, JsonObject &from) {
 }
 
 Status from_json(td_api::clearRecentlyFoundChats &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::clearSearchedForHashtags &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -6103,6 +6482,11 @@ Status from_json(td_api::createBasicGroupChat &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::createBusinessChatLink &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.link_info_, from.extract_field("link_info")));
+  return Status::OK();
+}
+
 Status from_json(td_api::createCall &to, JsonObject &from) {
   TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
   TRY_STATUS(from_json(to.protocol_, from.extract_field("protocol")));
@@ -6159,7 +6543,6 @@ Status from_json(td_api::createNewStickerSet &to, JsonObject &from) {
   TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
   TRY_STATUS(from_json(to.title_, from.extract_field("title")));
   TRY_STATUS(from_json(to.name_, from.extract_field("name")));
-  TRY_STATUS(from_json(to.sticker_format_, from.extract_field("sticker_format")));
   TRY_STATUS(from_json(to.sticker_type_, from.extract_field("sticker_type")));
   TRY_STATUS(from_json(to.needs_repainting_, from.extract_field("needs_repainting")));
   TRY_STATUS(from_json(to.stickers_, from.extract_field("stickers")));
@@ -6223,6 +6606,11 @@ Status from_json(td_api::deleteAllCallMessages &to, JsonObject &from) {
 Status from_json(td_api::deleteAllRevokedChatInviteLinks &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.creator_user_id_, from.extract_field("creator_user_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::deleteBusinessChatLink &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.link_, from.extract_field("link")));
   return Status::OK();
 }
 
@@ -6413,6 +6801,12 @@ Status from_json(td_api::downloadFile &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::editBusinessChatLink &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.link_, from.extract_field("link")));
+  TRY_STATUS(from_json(to.link_info_, from.extract_field("link_info")));
+  return Status::OK();
+}
+
 Status from_json(td_api::editChatFolder &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_folder_id_, from.extract_field("chat_folder_id")));
   TRY_STATUS(from_json(to.folder_, from.extract_field("folder")));
@@ -6455,6 +6849,7 @@ Status from_json(td_api::editInlineMessageCaption &to, JsonObject &from) {
   TRY_STATUS(from_json(to.inline_message_id_, from.extract_field("inline_message_id")));
   TRY_STATUS(from_json(to.reply_markup_, from.extract_field("reply_markup")));
   TRY_STATUS(from_json(to.caption_, from.extract_field("caption")));
+  TRY_STATUS(from_json(to.show_caption_above_media_, from.extract_field("show_caption_above_media")));
   return Status::OK();
 }
 
@@ -6462,6 +6857,7 @@ Status from_json(td_api::editInlineMessageLiveLocation &to, JsonObject &from) {
   TRY_STATUS(from_json(to.inline_message_id_, from.extract_field("inline_message_id")));
   TRY_STATUS(from_json(to.reply_markup_, from.extract_field("reply_markup")));
   TRY_STATUS(from_json(to.location_, from.extract_field("location")));
+  TRY_STATUS(from_json(to.live_period_, from.extract_field("live_period")));
   TRY_STATUS(from_json(to.heading_, from.extract_field("heading")));
   TRY_STATUS(from_json(to.proximity_alert_radius_, from.extract_field("proximity_alert_radius")));
   return Status::OK();
@@ -6492,6 +6888,7 @@ Status from_json(td_api::editMessageCaption &to, JsonObject &from) {
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
   TRY_STATUS(from_json(to.reply_markup_, from.extract_field("reply_markup")));
   TRY_STATUS(from_json(to.caption_, from.extract_field("caption")));
+  TRY_STATUS(from_json(to.show_caption_above_media_, from.extract_field("show_caption_above_media")));
   return Status::OK();
 }
 
@@ -6500,6 +6897,7 @@ Status from_json(td_api::editMessageLiveLocation &to, JsonObject &from) {
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
   TRY_STATUS(from_json(to.reply_markup_, from.extract_field("reply_markup")));
   TRY_STATUS(from_json(to.location_, from.extract_field("location")));
+  TRY_STATUS(from_json(to.live_period_, from.extract_field("live_period")));
   TRY_STATUS(from_json(to.heading_, from.extract_field("heading")));
   TRY_STATUS(from_json(to.proximity_alert_radius_, from.extract_field("proximity_alert_radius")));
   return Status::OK();
@@ -6541,6 +6939,13 @@ Status from_json(td_api::editProxy &to, JsonObject &from) {
   TRY_STATUS(from_json(to.port_, from.extract_field("port")));
   TRY_STATUS(from_json(to.enable_, from.extract_field("enable")));
   TRY_STATUS(from_json(to.type_, from.extract_field("type")));
+  return Status::OK();
+}
+
+Status from_json(td_api::editQuickReplyMessage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.shortcut_id_, from.extract_field("shortcut_id")));
+  TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
+  TRY_STATUS(from_json(to.input_message_content_, from.extract_field("input_message_content")));
   return Status::OK();
 }
 
@@ -6711,7 +7116,26 @@ Status from_json(td_api::getBotName &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::getBusinessChatLinkInfo &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.link_name_, from.extract_field("link_name")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getBusinessChatLinks &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::getBusinessConnectedBot &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::getBusinessConnection &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.connection_id_, from.extract_field("connection_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getBusinessFeatures &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.source_, from.extract_field("source")));
   return Status::OK();
 }
 
@@ -6930,10 +7354,29 @@ Status from_json(td_api::getChatPinnedMessage &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::getChatPinnedStories &to, JsonObject &from) {
+Status from_json(td_api::getChatPostedToChatPageStories &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.from_story_id_, from.extract_field("from_story_id")));
   TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getChatRevenueStatistics &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.is_dark_, from.extract_field("is_dark")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getChatRevenueTransactions &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.offset_, from.extract_field("offset")));
+  TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getChatRevenueWithdrawalUrl &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.password_, from.extract_field("password")));
   return Status::OK();
 }
 
@@ -6999,6 +7442,11 @@ Status from_json(td_api::getChatsToSendStories &to, JsonObject &from) {
 }
 
 Status from_json(td_api::getCloseFriends &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::getCollectibleItemInfo &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.type_, from.extract_field("type")));
   return Status::OK();
 }
 
@@ -7165,6 +7613,10 @@ Status from_json(td_api::getGameHighScores &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
   TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getGreetingStickers &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -7362,6 +7814,11 @@ Status from_json(td_api::getMessageAvailableReactions &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::getMessageEffect &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.effect_id_, from.extract_field("effect_id")));
+  return Status::OK();
+}
+
 Status from_json(td_api::getMessageEmbeddingCode &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
@@ -7458,6 +7915,12 @@ Status from_json(td_api::getNewChatPrivacySettings &to, JsonObject &from) {
 
 Status from_json(td_api::getOption &to, JsonObject &from) {
   TRY_STATUS(from_json(to.name_, from.extract_field("name")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getOwnedStickerSets &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.offset_sticker_set_id_, from.extract_field("offset_sticker_set_id")));
+  TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
   return Status::OK();
 }
 
@@ -7601,6 +8064,10 @@ Status from_json(td_api::getRecommendedChatFolders &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::getRecommendedChats &to, JsonObject &from) {
+  return Status::OK();
+}
+
 Status from_json(td_api::getRecoveryEmailAddress &to, JsonObject &from) {
   TRY_STATUS(from_json(to.password_, from.extract_field("password")));
   return Status::OK();
@@ -7659,8 +8126,24 @@ Status from_json(td_api::getScopeNotificationSettings &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::getSearchedForHashtags &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.prefix_, from.extract_field("prefix")));
+  TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
+  return Status::OK();
+}
+
 Status from_json(td_api::getSecretChat &to, JsonObject &from) {
   TRY_STATUS(from_json(to.secret_chat_id_, from.extract_field("secret_chat_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::getStarPaymentOptions &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::getStarTransactions &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.offset_, from.extract_field("offset")));
+  TRY_STATUS(from_json(to.direction_, from.extract_field("direction")));
   return Status::OK();
 }
 
@@ -7752,6 +8235,10 @@ Status from_json(td_api::getSuggestedStickerSetName &to, JsonObject &from) {
 }
 
 Status from_json(td_api::getSuitableDiscussionChats &to, JsonObject &from) {
+  return Status::OK();
+}
+
+Status from_json(td_api::getSuitablePersonalChats &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -7895,6 +8382,10 @@ Status from_json(td_api::getWebPageInstantView &to, JsonObject &from) {
 Status from_json(td_api::getWebPagePreview &to, JsonObject &from) {
   TRY_STATUS(from_json(to.text_, from.extract_field("text")));
   TRY_STATUS(from_json(to.link_preview_options_, from.extract_field("link_preview_options")));
+  return Status::OK();
+}
+
+Status from_json(td_api::hideContactCloseBirthdays &to, JsonObject &from) {
   return Status::OK();
 }
 
@@ -8137,6 +8628,12 @@ Status from_json(td_api::readFilePart &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::readdQuickReplyShortcutMessages &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.shortcut_name_, from.extract_field("shortcut_name")));
+  TRY_STATUS(from_json(to.message_ids_, from.extract_field("message_ids")));
+  return Status::OK();
+}
+
 Status from_json(td_api::recognizeSpeech &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
@@ -8157,6 +8654,12 @@ Status from_json(td_api::recoverPassword &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::refundStarPayment &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
+  TRY_STATUS(from_json(to.telegram_payment_charge_id_, from.extract_field("telegram_payment_charge_id")));
+  return Status::OK();
+}
+
 Status from_json(td_api::registerDevice &to, JsonObject &from) {
   TRY_STATUS(from_json(to.device_token_, from.extract_field("device_token")));
   TRY_STATUS(from_json(to.other_user_ids_, from.extract_field("other_user_ids")));
@@ -8174,6 +8677,11 @@ Status from_json(td_api::removeAllFilesFromDownloads &to, JsonObject &from) {
   TRY_STATUS(from_json(to.only_active_, from.extract_field("only_active")));
   TRY_STATUS(from_json(to.only_completed_, from.extract_field("only_completed")));
   TRY_STATUS(from_json(to.delete_from_cache_, from.extract_field("delete_from_cache")));
+  return Status::OK();
+}
+
+Status from_json(td_api::removeBusinessConnectedBotFromChat &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   return Status::OK();
 }
 
@@ -8253,6 +8761,11 @@ Status from_json(td_api::removeSavedNotificationSound &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::removeSearchedForHashtag &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.hashtag_, from.extract_field("hashtag")));
+  return Status::OK();
+}
+
 Status from_json(td_api::removeStickerFromSet &to, JsonObject &from) {
   TRY_STATUS(from_json(to.sticker_, from.extract_field("sticker")));
   return Status::OK();
@@ -8303,8 +8816,21 @@ Status from_json(td_api::replacePrimaryChatInviteLink &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::replaceStickerInSet &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
+  TRY_STATUS(from_json(to.name_, from.extract_field("name")));
+  TRY_STATUS(from_json(to.old_sticker_, from.extract_field("old_sticker")));
+  TRY_STATUS(from_json(to.new_sticker_, from.extract_field("new_sticker")));
+  return Status::OK();
+}
+
 Status from_json(td_api::replaceVideoChatRtmpUrl &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::reportAuthenticationCodeMissing &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.mobile_network_code_, from.extract_field("mobile_network_code")));
   return Status::OK();
 }
 
@@ -8324,10 +8850,22 @@ Status from_json(td_api::reportChatPhoto &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::reportChatSponsoredMessage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
+  TRY_STATUS(from_json_bytes(to.option_id_, from.extract_field("option_id")));
+  return Status::OK();
+}
+
 Status from_json(td_api::reportMessageReactions &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
   TRY_STATUS(from_json(to.sender_id_, from.extract_field("sender_id")));
+  return Status::OK();
+}
+
+Status from_json(td_api::reportPhoneNumberCodeMissing &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.mobile_network_code_, from.extract_field("mobile_network_code")));
   return Status::OK();
 }
 
@@ -8365,10 +8903,7 @@ Status from_json(td_api::requestQrCodeAuthentication &to, JsonObject &from) {
 }
 
 Status from_json(td_api::resendAuthenticationCode &to, JsonObject &from) {
-  return Status::OK();
-}
-
-Status from_json(td_api::resendChangePhoneNumberCode &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.reason_, from.extract_field("reason")));
   return Status::OK();
 }
 
@@ -8387,11 +8922,8 @@ Status from_json(td_api::resendMessages &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::resendPhoneNumberConfirmationCode &to, JsonObject &from) {
-  return Status::OK();
-}
-
-Status from_json(td_api::resendPhoneNumberVerificationCode &to, JsonObject &from) {
+Status from_json(td_api::resendPhoneNumberCode &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.reason_, from.extract_field("reason")));
   return Status::OK();
 }
 
@@ -8529,6 +9061,7 @@ Status from_json(td_api::searchInstalledStickerSets &to, JsonObject &from) {
 
 Status from_json(td_api::searchMessages &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_list_, from.extract_field("chat_list")));
+  TRY_STATUS(from_json(to.only_in_channels_, from.extract_field("only_in_channels")));
   TRY_STATUS(from_json(to.query_, from.extract_field("query")));
   TRY_STATUS(from_json(to.offset_, from.extract_field("offset")));
   TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
@@ -8551,6 +9084,13 @@ Status from_json(td_api::searchPublicChat &to, JsonObject &from) {
 
 Status from_json(td_api::searchPublicChats &to, JsonObject &from) {
   TRY_STATUS(from_json(to.query_, from.extract_field("query")));
+  return Status::OK();
+}
+
+Status from_json(td_api::searchPublicHashtagMessages &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.hashtag_, from.extract_field("hashtag")));
+  TRY_STATUS(from_json(to.offset_, from.extract_field("offset")));
+  TRY_STATUS(from_json(to.limit_, from.extract_field("limit")));
   return Status::OK();
 }
 
@@ -8614,6 +9154,7 @@ Status from_json(td_api::searchStringsByPrefix &to, JsonObject &from) {
 
 Status from_json(td_api::searchUserByPhoneNumber &to, JsonObject &from) {
   TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
+  TRY_STATUS(from_json(to.only_local_, from.extract_field("only_local")));
   return Status::OK();
 }
 
@@ -8637,6 +9178,29 @@ Status from_json(td_api::sendBotStartMessage &to, JsonObject &from) {
   TRY_STATUS(from_json(to.bot_user_id_, from.extract_field("bot_user_id")));
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.parameter_, from.extract_field("parameter")));
+  return Status::OK();
+}
+
+Status from_json(td_api::sendBusinessMessage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.business_connection_id_, from.extract_field("business_connection_id")));
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.reply_to_, from.extract_field("reply_to")));
+  TRY_STATUS(from_json(to.disable_notification_, from.extract_field("disable_notification")));
+  TRY_STATUS(from_json(to.protect_content_, from.extract_field("protect_content")));
+  TRY_STATUS(from_json(to.effect_id_, from.extract_field("effect_id")));
+  TRY_STATUS(from_json(to.reply_markup_, from.extract_field("reply_markup")));
+  TRY_STATUS(from_json(to.input_message_content_, from.extract_field("input_message_content")));
+  return Status::OK();
+}
+
+Status from_json(td_api::sendBusinessMessageAlbum &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.business_connection_id_, from.extract_field("business_connection_id")));
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.reply_to_, from.extract_field("reply_to")));
+  TRY_STATUS(from_json(to.disable_notification_, from.extract_field("disable_notification")));
+  TRY_STATUS(from_json(to.protect_content_, from.extract_field("protect_content")));
+  TRY_STATUS(from_json(to.effect_id_, from.extract_field("effect_id")));
+  TRY_STATUS(from_json(to.input_message_contents_, from.extract_field("input_message_contents")));
   return Status::OK();
 }
 
@@ -8669,6 +9233,7 @@ Status from_json(td_api::sendCallSignalingData &to, JsonObject &from) {
 Status from_json(td_api::sendChatAction &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_thread_id_, from.extract_field("message_thread_id")));
+  TRY_STATUS(from_json(to.business_connection_id_, from.extract_field("business_connection_id")));
   TRY_STATUS(from_json(to.action_, from.extract_field("action")));
   return Status::OK();
 }
@@ -8730,16 +9295,15 @@ Status from_json(td_api::sendPaymentForm &to, JsonObject &from) {
   return Status::OK();
 }
 
-Status from_json(td_api::sendPhoneNumberConfirmationCode &to, JsonObject &from) {
-  TRY_STATUS(from_json(to.hash_, from.extract_field("hash")));
+Status from_json(td_api::sendPhoneNumberCode &to, JsonObject &from) {
   TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
   TRY_STATUS(from_json(to.settings_, from.extract_field("settings")));
+  TRY_STATUS(from_json(to.type_, from.extract_field("type")));
   return Status::OK();
 }
 
-Status from_json(td_api::sendPhoneNumberVerificationCode &to, JsonObject &from) {
-  TRY_STATUS(from_json(to.phone_number_, from.extract_field("phone_number")));
-  TRY_STATUS(from_json(to.settings_, from.extract_field("settings")));
+Status from_json(td_api::sendPhoneNumberFirebaseSms &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.token_, from.extract_field("token")));
   return Status::OK();
 }
 
@@ -8758,7 +9322,7 @@ Status from_json(td_api::sendStory &to, JsonObject &from) {
   TRY_STATUS(from_json(to.privacy_settings_, from.extract_field("privacy_settings")));
   TRY_STATUS(from_json(to.active_period_, from.extract_field("active_period")));
   TRY_STATUS(from_json(to.from_story_full_id_, from.extract_field("from_story_full_id")));
-  TRY_STATUS(from_json(to.is_pinned_, from.extract_field("is_pinned")));
+  TRY_STATUS(from_json(to.is_posted_to_chat_page_, from.extract_field("is_posted_to_chat_page")));
   TRY_STATUS(from_json(to.protect_content_, from.extract_field("protect_content")));
   return Status::OK();
 }
@@ -8793,6 +9357,12 @@ Status from_json(td_api::setAlarm &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::setApplicationVerificationToken &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.verification_id_, from.extract_field("verification_id")));
+  TRY_STATUS(from_json(to.token_, from.extract_field("token")));
+  return Status::OK();
+}
+
 Status from_json(td_api::setArchiveChatListSettings &to, JsonObject &from) {
   TRY_STATUS(from_json(to.settings_, from.extract_field("settings")));
   return Status::OK();
@@ -8823,6 +9393,11 @@ Status from_json(td_api::setAutosaveSettings &to, JsonObject &from) {
 
 Status from_json(td_api::setBio &to, JsonObject &from) {
   TRY_STATUS(from_json(to.bio_, from.extract_field("bio")));
+  return Status::OK();
+}
+
+Status from_json(td_api::setBirthdate &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.birthdate_, from.extract_field("birthdate")));
   return Status::OK();
 }
 
@@ -8881,6 +9456,11 @@ Status from_json(td_api::setBusinessLocation &to, JsonObject &from) {
 
 Status from_json(td_api::setBusinessOpeningHours &to, JsonObject &from) {
   TRY_STATUS(from_json(to.opening_hours_, from.extract_field("opening_hours")));
+  return Status::OK();
+}
+
+Status from_json(td_api::setBusinessStartPage &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.start_page_, from.extract_field("start_page")));
   return Status::OK();
 }
 
@@ -8983,6 +9563,12 @@ Status from_json(td_api::setChatPermissions &to, JsonObject &from) {
 Status from_json(td_api::setChatPhoto &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.photo_, from.extract_field("photo")));
+  return Status::OK();
+}
+
+Status from_json(td_api::setChatPinnedStories &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.story_ids_, from.extract_field("story_ids")));
   return Status::OK();
 }
 
@@ -9168,6 +9754,13 @@ Status from_json(td_api::setMenuButton &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::setMessageFactCheck &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
+  TRY_STATUS(from_json(to.text_, from.extract_field("text")));
+  return Status::OK();
+}
+
 Status from_json(td_api::setMessageReactions &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.message_id_, from.extract_field("message_id")));
@@ -9225,6 +9818,11 @@ Status from_json(td_api::setPassword &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::setPersonalChat &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  return Status::OK();
+}
+
 Status from_json(td_api::setPinnedChats &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_list_, from.extract_field("chat_list")));
   TRY_STATUS(from_json(to.chat_ids_, from.extract_field("chat_ids")));
@@ -9264,6 +9862,11 @@ Status from_json(td_api::setProfilePhoto &to, JsonObject &from) {
 Status from_json(td_api::setQuickReplyShortcutName &to, JsonObject &from) {
   TRY_STATUS(from_json(to.shortcut_id_, from.extract_field("shortcut_id")));
   TRY_STATUS(from_json(to.name_, from.extract_field("name")));
+  return Status::OK();
+}
+
+Status from_json(td_api::setReactionNotificationSettings &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.notification_settings_, from.extract_field("notification_settings")));
   return Status::OK();
 }
 
@@ -9318,6 +9921,7 @@ Status from_json(td_api::setStickerSetThumbnail &to, JsonObject &from) {
   TRY_STATUS(from_json(to.user_id_, from.extract_field("user_id")));
   TRY_STATUS(from_json(to.name_, from.extract_field("name")));
   TRY_STATUS(from_json(to.thumbnail_, from.extract_field("thumbnail")));
+  TRY_STATUS(from_json(to.format_, from.extract_field("format")));
   return Status::OK();
 }
 
@@ -9566,6 +10170,12 @@ Status from_json(td_api::toggleBotUsernameIsActive &to, JsonObject &from) {
   return Status::OK();
 }
 
+Status from_json(td_api::toggleBusinessConnectedBotChatIsPaused &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
+  TRY_STATUS(from_json(to.is_paused_, from.extract_field("is_paused")));
+  return Status::OK();
+}
+
 Status from_json(td_api::toggleChatDefaultDisableNotification &to, JsonObject &from) {
   TRY_STATUS(from_json(to.chat_id_, from.extract_field("chat_id")));
   TRY_STATUS(from_json(to.default_disable_notification_, from.extract_field("default_disable_notification")));
@@ -9678,6 +10288,11 @@ Status from_json(td_api::toggleGroupCallScreenSharingIsPaused &to, JsonObject &f
   return Status::OK();
 }
 
+Status from_json(td_api::toggleHasSponsoredMessagesEnabled &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.has_sponsored_messages_enabled_, from.extract_field("has_sponsored_messages_enabled")));
+  return Status::OK();
+}
+
 Status from_json(td_api::toggleSavedMessagesTopicIsPinned &to, JsonObject &from) {
   TRY_STATUS(from_json(to.saved_messages_topic_id_, from.extract_field("saved_messages_topic_id")));
   TRY_STATUS(from_json(to.is_pinned_, from.extract_field("is_pinned")));
@@ -9696,10 +10311,16 @@ Status from_json(td_api::toggleSessionCanAcceptSecretChats &to, JsonObject &from
   return Status::OK();
 }
 
-Status from_json(td_api::toggleStoryIsPinned &to, JsonObject &from) {
+Status from_json(td_api::toggleStoryIsPostedToChatPage &to, JsonObject &from) {
   TRY_STATUS(from_json(to.story_sender_chat_id_, from.extract_field("story_sender_chat_id")));
   TRY_STATUS(from_json(to.story_id_, from.extract_field("story_id")));
-  TRY_STATUS(from_json(to.is_pinned_, from.extract_field("is_pinned")));
+  TRY_STATUS(from_json(to.is_posted_to_chat_page_, from.extract_field("is_posted_to_chat_page")));
+  return Status::OK();
+}
+
+Status from_json(td_api::toggleSupergroupCanHaveSponsoredMessages &to, JsonObject &from) {
+  TRY_STATUS(from_json(to.supergroup_id_, from.extract_field("supergroup_id")));
+  TRY_STATUS(from_json(to.can_have_sponsored_messages_, from.extract_field("can_have_sponsored_messages")));
   return Status::OK();
 }
 
@@ -10056,6 +10677,18 @@ void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeSms &object
   jo("length", object.length_);
 }
 
+void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeSmsWord &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "authenticationCodeTypeSmsWord");
+  jo("first_letter", object.first_letter_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeSmsPhrase &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "authenticationCodeTypeSmsPhrase");
+  jo("first_word", object.first_word_);
+}
+
 void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeCall &object) {
   auto jo = jv.enter_object();
   jo("@type", "authenticationCodeTypeCall");
@@ -10085,6 +10718,7 @@ void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeFragment &o
 void to_json(JsonValueScope &jv, const td_api::authenticationCodeTypeFirebaseAndroid &object) {
   auto jo = jv.enter_object();
   jo("@type", "authenticationCodeTypeFirebaseAndroid");
+  jo("use_play_integrity", JsonBool{object.use_play_integrity_});
   jo("nonce", base64_encode(object.nonce_));
   jo("length", object.length_);
 }
@@ -10405,6 +11039,14 @@ void to_json(JsonValueScope &jv, const td_api::basicGroupFullInfo &object) {
   jo("bot_commands", ToJson(object.bot_commands_));
 }
 
+void to_json(JsonValueScope &jv, const td_api::birthdate &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "birthdate");
+  jo("day", object.day_);
+  jo("month", object.month_);
+  jo("year", object.year_);
+}
+
 void to_json(JsonValueScope &jv, const td_api::BlockList &object) {
   td_api::downcast_call(const_cast<td_api::BlockList &>(object), [&jv](const auto &object) { to_json(jv, object); });
 }
@@ -10537,6 +11179,41 @@ void to_json(JsonValueScope &jv, const td_api::businessAwayMessageSettings &obje
   jo("offline_only", JsonBool{object.offline_only_});
 }
 
+void to_json(JsonValueScope &jv, const td_api::businessBotManageBar &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessBotManageBar");
+  jo("bot_user_id", object.bot_user_id_);
+  jo("manage_url", object.manage_url_);
+  jo("is_bot_paused", JsonBool{object.is_bot_paused_});
+  jo("can_bot_reply", JsonBool{object.can_bot_reply_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessChatLink &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessChatLink");
+  jo("link", object.link_);
+  if (object.text_) {
+    jo("text", ToJson(*object.text_));
+  }
+  jo("title", object.title_);
+  jo("view_count", object.view_count_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessChatLinkInfo &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessChatLinkInfo");
+  jo("chat_id", object.chat_id_);
+  if (object.text_) {
+    jo("text", ToJson(*object.text_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessChatLinks &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessChatLinks");
+  jo("links", ToJson(object.links_));
+}
+
 void to_json(JsonValueScope &jv, const td_api::businessConnectedBot &object) {
   auto jo = jv.enter_object();
   jo("@type", "businessConnectedBot");
@@ -10545,6 +11222,93 @@ void to_json(JsonValueScope &jv, const td_api::businessConnectedBot &object) {
     jo("recipients", ToJson(*object.recipients_));
   }
   jo("can_reply", JsonBool{object.can_reply_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessConnection &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessConnection");
+  jo("id", object.id_);
+  jo("user_id", object.user_id_);
+  jo("user_chat_id", object.user_chat_id_);
+  jo("date", object.date_);
+  jo("can_reply", JsonBool{object.can_reply_});
+  jo("is_enabled", JsonBool{object.is_enabled_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::BusinessFeature &object) {
+  td_api::downcast_call(const_cast<td_api::BusinessFeature &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureLocation &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureLocation");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureOpeningHours &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureOpeningHours");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureQuickReplies &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureQuickReplies");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureGreetingMessage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureGreetingMessage");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureAwayMessage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureAwayMessage");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureAccountLinks &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureAccountLinks");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureStartPage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureStartPage");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureBots &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureBots");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureEmojiStatus &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureEmojiStatus");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureChatFolderTags &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureChatFolderTags");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatureUpgradedStories &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatureUpgradedStories");
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeaturePromotionAnimation &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeaturePromotionAnimation");
+  if (object.feature_) {
+    jo("feature", ToJson(*object.feature_));
+  }
+  if (object.animation_) {
+    jo("animation", ToJson(*object.animation_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessFeatures &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessFeatures");
+  jo("features", ToJson(object.features_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::businessGreetingMessageSettings &object) {
@@ -10566,11 +11330,19 @@ void to_json(JsonValueScope &jv, const td_api::businessInfo &object) {
   if (object.opening_hours_) {
     jo("opening_hours", ToJson(*object.opening_hours_));
   }
+  if (object.local_opening_hours_) {
+    jo("local_opening_hours", ToJson(*object.local_opening_hours_));
+  }
+  jo("next_open_in", object.next_open_in_);
+  jo("next_close_in", object.next_close_in_);
   if (object.greeting_message_settings_) {
     jo("greeting_message_settings", ToJson(*object.greeting_message_settings_));
   }
   if (object.away_message_settings_) {
     jo("away_message_settings", ToJson(*object.away_message_settings_));
+  }
+  if (object.start_page_) {
+    jo("start_page", ToJson(*object.start_page_));
   }
 }
 
@@ -10581,6 +11353,23 @@ void to_json(JsonValueScope &jv, const td_api::businessLocation &object) {
     jo("location", ToJson(*object.location_));
   }
   jo("address", object.address_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessMessage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessMessage");
+  if (object.message_) {
+    jo("message", ToJson(*object.message_));
+  }
+  if (object.reply_to_message_) {
+    jo("reply_to_message", ToJson(*object.reply_to_message_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessMessages &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessMessages");
+  jo("messages", ToJson(object.messages_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::businessOpeningHours &object) {
@@ -10601,11 +11390,22 @@ void to_json(JsonValueScope &jv, const td_api::businessRecipients &object) {
   auto jo = jv.enter_object();
   jo("@type", "businessRecipients");
   jo("chat_ids", ToJson(object.chat_ids_));
+  jo("excluded_chat_ids", ToJson(object.excluded_chat_ids_));
   jo("select_existing_chats", JsonBool{object.select_existing_chats_});
   jo("select_new_chats", JsonBool{object.select_new_chats_});
   jo("select_contacts", JsonBool{object.select_contacts_});
   jo("select_non_contacts", JsonBool{object.select_non_contacts_});
   jo("exclude_selected", JsonBool{object.exclude_selected_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::businessStartPage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "businessStartPage");
+  jo("title", object.title_);
+  jo("message", object.message_);
+  if (object.sticker_) {
+    jo("sticker", ToJson(*object.sticker_));
+  }
 }
 
 void to_json(JsonValueScope &jv, const td_api::call &object) {
@@ -10724,6 +11524,7 @@ void to_json(JsonValueScope &jv, const td_api::callStateReady &object) {
   jo("encryption_key", base64_encode(object.encryption_key_));
   jo("emojis", ToJson(object.emojis_));
   jo("allow_p2p", JsonBool{object.allow_p2p_});
+  jo("custom_parameters", object.custom_parameters_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::callStateHangingUp &object) {
@@ -10922,6 +11723,9 @@ void to_json(JsonValueScope &jv, const td_api::chat &object) {
   if (object.action_bar_) {
     jo("action_bar", ToJson(*object.action_bar_));
   }
+  if (object.business_bot_manage_bar_) {
+    jo("business_bot_manage_bar", ToJson(*object.business_bot_manage_bar_));
+  }
   if (object.video_chat_) {
     jo("video_chat", ToJson(*object.video_chat_));
   }
@@ -11118,12 +11922,14 @@ void to_json(JsonValueScope &jv, const td_api::ChatAvailableReactions &object) {
 void to_json(JsonValueScope &jv, const td_api::chatAvailableReactionsAll &object) {
   auto jo = jv.enter_object();
   jo("@type", "chatAvailableReactionsAll");
+  jo("max_reaction_count", object.max_reaction_count_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::chatAvailableReactionsSome &object) {
   auto jo = jv.enter_object();
   jo("@type", "chatAvailableReactionsSome");
   jo("reactions", ToJson(object.reactions_));
+  jo("max_reaction_count", object.max_reaction_count_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::chatBackground &object) {
@@ -11158,6 +11964,7 @@ void to_json(JsonValueScope &jv, const td_api::chatBoostFeatures &object) {
   jo("min_custom_background_boost_level", object.min_custom_background_boost_level_);
   jo("min_custom_emoji_sticker_set_boost_level", object.min_custom_emoji_sticker_set_boost_level_);
   jo("min_speech_recognition_boost_level", object.min_speech_recognition_boost_level_);
+  jo("min_sponsored_message_disable_boost_level", object.min_sponsored_message_disable_boost_level_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::chatBoostLevelFeatures &object) {
@@ -11176,6 +11983,7 @@ void to_json(JsonValueScope &jv, const td_api::chatBoostLevelFeatures &object) {
   jo("can_set_custom_background", JsonBool{object.can_set_custom_background_});
   jo("can_set_custom_emoji_sticker_set", JsonBool{object.can_set_custom_emoji_sticker_set_});
   jo("can_recognize_speech", JsonBool{object.can_recognize_speech_});
+  jo("can_disable_sponsored_messages", JsonBool{object.can_disable_sponsored_messages_});
 }
 
 void to_json(JsonValueScope &jv, const td_api::chatBoostLink &object) {
@@ -12092,6 +12900,96 @@ void to_json(JsonValueScope &jv, const td_api::chatPosition &object) {
   }
 }
 
+void to_json(JsonValueScope &jv, const td_api::chatRevenueAmount &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueAmount");
+  jo("cryptocurrency", object.cryptocurrency_);
+  jo("total_amount", ToJson(JsonInt64{object.total_amount_}));
+  jo("balance_amount", ToJson(JsonInt64{object.balance_amount_}));
+  jo("available_amount", ToJson(JsonInt64{object.available_amount_}));
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueStatistics &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueStatistics");
+  if (object.revenue_by_hour_graph_) {
+    jo("revenue_by_hour_graph", ToJson(*object.revenue_by_hour_graph_));
+  }
+  if (object.revenue_graph_) {
+    jo("revenue_graph", ToJson(*object.revenue_graph_));
+  }
+  if (object.revenue_amount_) {
+    jo("revenue_amount", ToJson(*object.revenue_amount_));
+  }
+  jo("usd_rate", object.usd_rate_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueTransaction &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueTransaction");
+  jo("cryptocurrency", object.cryptocurrency_);
+  jo("cryptocurrency_amount", ToJson(JsonInt64{object.cryptocurrency_amount_}));
+  if (object.type_) {
+    jo("type", ToJson(*object.type_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::ChatRevenueTransactionType &object) {
+  td_api::downcast_call(const_cast<td_api::ChatRevenueTransactionType &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueTransactionTypeEarnings &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueTransactionTypeEarnings");
+  jo("start_date", object.start_date_);
+  jo("end_date", object.end_date_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueTransactionTypeWithdrawal &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueTransactionTypeWithdrawal");
+  jo("withdrawal_date", object.withdrawal_date_);
+  jo("provider", object.provider_);
+  if (object.state_) {
+    jo("state", ToJson(*object.state_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueTransactionTypeRefund &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueTransactionTypeRefund");
+  jo("refund_date", object.refund_date_);
+  jo("provider", object.provider_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueTransactions &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueTransactions");
+  jo("total_count", object.total_count_);
+  jo("transactions", ToJson(object.transactions_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::ChatRevenueWithdrawalState &object) {
+  td_api::downcast_call(const_cast<td_api::ChatRevenueWithdrawalState &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueWithdrawalStatePending &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueWithdrawalStatePending");
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueWithdrawalStateCompleted &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueWithdrawalStateCompleted");
+  jo("date", object.date_);
+  jo("url", object.url_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::chatRevenueWithdrawalStateFailed &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "chatRevenueWithdrawalStateFailed");
+}
+
 void to_json(JsonValueScope &jv, const td_api::ChatSource &object) {
   td_api::downcast_call(const_cast<td_api::ChatSource &>(object), [&jv](const auto &object) { to_json(jv, object); });
 }
@@ -12386,10 +13284,30 @@ void to_json(JsonValueScope &jv, const td_api::checkStickerSetNameResultNameOccu
   jo("@type", "checkStickerSetNameResultNameOccupied");
 }
 
+void to_json(JsonValueScope &jv, const td_api::closeBirthdayUser &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "closeBirthdayUser");
+  jo("user_id", object.user_id_);
+  if (object.birthdate_) {
+    jo("birthdate", ToJson(*object.birthdate_));
+  }
+}
+
 void to_json(JsonValueScope &jv, const td_api::closedVectorPath &object) {
   auto jo = jv.enter_object();
   jo("@type", "closedVectorPath");
   jo("commands", ToJson(object.commands_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::collectibleItemInfo &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "collectibleItemInfo");
+  jo("purchase_date", object.purchase_date_);
+  jo("currency", object.currency_);
+  jo("amount", object.amount_);
+  jo("cryptocurrency", object.cryptocurrency_);
+  jo("cryptocurrency_amount", ToJson(JsonInt64{object.cryptocurrency_amount_}));
+  jo("url", object.url_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::connectedWebsite &object) {
@@ -12471,6 +13389,15 @@ void to_json(JsonValueScope &jv, const td_api::countryInfo &object) {
   jo("english_name", object.english_name_);
   jo("is_hidden", JsonBool{object.is_hidden_});
   jo("calling_codes", ToJson(object.calling_codes_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::createdBasicGroupChat &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "createdBasicGroupChat");
+  jo("chat_id", object.chat_id_);
+  if (object.failed_to_add_members_) {
+    jo("failed_to_add_members", ToJson(*object.failed_to_add_members_));
+  }
 }
 
 void to_json(JsonValueScope &jv, const td_api::customRequestResult &object) {
@@ -12622,7 +13549,25 @@ void to_json(JsonValueScope &jv, const td_api::emojiCategory &object) {
   if (object.icon_) {
     jo("icon", ToJson(*object.icon_));
   }
+  if (object.source_) {
+    jo("source", ToJson(*object.source_));
+  }
+  jo("is_greeting", JsonBool{object.is_greeting_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::EmojiCategorySource &object) {
+  td_api::downcast_call(const_cast<td_api::EmojiCategorySource &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::emojiCategorySourceSearch &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "emojiCategorySourceSearch");
   jo("emojis", ToJson(object.emojis_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::emojiCategorySourcePremium &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "emojiCategorySourcePremium");
 }
 
 void to_json(JsonValueScope &jv, const td_api::emojiKeyword &object) {
@@ -12721,6 +13666,29 @@ void to_json(JsonValueScope &jv, const td_api::error &object) {
   jo("@type", "error");
   jo("code", object.code_);
   jo("message", object.message_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::factCheck &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "factCheck");
+  if (object.text_) {
+    jo("text", ToJson(*object.text_));
+  }
+  jo("country_code", object.country_code_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::failedToAddMember &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "failedToAddMember");
+  jo("user_id", object.user_id_);
+  jo("premium_would_allow_invite", JsonBool{object.premium_would_allow_invite_});
+  jo("premium_required_to_send_messages", JsonBool{object.premium_required_to_send_messages_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::failedToAddMembers &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "failedToAddMembers");
+  jo("failed_to_add_members", ToJson(object.failed_to_add_members_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::file &object) {
@@ -13466,6 +14434,7 @@ void to_json(JsonValueScope &jv, const td_api::inputMessageAnimation &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   jo("has_spoiler", JsonBool{object.has_spoiler_});
 }
 
@@ -13516,6 +14485,7 @@ void to_json(JsonValueScope &jv, const td_api::inputMessagePhoto &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   if (object.self_destruct_type_) {
     jo("self_destruct_type", ToJson(*object.self_destruct_type_));
   }
@@ -13553,6 +14523,7 @@ void to_json(JsonValueScope &jv, const td_api::inputMessageVideo &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   if (object.self_destruct_type_) {
     jo("self_destruct_type", ToJson(*object.self_destruct_type_));
   }
@@ -13656,7 +14627,9 @@ void to_json(JsonValueScope &jv, const td_api::inputMessageInvoice &object) {
 void to_json(JsonValueScope &jv, const td_api::inputMessagePoll &object) {
   auto jo = jv.enter_object();
   jo("@type", "inputMessagePoll");
-  jo("question", object.question_);
+  if (object.question_) {
+    jo("question", ToJson(*object.question_));
+  }
   jo("options", ToJson(object.options_));
   jo("is_anonymous", JsonBool{object.is_anonymous_});
   if (object.type_) {
@@ -13781,6 +14754,12 @@ void to_json(JsonValueScope &jv, const td_api::internalLinkTypeBotStartInGroup &
   if (object.administrator_rights_) {
     jo("administrator_rights", ToJson(*object.administrator_rights_));
   }
+}
+
+void to_json(JsonValueScope &jv, const td_api::internalLinkTypeBusinessChat &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "internalLinkTypeBusinessChat");
+  jo("link_name", object.link_name_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::internalLinkTypeChangePhoneNumber &object) {
@@ -13921,6 +14900,7 @@ void to_json(JsonValueScope &jv, const td_api::internalLinkTypePublicChat &objec
   auto jo = jv.enter_object();
   jo("@type", "internalLinkTypePublicChat");
   jo("chat_username", object.chat_username_);
+  jo("draft_text", object.draft_text_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::internalLinkTypeQrCodeAuthentication &object) {
@@ -13985,6 +14965,7 @@ void to_json(JsonValueScope &jv, const td_api::internalLinkTypeUserPhoneNumber &
   auto jo = jv.enter_object();
   jo("@type", "internalLinkTypeUserPhoneNumber");
   jo("phone_number", object.phone_number_);
+  jo("draft_text", object.draft_text_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::internalLinkTypeUserToken &object) {
@@ -14139,6 +15120,9 @@ void to_json(JsonValueScope &jv, const td_api::keyboardButtonTypeRequestUsers &o
   jo("restrict_user_is_premium", JsonBool{object.restrict_user_is_premium_});
   jo("user_is_premium", JsonBool{object.user_is_premium_});
   jo("max_quantity", object.max_quantity_);
+  jo("request_name", JsonBool{object.request_name_});
+  jo("request_username", JsonBool{object.request_username_});
+  jo("request_photo", JsonBool{object.request_photo_});
 }
 
 void to_json(JsonValueScope &jv, const td_api::keyboardButtonTypeRequestChat &object) {
@@ -14158,6 +15142,9 @@ void to_json(JsonValueScope &jv, const td_api::keyboardButtonTypeRequestChat &ob
     jo("bot_administrator_rights", ToJson(*object.bot_administrator_rights_));
   }
   jo("bot_is_member", JsonBool{object.bot_is_member_});
+  jo("request_title", JsonBool{object.request_title_});
+  jo("request_username", JsonBool{object.request_username_});
+  jo("request_photo", JsonBool{object.request_photo_});
 }
 
 void to_json(JsonValueScope &jv, const td_api::keyboardButtonTypeWebApp &object) {
@@ -14374,6 +15361,7 @@ void to_json(JsonValueScope &jv, const td_api::message &object) {
   }
   jo("is_outgoing", JsonBool{object.is_outgoing_});
   jo("is_pinned", JsonBool{object.is_pinned_});
+  jo("is_from_offline", JsonBool{object.is_from_offline_});
   jo("can_be_edited", JsonBool{object.can_be_edited_});
   jo("can_be_forwarded", JsonBool{object.can_be_forwarded_});
   jo("can_be_replied_in_another_chat", JsonBool{object.can_be_replied_in_another_chat_});
@@ -14403,6 +15391,9 @@ void to_json(JsonValueScope &jv, const td_api::message &object) {
     jo("interaction_info", ToJson(*object.interaction_info_));
   }
   jo("unread_reactions", ToJson(object.unread_reactions_));
+  if (object.fact_check_) {
+    jo("fact_check", ToJson(*object.fact_check_));
+  }
   if (object.reply_to_) {
     jo("reply_to", ToJson(*object.reply_to_));
   }
@@ -14414,9 +15405,11 @@ void to_json(JsonValueScope &jv, const td_api::message &object) {
   jo("self_destruct_in", object.self_destruct_in_);
   jo("auto_delete_in", object.auto_delete_in_);
   jo("via_bot_user_id", object.via_bot_user_id_);
+  jo("sender_business_bot_user_id", object.sender_business_bot_user_id_);
   jo("sender_boost_count", object.sender_boost_count_);
   jo("author_signature", object.author_signature_);
   jo("media_album_id", ToJson(JsonInt64{object.media_album_id_}));
+  jo("effect_id", ToJson(JsonInt64{object.effect_id_}));
   jo("restriction_reason", object.restriction_reason_);
   if (object.content_) {
     jo("content", ToJson(*object.content_));
@@ -14475,6 +15468,7 @@ void to_json(JsonValueScope &jv, const td_api::messageAnimation &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   jo("has_spoiler", JsonBool{object.has_spoiler_});
   jo("is_secret", JsonBool{object.is_secret_});
 }
@@ -14510,6 +15504,7 @@ void to_json(JsonValueScope &jv, const td_api::messagePhoto &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   jo("has_spoiler", JsonBool{object.has_spoiler_});
   jo("is_secret", JsonBool{object.is_secret_});
 }
@@ -14532,6 +15527,7 @@ void to_json(JsonValueScope &jv, const td_api::messageVideo &object) {
   if (object.caption_) {
     jo("caption", ToJson(*object.caption_));
   }
+  jo("show_caption_above_media", JsonBool{object.show_caption_above_media_});
   jo("has_spoiler", JsonBool{object.has_spoiler_});
   jo("is_secret", JsonBool{object.is_secret_});
 }
@@ -14656,12 +15652,8 @@ void to_json(JsonValueScope &jv, const td_api::messageStory &object) {
 void to_json(JsonValueScope &jv, const td_api::messageInvoice &object) {
   auto jo = jv.enter_object();
   jo("@type", "messageInvoice");
-  jo("title", object.title_);
-  if (object.description_) {
-    jo("description", ToJson(*object.description_));
-  }
-  if (object.photo_) {
-    jo("photo", ToJson(*object.photo_));
+  if (object.product_info_) {
+    jo("product_info", ToJson(*object.product_info_));
   }
   jo("currency", object.currency_);
   jo("total_amount", object.total_amount_);
@@ -14979,14 +15971,16 @@ void to_json(JsonValueScope &jv, const td_api::messageContactRegistered &object)
 void to_json(JsonValueScope &jv, const td_api::messageUsersShared &object) {
   auto jo = jv.enter_object();
   jo("@type", "messageUsersShared");
-  jo("user_ids", ToJson(object.user_ids_));
+  jo("users", ToJson(object.users_));
   jo("button_id", object.button_id_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::messageChatShared &object) {
   auto jo = jv.enter_object();
   jo("@type", "messageChatShared");
-  jo("chat_id", object.chat_id_);
+  if (object.chat_) {
+    jo("chat", ToJson(*object.chat_));
+  }
   jo("button_id", object.button_id_);
 }
 
@@ -15050,6 +16044,44 @@ void to_json(JsonValueScope &jv, const td_api::messageCopyOptions &object) {
   jo("replace_caption", JsonBool{object.replace_caption_});
   if (object.new_caption_) {
     jo("new_caption", ToJson(*object.new_caption_));
+  }
+  jo("new_show_caption_above_media", JsonBool{object.new_show_caption_above_media_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::messageEffect &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "messageEffect");
+  jo("id", ToJson(JsonInt64{object.id_}));
+  if (object.static_icon_) {
+    jo("static_icon", ToJson(*object.static_icon_));
+  }
+  jo("emoji", object.emoji_);
+  jo("is_premium", JsonBool{object.is_premium_});
+  if (object.type_) {
+    jo("type", ToJson(*object.type_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::MessageEffectType &object) {
+  td_api::downcast_call(const_cast<td_api::MessageEffectType &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::messageEffectTypeEmojiReaction &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "messageEffectTypeEmojiReaction");
+  if (object.select_animation_) {
+    jo("select_animation", ToJson(*object.select_animation_));
+  }
+  if (object.effect_animation_) {
+    jo("effect_animation", ToJson(*object.effect_animation_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::messageEffectTypePremiumSticker &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "messageEffectTypePremiumSticker");
+  if (object.sticker_) {
+    jo("sticker", ToJson(*object.sticker_));
   }
 }
 
@@ -15389,58 +16421,11 @@ void to_json(JsonValueScope &jv, const td_api::messageSendingStateFailed &object
 void to_json(JsonValueScope &jv, const td_api::messageSponsor &object) {
   auto jo = jv.enter_object();
   jo("@type", "messageSponsor");
-  if (object.type_) {
-    jo("type", ToJson(*object.type_));
-  }
+  jo("url", object.url_);
   if (object.photo_) {
     jo("photo", ToJson(*object.photo_));
   }
   jo("info", object.info_);
-}
-
-void to_json(JsonValueScope &jv, const td_api::MessageSponsorType &object) {
-  td_api::downcast_call(const_cast<td_api::MessageSponsorType &>(object), [&jv](const auto &object) { to_json(jv, object); });
-}
-
-void to_json(JsonValueScope &jv, const td_api::messageSponsorTypeBot &object) {
-  auto jo = jv.enter_object();
-  jo("@type", "messageSponsorTypeBot");
-  jo("bot_user_id", object.bot_user_id_);
-  if (object.link_) {
-    jo("link", ToJson(*object.link_));
-  }
-}
-
-void to_json(JsonValueScope &jv, const td_api::messageSponsorTypeWebApp &object) {
-  auto jo = jv.enter_object();
-  jo("@type", "messageSponsorTypeWebApp");
-  jo("web_app_title", object.web_app_title_);
-  if (object.link_) {
-    jo("link", ToJson(*object.link_));
-  }
-}
-
-void to_json(JsonValueScope &jv, const td_api::messageSponsorTypePublicChannel &object) {
-  auto jo = jv.enter_object();
-  jo("@type", "messageSponsorTypePublicChannel");
-  jo("chat_id", object.chat_id_);
-  if (object.link_) {
-    jo("link", ToJson(*object.link_));
-  }
-}
-
-void to_json(JsonValueScope &jv, const td_api::messageSponsorTypePrivateChannel &object) {
-  auto jo = jv.enter_object();
-  jo("@type", "messageSponsorTypePrivateChannel");
-  jo("title", object.title_);
-  jo("invite_link", object.invite_link_);
-}
-
-void to_json(JsonValueScope &jv, const td_api::messageSponsorTypeWebsite &object) {
-  auto jo = jv.enter_object();
-  jo("@type", "messageSponsorTypeWebsite");
-  jo("url", object.url_);
-  jo("name", object.name_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::messageStatistics &object) {
@@ -16401,10 +17386,25 @@ void to_json(JsonValueScope &jv, const td_api::paymentForm &object) {
   auto jo = jv.enter_object();
   jo("@type", "paymentForm");
   jo("id", ToJson(JsonInt64{object.id_}));
+  if (object.type_) {
+    jo("type", ToJson(*object.type_));
+  }
+  jo("seller_bot_user_id", object.seller_bot_user_id_);
+  if (object.product_info_) {
+    jo("product_info", ToJson(*object.product_info_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::PaymentFormType &object) {
+  td_api::downcast_call(const_cast<td_api::PaymentFormType &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::paymentFormTypeRegular &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "paymentFormTypeRegular");
   if (object.invoice_) {
     jo("invoice", ToJson(*object.invoice_));
   }
-  jo("seller_bot_user_id", object.seller_bot_user_id_);
   jo("payment_provider_user_id", object.payment_provider_user_id_);
   if (object.payment_provider_) {
     jo("payment_provider", ToJson(*object.payment_provider_));
@@ -16416,13 +17416,12 @@ void to_json(JsonValueScope &jv, const td_api::paymentForm &object) {
   jo("saved_credentials", ToJson(object.saved_credentials_));
   jo("can_save_credentials", JsonBool{object.can_save_credentials_});
   jo("need_password", JsonBool{object.need_password_});
-  jo("product_title", object.product_title_);
-  if (object.product_description_) {
-    jo("product_description", ToJson(*object.product_description_));
-  }
-  if (object.product_photo_) {
-    jo("product_photo", ToJson(*object.product_photo_));
-  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::paymentFormTypeStars &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "paymentFormTypeStars");
+  jo("star_count", object.star_count_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::paymentOption &object) {
@@ -16461,15 +17460,23 @@ void to_json(JsonValueScope &jv, const td_api::paymentProviderOther &object) {
 void to_json(JsonValueScope &jv, const td_api::paymentReceipt &object) {
   auto jo = jv.enter_object();
   jo("@type", "paymentReceipt");
-  jo("title", object.title_);
-  if (object.description_) {
-    jo("description", ToJson(*object.description_));
-  }
-  if (object.photo_) {
-    jo("photo", ToJson(*object.photo_));
+  if (object.product_info_) {
+    jo("product_info", ToJson(*object.product_info_));
   }
   jo("date", object.date_);
   jo("seller_bot_user_id", object.seller_bot_user_id_);
+  if (object.type_) {
+    jo("type", ToJson(*object.type_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::PaymentReceiptType &object) {
+  td_api::downcast_call(const_cast<td_api::PaymentReceiptType &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::paymentReceiptTypeRegular &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "paymentReceiptTypeRegular");
   jo("payment_provider_user_id", object.payment_provider_user_id_);
   if (object.invoice_) {
     jo("invoice", ToJson(*object.invoice_));
@@ -16482,6 +17489,13 @@ void to_json(JsonValueScope &jv, const td_api::paymentReceipt &object) {
   }
   jo("credentials_title", object.credentials_title_);
   jo("tip_amount", object.tip_amount_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::paymentReceiptTypeStars &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "paymentReceiptTypeStars");
+  jo("star_count", object.star_count_);
+  jo("transaction_id", object.transaction_id_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::paymentResult &object) {
@@ -16559,7 +17573,9 @@ void to_json(JsonValueScope &jv, const td_api::poll &object) {
   auto jo = jv.enter_object();
   jo("@type", "poll");
   jo("id", ToJson(JsonInt64{object.id_}));
-  jo("question", object.question_);
+  if (object.question_) {
+    jo("question", ToJson(*object.question_));
+  }
   jo("options", ToJson(object.options_));
   jo("total_voter_count", object.total_voter_count_);
   jo("recent_voter_ids", ToJson(object.recent_voter_ids_));
@@ -16575,7 +17591,9 @@ void to_json(JsonValueScope &jv, const td_api::poll &object) {
 void to_json(JsonValueScope &jv, const td_api::pollOption &object) {
   auto jo = jv.enter_object();
   jo("@type", "pollOption");
-  jo("text", object.text_);
+  if (object.text_) {
+    jo("text", ToJson(*object.text_));
+  }
   jo("voter_count", object.voter_count_);
   jo("vote_percentage", object.vote_percentage_);
   jo("is_chosen", JsonBool{object.is_chosen_});
@@ -16713,6 +17731,11 @@ void to_json(JsonValueScope &jv, const td_api::premiumFeatureMessagePrivacy &obj
 void to_json(JsonValueScope &jv, const td_api::premiumFeatureLastSeenTimes &object) {
   auto jo = jv.enter_object();
   jo("@type", "premiumFeatureLastSeenTimes");
+}
+
+void to_json(JsonValueScope &jv, const td_api::premiumFeatureBusiness &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "premiumFeatureBusiness");
 }
 
 void to_json(JsonValueScope &jv, const td_api::premiumFeaturePromotionAnimation &object) {
@@ -16966,6 +17989,7 @@ void to_json(JsonValueScope &jv, const td_api::premiumState &object) {
   }
   jo("payment_options", ToJson(object.payment_options_));
   jo("animations", ToJson(object.animations_));
+  jo("business_animations", ToJson(object.business_animations_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::premiumStatePaymentOption &object) {
@@ -16986,6 +18010,18 @@ void to_json(JsonValueScope &jv, const td_api::prepaidPremiumGiveaway &object) {
   jo("winner_count", object.winner_count_);
   jo("month_count", object.month_count_);
   jo("payment_date", object.payment_date_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::productInfo &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "productInfo");
+  jo("title", object.title_);
+  if (object.description_) {
+    jo("description", ToJson(*object.description_));
+  }
+  if (object.photo_) {
+    jo("photo", ToJson(*object.photo_));
+  }
 }
 
 void to_json(JsonValueScope &jv, const td_api::profileAccentColor &object) {
@@ -17374,6 +18410,12 @@ void to_json(JsonValueScope &jv, const td_api::quickReplyMessage &object) {
   }
 }
 
+void to_json(JsonValueScope &jv, const td_api::quickReplyMessages &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "quickReplyMessages");
+  jo("messages", ToJson(object.messages_));
+}
+
 void to_json(JsonValueScope &jv, const td_api::quickReplyShortcut &object) {
   auto jo = jv.enter_object();
   jo("@type", "quickReplyShortcut");
@@ -17383,6 +18425,38 @@ void to_json(JsonValueScope &jv, const td_api::quickReplyShortcut &object) {
     jo("first_message", ToJson(*object.first_message_));
   }
   jo("message_count", object.message_count_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::reactionNotificationSettings &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reactionNotificationSettings");
+  if (object.message_reaction_source_) {
+    jo("message_reaction_source", ToJson(*object.message_reaction_source_));
+  }
+  if (object.story_reaction_source_) {
+    jo("story_reaction_source", ToJson(*object.story_reaction_source_));
+  }
+  jo("sound_id", ToJson(JsonInt64{object.sound_id_}));
+  jo("show_preview", JsonBool{object.show_preview_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::ReactionNotificationSource &object) {
+  td_api::downcast_call(const_cast<td_api::ReactionNotificationSource &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::reactionNotificationSourceNone &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reactionNotificationSourceNone");
+}
+
+void to_json(JsonValueScope &jv, const td_api::reactionNotificationSourceContacts &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reactionNotificationSourceContacts");
+}
+
+void to_json(JsonValueScope &jv, const td_api::reactionNotificationSourceAll &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reactionNotificationSourceAll");
 }
 
 void to_json(JsonValueScope &jv, const td_api::ReactionType &object) {
@@ -17484,6 +18558,44 @@ void to_json(JsonValueScope &jv, const td_api::replyMarkupInlineKeyboard &object
   auto jo = jv.enter_object();
   jo("@type", "replyMarkupInlineKeyboard");
   jo("rows", ToJson(object.rows_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageOption &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageOption");
+  jo("id", base64_encode(object.id_));
+  jo("text", object.text_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::ReportChatSponsoredMessageResult &object) {
+  td_api::downcast_call(const_cast<td_api::ReportChatSponsoredMessageResult &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageResultOk &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageResultOk");
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageResultFailed &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageResultFailed");
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageResultOptionRequired &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageResultOptionRequired");
+  jo("title", object.title_);
+  jo("options", ToJson(object.options_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageResultAdsHidden &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageResultAdsHidden");
+}
+
+void to_json(JsonValueScope &jv, const td_api::reportChatSponsoredMessageResultPremiumRequired &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "reportChatSponsoredMessageResultPremiumRequired");
 }
 
 void to_json(JsonValueScope &jv, const td_api::ResetPasswordResult &object) {
@@ -17905,6 +19017,29 @@ void to_json(JsonValueScope &jv, const td_api::sessions &object) {
   jo("inactive_session_ttl_days", object.inactive_session_ttl_days_);
 }
 
+void to_json(JsonValueScope &jv, const td_api::sharedChat &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "sharedChat");
+  jo("chat_id", object.chat_id_);
+  jo("title", object.title_);
+  jo("username", object.username_);
+  if (object.photo_) {
+    jo("photo", ToJson(*object.photo_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::sharedUser &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "sharedUser");
+  jo("user_id", object.user_id_);
+  jo("first_name", object.first_name_);
+  jo("last_name", object.last_name_);
+  jo("username", object.username_);
+  if (object.photo_) {
+    jo("photo", ToJson(*object.photo_));
+  }
+}
+
 void to_json(JsonValueScope &jv, const td_api::shippingOption &object) {
   auto jo = jv.enter_object();
   jo("@type", "shippingOption");
@@ -17942,13 +19077,17 @@ void to_json(JsonValueScope &jv, const td_api::sponsoredMessage &object) {
   jo("@type", "sponsoredMessage");
   jo("message_id", object.message_id_);
   jo("is_recommended", JsonBool{object.is_recommended_});
+  jo("can_be_reported", JsonBool{object.can_be_reported_});
   if (object.content_) {
     jo("content", ToJson(*object.content_));
   }
   if (object.sponsor_) {
     jo("sponsor", ToJson(*object.sponsor_));
   }
+  jo("title", object.title_);
   jo("button_text", object.button_text_);
+  jo("accent_color_id", object.accent_color_id_);
+  jo("background_custom_emoji_id", ToJson(JsonInt64{object.background_custom_emoji_id_}));
   jo("additional_info", object.additional_info_);
 }
 
@@ -17957,6 +19096,80 @@ void to_json(JsonValueScope &jv, const td_api::sponsoredMessages &object) {
   jo("@type", "sponsoredMessages");
   jo("messages", ToJson(object.messages_));
   jo("messages_between", object.messages_between_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::starPaymentOption &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starPaymentOption");
+  jo("currency", object.currency_);
+  jo("amount", object.amount_);
+  jo("star_count", object.star_count_);
+  jo("store_product_id", object.store_product_id_);
+  jo("is_additional", JsonBool{object.is_additional_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::starPaymentOptions &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starPaymentOptions");
+  jo("options", ToJson(object.options_));
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransaction &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransaction");
+  jo("id", object.id_);
+  jo("star_count", object.star_count_);
+  jo("is_refund", JsonBool{object.is_refund_});
+  jo("date", object.date_);
+  if (object.source_) {
+    jo("source", ToJson(*object.source_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::StarTransactionSource &object) {
+  td_api::downcast_call(const_cast<td_api::StarTransactionSource &>(object), [&jv](const auto &object) { to_json(jv, object); });
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceTelegram &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceTelegram");
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceAppStore &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceAppStore");
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceGooglePlay &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceGooglePlay");
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceFragment &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceFragment");
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceUser &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceUser");
+  jo("user_id", object.user_id_);
+  if (object.product_info_) {
+    jo("product_info", ToJson(*object.product_info_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactionSourceUnsupported &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactionSourceUnsupported");
+}
+
+void to_json(JsonValueScope &jv, const td_api::starTransactions &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "starTransactions");
+  jo("star_count", object.star_count_);
+  jo("transactions", ToJson(object.transactions_));
+  jo("next_offset", object.next_offset_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::StatisticalGraph &object) {
@@ -18069,12 +19282,10 @@ void to_json(JsonValueScope &jv, const td_api::stickerSet &object) {
     jo("thumbnail", ToJson(*object.thumbnail_));
   }
   jo("thumbnail_outline", ToJson(object.thumbnail_outline_));
+  jo("is_owned", JsonBool{object.is_owned_});
   jo("is_installed", JsonBool{object.is_installed_});
   jo("is_archived", JsonBool{object.is_archived_});
   jo("is_official", JsonBool{object.is_official_});
-  if (object.sticker_format_) {
-    jo("sticker_format", ToJson(*object.sticker_format_));
-  }
   if (object.sticker_type_) {
     jo("sticker_type", ToJson(*object.sticker_type_));
   }
@@ -18095,12 +19306,10 @@ void to_json(JsonValueScope &jv, const td_api::stickerSetInfo &object) {
     jo("thumbnail", ToJson(*object.thumbnail_));
   }
   jo("thumbnail_outline", ToJson(object.thumbnail_outline_));
+  jo("is_owned", JsonBool{object.is_owned_});
   jo("is_installed", JsonBool{object.is_installed_});
   jo("is_archived", JsonBool{object.is_archived_});
   jo("is_official", JsonBool{object.is_official_});
-  if (object.sticker_format_) {
-    jo("sticker_format", ToJson(*object.sticker_format_));
-  }
   if (object.sticker_type_) {
     jo("sticker_type", ToJson(*object.sticker_type_));
   }
@@ -18185,6 +19394,7 @@ void to_json(JsonValueScope &jv, const td_api::stories &object) {
   jo("@type", "stories");
   jo("total_count", object.total_count_);
   jo("stories", ToJson(object.stories_));
+  jo("pinned_story_ids", ToJson(object.pinned_story_ids_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::story &object) {
@@ -18199,13 +19409,13 @@ void to_json(JsonValueScope &jv, const td_api::story &object) {
   jo("is_being_sent", JsonBool{object.is_being_sent_});
   jo("is_being_edited", JsonBool{object.is_being_edited_});
   jo("is_edited", JsonBool{object.is_edited_});
-  jo("is_pinned", JsonBool{object.is_pinned_});
+  jo("is_posted_to_chat_page", JsonBool{object.is_posted_to_chat_page_});
   jo("is_visible_only_for_self", JsonBool{object.is_visible_only_for_self_});
   jo("can_be_deleted", JsonBool{object.can_be_deleted_});
   jo("can_be_edited", JsonBool{object.can_be_edited_});
   jo("can_be_forwarded", JsonBool{object.can_be_forwarded_});
   jo("can_be_replied", JsonBool{object.can_be_replied_});
-  jo("can_toggle_is_pinned", JsonBool{object.can_toggle_is_pinned_});
+  jo("can_toggle_is_posted_to_chat_page", JsonBool{object.can_toggle_is_posted_to_chat_page_});
   jo("can_get_statistics", JsonBool{object.can_get_statistics_});
   jo("can_get_interactions", JsonBool{object.can_get_interactions_});
   jo("has_expired_viewers", JsonBool{object.has_expired_viewers_});
@@ -18541,6 +19751,17 @@ void to_json(JsonValueScope &jv, const td_api::suggestedActionGiftPremiumForChri
   jo("@type", "suggestedActionGiftPremiumForChristmas");
 }
 
+void to_json(JsonValueScope &jv, const td_api::suggestedActionSetBirthdate &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "suggestedActionSetBirthdate");
+}
+
+void to_json(JsonValueScope &jv, const td_api::suggestedActionExtendPremium &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "suggestedActionExtendPremium");
+  jo("manage_premium_subscription_url", object.manage_premium_subscription_url_);
+}
+
 void to_json(JsonValueScope &jv, const td_api::supergroup &object) {
   auto jo = jv.enter_object();
   jo("@type", "supergroup");
@@ -18591,8 +19812,10 @@ void to_json(JsonValueScope &jv, const td_api::supergroupFullInfo &object) {
   jo("can_set_sticker_set", JsonBool{object.can_set_sticker_set_});
   jo("can_set_location", JsonBool{object.can_set_location_});
   jo("can_get_statistics", JsonBool{object.can_get_statistics_});
+  jo("can_get_revenue_statistics", JsonBool{object.can_get_revenue_statistics_});
   jo("can_toggle_aggressive_anti_spam", JsonBool{object.can_toggle_aggressive_anti_spam_});
   jo("is_all_history_available", JsonBool{object.is_all_history_available_});
+  jo("can_have_sponsored_messages", JsonBool{object.can_have_sponsored_messages_});
   jo("has_aggressive_anti_spam_enabled", JsonBool{object.has_aggressive_anti_spam_enabled_});
   jo("has_pinned_stories", JsonBool{object.has_pinned_stories_});
   jo("my_boost_count", object.my_boost_count_);
@@ -18852,6 +20075,11 @@ void to_json(JsonValueScope &jv, const td_api::textEntityTypeBlockQuote &object)
   jo("@type", "textEntityTypeBlockQuote");
 }
 
+void to_json(JsonValueScope &jv, const td_api::textEntityTypeExpandableBlockQuote &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "textEntityTypeExpandableBlockQuote");
+}
+
 void to_json(JsonValueScope &jv, const td_api::textEntityTypeTextUrl &object) {
   auto jo = jv.enter_object();
   jo("@type", "textEntityTypeTextUrl");
@@ -19106,6 +20334,16 @@ void to_json(JsonValueScope &jv, const td_api::updateMessageUnreadReactions &obj
   jo("unread_reaction_count", object.unread_reaction_count_);
 }
 
+void to_json(JsonValueScope &jv, const td_api::updateMessageFactCheck &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateMessageFactCheck");
+  jo("chat_id", object.chat_id_);
+  jo("message_id", object.message_id_);
+  if (object.fact_check_) {
+    jo("fact_check", ToJson(*object.fact_check_));
+  }
+}
+
 void to_json(JsonValueScope &jv, const td_api::updateMessageLiveLocationViewed &object) {
   auto jo = jv.enter_object();
   jo("@type", "updateMessageLiveLocationViewed");
@@ -19214,6 +20452,15 @@ void to_json(JsonValueScope &jv, const td_api::updateChatActionBar &object) {
   jo("chat_id", object.chat_id_);
   if (object.action_bar_) {
     jo("action_bar", ToJson(*object.action_bar_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateChatBusinessBotManageBar &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateChatBusinessBotManageBar");
+  jo("chat_id", object.chat_id_);
+  if (object.business_bot_manage_bar_) {
+    jo("business_bot_manage_bar", ToJson(*object.business_bot_manage_bar_));
   }
 }
 
@@ -19452,6 +20699,14 @@ void to_json(JsonValueScope &jv, const td_api::updateScopeNotificationSettings &
   }
 }
 
+void to_json(JsonValueScope &jv, const td_api::updateReactionNotificationSettings &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateReactionNotificationSettings");
+  if (object.notification_settings_) {
+    jo("notification_settings", ToJson(*object.notification_settings_));
+  }
+}
+
 void to_json(JsonValueScope &jv, const td_api::updateNotification &object) {
   auto jo = jv.enter_object();
   jo("@type", "updateNotification");
@@ -19648,6 +20903,13 @@ void to_json(JsonValueScope &jv, const td_api::updateFileRemovedFromDownloads &o
   if (object.counts_) {
     jo("counts", ToJson(*object.counts_));
   }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateApplicationVerificationRequired &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateApplicationVerificationRequired");
+  jo("verification_id", object.verification_id_);
+  jo("nonce", object.nonce_);
 }
 
 void to_json(JsonValueScope &jv, const td_api::updateCall &object) {
@@ -19926,6 +21188,13 @@ void to_json(JsonValueScope &jv, const td_api::updateActiveEmojiReactions &objec
   jo("emojis", ToJson(object.emojis_));
 }
 
+void to_json(JsonValueScope &jv, const td_api::updateAvailableMessageEffects &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateAvailableMessageEffects");
+  jo("reaction_effect_ids", ToJson(JsonVectorInt64{object.reaction_effect_ids_}));
+  jo("sticker_effect_ids", ToJson(JsonVectorInt64{object.sticker_effect_ids_}));
+}
+
 void to_json(JsonValueScope &jv, const td_api::updateDefaultReactionType &object) {
   auto jo = jv.enter_object();
   jo("@type", "updateDefaultReactionType");
@@ -19940,6 +21209,21 @@ void to_json(JsonValueScope &jv, const td_api::updateSavedMessagesTags &object) 
   jo("saved_messages_topic_id", object.saved_messages_topic_id_);
   if (object.tags_) {
     jo("tags", ToJson(*object.tags_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateOwnedStarCount &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateOwnedStarCount");
+  jo("star_count", object.star_count_);
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateChatRevenueAmount &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateChatRevenueAmount");
+  jo("chat_id", object.chat_id_);
+  if (object.revenue_amount_) {
+    jo("revenue_amount", ToJson(*object.revenue_amount_));
   }
 }
 
@@ -19982,11 +21266,16 @@ void to_json(JsonValueScope &jv, const td_api::updateSuggestedActions &object) {
   jo("removed_actions", ToJson(object.removed_actions_));
 }
 
-void to_json(JsonValueScope &jv, const td_api::updateAddChatMembersPrivacyForbidden &object) {
+void to_json(JsonValueScope &jv, const td_api::updateSpeedLimitNotification &object) {
   auto jo = jv.enter_object();
-  jo("@type", "updateAddChatMembersPrivacyForbidden");
-  jo("chat_id", object.chat_id_);
-  jo("user_ids", ToJson(object.user_ids_));
+  jo("@type", "updateSpeedLimitNotification");
+  jo("is_upload", JsonBool{object.is_upload_});
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateContactCloseBirthdays &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateContactCloseBirthdays");
+  jo("close_birthday_users", ToJson(object.close_birthday_users_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::updateAutosaveSettings &object) {
@@ -19998,6 +21287,40 @@ void to_json(JsonValueScope &jv, const td_api::updateAutosaveSettings &object) {
   if (object.settings_) {
     jo("settings", ToJson(*object.settings_));
   }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateBusinessConnection &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateBusinessConnection");
+  if (object.connection_) {
+    jo("connection", ToJson(*object.connection_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateNewBusinessMessage &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateNewBusinessMessage");
+  jo("connection_id", object.connection_id_);
+  if (object.message_) {
+    jo("message", ToJson(*object.message_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateBusinessMessageEdited &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateBusinessMessageEdited");
+  jo("connection_id", object.connection_id_);
+  if (object.message_) {
+    jo("message", ToJson(*object.message_));
+  }
+}
+
+void to_json(JsonValueScope &jv, const td_api::updateBusinessMessagesDeleted &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "updateBusinessMessagesDeleted");
+  jo("connection_id", object.connection_id_);
+  jo("chat_id", object.chat_id_);
+  jo("message_ids", ToJson(object.message_ids_));
 }
 
 void to_json(JsonValueScope &jv, const td_api::updateNewInlineQuery &object) {
@@ -20118,6 +21441,7 @@ void to_json(JsonValueScope &jv, const td_api::updateChatMember &object) {
   if (object.invite_link_) {
     jo("invite_link", ToJson(*object.invite_link_));
   }
+  jo("via_join_request", JsonBool{object.via_join_request_});
   jo("via_chat_folder_invite_link", JsonBool{object.via_chat_folder_invite_link_});
   if (object.old_chat_member_) {
     jo("old_chat_member", ToJson(*object.old_chat_member_));
@@ -20240,12 +21564,17 @@ void to_json(JsonValueScope &jv, const td_api::userFullInfo &object) {
   jo("has_private_calls", JsonBool{object.has_private_calls_});
   jo("has_private_forwards", JsonBool{object.has_private_forwards_});
   jo("has_restricted_voice_and_video_note_messages", JsonBool{object.has_restricted_voice_and_video_note_messages_});
-  jo("has_pinned_stories", JsonBool{object.has_pinned_stories_});
+  jo("has_posted_to_profile_stories", JsonBool{object.has_posted_to_profile_stories_});
+  jo("has_sponsored_messages_enabled", JsonBool{object.has_sponsored_messages_enabled_});
   jo("need_phone_number_privacy_exception", JsonBool{object.need_phone_number_privacy_exception_});
   jo("set_chat_background", JsonBool{object.set_chat_background_});
   if (object.bio_) {
     jo("bio", ToJson(*object.bio_));
   }
+  if (object.birthdate_) {
+    jo("birthdate", ToJson(*object.birthdate_));
+  }
+  jo("personal_chat_id", object.personal_chat_id_);
   jo("premium_gift_options", ToJson(object.premium_gift_options_));
   jo("group_in_common_count", object.group_in_common_count_);
   if (object.business_info_) {
@@ -20292,6 +21621,11 @@ void to_json(JsonValueScope &jv, const td_api::userPrivacySettingShowBio &object
   jo("@type", "userPrivacySettingShowBio");
 }
 
+void to_json(JsonValueScope &jv, const td_api::userPrivacySettingShowBirthdate &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "userPrivacySettingShowBirthdate");
+}
+
 void to_json(JsonValueScope &jv, const td_api::userPrivacySettingAllowChatInvites &object) {
   auto jo = jv.enter_object();
   jo("@type", "userPrivacySettingAllowChatInvites");
@@ -20329,6 +21663,11 @@ void to_json(JsonValueScope &jv, const td_api::userPrivacySettingRuleAllowAll &o
 void to_json(JsonValueScope &jv, const td_api::userPrivacySettingRuleAllowContacts &object) {
   auto jo = jv.enter_object();
   jo("@type", "userPrivacySettingRuleAllowContacts");
+}
+
+void to_json(JsonValueScope &jv, const td_api::userPrivacySettingRuleAllowPremiumUsers &object) {
+  auto jo = jv.enter_object();
+  jo("@type", "userPrivacySettingRuleAllowPremiumUsers");
 }
 
 void to_json(JsonValueScope &jv, const td_api::userPrivacySettingRuleAllowUsers &object) {
@@ -20443,6 +21782,7 @@ void to_json(JsonValueScope &jv, const td_api::userTypeBot &object) {
   jo("is_inline", JsonBool{object.is_inline_});
   jo("inline_query_placeholder", object.inline_query_placeholder_);
   jo("need_location", JsonBool{object.need_location_});
+  jo("can_connect_to_business", JsonBool{object.can_connect_to_business_});
   jo("can_be_added_to_attachment_menu", JsonBool{object.can_be_added_to_attachment_menu_});
 }
 
@@ -20645,6 +21985,7 @@ void to_json(JsonValueScope &jv, const td_api::webPage &object) {
   }
   jo("story_sender_chat_id", object.story_sender_chat_id_);
   jo("story_id", object.story_id_);
+  jo("stickers", ToJson(object.stickers_));
   jo("instant_view_version", object.instant_view_version_);
 }
 
