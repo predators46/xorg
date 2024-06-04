@@ -14,7 +14,7 @@ PKG_LICENSE_FILES:=LICENSE
 
 CMAKE_BINARY_SUBDIR := build
 GO_PKG:=github.com/d99kris/nchat
-GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go
+GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go/
 
 HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
