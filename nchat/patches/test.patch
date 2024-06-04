@@ -1,0 +1,28 @@
+--- a/lib/wmchat/go/CMakeLists.txt
++++ b/lib/wmchat/go/CMakeLists.txt
+@@ -12,16 +12,6 @@ else ()
+   SET(CUSTOM_GO_FLAGS "")
+ endif ()
+ 
+-# Check Go package
+-execute_process(COMMAND bash "-c" "go version | grep -v -q gccgo" RESULT_VARIABLE GO_GCC)
+-if (GO_GCC EQUAL "1")
+-  message(STATUS "Go gccgo.")
+-  set(GO_LIBRARIES "go" PARENT_SCOPE)
+-else ()
+-  message(STATUS "Go golang.")
+-  set(GO_LIBRARIES "" PARENT_SCOPE)
+-endif ()
+-
+ # Build Go library / C archive
+ set(TARGET cgowm)
+ set(GOPATH ${CMAKE_CURRENT_BINARY_DIR})
+--- a/lib/wmchat/CMakeLists.txt
++++ b/lib/wmchat/CMakeLists.txt
+@@ -40,5 +40,4 @@ set_target_properties(wmchat PROPERTIES COMPILE_FLAGS
+                        -Wcast-align")
+ 
+ # Linking
+-message(STATUS "Go libraries: ${GO_LIBRARIES}")
+-target_link_libraries(wmchat PUBLIC ref-cgowm ncutil ${GO_LIBRARIES})
++target_link_libraries(wmchat PUBLIC ref-cgowm ncutil)
