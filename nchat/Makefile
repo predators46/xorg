@@ -13,19 +13,22 @@ PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
 CMAKE_BINARY_SUBDIR := build
+GO_PKG:=github.com/d99kris/nchat
+GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go
 
-HOST_BUILD_DEPENDS:=ncurses/host gperf/host
-PKG_BUILD_DEPENDS:=ncurses/host gperf/host
+HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
+PKG_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
+include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
 define Package/nchat
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=Terminal-based Telegram / WhatsApp client for Linux and macOS
-	DEPENDS:=+libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +libstdcpp
+	DEPENDS:=$(GO_ARCH_DEPENDS) +libncurses +libopenssl +libsqlite3 +file +zlib +libreadline +libstdcpp
 	URL:=https://github.com/d99kris/nchat
 endef
 
@@ -54,6 +57,10 @@ CMAKE_OPTIONS += \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
 	-DHAS_COREDUMP=ON
+
+MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG_BUILD_PKG)
+MAKE_VARS += \
+	$(GO_PKG_VARS)
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
