@@ -18,7 +18,7 @@ PYTHON3_PKG_BUILD_VARS:= $(GO_PKG_VARS)
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
-include $(TOPDIR)/feeds/mosdns/golang/golang-package.mk
+include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
 
 define Package/tun2socks-python3
