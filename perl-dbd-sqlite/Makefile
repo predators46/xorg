@@ -23,7 +23,7 @@ define Package/perl-dbd-sqlite
   CATEGORY:=Languages
   TITLE:=Perl DBD SQLite
   URL:=https://metacpan.org/release/DBD-SQLite
-  DEPENDS:=+perl-dbi +libsqlite3
+  DEPENDS:=perl +perl-dbi +libsqlite3
 endef
 
 define Build/Configure
