@@ -42,7 +42,7 @@ CMAKE_OPTIONS += \
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
-	  $(1)/usr/lib
+	  $(1)/usr/lib/pkgconfig
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/include/weechat \
