@@ -49,8 +49,8 @@ define Build/InstallDev
 	  $(1)/usr/include/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/pkgconfig \
-	  $(1)/usr/lib/
+	  $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/weechat.pc \
+	  $(1)/usr/lib/pkgconfig/
 endef
 
 define Package/weechat/install
@@ -64,11 +64,11 @@ define Package/weechat/install
 	  $(1)/usr/bin/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{weechat,*.so*} \
+	  $(PKG_INSTALL_DIR)/usr/lib/weechat \
 	  $(1)/usr/lib/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/share/* \
+	  $(PKG_INSTALL_DIR)/usr/share/{applications,icons} \
 	  $(1)/usr/share/
 endef
 
