@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
 PKG_LICENSE:=LICENSE
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/perl/DBD-SQLite-$(PKG_VERSION)
-#PKG_BUILD_DEPENDS:=perl-dbi/host
+PKG_BUILD_DEPENDS:=perl-dbi/host
 
 include $(INCLUDE_DIR)/package.mk
 include ../perl/perlmod.mk
