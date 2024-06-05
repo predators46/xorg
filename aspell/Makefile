@@ -1,39 +1,62 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=sphinxcontrib-serializinghtml
-PKG_VERSION:=1.1.10
+PKG_NAME:=aspell
+PKG_VERSION:=0.60.8.1
 PKG_RELEASE:=1
 
-PYPI_NAME:=sphinxcontrib_serializinghtml
-PKG_HASH:=93f3f5dc458b91b192fe10c397e324f262cf163d79f3282c158e8436a2c4511f
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://ftp.gnu.org/gnu/aspell/
+PKG_HASH:=d6da12b34d42d457fa604e435ad484a74b2effcd120ff40acd6bb3fb2887d21b
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
-PKG_LICENSE:=License
-PKG_LICENSE_FILES:=LICENSE
+PKG_LICENSE:=LGPL-2.1 license
+PKG_LICENSE_FILES:=COPYING
 
-HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-flit-core/host
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host python-flit-core/host
+PKG_BUILD_DEPENDS:=perl/host
 
-include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/host-build.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
 
-define Package/python3-sphinxcontrib-serializinghtml
-  SUBMENU:=Python
-  SECTION:=lang
-  CATEGORY:=Languages
-  TITLE:=Sphinx serializinghtml extension
-  URL:=https://github.com/sphinx-doc/sphinxcontrib-serializinghtml
-  DEPENDS:=+python3
+define Package/aspell
+	SECTION:=net
+	CATEGORY:=Network
+	TITLE:=This is the Git repository for GNU Aspell
+	DEPENDS:=+libncurses +libintl-full +libstdcpp
+	URL:=https://ftp.gnu.org/gnu/aspell
 endef
 
-define Package/python3-sphinxcontrib-serializinghtml/description
-  sphinxcontrib-serializinghtml is a sphinx extension which outputs "serialized" HTML files (json and pickle)
+define Package/aspell/description
+	A spell checker designed to eventually replace Ispell
 endef
 
-$(eval $(call Py3Package,python3-sphinxcontrib-serializinghtml))
-$(eval $(call BuildPackage,python3-sphinxcontrib-serializinghtml))
-$(eval $(call BuildPackage,python3-sphinxcontrib-serializinghtml-src))
-$(eval $(call HostBuild))
+CONFIGURE_ARGS += \
+	--prefix=/usr \
+	--sysconfdir=/etc
+
+define Build/InstallDev
+	$(INSTALL_DIR) \
+	  $(1)/usr/include \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/include/{aspell.h,pspell} \
+	  $(1)/usr/include/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/{aspell,aspell-0.60,*.so*} \
+	  $(1)/usr/lib/
+endef
+
+define Package/aspell/install
+	$(INSTALL_DIR) \
+	  $(1)/usr/bin \
+	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/bin/* \
+	  $(1)/usr/bin/
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/lib/{aspell,aspell-0.60,*.so*} \
+	  $(1)/usr/lib/
+
+$(eval $(call BuildPackage,aspell))
