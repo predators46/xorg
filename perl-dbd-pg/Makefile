@@ -26,8 +26,6 @@ define Package/perl-dbd-pg
   DEPENDS:=perl +perl-dbi +libpq
 endef
 
-MOD_CFLAGS_PERL += -DPGLIBVERSION=\"130400\" -DPGDEFPORT=\"5432\"
-
 define Build/Configure
 	$(call perlmod/Configure,,)
 endef
