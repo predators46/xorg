@@ -1,39 +1,41 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=sphinxcontrib-serializinghtml
-PKG_VERSION:=1.1.10
+PKG_NAME:=perl-dbd-sqlite
+PKG_VERSION:=1.74
 PKG_RELEASE:=1
 
-PYPI_NAME:=sphinxcontrib_serializinghtml
-PKG_HASH:=93f3f5dc458b91b192fe10c397e324f262cf163d79f3282c158e8436a2c4511f
+PKG_SOURCE:=DBD-SQLite-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://cpan.metacpan.org/authors/id/I/IS/ISHIGAKI/
+PKG_HASH:=8994997d84b9feb4547795f78746c661fb72e3cb6a25dbdd789b731f5688a4dd
 
-PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
-PKG_LICENSE:=License
-PKG_LICENSE_FILES:=LICENSE
+PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
+PKG_LICENSE:=LICENSE
 
-HOST_BUILD_DEPENDS:=python-setuptools-scm/host python-flit-core/host
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host python-flit-core/host
+PKG_BUILD_DIR:=$(BUILD_DIR)/perl/DBD-SQLite-$(PKG_VERSION)
+PKG_BUILD_DEPENDS:=perl-dbi/host
 
-include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/host-build.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-host-build.mk
+include $(TOPDIR)/feeds/packages/lang/perl/perlmod.mk
 
-define Package/python3-sphinxcontrib-serializinghtml
-  SUBMENU:=Python
+define Package/perl-dbd-sqlite
+  SUBMENU:=Perl
   SECTION:=lang
   CATEGORY:=Languages
-  TITLE:=Sphinx serializinghtml extension
-  URL:=https://github.com/sphinx-doc/sphinxcontrib-serializinghtml
-  DEPENDS:=+python3
+  TITLE:=Perl DBD SQLite
+  URL:=https://metacpan.org/release/DBD-SQLite
+  DEPENDS:=perl +perl-dbi +libsqlite3
 endef
 
-define Package/python3-sphinxcontrib-serializinghtml/description
-  sphinxcontrib-serializinghtml is a sphinx extension which outputs "serialized" HTML files (json and pickle)
+define Build/Configure
+	$(call perlmod/Configure,,)
 endef
 
-$(eval $(call Py3Package,python3-sphinxcontrib-serializinghtml))
-$(eval $(call BuildPackage,python3-sphinxcontrib-serializinghtml))
-$(eval $(call BuildPackage,python3-sphinxcontrib-serializinghtml-src))
-$(eval $(call HostBuild))
+define Build/Compile
+	$(call perlmod/Compile,,)
+endef
+
+define Package/perl-dbd-sqlite/install
+	$(call perlmod/Install,$(1),DBD auto/DBD auto/share)
+endef
+
+$(eval $(call BuildPackage,perl-dbd-sqlite))
