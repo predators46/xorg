@@ -21,7 +21,7 @@ define Package/weechat
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=The extensible chat client.
-	DEPENDS:=+libncurses +libopenssl +libintl-full +cJSON +zlib +ruby +libgnutls +libcurl +liblua +libzstd +tcl
+	DEPENDS:=+libncurses +libopenssl +libintl-full +cJSON +zlib +ruby +libgnutls +libcurl +liblua +libzstd +tcl +libgcrypt
 	URL:=https://github.com/weechat/weechat
 endef
 
