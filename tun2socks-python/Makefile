@@ -13,7 +13,7 @@ PKG_MAINTAINER:=
 
 PKG_BUILD_DEPENDS:=python-setuptools-scm/host python-wheel/host golang/host
 
-PYTHON3_PKG_BUILD_VARS:= $(GO_PKG_VARS)
+PYTHON3_PKG_BUILD_VARS:= $(GO_ARCH_DEPENDS)
 
 include $(TOPDIR)/feeds/packages/lang/python/pypi.mk
 include $(INCLUDE_DIR)/package.mk
@@ -33,6 +33,9 @@ endef
 define Package/tun2socks-python3/description
 Python bindings for go tun2socks.
 endef
+
+CMAKE_OPTIONS += \
+	-Wno-dev
 
 $(eval $(call Py3Package,tun2socks-python3))
 $(eval $(call BuildPackage,tun2socks-python3))
