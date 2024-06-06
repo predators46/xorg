@@ -56,7 +56,7 @@ define Build/InstallDev
 	  $(1)/usr/lib/
 
 	$(SED) 's,/usr/share,$$$${exec_prefix}/share,g' $(1)/usr/bin/pspell-config
-	$(LN) ../../usr/bin/pspell-config $(2)/bin/pspell-config
+	  $(LN) ../../usr/bin/pspell-config $(2)/bin/pspell-config
 endef
 
 define Package/aspell/install
