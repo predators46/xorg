@@ -65,7 +65,7 @@ define Package/aspell/install
 	  $(1)/usr/lib
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/bin/* \
+	  $(PKG_INSTALL_DIR)/usr/bin/{aspell,aspell-import,precat,preunzip,prezip,prezip-bin,run-with-aspell,word-list-compress} \
 	  $(1)/usr/bin/
 
 	$(CP) \
