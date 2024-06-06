@@ -12,6 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=LGPL-2.1 license
 PKG_LICENSE_FILES:=COPYING
 
+PKG_BUILD_DEPENDS:=perl/host
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -27,6 +28,9 @@ endef
 define Package/aspell/description
 	A spell checker designed to eventually replace Ispell
 endef
+
+CONFIGURE_VARS += \
+	PERLPROG=$(STAGING_DIR_HOSTPKG)/usr/bin/perl
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
