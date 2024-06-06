@@ -12,7 +12,6 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=LGPL-2.1 license
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DEPENDS:=perl/host
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -21,7 +20,7 @@ define Package/aspell
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=This is the Git repository for GNU Aspell
-	DEPENDS:=+libncurses +libintl-full +libstdcpp +perl
+	DEPENDS:=+libncurses +libintl-full +libstdcpp
 	URL:=http://aspell.net/
 endef
 
