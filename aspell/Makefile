@@ -20,7 +20,7 @@ define Package/aspell
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=This is the Git repository for GNU Aspell
-	DEPENDS:=+libncurses +libintl-full +libstdcpp
+	DEPENDS:=+libncurses +libintl-full +libstdcpp +perl
 	URL:=http://aspell.net/
 endef
 
