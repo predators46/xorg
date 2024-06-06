@@ -51,6 +51,9 @@ define Build/InstallDev
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/weechat.pc \
 	  $(1)/usr/lib/pkgconfig/
+
+	$(SED) 's,^\(prefix\)=.*,\1=$$$${prefix},g' \
+	  $(1)/usr/lib/pkgconfig/weechat.pc
 endef
 
 define Package/weechat/install
@@ -60,7 +63,7 @@ define Package/weechat/install
 	  $(1)/usr/share
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/bin/* \
+	  $(PKG_INSTALL_DIR)/usr/bin/{weechat,weechat-curses,weechat-headless} \
 	  $(1)/usr/bin/
 
 	$(CP) \
