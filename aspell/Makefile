@@ -55,7 +55,7 @@ define Build/InstallDev
 	  $(PKG_INSTALL_DIR)/usr/lib/{aspell-0.60,*.so*} \
 	  $(1)/usr/lib/
 
-	$(SED) 's,/usr/share,$$$${exec_prefix}/share,g' $(1)/usr/bin/pspell-config
+	$(SED) 's,/usr/share,$$$${prefix}/share,g' $(1)/usr/bin/pspell-config
 	  $(LN) ../../usr/bin/pspell-config $(2)/bin/pspell-config
 endef
 
