@@ -21,7 +21,7 @@ define Package/weechat
 	SECTION:=net
 	CATEGORY:=Network
 	TITLE:=The extensible chat client.
-	DEPENDS:=+libncurses +libopenssl +libintl-full +cJSON +zlib +ruby +libgnutls +libcurl +liblua +libzstd +tcl +libgcrypt
+	DEPENDS:=+libncurses +libopenssl +libintl-full +cJSON +zlib +ruby +libgnutls +libcurl +liblua +libzstd +tcl +libgcrypt +python3
 	URL:=https://github.com/weechat/weechat
 endef
 
@@ -33,7 +33,7 @@ endef
 CMAKE_OPTIONS += \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DENABLE_PERL=OFF \
-	-DENABLE_PYTHON=OFF \
+	-DENABLE_PYTHON=ON \
 	-DENABLE_GUILE=OFF \
 	-DENABLE_JAVASCRIPT=OFF \
 	-DENABLE_PHP=OFF \
