@@ -21,7 +21,7 @@ define Package/aspell
 	CATEGORY:=Network
 	TITLE:=This is the Git repository for GNU Aspell
 	DEPENDS:=+libncurses +libintl-full +libstdcpp
-	URL:=https://ftp.gnu.org/gnu/aspell
+	URL:=http://aspell.net/
 endef
 
 define Package/aspell/description
