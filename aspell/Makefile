@@ -13,6 +13,7 @@ PKG_LICENSE:=LGPL-2.1 license
 PKG_LICENSE_FILES:=COPYING
 
 PKG_BUILD_DEPENDS:=perl/host
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
