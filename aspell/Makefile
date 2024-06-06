@@ -35,16 +35,25 @@ CONFIGURE_ARGS += \
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
+	  $(1)/usr/bin \
+	  $(2)/bin \
 	  $(1)/usr/include \
 	  $(1)/usr/lib
+
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/bin/pspell-config \
+	  $(1)/usr/bin/
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/include/{aspell.h,pspell} \
 	  $(1)/usr/include/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{aspell,aspell-0.60,*.so*} \
+	  $(PKG_INSTALL_DIR)/usr/lib/{aspell-0.60,*.so*} \
 	  $(1)/usr/lib/
+
+	$(SED) 's,/usr/share,$$$${exec_prefix}/share,g' $(1)/usr/bin/pspell-config
+	$(LN) ../../usr/bin/pspell-config $(2)/bin/pspell-config
 endef
 
 define Package/aspell/install
@@ -57,7 +66,7 @@ define Package/aspell/install
 	  $(1)/usr/bin/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{aspell,aspell-0.60,*.so*} \
+	  $(PKG_INSTALL_DIR)/usr/lib/{aspell-0.60,*.so*} \
 	  $(1)/usr/lib/
 endef
 
