@@ -58,5 +58,6 @@ define Package/aspell/install
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{aspell,aspell-0.60,*.so*} \
 	  $(1)/usr/lib/
+endef
 
 $(eval $(call BuildPackage,aspell))
