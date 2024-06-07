@@ -1,17 +1,11 @@
 --- a/lib/wmchat/go/CMakeLists.txt
 +++ b/lib/wmchat/go/CMakeLists.txt
-@@ -25,12 +25,13 @@ endif ()
- # Build Go library / C archive
- set(TARGET cgowm)
- set(GOPATH ${CMAKE_CURRENT_BINARY_DIR})
-+set(GO_PKG_VARS ${GO_PKG_VARS})
- set(SRCS gowm.go cgowm.go)
- set(LIB "libcgowm${CMAKE_SHARED_LIBRARY_SUFFIX}")
+@@ -30,7 +30,7 @@ set(LIB "libcgowm${CMAKE_SHARED_LIBRARY_SUFFIX}")
  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${LIB}
    DEPENDS ${SRCS}
    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 -  COMMAND env GOPATH=${GOPATH} CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
-+  COMMAND env GOPATH=${GOPATH} GO_PKG_VARS=${GO_PKG_VARS} go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
++  COMMAND env GOPATH=${GOPATH} GOOS=linux GOARCH=arm64 CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
    -o "${CMAKE_CURRENT_BINARY_DIR}/${LIB}"
    ${CMAKE_GO_FLAGS} ./...
    COMMENT "Building Go library")
