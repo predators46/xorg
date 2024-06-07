@@ -34,7 +34,8 @@ CONFIGURE_VARS += \
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
-	--sysconfdir=/etc
+	--sysconfdir=/etc \
+	--enable-compile-in-filters
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
