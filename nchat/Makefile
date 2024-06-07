@@ -57,7 +57,7 @@ CMAKE_OPTIONS += \
 	-DHAS_COREDUMP=ON
 
 define Build/Compile
-	$(call GoPackage/Build/Compile)
+	$(GO_PKG_VARS)
 endef
 
 define Package/nchat/install
