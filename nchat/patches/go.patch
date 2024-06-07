@@ -1,0 +1,11 @@
+--- a/lib/wmchat/go/go.mod
++++ b/lib/wmchat/go/go.mod
+@@ -2,7 +2,7 @@ module github.com/d99kris/nchat/lib/wmchat/go
+ 
+ require go.mau.fi/whatsmeow v0.0.0
+ 
+-replace go.mau.fi/whatsmeow => ./ext/whatsmeow
++replace go.mau.fi/whatsmeow => ./lib/wmchat/go/ext/whatsmeow
+ 
+ require (
+ 	github.com/mattn/go-sqlite3 v1.14.22
