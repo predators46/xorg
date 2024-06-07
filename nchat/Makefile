@@ -12,7 +12,6 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
-GO_PKG:=github.com/d99kris/nchat
 CMAKE_BINARY_SUBDIR := build
 
 HOST_BUILD_DEPENDS:=golang/host ncurses/host gperf/host
@@ -46,9 +45,6 @@ define Build/Prepare
 	$(CP) \
 	  ./files/lib/tgchat/ext/td/tdutils/generate/auto \
 	  $(PKG_BUILD_DIR)/lib/tgchat/ext/td/tdutils/generate/
-	$(CP) \
-	  $(PKG_BUILD_DIR)/lib/wmchat/go/{*.go,go.*} \
-	  $(PKG_BUILD_DIR)/
 endef
 
 CMAKE_OPTIONS += \
@@ -59,15 +55,6 @@ CMAKE_OPTIONS += \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
 	-DHAS_COREDUMP=ON
-
-MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG)
-MAKE_VARS += \
-	GOPATH=$(GO_PKG_BUILD_DIR) \
-	GOCACHE=$(GO_BUILD_CACHE_DIR) \
-	GOROOT_FINAL=$(GO_TARGET_ROOT) \
-	CC=$(TARGET_CC) \
-	CXX=$(TARGET_CXX) \
-	$(GO_PKG_VARS)
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
