@@ -1,26 +1,17 @@
 --- a/lib/wmchat/go/CMakeLists.txt
 +++ b/lib/wmchat/go/CMakeLists.txt
-@@ -25,12 +25,22 @@ endif ()
+@@ -25,12 +25,13 @@ endif ()
  # Build Go library / C archive
  set(TARGET cgowm)
  set(GOPATH ${CMAKE_CURRENT_BINARY_DIR})
-+set(GOOS ${GO_OS})
-+set(GOARCH ${GO_ARCH})
-+set(CC ${TARGET_CC})
-+set(CXX ${TARGET_CXX})
-+set(CGO_CPPFLAGS ${TARGET_CPPFLAGS})
-+set(CGO_LDFLAGS ${TARGET_LDFLAGS})
-+set(GOCACHE ${GO_BUILD_CACHE_DIR})
-+set(GOMODCACHE ${GO_MOD_CACHE_DIR})
-+set(GOFLAGS ${GO_PKG_GCFLAGS})
-+set(GO_PKG_CFLAGS ${GO_PKG_CFLAGS})
++set(GO_PKG_VARS ${GO_PKG_VARS})
  set(SRCS gowm.go cgowm.go)
  set(LIB "libcgowm${CMAKE_SHARED_LIBRARY_SUFFIX}")
  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${LIB}
    DEPENDS ${SRCS}
    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 -  COMMAND env GOPATH=${GOPATH} CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
-+  COMMAND env GOPATH=${GOPATH} GOOS=${GOOS} GOARCH=${GOARCH} CC=${CC} CXX=${CXX} CGO_CPPFLAGS=${CGO_CPPFLAGS} CGO_LDFLAGS=${CGO_LDFLAGS} GOCACHE=${GOCACHE} GOMODCACHE=${GOMODCACHE} GOFLAGS=${GOFLAGS} GO_PKG_CFLAGS=${GO_PKG_CFLAGS} CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
++  COMMAND env GOPATH=${GOPATH} GO_PKG_VARS=${GO_PKG_VARS} go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
    -o "${CMAKE_CURRENT_BINARY_DIR}/${LIB}"
    ${CMAKE_GO_FLAGS} ./...
    COMMENT "Building Go library")
