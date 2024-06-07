@@ -1,11 +1,11 @@
---- a/lib/wmchat/go/go.mod
-+++ b/lib/wmchat/go/go.mod
-@@ -2,7 +2,7 @@ module github.com/d99kris/nchat/lib/wmchat/go
- 
- require go.mau.fi/whatsmeow v0.0.0
- 
--replace go.mau.fi/whatsmeow => ./ext/whatsmeow
-+replace go.mau.fi/whatsmeow => ./lib/wmchat/go/ext/whatsmeow
- 
- require (
- 	github.com/mattn/go-sqlite3 v1.14.22
+--- a/lib/wmchat/go/CMakeLists.txt
++++ b/lib/wmchat/go/CMakeLists.txt
+@@ -30,7 +30,7 @@ set(LIB "libcgowm${CMAKE_SHARED_LIBRARY_SUFFIX}")
+ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${LIB}
+   DEPENDS ${SRCS}
+   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+-  COMMAND env GOPATH=${GOPATH} CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
++  COMMAND env GOPATH=$(GO_PKG_BUILD_DIR) GOCACHE=$(GO_BUILD_CACHE_DIR) GOROOT_FINAL=$(GO_TARGET_ROOT) CC=$(TARGET_CC) CXX=$(TARGET_CXX) $(GO_PKG_VARS) CGO_ENABLED=1 go build -buildmode=c-archive ${CUSTOM_GO_FLAGS}
+   -o "${CMAKE_CURRENT_BINARY_DIR}/${LIB}"
+   ${CMAKE_GO_FLAGS} ./...
+   COMMENT "Building Go library")
