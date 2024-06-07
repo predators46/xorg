@@ -1,6 +1,6 @@
 --- a/lib/wmchat/go/CMakeLists.txt
 +++ b/lib/wmchat/go/CMakeLists.txt
-@@ -25,12 +25,24 @@ endif ()
+@@ -25,12 +25,22 @@ endif ()
  # Build Go library / C archive
  set(TARGET cgowm)
  set(GOPATH ${CMAKE_CURRENT_BINARY_DIR})
