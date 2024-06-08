@@ -5,7 +5,7 @@ PKG_VERSION:=1.2.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v$(PKG_VERSION)
+PKG_SOURCE_URL:=https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v$(PKG_VERSION)/$(PKG_NAME)-v$(PKG_VERSION)
 PKG_HASH:=f6b648c064464c2636884c05746e80428110a576f8daacf46ef2e554dcfdae75
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
