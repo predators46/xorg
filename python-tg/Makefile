@@ -28,7 +28,7 @@ define Package/python3-tg
   CATEGORY:=Languages
   TITLE:=terminal telegram client
   URL:=https://github.com/paul-nameless/tg
-  DEPENDS:=+python3 +python3-telegram +python3-setuptools
+  DEPENDS:=+python3 +python3-telegram +python3-setuptools +python3-ncurses +python3-unidecode +python3-codecs
 endef
 
 define Package/python3-tg/description
