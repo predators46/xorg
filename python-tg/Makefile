@@ -6,7 +6,6 @@ PKG_RELEASE:=1
 
 PYPI_NAME:=tg
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/paul-nameless/tg/archive/v$(PKG_VERSION)
 PKG_HASH:=216aec85b6224415a88e7b124a5fed3b310e4286171cb23a8d91f4c64a69d7dc
 
