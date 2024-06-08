@@ -4,9 +4,8 @@ PKG_NAME:=python-tg
 PKG_VERSION:=0.19.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/paul-nameless/tg/archive/v$(PKG_VERSION)
-PKG_HASH:=216aec85b6224415a88e7b124a5fed3b310e4286171cb23a8d91f4c64a69d7dc
+PYPI_NAME:=tg
+PKG_HASH:=2f1ad2fd1af78e10dfe50663cc9b1f31af531fcd27f630f6a1fc1aa2d5b569cb
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=Unlicense license
