@@ -31,6 +31,13 @@ define Package/xdg-utils/description
 	The xdg-utils package is a set of scripts that provide basic desktop integration functions for any Free Desktop on Linux, the BSDs and even partially on MacOS and WSL.
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	$(CP) \
+	  ./files/{docbkx412,docbook-xml-4.3} \
+	  $(PKG_BUILD_DIR)/scripts/desc/
+endef
+
 define Package/xdg-utils/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/bin
