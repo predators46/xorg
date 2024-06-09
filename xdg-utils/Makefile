@@ -31,6 +31,8 @@ define Package/xdg-utils/description
 	The xdg-utils package is a set of scripts that provide basic desktop integration functions for any Free Desktop on Linux, the BSDs and even partially on MacOS and WSL.
 endef
 
+export XML_CATALOG_FILES=/usr/etc/xml/docbook-xml
+
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
