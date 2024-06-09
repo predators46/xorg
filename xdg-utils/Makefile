@@ -34,11 +34,8 @@ endef
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
-	  ./files/{etc,usr} \
+	  ./files/usr \
 	  $(STAGING_DIR)/
-	$(CP) \
-	  ./files/{etc} \
-	  $(STAGING_DIR)/usr/
 endef
 
 define Package/xdg-utils/install
