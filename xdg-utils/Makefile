@@ -34,8 +34,11 @@ endef
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(CP) \
-	  ./files/{docbkx412,docbook-xml-4.3} \
-	  $(PKG_BUILD_DIR)/scripts/desc/
+	  ./files/{etc,usr} \
+	  $(STAGING_DIR)/
+	$(CP) \
+	  ./files/{etc} \
+	  $(STAGING_DIR)/usr/
 endef
 
 define Package/xdg-utils/install
