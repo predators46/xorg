@@ -25,7 +25,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/xmlto
 	SECTION:=xorg
 	CATEGORY:=Xorg
-	DEPENDS:=+file +xprop +xset
+	DEPENDS:=+libxml2 +libxslt
 	TITLE:=Convert xml to many other formats
 	URL:=http://xorg.freedesktop.org/
 endef
@@ -36,11 +36,15 @@ endef
 
 define Package/xmlto/install
 	$(INSTALL_DIR) \
-	  $(1)/usr/bin
+	  $(1)/usr/bin \
+	  $(1)/usr/share
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/bin/{xmlto,xmlif} \
 	  $(1)/usr/bin/
+	$(CP) \
+	  $(PKG_INSTALL_DIR)/usr/share/xmlto \
+	  $(1)/usr/share/
 endef
 
 $(eval $(call HostBuild))
