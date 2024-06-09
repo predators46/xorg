@@ -1,0 +1,22 @@
+From 3c3c70875eab46bfdd7546ce2e69972eab1090fb Mon Sep 17 00:00:00 2001
+From: esaaprillia <esaapriliasalsabila@gmail.com>
+Date: Mon, 10 Jun 2024 06:53:29 +0800
+Subject: [PATCH] Update config.py
+
+---
+ tg/config.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tg/config.py b/tg/config.py
+index 4d02df1..24e04a2 100644
+--- a/tg/config.py
++++ b/tg/config.py
+@@ -32,7 +32,7 @@
+ MAX_DOWNLOAD_SIZE = "10MB"
+ 
+ # TODO: check platform
+-NOTIFY_CMD = "/usr/local/bin/terminal-notifier -title {title} -subtitle {subtitle} -message {msg} -appIcon {icon_path}"
++NOTIFY_CMD = "/usr/bin/terminal-notifier -title {title} -subtitle {subtitle} -message {msg} -appIcon {icon_path}"
+ 
+ VIEW_TEXT_CMD = "less"
+ FZF = "fzf"
