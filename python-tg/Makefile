@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-tg
 PKG_VERSION:=0.19.0
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PYPI_NAME:=tg
 
