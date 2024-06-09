@@ -12,7 +12,7 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DEPENDS:=libxml2/host
+PKG_BUILD_DEPENDS:=libxml2/host libxslt/host xmlto/host
 
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
