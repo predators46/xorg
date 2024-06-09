@@ -28,7 +28,7 @@ index e3f5493..a673911 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-copy">
    <refentryinfo>
@@ -41,7 +41,7 @@ index 273045d..d5dce78 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-desktop-icon">
    <refentryinfo>
@@ -54,7 +54,7 @@ index 6919ff9..e4ba257 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-desktop-menu">
    <refentryinfo>
@@ -67,7 +67,7 @@ index 3abea2a..d9c1c2e 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-email">
    <refentryinfo>
@@ -80,7 +80,7 @@ index 3ca5cdd..b8d5325 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-file-dialog">
    <refentryinfo>
@@ -93,7 +93,7 @@ index 8dae3f6..d63140b 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-icon-resource">
    <refentryinfo>
@@ -106,7 +106,7 @@ index f3eba17..81b51f0 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbook-xml-4.3/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbook-xml-4.3/docbookx.dtd" [
  ]>
  <refentry id="xdg-mime">
    <refentryinfo>
@@ -119,7 +119,7 @@ index 906d44f..8401732 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbook-xml-4.3/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbook-xml-4.3/docbookx.dtd" [
  ]>
  <refentry id="xdg-open">
    <refentryinfo>
@@ -132,7 +132,7 @@ index 60a5b22..72b0b50 100644
  <?xml-stylesheet type="text/xsl"
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
 -<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
-+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "file:///$(PKG_BUILD_DIR)/scripts/desc/docbook-xml-4.3/docbookx.dtd">
++<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbook-xml-4.3/docbookx.dtd">
  <refentry id="xdg-open">
    <refentryinfo>
      <title>xdg-realpath Manual</title>
@@ -145,7 +145,7 @@ index 0dadf04..0f8c18a 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-screensaver">
    <refentryinfo>
@@ -158,7 +158,7 @@ index 255d712..e2986e4 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-settings">
    <refentryinfo>
@@ -171,7 +171,7 @@ index b4e1b7e..98e2c08 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-su">
    <refentryinfo>
@@ -184,7 +184,8 @@ index 4ed4d90..30d7a8c 100644
     href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
  <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 -    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-+    "file:///$(PKG_BUILD_DIR)/scripts/desc/docbkx412/docbookx.dtd" [
++    "file:///home/runner/work/mosdns/mosdns/sdk/build_dir/target-aarch64_generic_musl/xdg-utils-v1.2.1/scripts/desc/docbkx412/docbookx.dtd" [
  ]>
  <refentry id="xdg-terminal">
    <refentryinfo>
+
