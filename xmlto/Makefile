@@ -39,7 +39,7 @@ define Package/xmlto/install
 	  $(1)/usr/bin
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/bin/xmlto \
+	  $(PKG_INSTALL_DIR)/usr/bin/{xmlto,xmlif} \
 	  $(1)/usr/bin/
 endef
 
