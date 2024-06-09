@@ -1,0 +1,374 @@
+From fab25b41fd2e8c04e1ab7a11ff8bc40350acc64b Mon Sep 17 00:00:00 2001
+From: esaapriliasalsabila <esaapriliasalsabila@gmail.com>
+Date: Mon, 10 Jun 2024 00:13:29 +0800
+Subject: [PATCH] first commit
+
+---
+ scripts/desc/xdg-copy.xml          |  8 ++++----
+ scripts/desc/xdg-desktop-icon.xml  |  6 +++---
+ scripts/desc/xdg-desktop-menu.xml  | 14 +++++++-------
+ scripts/desc/xdg-email.xml         |  8 ++++----
+ scripts/desc/xdg-file-dialog.xml   |  4 ++--
+ scripts/desc/xdg-icon-resource.xml |  8 ++++----
+ scripts/desc/xdg-mime.xml          | 10 +++++-----
+ scripts/desc/xdg-open.xml          | 12 ++++++------
+ scripts/desc/xdg-realpath.xml      |  4 ++--
+ scripts/desc/xdg-screensaver.xml   |  4 ++--
+ scripts/desc/xdg-settings.xml      |  6 +++---
+ scripts/desc/xdg-su.xml            |  4 ++--
+ scripts/desc/xdg-terminal.xml      |  4 ++--
+ 13 files changed, 46 insertions(+), 46 deletions(-)
+
+diff --git a/scripts/desc/xdg-copy.xml b/scripts/desc/xdg-copy.xml
+index e3f5493..e94a109 100644
+--- a/scripts/desc/xdg-copy.xml
++++ b/scripts/desc/xdg-copy.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-copy">
+   <refentryinfo>
+@@ -56,7 +56,7 @@
+       <replaceable>destination</replaceable> and provides visual feedback to
+       the user during the operation. Both <replaceable>source</replaceable>
+       and <replaceable>destination</replaceable> can either be a file or
+-      URL. Supported URL types are file, ftp, http and https. Additional
++      URL. Supported URL types are file, ftp, https and httpss. Additional
+       URL types may be supported depending on the desktop environment.
+     </para>
+     <para>
+@@ -141,7 +141,7 @@
+     <title>Examples</title>
+     <para>
+ <programlisting>
+-xdg-copy "http://portland.freedesktop.org/png/freedesktop-logo.png" .
++xdg-copy "https://portland.freedesktop.org/png/freedesktop-logo.png" .
+ </programlisting>
+     </para>
+     <para>
+diff --git a/scripts/desc/xdg-desktop-icon.xml b/scripts/desc/xdg-desktop-icon.xml
+index 273045d..8fe5f88 100644
+--- a/scripts/desc/xdg-desktop-icon.xml
++++ b/scripts/desc/xdg-desktop-icon.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-desktop-icon">
+   <refentryinfo>
+@@ -240,7 +240,7 @@
+     </variablelist>
+     <para>
+       For a complete overview of the *.desktop file format please
+-      visit <ulink url="http://www.freedesktop.org/wiki/Specifications/desktop-entry-spec"/>
++      visit <ulink url="https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec"/>
+     </para>
+   </refsect1>
+   <refsect1 id="env_vars">
+diff --git a/scripts/desc/xdg-desktop-menu.xml b/scripts/desc/xdg-desktop-menu.xml
+index 6919ff9..24ac19b 100644
+--- a/scripts/desc/xdg-desktop-menu.xml
++++ b/scripts/desc/xdg-desktop-menu.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-desktop-menu">
+   <refentryinfo>
+@@ -75,7 +75,7 @@
+     <para>
+       The application menu works according to the
+       XDG Desktop Menu Specification at
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/menu-spec"/>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/menu-spec"/>
+     </para>
+   </refsect1>
+   <refsect1 id="commands">
+@@ -355,7 +355,7 @@
+           <simpara>
+             See Appendix A of the XDG Desktop Menu Specification
+             for information about additional categories:
+-            <ulink url="http://standards.freedesktop.org/menu-spec/menu-spec-1.0.html#category-registry"/>
++            <ulink url="https://standards.freedesktop.org/menu-spec/menu-spec-1.0.html#category-registry"/>
+ 	  </simpara>
+ 	</listitem>
+       </varlistentry>
+@@ -373,7 +373,7 @@
+     </variablelist>
+     <para>
+       For a complete overview of the *.desktop file format please
+-      visit <ulink url="http://www.freedesktop.org/wiki/Specifications/desktop-entry-spec"/>
++      visit <ulink url="https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec"/>
+     </para>
+   </refsect1>
+   <refsect1 id="directoryfiles">
+@@ -538,8 +538,8 @@
+       <citerefentry><refentrytitle>xdg-mime</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/">Desktop entry specification</ulink>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/menu-spec/">Desktop menu specification</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/">Desktop entry specification</ulink>,
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/menu-spec/">Desktop menu specification</ulink>
+     </para>
+   </refsect1>
+   <refsect1 id="examples">
+diff --git a/scripts/desc/xdg-email.xml b/scripts/desc/xdg-email.xml
+index 3abea2a..5beb942 100644
+--- a/scripts/desc/xdg-email.xml
++++ b/scripts/desc/xdg-email.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-email">
+   <refentryinfo>
+@@ -257,8 +257,8 @@
+         <refentrytitle>xdg-mime</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>,
+-      <ulink url="https://tools.ietf.org/html/rfc6068">RFC 6068 - The 'mailto' URI Scheme</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>,
++      <ulink url="httpss://tools.ietf.org/html/rfc6068">RFC 6068 - The 'mailto' URI Scheme</ulink>
+     </para>
+   </refsect1>
+ 
+diff --git a/scripts/desc/xdg-file-dialog.xml b/scripts/desc/xdg-file-dialog.xml
+index 3ca5cdd..e0c3d27 100644
+--- a/scripts/desc/xdg-file-dialog.xml
++++ b/scripts/desc/xdg-file-dialog.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-file-dialog">
+   <refentryinfo>
+diff --git a/scripts/desc/xdg-icon-resource.xml b/scripts/desc/xdg-icon-resource.xml
+index 8dae3f6..35c88c1 100644
+--- a/scripts/desc/xdg-icon-resource.xml
++++ b/scripts/desc/xdg-icon-resource.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-icon-resource">
+   <refentryinfo>
+@@ -89,7 +89,7 @@
+     <para>
+       The desktop icon system works according to the
+       XDG Icon Theme Specification at
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/icon-theme-spec"/>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/icon-theme-spec"/>
+     </para>
+   </refsect1>
+   <refsect1 id="commands">
+@@ -349,7 +349,7 @@
+       <citerefentry><refentrytitle>xdg-mime</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/icon-theme-spec/">Icon theme specification</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/icon-theme-spec/">Icon theme specification</ulink>
+     </para>
+   </refsect1>
+   <refsect1 id="examples">
+diff --git a/scripts/desc/xdg-mime.xml b/scripts/desc/xdg-mime.xml
+index f3eba17..89a2443 100644
+--- a/scripts/desc/xdg-mime.xml
++++ b/scripts/desc/xdg-mime.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-mime">
+   <refentryinfo>
+@@ -349,8 +349,8 @@ and adding descriptions for new file types</refpurpose>
+       <citerefentry><refentrytitle>xdg-desktop-menu</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/">Shared MIME database specification</ulink>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/">Shared MIME database specification</ulink>,
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
+     </para>
+   </refsect1>
+   <refsect1 id="examples">
+@@ -377,7 +377,7 @@ xdg-mime install shinythings-shiny.xml
+ shinythings-shiny.xml:
+ 
+ &lt;?xml version="1.0"?&gt;
+-&lt;mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'&gt;
++&lt;mime-info xmlns='https://www.freedesktop.org/standards/shared-mime-info'&gt;
+   &lt;mime-type type="text/x-shiny"&gt;
+     &lt;comment&gt;Shiny new file type&lt;/comment&gt;
+     &lt;glob pattern="*.shiny"/&gt;
+diff --git a/scripts/desc/xdg-open.xml b/scripts/desc/xdg-open.xml
+index 906d44f..6b67c0d 100644
+--- a/scripts/desc/xdg-open.xml
++++ b/scripts/desc/xdg-open.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-open">
+   <refentryinfo>
+@@ -58,7 +58,7 @@
+       If a URL is provided the URL will be opened in the user's preferred
+       web browser. If a file is provided the file will be opened in the
+       preferred application for files of that type. xdg-open supports
+-      file, ftp, http and https URLs.
++      file, ftp, https and httpss URLs.
+     </para>
+     <para>
+       xdg-open is for use inside a desktop session only.
+@@ -163,7 +163,7 @@
+ 	   If a flaw is reproducible using the desktop specific opener (and isn't a configuration issue): Please report to whoever is responsible for that first (reporting to xdg-utils is better than not reporting at all, but since the xdg-utils are maintained in very little spare time a fix will take much longer)
+     </para>
+     <para>
+-      In case an issue specific to xdg-open please report it to <uri>https://gitlab.freedesktop.org/xdg/xdg-utils/-/issues</uri> .
++      In case an issue specific to xdg-open please report it to <uri>httpss://gitlab.freedesktop.org/xdg/xdg-utils/-/issues</uri> .
+     </para>
+   </refsect1>
+   <refsect1 id="seealso">
+@@ -174,7 +174,7 @@
+       <citerefentry><refentrytitle>xdg-settings</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
+     </para>
+   </refsect1>
+ 
+@@ -182,7 +182,7 @@
+     <title>Examples</title>
+     <para>
+ <programlisting>
+-xdg-open 'http://www.freedesktop.org/'
++xdg-open 'https://www.freedesktop.org/'
+ </programlisting>
+       Opens the freedesktop.org website in the user's default browser.
+     </para>
+diff --git a/scripts/desc/xdg-realpath.xml b/scripts/desc/xdg-realpath.xml
+index 60a5b22..7ecdc57 100644
+--- a/scripts/desc/xdg-realpath.xml
++++ b/scripts/desc/xdg-realpath.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "https://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+ <refentry id="xdg-open">
+   <refentryinfo>
+     <title>xdg-realpath Manual</title>
+diff --git a/scripts/desc/xdg-screensaver.xml b/scripts/desc/xdg-screensaver.xml
+index 0dadf04..9bd7665 100644
+--- a/scripts/desc/xdg-screensaver.xml
++++ b/scripts/desc/xdg-screensaver.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-screensaver">
+   <refentryinfo>
+diff --git a/scripts/desc/xdg-settings.xml b/scripts/desc/xdg-settings.xml
+index 255d712..8250aee 100644
+--- a/scripts/desc/xdg-settings.xml
++++ b/scripts/desc/xdg-settings.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-settings">
+   <refentryinfo>
+@@ -173,7 +173,7 @@
+       <citerefentry><refentrytitle>xdg-open</refentrytitle>
+         <manvolnum>1</manvolnum>
+       </citerefentry>,
+-      <ulink url="http://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
++      <ulink url="https://www.freedesktop.org/wiki/Specifications/mime-apps-spec/">MIME applications associations specification</ulink>
+     </para>
+   </refsect1>
+   <refsect1 id="examples">
+diff --git a/scripts/desc/xdg-su.xml b/scripts/desc/xdg-su.xml
+index b4e1b7e..fd6064e 100644
+--- a/scripts/desc/xdg-su.xml
++++ b/scripts/desc/xdg-su.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-su">
+   <refentryinfo>
+diff --git a/scripts/desc/xdg-terminal.xml b/scripts/desc/xdg-terminal.xml
+index 4ed4d90..bb40f4d 100644
+--- a/scripts/desc/xdg-terminal.xml
++++ b/scripts/desc/xdg-terminal.xml
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <?xml-stylesheet type="text/xsl"
+-   href="http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
++   href="https://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"?>
+ <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
++    "https://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+ ]>
+ <refentry id="xdg-terminal">
+   <refentryinfo>
