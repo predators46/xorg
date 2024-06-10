@@ -4,13 +4,15 @@ PKG_NAME:=docbook-xsl
 PKG_VERSION:=1.79.2
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/docbook/xslt10-stylesheets/releases/download/release/$(PKG_VERSION)
+PKG_SOURCE:=xslt10-stylesheets-release-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/docbook/xslt10-stylesheets/tar.gz/$(PKG_VERSION)?
 PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=custom
 PKG_LICENSE_FILES:=COPYING
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/xslt10-stylesheets-release-$(PKG_VERSION)
 
 HOST_BUILD_DEPENDS:=libxml2/host libxslt/host
 PKG_BUILD_DEPENDS:=libxml2/host libxslt/host
