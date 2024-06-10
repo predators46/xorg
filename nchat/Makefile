@@ -16,7 +16,6 @@ CMAKE_BINARY_SUBDIR := build
 
 PKG_BUILD_DEPENDS:=ncurses/host gperf/host
 
-include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
