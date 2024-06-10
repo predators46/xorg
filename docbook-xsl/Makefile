@@ -34,6 +34,10 @@ define Package/docbook-xsl/description
 	DocBook XSLT 1.0 Stylesheets
 endef
 
+define Build/Compile
+	$(MAKE) XSLTENGINE=xsltproc -C $(PKG_BUILD_DIR)
+endef
+
 define Package/docbook-xsl/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/bin
