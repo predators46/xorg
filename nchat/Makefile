@@ -14,7 +14,6 @@ PKG_LICENSE_FILES:=LICENSE
 
 CMAKE_BINARY_SUBDIR := build
 
-HOST_BUILD_DEPENDS:=ncurses/host gperf/host
 PKG_BUILD_DEPENDS:=ncurses/host gperf/host
 
 include $(INCLUDE_DIR)/host-build.mk
@@ -74,5 +73,4 @@ define Package/nchat/install
 	  $(1)/usr/share/
 endef
 
-$(eval $(call HostBuild))
 $(eval $(call BuildPackage,nchat))
