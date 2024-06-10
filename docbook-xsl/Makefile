@@ -15,7 +15,7 @@ PKG_LICENSE_FILES:=COPYING
 PKG_BUILD_DIR:=$(BUILD_DIR)/xslt10-stylesheets-release-$(PKG_VERSION)
 
 HOST_BUILD_DEPENDS:=libxml2/host libxslt/host
-PKG_BUILD_DEPENDS:=libxml2/host libxslt/host
+PKG_BUILD_DEPENDS:=libxml2/host libxslt/host perl/host
 
 HOST_BUILD_PARALLEL:=1
 PKG_BUILD_PARALLEL:=1
