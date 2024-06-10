@@ -4,7 +4,7 @@ PKG_NAME:=docbook-xsl
 PKG_VERSION:=1.79.2
 PKG_RELEASE:=1
 
-PKG_SOURCE:=xslt10-stylesheets-release-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/docbook/xslt10-stylesheets/tar.gz/$(PKG_VERSION)?
 PKG_HASH:=skip
 
