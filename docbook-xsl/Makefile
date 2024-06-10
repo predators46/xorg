@@ -5,7 +5,7 @@ PKG_VERSION:=1.79.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/docbook/xslt10-stylesheets/releases/download/release/$(PKG_VERSION)
+PKG_SOURCE_URL:=https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F$(PKG_VERSION)
 PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
