@@ -1,0 +1,3190 @@
+From c44904f5c2d690ed588f1b3cb97714be84eb48cd Mon Sep 17 00:00:00 2001
+From: esaapriliasalsabila <esaapriliasalsabila@gmail.com>
+Date: Wed, 12 Jun 2024 11:11:42 +0800
+Subject: [PATCH] update tdlib
+ https://github.com/tdlib/td/commit/7e950e1b880161d52d46f6dd82c2a1abe829aa5e
+
+---
+ lib/tgchat/ext/td/.gitignore                  |   2 +-
+ lib/tgchat/ext/td/CMakeLists.txt              |   9 +-
+ lib/tgchat/ext/td/SplitSource.php             |   1 +
+ lib/tgchat/ext/td/build.html                  |  10 +-
+ lib/tgchat/ext/td/example/android/.gitignore  |   6 +-
+ .../ext/td/example/android/CMakeLists.txt     |  19 +-
+ lib/tgchat/ext/td/example/android/Dockerfile  |   7 +-
+ lib/tgchat/ext/td/example/android/README.md   |   8 +-
+ .../ext/td/example/android/build-openssl.sh   |  26 +-
+ .../ext/td/example/android/build-tdlib.sh     |  19 +-
+ lib/tgchat/ext/td/example/cpp/.gitignore      |   2 +-
+ lib/tgchat/ext/td/example/csharp/.gitignore   |  10 +-
+ .../td/example/ios/Python-Apple-support.patch |   2 +-
+ lib/tgchat/ext/td/example/python/.gitignore   |   3 +
+ lib/tgchat/ext/td/example/swift/.gitignore    |   6 +-
+ lib/tgchat/ext/td/example/uwp/app/.gitignore  |  10 +-
+ lib/tgchat/ext/td/td/generate/CMakeLists.txt  |  36 +-
+ .../ext/td/td/generate/generate_common.cpp    |   4 -
+ .../ext/td/td/generate/generate_mtproto.cpp   |  27 ++
+ .../ext/td/td/generate/scheme/td_api.tl       |  10 +-
+ .../ext/td/td/mtproto/PingConnection.cpp      |   2 +-
+ .../ext/td/td/mtproto/SessionConnection.cpp   |   5 +-
+ .../ext/td/td/mtproto/SessionConnection.h     |   2 +-
+ .../td/telegram/BusinessConnectionManager.cpp |   2 +-
+ .../td/telegram/BusinessConnectionManager.h   |   2 +-
+ .../ext/td/td/telegram/BusinessIntro.cpp      |   5 +-
+ .../ext/td/td/telegram/BusinessManager.cpp    |   2 +-
+ .../ext/td/td/telegram/BusinessManager.h      |   2 +-
+ .../telegram/ChannelRecommendationManager.cpp |   2 +-
+ .../telegram/ChannelRecommendationManager.h   |   2 +-
+ .../td/td/telegram/CommonDialogManager.cpp    |   2 +-
+ .../ext/td/td/telegram/CommonDialogManager.h  |   2 +-
+ .../td/td/telegram/DialogActionManager.cpp    |   2 +-
+ .../ext/td/td/telegram/DialogActionManager.h  |   2 +-
+ .../ext/td/td/telegram/DialogFilter.cpp       |  10 +-
+ .../td/telegram/DialogInviteLinkManager.cpp   |   2 +-
+ .../td/td/telegram/DialogInviteLinkManager.h  |   2 +-
+ .../ext/td/td/telegram/DialogManager.cpp      |   2 +-
+ lib/tgchat/ext/td/td/telegram/DialogManager.h |   2 +-
+ .../td/telegram/DialogParticipantManager.cpp  |   2 +-
+ .../td/td/telegram/DialogParticipantManager.h |   2 +-
+ lib/tgchat/ext/td/td/telegram/GameManager.cpp | 110 -----
+ lib/tgchat/ext/td/td/telegram/GameManager.h   |   6 -
+ lib/tgchat/ext/td/td/telegram/Global.h        |   9 +
+ .../ext/td/td/telegram/HashtagHints.cpp       |   8 +-
+ lib/tgchat/ext/td/td/telegram/HashtagHints.h  |   3 +-
+ .../td/td/telegram/InlineMessageManager.cpp   | 405 ++++++++++++++++++
+ .../ext/td/td/telegram/InlineMessageManager.h |  61 +++
+ .../td/td/telegram/InlineQueriesManager.cpp   |  37 --
+ .../ext/td/td/telegram/InlineQueriesManager.h |   5 -
+ .../td/td/telegram/MessageImportManager.cpp   |   2 +-
+ .../ext/td/td/telegram/MessageImportManager.h |   2 +-
+ .../ext/td/td/telegram/MessagesManager.cpp    | 392 +++--------------
+ .../ext/td/td/telegram/MessagesManager.h      |  48 +--
+ .../td/td/telegram/PeopleNearbyManager.cpp    |   2 +-
+ .../ext/td/td/telegram/PeopleNearbyManager.h  |   2 +-
+ .../ext/td/td/telegram/QuickReplyManager.cpp  |   2 +-
+ .../ext/td/td/telegram/QuickReplyManager.h    |   2 +-
+ .../ext/td/td/telegram/ReactionManager.cpp    |  52 +--
+ .../ext/td/td/telegram/RepliedMessageInfo.cpp |   6 +-
+ .../td/td/telegram/SavedMessagesManager.cpp   |   2 +-
+ .../ext/td/td/telegram/SavedMessagesManager.h |   2 +-
+ .../ext/td/td/telegram/StickersManager.cpp    |  28 +-
+ .../ext/td/td/telegram/StickersManager.h      |   2 +-
+ .../ext/td/td/telegram/StoryManager.cpp       |   2 +-
+ lib/tgchat/ext/td/td/telegram/Td.cpp          |  89 ++--
+ lib/tgchat/ext/td/td/telegram/Td.h            |   6 +-
+ .../ext/td/td/telegram/TimeZoneManager.cpp    |   2 +-
+ .../ext/td/td/telegram/TimeZoneManager.h      |   2 +-
+ .../ext/td/td/telegram/TranslationManager.cpp |   3 +
+ lib/tgchat/ext/td/td/telegram/UserManager.cpp |   2 +-
+ lib/tgchat/ext/td/td/telegram/UserManager.h   |   2 +-
+ .../ext/td/td/telegram/WebPagesManager.cpp    |  13 +-
+ lib/tgchat/ext/td/td/telegram/net/Session.cpp |  12 +-
+ lib/tgchat/ext/td/td/telegram/net/Session.h   |   2 +-
+ lib/tgchat/ext/td/tdutils/td/utils/optional.h |   3 +
+ lib/tgchat/src/tgchat.cpp                     |   2 +-
+ 77 files changed, 869 insertions(+), 732 deletions(-)
+ create mode 100644 lib/tgchat/ext/td/example/python/.gitignore
+ create mode 100644 lib/tgchat/ext/td/td/generate/generate_mtproto.cpp
+ create mode 100644 lib/tgchat/ext/td/td/telegram/InlineMessageManager.cpp
+ create mode 100644 lib/tgchat/ext/td/td/telegram/InlineMessageManager.h
+
+diff --git a/lib/tgchat/ext/td/.gitignore b/lib/tgchat/ext/td/.gitignore
+index 4f950ed9..1efef31f 100644
+--- a/lib/tgchat/ext/td/.gitignore
++++ b/lib/tgchat/ext/td/.gitignore
+@@ -3,5 +3,5 @@
+ **/.DS_Store
+ **/auto/
+ docs/
+-tdlib/
++/tdlib/
+ vcpkg/
+diff --git a/lib/tgchat/ext/td/CMakeLists.txt b/lib/tgchat/ext/td/CMakeLists.txt
+index 2edd6621..d15339f3 100644
+--- a/lib/tgchat/ext/td/CMakeLists.txt
++++ b/lib/tgchat/ext/td/CMakeLists.txt
+@@ -168,13 +168,13 @@ add_subdirectory(tdutils)
+ add_subdirectory(td/generate)
+ 
+ if (NOT CMAKE_CROSSCOMPILING)
+-  add_custom_target(prepare_cross_compiling DEPENDS tl_generate_common tdmime_auto tl_generate_json)
++  add_custom_target(prepare_cross_compiling DEPENDS tl_generate_mtproto tl_generate_common tdmime_auto tl_generate_json)
+   if (TD_ENABLE_DOTNET)
+     add_custom_target(remove_cpp_documentation
+       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+       COMMAND remove_documentation ${TL_TD_API_AUTO_SOURCE} td/telegram/Client.h td/telegram/Log.h td/tl/TlObject.h
+       COMMENT "Remove C++ documentation from sources"
+-      DEPENDS remove_documentation tl_generate_common generate_dotnet_api ${TL_TD_API_AUTO_SOURCE} td/telegram/Client.h td/telegram/Log.h td/tl/TlObject.h
++      DEPENDS remove_documentation tl_generate_mtproto tl_generate_common generate_dotnet_api ${TL_TD_API_AUTO_SOURCE} td/telegram/Client.h td/telegram/Log.h td/tl/TlObject.h
+     )
+ 
+     add_dependencies(prepare_cross_compiling generate_dotnet_api remove_cpp_documentation)
+@@ -431,6 +431,7 @@ set(TDLIB_SOURCE_PART1
+   td/telegram/GroupCallParticipantOrder.cpp
+   td/telegram/GroupCallVideoPayload.cpp
+   td/telegram/HashtagHints.cpp
++  td/telegram/InlineMessageManager.cpp
+   td/telegram/InlineQueriesManager.cpp
+   td/telegram/InputBusinessChatLink.cpp
+   td/telegram/InputDialogId.cpp
+@@ -730,6 +731,7 @@ set(TDLIB_SOURCE_PART2
+   td/telegram/GroupCallParticipantOrder.h
+   td/telegram/GroupCallVideoPayload.h
+   td/telegram/HashtagHints.h
++  td/telegram/InlineMessageManager.h
+   td/telegram/InlineQueriesManager.h
+   td/telegram/InputBusinessChatLink.h
+   td/telegram/InputDialogId.h
+@@ -1083,6 +1085,9 @@ if (WIN32)
+     target_link_libraries(tdmtproto PRIVATE ws2_32 Mswsock Crypt32)
+   endif()
+ endif()
++if (NOT CMAKE_CROSSCOMPILING)
++  add_dependencies(tdmtproto tl_generate_mtproto)
++endif()
+ 
+ # tdcore - mostly internal TDLib interface. One should use tdactor for interactions with it.
+ if (MSVC AND TD_ENABLE_LTO)
+diff --git a/lib/tgchat/ext/td/SplitSource.php b/lib/tgchat/ext/td/SplitSource.php
+index 19e27f4b..e22ae31e 100644
+--- a/lib/tgchat/ext/td/SplitSource.php
++++ b/lib/tgchat/ext/td/SplitSource.php
+@@ -362,6 +362,7 @@ function ($matches) use ($needed_std_headers) {
+                 'GroupCallId' => 'GroupCallId',
+                 'group_call_manager[_(-](?![.]get[(][)])|GroupCallManager' => 'GroupCallManager',
+                 'hashtag_hints[_(-](?![.]get[(][)])|HashtagHints' => 'HashtagHints',
++                'inline_message_manager[_(-](?![.]get[(][)])|InlineMessageManager' => 'InlineQueriesManager',
+                 'inline_queries_manager[_(-](?![.]get[(][)])|InlineQueriesManager' => 'InlineQueriesManager',
+                 'InputBusinessChatLink' => 'InputBusinessChatLink',
+                 'language_pack_manager[_(-]|LanguagePackManager' => 'LanguagePackManager',
+diff --git a/lib/tgchat/ext/td/build.html b/lib/tgchat/ext/td/build.html
+index 4c198bd1..619e6ff7 100644
+--- a/lib/tgchat/ext/td/build.html
++++ b/lib/tgchat/ext/td/build.html
+@@ -473,6 +473,9 @@
+     return 'WebAssembly';
+   }
+   if (os.includes('Android')) {
++    if (language === 'Dart') {
++      return 'AndroidJson';
++    }
+     return 'Android';
+   }
+   if (os.includes('iOS') || os.includes('tvOS') || os.includes('visionOS') || os.includes('watchOS')) {
+@@ -495,6 +498,7 @@
+     case 'tdjson':
+     case 'WebAssembly':
+     case 'iOS':
++    case 'AndroidJson':
+       return '<a href="https://github.com/tdlib/td#using-json">JSON</a>';
+     case 'tdclient':
+       return '<a href="https://github.com/tdlib/td#using-cxx">simple and convenient C++11</a>';
+@@ -524,9 +528,9 @@
+            'If you want to build it manually, take a look at our <a href="https://github.com/tdlib/td/tree/master/example/web">example</a>.';
+     target = '';
+   }
+-  if (target === 'Android') {
+-    text = 'TDLib for Android is available in a prebuilt form and can be downloaded from <a href="https://core.telegram.org/tdlib/tdlib.zip">there</a>.<br>' +
+-           'See <a href="https://github.com/tdlib/td/issues/77#issuecomment-640719893">build instructions</a> if you want to build the latest TDLib version or want to build TDLib with different interface.';
++  if (target === 'Android' || target === 'AndroidJson') {
++    text = 'TDLib can be used from ' + language + ' on ' + os + ' through the ' + getTargetName(target) + ' interface.<br>' +
++           'See <a href="https://github.com/tdlib/td/blob/master/example/android">Android example</a> for the example of building TDLib for Android.<br>';
+     target = '';
+   }
+   if (target === 'iOS') {
+diff --git a/lib/tgchat/ext/td/example/android/.gitignore b/lib/tgchat/ext/td/example/android/.gitignore
+index 7547413b..a9e9f6d0 100644
+--- a/lib/tgchat/ext/td/example/android/.gitignore
++++ b/lib/tgchat/ext/td/example/android/.gitignore
+@@ -1,3 +1,3 @@
+-SDK/
+-tdlib/
+-third-party/
++/SDK*
++/tdlib*
++/third-party*
+diff --git a/lib/tgchat/ext/td/example/android/CMakeLists.txt b/lib/tgchat/ext/td/example/android/CMakeLists.txt
+index 71b2cb58..960e4f1b 100644
+--- a/lib/tgchat/ext/td/example/android/CMakeLists.txt
++++ b/lib/tgchat/ext/td/example/android/CMakeLists.txt
+@@ -4,6 +4,9 @@ project(TdAndroid VERSION 1.0 LANGUAGES CXX)
+ 
+ set(TD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+ 
++option(TD_ANDROID_JSON "Use \"ON\" to build JSON interface.")
++option(TD_ANDROID_JSON_JAVA "Use \"ON\" to build Java wrapper for JSON API.")
++
+ if (TD_ANDROID_JSON)
+   if (CMAKE_CROSSCOMPILING)
+     string(APPEND CMAKE_CXX_FLAGS_RELWITHDEBINFO " -flto=thin -Oz")
+@@ -13,7 +16,9 @@ if (TD_ANDROID_JSON)
+   return()
+ endif()
+ 
+-option(TD_ENABLE_JNI "Enable JNI-compatible TDLib API" ON)
++if (NOT TD_ANDROID_JSON_JAVA)
++  option(TD_ENABLE_JNI "Enable JNI-compatible TDLib API" ON)
++endif()
+ 
+ if (CMAKE_CROSSCOMPILING)
+   set(CMAKE_MODULE_PATH "${TD_DIR}/CMake")
+@@ -27,7 +32,13 @@ if (CMAKE_CROSSCOMPILING)
+ 
+   add_library(tdjni SHARED "${TD_DIR}/example/java/td_jni.cpp")
+ 
+-  target_link_libraries(tdjni PRIVATE Td::TdStatic)
++  if (TD_ANDROID_JSON_JAVA)
++    target_link_libraries(tdjni PRIVATE Td::TdJsonStatic)
++    target_compile_definitions(tdjni PRIVATE TD_JSON_JAVA=1)
++    set_target_properties(tdjni PROPERTIES OUTPUT_NAME "tdjsonjava")
++  else()
++    target_link_libraries(tdjni PRIVATE Td::TdStatic)
++  endif()
+   target_compile_definitions(tdjni PRIVATE PACKAGE_NAME="org/drinkless/tdlib")
+ 
+   add_custom_command(TARGET tdjni POST_BUILD
+@@ -36,6 +47,10 @@ if (CMAKE_CROSSCOMPILING)
+ else()
+   add_subdirectory(${TD_DIR} td)
+ 
++  if (TD_ANDROID_JSON_JAVA)
++    return()
++  endif()
++
+   set(TD_API_JAVA_PACKAGE "org/drinkless/tdlib")
+   set(TD_API_JAVA_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${TD_API_JAVA_PACKAGE}/TdApi.java")
+   set(TD_API_TLO_PATH "${TD_DIR}/td/generate/auto/tlo/td_api.tlo")
+diff --git a/lib/tgchat/ext/td/example/android/Dockerfile b/lib/tgchat/ext/td/example/android/Dockerfile
+index 3c782ca6..b4a8c08d 100644
+--- a/lib/tgchat/ext/td/example/android/Dockerfile
++++ b/lib/tgchat/ext/td/example/android/Dockerfile
+@@ -8,14 +8,15 @@ ARG ANDROID_NDK_VERSION=23.2.8568313
+ COPY ./check-environment.sh ./fetch-sdk.sh ./
+ RUN ./fetch-sdk.sh SDK "$ANDROID_NDK_VERSION"
+ 
+-ARG OPENSSL_VERSION=OpenSSL_1_1_1t
++ARG OPENSSL_VERSION=OpenSSL_1_1_1w
++ARG BUILD_SHARED_OPENSSL_LIBS=
+ COPY ./build-openssl.sh ./
+-RUN ./build-openssl.sh SDK "$ANDROID_NDK_VERSION" openssl "$OPENSSL_VERSION"
++RUN ./build-openssl.sh SDK "$ANDROID_NDK_VERSION" openssl "$OPENSSL_VERSION" "$BUILD_SHARED_OPENSSL_LIBS"
+ 
+ ADD "https://api.github.com/repos/tdlib/td/git/refs/heads/master" version.json
+ ARG COMMIT_HASH=master
+ RUN git clone https://github.com/tdlib/td.git && cd td && git checkout "$COMMIT_HASH"
+-RUN cd td && git merge-base --is-ancestor f28fa6a860af8a88a330d22fe34628eba6d69d89 "$COMMIT_HASH"
++RUN cd td && git merge-base --is-ancestor 872d8ebd3ba9d922169839e6a24cee08b02b328a "$COMMIT_HASH"
+ 
+ ARG ANDROID_STL=c++_static
+ ARG TDLIB_INTERFACE=Java
+diff --git a/lib/tgchat/ext/td/example/android/README.md b/lib/tgchat/ext/td/example/android/README.md
+index d61a2e14..102e9dcc 100644
+--- a/lib/tgchat/ext/td/example/android/README.md
++++ b/lib/tgchat/ext/td/example/android/README.md
+@@ -19,10 +19,14 @@ If you want to update TDLib to a newer version, you need to run only the script
+ 
+ You can specify different OpenSSL version as the fourth parameter to the script `./build-openssl.sh`. By default OpenSSL 1.1.1 is used because of much smaller binary footprint and better performance than newer OpenSSL versions.
+ 
++You can build shared OpenSSL libraries instead of static ones by passing any non-empty string as the fifth parameter to the script `./build-openssl.sh`. This can reduce total application size if you have a lot of other code that uses OpenSSL and want it to use the same shared library.
++
+ You can build TDLib against shared standard C++ library by specifying "c++_shared" as the fourth parameter to the script `./build-tdlib.sh`. This can reduce total application size if you have a lot of other C++ code and want it to use the same shared library.
+ 
+-You can build TDLib with [JSON interface](https://github.com/tdlib/td#using-json) instead of [Java](https://github.com/tdlib/td#using-java) interface by passing "JSON" as the fifth parameter to the script `./build-tdlib.sh`.
++You can also build TDLib with [JSON interface](https://github.com/tdlib/td#using-json) instead of [Java](https://github.com/tdlib/td#using-java) interface by passing "JSON" as the fifth parameter to the script `./build-tdlib.sh`.
++
++You can also build TDLib with [JSON interface](https://github.com/tdlib/td#using-json) that can be called from Java by passing "JSONJava" as the fifth parameter to the script `./build-tdlib.sh`.
+ 
+ You can pass an empty string instead of any script parameter to use its default value. For example, you can use the command `./build-tdlib.sh '' '' '' '' 'JSON'` to build TDLib with [JSON interface](https://github.com/tdlib/td#using-json) using default values for other parameters.
+ 
+-Alternatively, you can use Docker to build TDLib for Android. Use `docker build --output tdlib .` to build the latest TDLib commit from Github, or `docker build --build-arg COMMIT_HASH=<commit-hash> --output tdlib .` to build specific commit. The output archives will be placed in the directory "tdlib" as specified. Additionally, you can specify build arguments "TDLIB_INTERFACE", "ANDROID_NDK_VERSION", "OPENSSL_VERSION", and "ANDROID_STL" to the provided Dockerfile. For example, use `docker build --build-arg TDLIB_INTERFACE=JSON --output tdlib .` to build the latest TDLib with JSON interface.
++Alternatively, you can use Docker to build TDLib for Android. Use `docker build --output tdlib .` to build the latest TDLib commit from Github, or `docker build --build-arg COMMIT_HASH=<commit-hash> --output tdlib .` to build specific commit. The output archives will be placed in the directory "tdlib" as specified. Additionally, you can specify build arguments "TDLIB_INTERFACE", "ANDROID_NDK_VERSION", "OPENSSL_VERSION", "BUILD_SHARED_OPENSSL_LIBS", and "ANDROID_STL" to the provided Dockerfile. For example, use `docker build --build-arg TDLIB_INTERFACE=JSON --output tdlib .` to build the latest TDLib with JSON interface.
+diff --git a/lib/tgchat/ext/td/example/android/build-openssl.sh b/lib/tgchat/ext/td/example/android/build-openssl.sh
+index b0e35ba9..93a2b374 100755
+--- a/lib/tgchat/ext/td/example/android/build-openssl.sh
++++ b/lib/tgchat/ext/td/example/android/build-openssl.sh
+@@ -3,7 +3,8 @@
+ ANDROID_SDK_ROOT=${1:-SDK}
+ ANDROID_NDK_VERSION=${2:-23.2.8568313}
+ OPENSSL_INSTALL_DIR=${3:-third-party/openssl}
+-OPENSSL_VERSION=${4:-OpenSSL_1_1_1t} # openssl-3.1.0
++OPENSSL_VERSION=${4:-OpenSSL_1_1_1w} # openssl-3.3.0
++BUILD_SHARED_LIBS=$5
+ 
+ if [ ! -d "$ANDROID_SDK_ROOT" ] ; then
+   echo "Error: directory \"$ANDROID_SDK_ROOT\" doesn't exist. Run ./fetch-sdk.sh first, or provide a valid path to Android SDK."
+@@ -17,6 +18,11 @@ fi
+ 
+ source ./check-environment.sh || exit 1
+ 
++if [[ "$OS_NAME" == "win" ]] && [[ "$BUILD_SHARED_LIBS" ]] ; then
++  echo "Error: OpenSSL shared libraries can't be built on Windows because of 'The command line is too long.' error during build. You can run the script in WSL instead."
++  exit 1
++fi
++
+ mkdir -p $OPENSSL_INSTALL_DIR || exit 1
+ 
+ ANDROID_SDK_ROOT="$(cd "$(dirname -- "$ANDROID_SDK_ROOT")" >/dev/null; pwd -P)/$(basename -- "$ANDROID_SDK_ROOT")"
+@@ -32,7 +38,7 @@ tar xzf $OPENSSL_VERSION.tar.gz || exit 1
+ rm $OPENSSL_VERSION.tar.gz || exit 1
+ cd openssl-$OPENSSL_VERSION
+ 
+-export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION  # for OpenSSL 3.0
++export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION  # for OpenSSL 3.*.*
+ export ANDROID_NDK_HOME=$ANDROID_NDK_ROOT                           # for OpenSSL 1.1.1
+ PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$HOST_ARCH/bin:$PATH
+ 
+@@ -53,15 +59,17 @@ if [[ ${ANDROID_NDK_VERSION%%.*} -ge 26 ]] ; then
+   ANDROID_API32=21
+ fi
+ 
++SHARED_BUILD_OPTION=$([ "$BUILD_SHARED_LIBS" ] && echo "shared" || echo "no-shared")
++
+ for ABI in arm64-v8a armeabi-v7a x86_64 x86 ; do
+   if [[ $ABI == "x86" ]] ; then
+-    ./Configure android-x86 no-shared -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API32 || exit 1
++    ./Configure android-x86 ${SHARED_BUILD_OPTION} -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API32 || exit 1
+   elif [[ $ABI == "x86_64" ]] ; then
+-    ./Configure android-x86_64 no-shared -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API64 || exit 1
++    ./Configure android-x86_64 ${SHARED_BUILD_OPTION} -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API64 || exit 1
+   elif [[ $ABI == "armeabi-v7a" ]] ; then
+-    ./Configure android-arm no-shared -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API32 -D__ARM_MAX_ARCH__=8 || exit 1
++    ./Configure android-arm ${SHARED_BUILD_OPTION} -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API32 -D__ARM_MAX_ARCH__=8 || exit 1
+   elif [[ $ABI == "arm64-v8a" ]] ; then
+-    ./Configure android-arm64 no-shared -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API64 || exit 1
++    ./Configure android-arm64 ${SHARED_BUILD_OPTION} -U__ANDROID_API__ -D__ANDROID_API__=$ANDROID_API64 || exit 1
+   fi
+ 
+   sed -i.bak 's/-O3/-O3 -ffunction-sections -fdata-sections/g' Makefile || exit 1
+@@ -70,7 +78,11 @@ for ABI in arm64-v8a armeabi-v7a x86_64 x86 ; do
+   make -j4 -s || exit 1
+ 
+   mkdir -p $OPENSSL_INSTALL_DIR/$ABI/lib/ || exit 1
+-  cp libcrypto.a libssl.a $OPENSSL_INSTALL_DIR/$ABI/lib/ || exit 1
++  if [ "$BUILD_SHARED_LIBS" ] ; then
++    cp libcrypto.so libssl.so $OPENSSL_INSTALL_DIR/$ABI/lib/ || exit 1
++  else
++    cp libcrypto.a libssl.a $OPENSSL_INSTALL_DIR/$ABI/lib/ || exit 1
++  fi
+   cp -r include $OPENSSL_INSTALL_DIR/$ABI/ || exit 1
+ 
+   make distclean || exit 1
+diff --git a/lib/tgchat/ext/td/example/android/build-tdlib.sh b/lib/tgchat/ext/td/example/android/build-tdlib.sh
+index 3a257989..c670a922 100755
+--- a/lib/tgchat/ext/td/example/android/build-tdlib.sh
++++ b/lib/tgchat/ext/td/example/android/build-tdlib.sh
+@@ -11,8 +11,8 @@ if [ "$ANDROID_STL" != "c++_static" ] && [ "$ANDROID_STL" != "c++_shared" ] ; th
+   exit 1
+ fi
+ 
+-if [ "$TDLIB_INTERFACE" != "Java" ] && [ "$TDLIB_INTERFACE" != "JSON" ] ; then
+-  echo 'Error: TDLIB_INTERFACE must be either "Java" or "JSON".'
++if [ "$TDLIB_INTERFACE" != "Java" ] && [ "$TDLIB_INTERFACE" != "JSON" ] && [ "$TDLIB_INTERFACE" != "JSONJava" ] ; then
++  echo 'Error: TDLIB_INTERFACE must be either "Java", "JSON", or "JSONJava".'
+   exit 1
+ fi
+ 
+@@ -32,7 +32,7 @@ ANDROID_SDK_ROOT="$(cd "$(dirname -- "$ANDROID_SDK_ROOT")" >/dev/null; pwd -P)/$
+ ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
+ OPENSSL_INSTALL_DIR="$(cd "$(dirname -- "$OPENSSL_INSTALL_DIR")" >/dev/null; pwd -P)/$(basename -- "$OPENSSL_INSTALL_DIR")"
+ PATH=$ANDROID_SDK_ROOT/cmake/3.22.1/bin:$PATH
+-TDLIB_INTERFACE_OPTION=$([ "$TDLIB_INTERFACE" == "JSON" ] && echo "-DTD_ANDROID_JSON=ON" || echo "")
++TDLIB_INTERFACE_OPTION=$([ "$TDLIB_INTERFACE" == "JSON" ] && echo "-DTD_ANDROID_JSON=ON" || [ "$TDLIB_INTERFACE" == "JSONJava" ] && echo "-DTD_ANDROID_JSON_JAVA=ON" || echo "")
+ 
+ cd $(dirname $0)
+ 
+@@ -54,7 +54,7 @@ if [ "$TDLIB_INTERFACE" == "Java" ] ; then
+   cmake --build build-native-$TDLIB_INTERFACE --target tl_generate_java || exit 1
+   php AddIntDef.php org/drinkless/tdlib/TdApi.java || exit 1
+   mkdir -p tdlib/java/org/drinkless/tdlib || exit 1
+-  cp -p {../../example,tdlib}/java/org/drinkless/tdlib/Client.java || exit 1
++  cp -p {..,tdlib}/java/org/drinkless/tdlib/Client.java || exit 1
+   mv {,tdlib/java/}org/drinkless/tdlib/TdApi.java || exit 1
+   rm -rf org || exit 1
+ 
+@@ -64,6 +64,10 @@ if [ "$TDLIB_INTERFACE" == "Java" ] ; then
+   javadoc -d tdlib/javadoc -encoding UTF-8 -charset UTF-8 -classpath "android.jar${JAVADOC_SEPARATOR}annotation-1.4.0.jar" -quiet -sourcepath tdlib/java org.drinkless.tdlib || exit 1
+   rm android.jar annotation-1.4.0.jar || exit 1
+ fi
++if [ "$TDLIB_INTERFACE" == "JSONJava" ] ; then
++  mkdir -p tdlib/java/org/drinkless/tdlib || exit 1
++  cp -p {..,tdlib}/java/org/drinkless/tdlib/JsonClient.java || exit 1
++fi
+ 
+ echo "Building TDLib..."
+ for ABI in arm64-v8a armeabi-v7a x86_64 x86 ; do
+@@ -72,7 +76,7 @@ for ABI in arm64-v8a armeabi-v7a x86_64 x86 ; do
+   mkdir -p build-$ABI-$TDLIB_INTERFACE || exit 1
+   cd build-$ABI-$TDLIB_INTERFACE
+   cmake -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake" -DOPENSSL_ROOT_DIR="$OPENSSL_INSTALL_DIR/$ABI" -DCMAKE_BUILD_TYPE=RelWithDebInfo -GNinja -DANDROID_ABI=$ABI -DANDROID_STL=$ANDROID_STL -DANDROID_PLATFORM=android-16 $TDLIB_INTERFACE_OPTION .. || exit 1
+-  if [ "$TDLIB_INTERFACE" == "Java" ] ; then
++  if [ "$TDLIB_INTERFACE" == "Java" ] || [ "$TDLIB_INTERFACE" == "JSONJava" ] ; then
+     cmake --build . --target tdjni || exit 1
+     cp -p libtd*.so* ../tdlib/libs/$ABI/ || exit 1
+   fi
+@@ -96,6 +100,11 @@ for ABI in arm64-v8a armeabi-v7a x86_64 x86 ; do
+     cp "$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$HOST_ARCH/sysroot/usr/lib/$FULL_ABI/libc++_shared.so" tdlib/libs/$ABI/ || exit 1
+     "$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$HOST_ARCH/bin/llvm-strip" tdlib/libs/$ABI/libc++_shared.so || exit 1
+   fi
++  if [ -e "$OPENSSL_INSTALL_DIR/$ABI/lib/libcrypto.so" ] ; then
++    cp "$OPENSSL_INSTALL_DIR/$ABI/lib/libcrypto.so" "$OPENSSL_INSTALL_DIR/$ABI/lib/libssl.so" tdlib/libs/$ABI/ || exit 1
++    "$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$HOST_ARCH/bin/llvm-strip" tdlib/libs/$ABI/libcrypto.so || exit 1
++    "$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/$HOST_ARCH/bin/llvm-strip" tdlib/libs/$ABI/libssl.so || exit 1
++  fi
+ done
+ 
+ echo "Compressing..."
+diff --git a/lib/tgchat/ext/td/example/cpp/.gitignore b/lib/tgchat/ext/td/example/cpp/.gitignore
+index 336dc7d4..b64845d4 100644
+--- a/lib/tgchat/ext/td/example/cpp/.gitignore
++++ b/lib/tgchat/ext/td/example/cpp/.gitignore
+@@ -1 +1 @@
+-td/
++/td/
+diff --git a/lib/tgchat/ext/td/example/csharp/.gitignore b/lib/tgchat/ext/td/example/csharp/.gitignore
+index 5266eccc..9ce7d06a 100644
+--- a/lib/tgchat/ext/td/example/csharp/.gitignore
++++ b/lib/tgchat/ext/td/example/csharp/.gitignore
+@@ -1,5 +1,5 @@
+-.vs/
+-bin/
+-obj/
+-project.lock.json
+-TdExample.csproj.user
++/.vs/
++/bin/
++/obj/
++/project.lock.json
++/TdExample.csproj.user
+diff --git a/lib/tgchat/ext/td/example/ios/Python-Apple-support.patch b/lib/tgchat/ext/td/example/ios/Python-Apple-support.patch
+index 4b03ec28..4ef7827b 100644
+--- a/lib/tgchat/ext/td/example/ios/Python-Apple-support.patch
++++ b/lib/tgchat/ext/td/example/ios/Python-Apple-support.patch
+@@ -21,7 +21,7 @@ index a1d13e9..8efcf20 100644
+  # probably some other packages as well) only works with 1.1.1, so
+  # we need to preserve the ability to build the older OpenSSL (for now...)
+ -OPENSSL_VERSION=3.1.0
+-+OPENSSL_VERSION=3.1.2
+++OPENSSL_VERSION=3.1.5
+  # OPENSSL_VERSION_NUMBER=1.1.1
+  # OPENSSL_REVISION=q
+  # OPENSSL_VERSION=$(OPENSSL_VERSION_NUMBER)$(OPENSSL_REVISION)
+diff --git a/lib/tgchat/ext/td/example/python/.gitignore b/lib/tgchat/ext/td/example/python/.gitignore
+new file mode 100644
+index 00000000..7eace820
+--- /dev/null
++++ b/lib/tgchat/ext/td/example/python/.gitignore
+@@ -0,0 +1,3 @@
++/td/
++/tdlib/
++/*.dll
+\ No newline at end of file
+diff --git a/lib/tgchat/ext/td/example/swift/.gitignore b/lib/tgchat/ext/td/example/swift/.gitignore
+index 4737be59..6e3ff7d7 100644
+--- a/lib/tgchat/ext/td/example/swift/.gitignore
++++ b/lib/tgchat/ext/td/example/swift/.gitignore
+@@ -1,3 +1,3 @@
+-xcuserdata/
+-*workspace/
+-td/
++/xcuserdata/
++/*workspace/
++/td/
+diff --git a/lib/tgchat/ext/td/example/uwp/app/.gitignore b/lib/tgchat/ext/td/example/uwp/app/.gitignore
+index 37ab0816..08029685 100644
+--- a/lib/tgchat/ext/td/example/uwp/app/.gitignore
++++ b/lib/tgchat/ext/td/example/uwp/app/.gitignore
+@@ -1,5 +1,5 @@
+-.vs/
+-bin/
+-obj/
+-project.lock.json
+-TdApp.csproj.user
++/.vs/
++/bin/
++/obj/
++/project.lock.json
++/TdApp.csproj.user
+diff --git a/lib/tgchat/ext/td/td/generate/CMakeLists.txt b/lib/tgchat/ext/td/td/generate/CMakeLists.txt
+index d417c078..07f46c3b 100644
+--- a/lib/tgchat/ext/td/td/generate/CMakeLists.txt
++++ b/lib/tgchat/ext/td/td/generate/CMakeLists.txt
+@@ -57,9 +57,7 @@ set(TL_DOTNET_AUTO_SOURCE
+   PARENT_SCOPE
+ )
+ 
+-set(TL_GENERATE_COMMON_SOURCE
+-  generate_common.cpp
+-
++set(TL_WRITER_CPP_SOURCE
+   tl_writer_cpp.cpp
+   tl_writer_h.cpp
+   tl_writer_hpp.cpp
+@@ -75,6 +73,14 @@ set(TL_GENERATE_COMMON_SOURCE
+   tl_writer_td.h
+ )
+ 
++set(TL_GENERATE_MTPROTO_SOURCE
++  generate_mtproto.cpp
++)
++
++set(TL_GENERATE_COMMON_SOURCE
++  generate_common.cpp
++)
++
+ set(TL_GENERATE_C_SOURCE
+   generate_c.cpp
+ 
+@@ -133,8 +139,27 @@ if (NOT CMAKE_CROSSCOMPILING)
+     DEPENDS tl-parser ${CMAKE_CURRENT_SOURCE_DIR}/scheme/mtproto_api.tl ${CMAKE_CURRENT_SOURCE_DIR}/scheme/secret_api.tl ${CMAKE_CURRENT_SOURCE_DIR}/scheme/td_api.tl ${CMAKE_CURRENT_SOURCE_DIR}/scheme/telegram_api.tl
+   )
+ 
++  add_library(tl_writer_cpp STATIC ${TL_WRITER_CPP_SOURCE})
++  target_link_libraries(tl_writer_cpp PRIVATE tdtl)
++  target_include_directories(tl_writer_cpp PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
++  if (TD_ENABLE_JNI)
++    target_compile_definitions(tl_writer_cpp PRIVATE TD_ENABLE_JNI=1)
++  endif()
++  if (TD_ENABLE_DOTNET)
++    target_compile_definitions(tl_writer_cpp PRIVATE DISABLE_HPP_DOCUMENTATION=1)
++  endif()
++
++  add_executable(generate_mtproto ${TL_GENERATE_MTPROTO_SOURCE})
++  target_link_libraries(generate_mtproto PRIVATE tdtl tl_writer_cpp)
++  add_custom_target(tl_generate_mtproto
++    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/auto
++    COMMAND generate_mtproto
++    COMMENT "Generate MTProto API source files"
++    DEPENDS generate_mtproto tl_generate_tlo ${TLO_FILES}
++  )
++
+   add_executable(generate_common ${TL_GENERATE_COMMON_SOURCE})
+-  target_link_libraries(generate_common PRIVATE tdtl)
++  target_link_libraries(generate_common PRIVATE tdtl tl_writer_cpp)
+   add_custom_target(tl_generate_common
+     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/auto
+     COMMAND ${GENERATE_COMMON_CMD}
+@@ -144,9 +169,6 @@ if (NOT CMAKE_CROSSCOMPILING)
+   if (TD_ENABLE_JNI)
+     target_compile_definitions(generate_common PRIVATE TD_ENABLE_JNI=1)
+   endif()
+-  if (TD_ENABLE_DOTNET)
+-    target_compile_definitions(generate_common PRIVATE DISABLE_HPP_DOCUMENTATION=1)
+-  endif()
+ 
+   add_executable(generate_c ${TL_GENERATE_C_SOURCE})
+   target_link_libraries(generate_c PRIVATE tdtl)
+diff --git a/lib/tgchat/ext/td/td/generate/generate_common.cpp b/lib/tgchat/ext/td/td/generate/generate_common.cpp
+index 31766f1d..4fdc2688 100644
+--- a/lib/tgchat/ext/td/td/generate/generate_common.cpp
++++ b/lib/tgchat/ext/td/td/generate/generate_common.cpp
+@@ -39,10 +39,6 @@ int main() {
+   generate_cpp<>("td/telegram", "secret_api", "std::string", "BufferSlice",
+                  {"\"td/tl/tl_object_parse.h\"", "\"td/tl/tl_object_store.h\""}, {"\"td/utils/buffer.h\""});
+ 
+-  generate_cpp<>("td/mtproto", "mtproto_api", "Slice", "Slice",
+-                 {"\"td/tl/tl_object_parse.h\"", "\"td/tl/tl_object_store.h\""},
+-                 {"\"td/utils/Slice.h\"", "\"td/utils/UInt.h\""});
+-
+ #ifdef TD_ENABLE_JNI
+   generate_cpp<false, td::TD_TL_writer_jni_cpp, td::TD_TL_writer_jni_h>(
+       "td/telegram", "td_api", "std::string", "std::string", {"\"td/tl/tl_jni_object.h\""}, {"<string>"});
+diff --git a/lib/tgchat/ext/td/td/generate/generate_mtproto.cpp b/lib/tgchat/ext/td/td/generate/generate_mtproto.cpp
+new file mode 100644
+index 00000000..e7d90909
+--- /dev/null
++++ b/lib/tgchat/ext/td/td/generate/generate_mtproto.cpp
+@@ -0,0 +1,27 @@
++//
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
++//
++// Distributed under the Boost Software License, Version 1.0. (See accompanying
++// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
++//
++#include "tl_writer_cpp.h"
++#include "tl_writer_h.h"
++#include "tl_writer_hpp.h"
++
++#include "td/tl/tl_config.h"
++#include "td/tl/tl_generate.h"
++
++#include <string>
++
++int main() {
++  std::string tl_name = "mtproto_api";
++  std::string path = "td/mtproto/" + tl_name;
++  td::tl::tl_config config = td::tl::read_tl_config_from_file("tlo/" + tl_name + ".tlo");
++  td::tl::write_tl_to_file(
++      config, path + ".cpp",
++      td::TD_TL_writer_cpp(tl_name, "Slice", "Slice", {"\"td/tl/tl_object_parse.h\"", "\"td/tl/tl_object_store.h\""}));
++  td::tl::write_tl_to_file(
++      config, path + ".h",
++      td::TD_TL_writer_h(tl_name, "Slice", "Slice", {"\"td/utils/Slice.h\"", "\"td/utils/UInt.h\""}));
++  td::tl::write_tl_to_file(config, path + ".hpp", td::TD_TL_writer_hpp(tl_name, "Slice", "Slice"));
++}
+diff --git a/lib/tgchat/ext/td/td/generate/scheme/td_api.tl b/lib/tgchat/ext/td/td/generate/scheme/td_api.tl
+index d8dbc7b6..e1c2ff6b 100644
+--- a/lib/tgchat/ext/td/td/generate/scheme/td_api.tl
++++ b/lib/tgchat/ext/td/td/generate/scheme/td_api.tl
+@@ -8065,16 +8065,16 @@ searchCallMessages offset:string limit:int32 only_missed:Bool = FoundMessages;
+ //@limit The maximum number of messages to be returned; up to 100
+ searchOutgoingDocumentMessages query:string limit:int32 = FoundMessages;
+ 
+-//@description Searches for public channel posts with the given hashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit
+-//@hashtag Hashtag to search for
++//@description Searches for public channel posts with the given hashtag or cashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit
++//@hashtag Hashtag or cashtag to search for
+ //@offset Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results
+ //@limit The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit
+ searchPublicHashtagMessages hashtag:string offset:string limit:int32 = FoundMessages;
+ 
+-//@description Returns recently searched for hashtags by their prefix @prefix Prefix of hashtags to return @limit The maximum number of hashtags to be returned
++//@description Returns recently searched for hashtags or cashtags by their prefix @prefix Prefix of hashtags or cashtags to return @limit The maximum number of items to be returned
+ getSearchedForHashtags prefix:string limit:int32 = Hashtags;
+ 
+-//@description Removes a hashtag from the list of recently searched for hashtags @hashtag Hashtag to delete
++//@description Removes a hashtag or a cashtag from the list of recently searched for hashtags or cashtags @hashtag Hashtag or cashtag to delete
+ removeSearchedForHashtag hashtag:string = Ok;
+ 
+ //@description Clears the list of recently searched for hashtags
+@@ -8367,7 +8367,7 @@ editMessageSchedulingState chat_id:int53 message_id:int53 scheduling_state:Messa
+ 
+ //@description Changes the fact-check of a message. Can be only used if getOption("can_edit_fact_check") == true
+ //@chat_id The channel chat the message belongs to
+-//@message_id Identifier of the message
++//@message_id Identifier of the message. The message must be one of the following types: messageAnimation, messageAudio, messageDocument, messagePhoto, messageText, messageVideo
+ //@text New text of the fact-check; 0-getOption("fact_check_length_max") characters; pass null to remove it. Only Bold, Italic, and TextUrl entities with https://t.me/ links are supported
+ setMessageFactCheck chat_id:int53 message_id:int53 text:formattedText = Ok;
+ 
+diff --git a/lib/tgchat/ext/td/td/mtproto/PingConnection.cpp b/lib/tgchat/ext/td/td/mtproto/PingConnection.cpp
+index 39ead983..7b74ee6b 100644
+--- a/lib/tgchat/ext/td/td/mtproto/PingConnection.cpp
++++ b/lib/tgchat/ext/td/td/mtproto/PingConnection.cpp
+@@ -134,7 +134,7 @@ class PingConnectionPingPong final
+   void on_container_sent(MessageId container_message_id, vector<MessageId> message_ids) final {
+   }
+ 
+-  Status on_pong() final {
++  Status on_pong(double ping_time, double pong_time) final {
+     pong_cnt_++;
+     if (pong_cnt_ == 1) {
+       rtt_ = Time::now();
+diff --git a/lib/tgchat/ext/td/td/mtproto/SessionConnection.cpp b/lib/tgchat/ext/td/td/mtproto/SessionConnection.cpp
+index 6635a72f..e759fe7f 100644
+--- a/lib/tgchat/ext/td/td/mtproto/SessionConnection.cpp
++++ b/lib/tgchat/ext/td/td/mtproto/SessionConnection.cpp
+@@ -425,7 +425,10 @@ Status SessionConnection::on_packet(const MsgInfo &info, const mtproto_api::pong
+ 
+   last_pong_at_ = Time::now_cached();
+   real_last_pong_at_ = last_pong_at_;
+-  return callback_->on_pong();
++  auto get_time = [](int64 msg_id) {
++    return static_cast<double>(msg_id) / (static_cast<uint64>(1) << 32);
++  };
++  return callback_->on_pong(get_time(pong.ping_id_), get_time(pong.msg_id_));
+ }
+ 
+ Status SessionConnection::on_packet(const MsgInfo &info, const mtproto_api::future_salts &salts) {
+diff --git a/lib/tgchat/ext/td/td/mtproto/SessionConnection.h b/lib/tgchat/ext/td/td/mtproto/SessionConnection.h
+index 6add0092..eb4afd53 100644
+--- a/lib/tgchat/ext/td/td/mtproto/SessionConnection.h
++++ b/lib/tgchat/ext/td/td/mtproto/SessionConnection.h
+@@ -98,7 +98,7 @@ class SessionConnection final
+     virtual void on_session_failed(Status status) = 0;
+ 
+     virtual void on_container_sent(MessageId container_message_id, vector<MessageId> message_ids) = 0;
+-    virtual Status on_pong() = 0;
++    virtual Status on_pong(double ping_time, double pong_time) = 0;
+ 
+     virtual Status on_update(BufferSlice packet) = 0;
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.cpp b/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.cpp
+index 67faa680..5e9ae1eb 100644
+--- a/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.h b/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.h
+index daaafa25..34d0fd07 100644
+--- a/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.h
++++ b/lib/tgchat/ext/td/td/telegram/BusinessConnectionManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/BusinessIntro.cpp b/lib/tgchat/ext/td/td/telegram/BusinessIntro.cpp
+index a276e2d8..ed40da65 100644
+--- a/lib/tgchat/ext/td/td/telegram/BusinessIntro.cpp
++++ b/lib/tgchat/ext/td/td/telegram/BusinessIntro.cpp
+@@ -30,8 +30,9 @@ BusinessIntro::BusinessIntro(Td *td, telegram_api::object_ptr<telegram_api::busi
+   }
+   title_ = std::move(intro->title_);
+   description_ = std::move(intro->description_);
+-  sticker_file_id_ =
+-      td->stickers_manager_->on_get_sticker_document(std::move(intro->sticker_), StickerFormat::Unknown).second;
++  sticker_file_id_ = td->stickers_manager_
++                         ->on_get_sticker_document(std::move(intro->sticker_), StickerFormat::Unknown, "BusinessIntro")
++                         .second;
+ }
+ 
+ BusinessIntro::BusinessIntro(Td *td, td_api::object_ptr<td_api::inputBusinessStartPage> intro) {
+diff --git a/lib/tgchat/ext/td/td/telegram/BusinessManager.cpp b/lib/tgchat/ext/td/td/telegram/BusinessManager.cpp
+index 9afa34c8..f60d0d4c 100644
+--- a/lib/tgchat/ext/td/td/telegram/BusinessManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/BusinessManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/BusinessManager.h b/lib/tgchat/ext/td/td/telegram/BusinessManager.h
+index d915b1f9..e85eedd6 100644
+--- a/lib/tgchat/ext/td/td/telegram/BusinessManager.h
++++ b/lib/tgchat/ext/td/td/telegram/BusinessManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.cpp b/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.cpp
+index c8d0048e..164d304c 100644
+--- a/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.h b/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.h
+index e21a1487..8cdd5efa 100644
+--- a/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.h
++++ b/lib/tgchat/ext/td/td/telegram/ChannelRecommendationManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/CommonDialogManager.cpp b/lib/tgchat/ext/td/td/telegram/CommonDialogManager.cpp
+index 118f9560..3a9b2d47 100644
+--- a/lib/tgchat/ext/td/td/telegram/CommonDialogManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/CommonDialogManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/CommonDialogManager.h b/lib/tgchat/ext/td/td/telegram/CommonDialogManager.h
+index b4f28ddf..7b128ca6 100644
+--- a/lib/tgchat/ext/td/td/telegram/CommonDialogManager.h
++++ b/lib/tgchat/ext/td/td/telegram/CommonDialogManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogActionManager.cpp b/lib/tgchat/ext/td/td/telegram/DialogActionManager.cpp
+index b37ecf1e..388aff9a 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogActionManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/DialogActionManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogActionManager.h b/lib/tgchat/ext/td/td/telegram/DialogActionManager.h
+index ecebf59b..e67fe019 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogActionManager.h
++++ b/lib/tgchat/ext/td/td/telegram/DialogActionManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogFilter.cpp b/lib/tgchat/ext/td/td/telegram/DialogFilter.cpp
+index d903cbe0..33c5e0d3 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogFilter.cpp
++++ b/lib/tgchat/ext/td/td/telegram/DialogFilter.cpp
+@@ -426,10 +426,7 @@ string DialogFilter::get_default_icon_name(const td_api::chatFolder *filter) {
+ 
+ telegram_api::object_ptr<telegram_api::DialogFilter> DialogFilter::get_input_dialog_filter() const {
+   if (is_shareable_) {
+-    int32 flags = 0;
+-    if (!emoji_.empty()) {
+-      flags |= telegram_api::dialogFilterChatlist::EMOTICON_MASK;
+-    }
++    int32 flags = telegram_api::dialogFilterChatlist::EMOTICON_MASK;
+     if (color_id_ != -1) {
+       flags |= telegram_api::dialogFilterChatlist::COLOR_MASK;
+     }
+@@ -440,10 +437,7 @@ telegram_api::object_ptr<telegram_api::DialogFilter> DialogFilter::get_input_dia
+         flags, false /*ignored*/, dialog_filter_id_.get(), title_, emoji_, color_id_,
+         InputDialogId::get_input_peers(pinned_dialog_ids_), InputDialogId::get_input_peers(included_dialog_ids_));
+   }
+-  int32 flags = 0;
+-  if (!emoji_.empty()) {
+-    flags |= telegram_api::dialogFilter::EMOTICON_MASK;
+-  }
++  int32 flags = telegram_api::dialogFilter::EMOTICON_MASK;
+   if (color_id_ != -1) {
+     flags |= telegram_api::dialogFilter::COLOR_MASK;
+   }
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.cpp b/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.cpp
+index 92befbe6..d1f20746 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.h b/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.h
+index 860a8204..b9f72711 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.h
++++ b/lib/tgchat/ext/td/td/telegram/DialogInviteLinkManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogManager.cpp b/lib/tgchat/ext/td/td/telegram/DialogManager.cpp
+index d8dc69c8..c7c4a9ba 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/DialogManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogManager.h b/lib/tgchat/ext/td/td/telegram/DialogManager.h
+index 5ee26de1..cff679b5 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogManager.h
++++ b/lib/tgchat/ext/td/td/telegram/DialogManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.cpp b/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.cpp
+index df50409c..c2250fa6 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.h b/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.h
+index 1e85aefe..d0211566 100644
+--- a/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.h
++++ b/lib/tgchat/ext/td/td/telegram/DialogParticipantManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/GameManager.cpp b/lib/tgchat/ext/td/td/telegram/GameManager.cpp
+index ced8cadc..dae80790 100644
+--- a/lib/tgchat/ext/td/td/telegram/GameManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/GameManager.cpp
+@@ -12,11 +12,8 @@
+ #include "td/telegram/DialogId.h"
+ #include "td/telegram/DialogManager.h"
+ #include "td/telegram/Global.h"
+-#include "td/telegram/InlineQueriesManager.h"
+ #include "td/telegram/MessageId.h"
+ #include "td/telegram/MessagesManager.h"
+-#include "td/telegram/net/DcId.h"
+-#include "td/telegram/net/NetQueryCreator.h"
+ #include "td/telegram/Td.h"
+ #include "td/telegram/telegram_api.h"
+ #include "td/telegram/UpdatesManager.h"
+@@ -78,50 +75,6 @@ class SetGameScoreQuery final : public Td::ResultHandler {
+   }
+ };
+ 
+-class SetInlineGameScoreQuery final : public Td::ResultHandler {
+-  Promise<Unit> promise_;
+-
+- public:
+-  explicit SetInlineGameScoreQuery(Promise<Unit> &&promise) : promise_(std::move(promise)) {
+-  }
+-
+-  void send(tl_object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id, bool edit_message,
+-            tl_object_ptr<telegram_api::InputUser> input_user, int32 score, bool force) {
+-    CHECK(input_bot_inline_message_id != nullptr);
+-    CHECK(input_user != nullptr);
+-
+-    int32 flags = 0;
+-    if (edit_message) {
+-      flags |= telegram_api::messages_setInlineGameScore::EDIT_MESSAGE_MASK;
+-    }
+-    if (force) {
+-      flags |= telegram_api::messages_setInlineGameScore::FORCE_MASK;
+-    }
+-
+-    auto dc_id = DcId::internal(InlineQueriesManager::get_inline_message_dc_id(input_bot_inline_message_id));
+-    send_query(G()->net_query_creator().create(
+-        telegram_api::messages_setInlineGameScore(flags, false /*ignored*/, false /*ignored*/,
+-                                                  std::move(input_bot_inline_message_id), std::move(input_user), score),
+-        {}, dc_id));
+-  }
+-
+-  void on_result(BufferSlice packet) final {
+-    auto result_ptr = fetch_result<telegram_api::messages_setInlineGameScore>(packet);
+-    if (result_ptr.is_error()) {
+-      return on_error(result_ptr.move_as_error());
+-    }
+-
+-    LOG_IF(ERROR, !result_ptr.ok()) << "Receive false in result of setInlineGameScore";
+-
+-    promise_.set_value(Unit());
+-  }
+-
+-  void on_error(Status status) final {
+-    LOG(INFO) << "Receive error for SetInlineGameScoreQuery: " << status;
+-    promise_.set_error(std::move(status));
+-  }
+-};
+-
+ class GetGameHighScoresQuery final : public Td::ResultHandler {
+   Promise<td_api::object_ptr<td_api::gameHighScores>> promise_;
+   DialogId dialog_id_;
+@@ -157,39 +110,6 @@ class GetGameHighScoresQuery final : public Td::ResultHandler {
+   }
+ };
+ 
+-class GetInlineGameHighScoresQuery final : public Td::ResultHandler {
+-  Promise<td_api::object_ptr<td_api::gameHighScores>> promise_;
+-
+- public:
+-  explicit GetInlineGameHighScoresQuery(Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise)
+-      : promise_(std::move(promise)) {
+-  }
+-
+-  void send(tl_object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id,
+-            tl_object_ptr<telegram_api::InputUser> input_user) {
+-    CHECK(input_bot_inline_message_id != nullptr);
+-    CHECK(input_user != nullptr);
+-
+-    auto dc_id = DcId::internal(InlineQueriesManager::get_inline_message_dc_id(input_bot_inline_message_id));
+-    send_query(G()->net_query_creator().create(
+-        telegram_api::messages_getInlineGameHighScores(std::move(input_bot_inline_message_id), std::move(input_user)),
+-        {}, dc_id));
+-  }
+-
+-  void on_result(BufferSlice packet) final {
+-    auto result_ptr = fetch_result<telegram_api::messages_getInlineGameHighScores>(packet);
+-    if (result_ptr.is_error()) {
+-      return on_error(result_ptr.move_as_error());
+-    }
+-
+-    promise_.set_value(td_->game_manager_->get_game_high_scores_object(result_ptr.move_as_ok()));
+-  }
+-
+-  void on_error(Status status) final {
+-    promise_.set_error(std::move(status));
+-  }
+-};
+-
+ GameManager::GameManager(Td *td, ActorShared<> parent) : td_(td), parent_(std::move(parent)) {
+ }
+ 
+@@ -232,21 +152,6 @@ void GameManager::on_set_game_score(MessageFullId message_full_id,
+   promise.set_value(td_->messages_manager_->get_message_object(message_full_id, "on_set_game_score"));
+ }
+ 
+-void GameManager::set_inline_game_score(const string &inline_message_id, bool edit_message, UserId user_id, int32 score,
+-                                        bool force, Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  TRY_RESULT_PROMISE(promise, input_user, td_->user_manager_->get_input_user(user_id));
+-
+-  td_->create_handler<SetInlineGameScoreQuery>(std::move(promise))
+-      ->send(std::move(input_bot_inline_message_id), edit_message, std::move(input_user), score, force);
+-}
+-
+ void GameManager::get_game_high_scores(MessageFullId message_full_id, UserId user_id,
+                                        Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise) {
+   CHECK(td_->auth_manager_->is_bot());
+@@ -269,21 +174,6 @@ void GameManager::get_game_high_scores(MessageFullId message_full_id, UserId use
+   td_->create_handler<GetGameHighScoresQuery>(std::move(promise))->send(dialog_id, message_id, std::move(input_user));
+ }
+ 
+-void GameManager::get_inline_game_high_scores(const string &inline_message_id, UserId user_id,
+-                                              Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  TRY_RESULT_PROMISE(promise, input_user, td_->user_manager_->get_input_user(user_id));
+-
+-  td_->create_handler<GetInlineGameHighScoresQuery>(std::move(promise))
+-      ->send(std::move(input_bot_inline_message_id), std::move(input_user));
+-}
+-
+ td_api::object_ptr<td_api::gameHighScores> GameManager::get_game_high_scores_object(
+     telegram_api::object_ptr<telegram_api::messages_highScores> &&high_scores) {
+   td_->user_manager_->on_get_users(std::move(high_scores->users_), "get_game_high_scores_object");
+diff --git a/lib/tgchat/ext/td/td/telegram/GameManager.h b/lib/tgchat/ext/td/td/telegram/GameManager.h
+index aae970a3..4e8c40a7 100644
+--- a/lib/tgchat/ext/td/td/telegram/GameManager.h
++++ b/lib/tgchat/ext/td/td/telegram/GameManager.h
+@@ -32,15 +32,9 @@ class GameManager final : public Actor {
+   void set_game_score(MessageFullId message_full_id, bool edit_message, UserId user_id, int32 score, bool force,
+                       Promise<td_api::object_ptr<td_api::message>> &&promise);
+ 
+-  void set_inline_game_score(const string &inline_message_id, bool edit_message, UserId user_id, int32 score,
+-                             bool force, Promise<Unit> &&promise);
+-
+   void get_game_high_scores(MessageFullId message_full_id, UserId user_id,
+                             Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise);
+ 
+-  void get_inline_game_high_scores(const string &inline_message_id, UserId user_id,
+-                                   Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise);
+-
+   td_api::object_ptr<td_api::gameHighScores> get_game_high_scores_object(
+       telegram_api::object_ptr<telegram_api::messages_highScores> &&high_scores);
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/Global.h b/lib/tgchat/ext/td/td/telegram/Global.h
+index 0947b712..d7b163d5 100644
+--- a/lib/tgchat/ext/td/td/telegram/Global.h
++++ b/lib/tgchat/ext/td/td/telegram/Global.h
+@@ -54,6 +54,7 @@ class FileReferenceManager;
+ class ForumTopicManager;
+ class GameManager;
+ class GroupCallManager;
++class InlineMessageManager;
+ class LanguagePackManager;
+ class LinkManager;
+ class MessageImportManager;
+@@ -347,6 +348,13 @@ class Global final : public ActorContext {
+     group_call_manager_ = group_call_manager;
+   }
+ 
++  ActorId<InlineMessageManager> inline_message_manager() const {
++    return inline_message_manager_;
++  }
++  void set_inline_message_manager(ActorId<InlineMessageManager> inline_message_manager) {
++    inline_message_manager_ = inline_message_manager;
++  }
++
+   ActorId<LanguagePackManager> language_pack_manager() const {
+     return language_pack_manager_;
+   }
+@@ -657,6 +665,7 @@ class Global final : public ActorContext {
+   ActorId<ForumTopicManager> forum_topic_manager_;
+   ActorId<GameManager> game_manager_;
+   ActorId<GroupCallManager> group_call_manager_;
++  ActorId<InlineMessageManager> inline_message_manager_;
+   ActorId<LanguagePackManager> language_pack_manager_;
+   ActorId<LinkManager> link_manager_;
+   ActorId<MessageImportManager> message_import_manager_;
+diff --git a/lib/tgchat/ext/td/td/telegram/HashtagHints.cpp b/lib/tgchat/ext/td/td/telegram/HashtagHints.cpp
+index c33ee800..05a74fe2 100644
+--- a/lib/tgchat/ext/td/td/telegram/HashtagHints.cpp
++++ b/lib/tgchat/ext/td/td/telegram/HashtagHints.cpp
+@@ -18,7 +18,8 @@
+ 
+ namespace td {
+ 
+-HashtagHints::HashtagHints(string mode, ActorShared<> parent) : mode_(std::move(mode)), parent_(std::move(parent)) {
++HashtagHints::HashtagHints(string mode, char first_character, ActorShared<> parent)
++    : mode_(std::move(mode)), first_character_(first_character), parent_(std::move(parent)) {
+ }
+ 
+ void HashtagHints::start_up() {
+@@ -43,7 +44,7 @@ void HashtagHints::remove_hashtag(string hashtag, Promise<Unit> promise) {
+   if (!sync_with_db_) {
+     return promise.set_value(Unit());
+   }
+-  if (hashtag[0] == '#') {
++  if (hashtag[0] == first_character_) {
+     hashtag = hashtag.substr(1);
+   }
+   auto key = Hash<string>()(hashtag);
+@@ -72,7 +73,8 @@ void HashtagHints::query(const string &prefix, int32 limit, Promise<vector<strin
+     return;
+   }
+ 
+-  auto result = prefix.empty() ? hints_.search_empty(limit) : hints_.search(prefix, limit);
++  auto query = Slice(prefix).substr(prefix[0] == first_character_ ? 1 : 0);
++  auto result = query.empty() ? hints_.search_empty(limit) : hints_.search(query, limit);
+   promise.set_value(keys_to_strings(result.second));
+ }
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/HashtagHints.h b/lib/tgchat/ext/td/td/telegram/HashtagHints.h
+index 82cded84..1dcd6878 100644
+--- a/lib/tgchat/ext/td/td/telegram/HashtagHints.h
++++ b/lib/tgchat/ext/td/td/telegram/HashtagHints.h
+@@ -17,7 +17,7 @@ namespace td {
+ 
+ class HashtagHints final : public Actor {
+  public:
+-  HashtagHints(string mode, ActorShared<> parent);
++  HashtagHints(string mode, char first_character, ActorShared<> parent);
+ 
+   void hashtag_used(const string &hashtag);
+ 
+@@ -30,6 +30,7 @@ class HashtagHints final : public Actor {
+  private:
+   string mode_;
+   Hints hints_;
++  char first_character_ = '#';
+   bool sync_with_db_ = false;
+   int64 counter_ = 0;
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/InlineMessageManager.cpp b/lib/tgchat/ext/td/td/telegram/InlineMessageManager.cpp
+new file mode 100644
+index 00000000..a16022c0
+--- /dev/null
++++ b/lib/tgchat/ext/td/td/telegram/InlineMessageManager.cpp
+@@ -0,0 +1,405 @@
++//
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
++//
++// Distributed under the Boost Software License, Version 1.0. (See accompanying
++// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
++//
++#include "td/telegram/InlineMessageManager.h"
++
++#include "td/telegram/AuthManager.h"
++#include "td/telegram/DialogId.h"
++#include "td/telegram/DialogManager.h"
++#include "td/telegram/files/FileManager.h"
++#include "td/telegram/GameManager.h"
++#include "td/telegram/Global.h"
++#include "td/telegram/InputMessageText.h"
++#include "td/telegram/Location.h"
++#include "td/telegram/MessageContent.h"
++#include "td/telegram/MessageEntity.h"
++#include "td/telegram/MessageSelfDestructType.h"
++#include "td/telegram/net/DcId.h"
++#include "td/telegram/OptionManager.h"
++#include "td/telegram/ReplyMarkup.h"
++#include "td/telegram/Td.h"
++#include "td/telegram/telegram_api.h"
++#include "td/telegram/UserManager.h"
++
++#include "td/utils/base64.h"
++#include "td/utils/buffer.h"
++#include "td/utils/logging.h"
++#include "td/utils/Status.h"
++#include "td/utils/tl_parsers.h"
++
++namespace td {
++
++static int32 get_inline_message_dc_id(
++    const telegram_api::object_ptr<telegram_api::InputBotInlineMessageID> &inline_message_id) {
++  CHECK(inline_message_id != nullptr);
++  switch (inline_message_id->get_id()) {
++    case telegram_api::inputBotInlineMessageID::ID:
++      return static_cast<const telegram_api::inputBotInlineMessageID *>(inline_message_id.get())->dc_id_;
++    case telegram_api::inputBotInlineMessageID64::ID:
++      return static_cast<const telegram_api::inputBotInlineMessageID64 *>(inline_message_id.get())->dc_id_;
++    default:
++      UNREACHABLE();
++      return 0;
++  }
++}
++
++static telegram_api::object_ptr<telegram_api::InputBotInlineMessageID> get_input_bot_inline_message_id(
++    const string &inline_message_id) {
++  auto r_binary = base64url_decode(inline_message_id);
++  if (r_binary.is_error()) {
++    return nullptr;
++  }
++  BufferSlice buffer_slice(r_binary.ok());
++  TlBufferParser parser(&buffer_slice);
++  auto result = buffer_slice.size() == 20 ? telegram_api::inputBotInlineMessageID::fetch(parser)
++                                          : telegram_api::inputBotInlineMessageID64::fetch(parser);
++  parser.fetch_end();
++  if (parser.get_error()) {
++    return nullptr;
++  }
++  if (!DcId::is_valid(get_inline_message_dc_id(result))) {
++    return nullptr;
++  }
++  LOG(INFO) << "Have inline message identifier: " << to_string(result);
++  return result;
++}
++
++class EditInlineMessageQuery final : public Td::ResultHandler {
++  Promise<Unit> promise_;
++
++ public:
++  explicit EditInlineMessageQuery(Promise<Unit> &&promise) : promise_(std::move(promise)) {
++  }
++
++  void send(telegram_api::object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id,
++            bool force_edit_text, const string &text,
++            vector<telegram_api::object_ptr<telegram_api::MessageEntity>> &&entities, bool disable_web_page_preview,
++            telegram_api::object_ptr<telegram_api::InputMedia> &&input_media, bool invert_media,
++            telegram_api::object_ptr<telegram_api::ReplyMarkup> &&reply_markup) {
++    CHECK(input_bot_inline_message_id != nullptr);
++
++    // file in an inline message can't be uploaded to another datacenter,
++    // so only previously uploaded files or URLs can be used in the InputMedia
++    CHECK(!FileManager::extract_was_uploaded(input_media));
++
++    int32 flags = 0;
++    if (disable_web_page_preview) {
++      flags |= telegram_api::messages_editInlineBotMessage::NO_WEBPAGE_MASK;
++    }
++    if (reply_markup != nullptr) {
++      flags |= telegram_api::messages_editInlineBotMessage::REPLY_MARKUP_MASK;
++    }
++    if (!entities.empty()) {
++      flags |= telegram_api::messages_editInlineBotMessage::ENTITIES_MASK;
++    }
++    if (force_edit_text || !text.empty()) {
++      flags |= telegram_api::messages_editInlineBotMessage::MESSAGE_MASK;
++    }
++    if (input_media != nullptr) {
++      flags |= telegram_api::messages_editInlineBotMessage::MEDIA_MASK;
++    }
++    if (invert_media) {
++      flags |= telegram_api::messages_editInlineBotMessage::INVERT_MEDIA_MASK;
++    }
++
++    auto dc_id = DcId::internal(get_inline_message_dc_id(input_bot_inline_message_id));
++    send_query(G()->net_query_creator().create(
++        telegram_api::messages_editInlineBotMessage(
++            flags, false /*ignored*/, false /*ignored*/, std::move(input_bot_inline_message_id), text,
++            std::move(input_media), std::move(reply_markup), std::move(entities)),
++        {}, dc_id));
++  }
++
++  void on_result(BufferSlice packet) final {
++    auto result_ptr = fetch_result<telegram_api::messages_editInlineBotMessage>(packet);
++    if (result_ptr.is_error()) {
++      return on_error(result_ptr.move_as_error());
++    }
++
++    LOG_IF(ERROR, !result_ptr.ok()) << "Receive false in result of editInlineMessage";
++
++    promise_.set_value(Unit());
++  }
++
++  void on_error(Status status) final {
++    LOG(INFO) << "Receive error for EditInlineMessageQuery: " << status;
++    promise_.set_error(std::move(status));
++  }
++};
++
++class SetInlineGameScoreQuery final : public Td::ResultHandler {
++  Promise<Unit> promise_;
++
++ public:
++  explicit SetInlineGameScoreQuery(Promise<Unit> &&promise) : promise_(std::move(promise)) {
++  }
++
++  void send(tl_object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id, bool edit_message,
++            tl_object_ptr<telegram_api::InputUser> input_user, int32 score, bool force) {
++    CHECK(input_bot_inline_message_id != nullptr);
++    CHECK(input_user != nullptr);
++
++    int32 flags = 0;
++    if (edit_message) {
++      flags |= telegram_api::messages_setInlineGameScore::EDIT_MESSAGE_MASK;
++    }
++    if (force) {
++      flags |= telegram_api::messages_setInlineGameScore::FORCE_MASK;
++    }
++
++    auto dc_id = DcId::internal(get_inline_message_dc_id(input_bot_inline_message_id));
++    send_query(G()->net_query_creator().create(
++        telegram_api::messages_setInlineGameScore(flags, false /*ignored*/, false /*ignored*/,
++                                                  std::move(input_bot_inline_message_id), std::move(input_user), score),
++        {}, dc_id));
++  }
++
++  void on_result(BufferSlice packet) final {
++    auto result_ptr = fetch_result<telegram_api::messages_setInlineGameScore>(packet);
++    if (result_ptr.is_error()) {
++      return on_error(result_ptr.move_as_error());
++    }
++
++    LOG_IF(ERROR, !result_ptr.ok()) << "Receive false in result of setInlineGameScore";
++
++    promise_.set_value(Unit());
++  }
++
++  void on_error(Status status) final {
++    LOG(INFO) << "Receive error for SetInlineGameScoreQuery: " << status;
++    promise_.set_error(std::move(status));
++  }
++};
++
++class GetInlineGameHighScoresQuery final : public Td::ResultHandler {
++  Promise<td_api::object_ptr<td_api::gameHighScores>> promise_;
++
++ public:
++  explicit GetInlineGameHighScoresQuery(Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise)
++      : promise_(std::move(promise)) {
++  }
++
++  void send(tl_object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id,
++            tl_object_ptr<telegram_api::InputUser> input_user) {
++    CHECK(input_bot_inline_message_id != nullptr);
++    CHECK(input_user != nullptr);
++
++    auto dc_id = DcId::internal(get_inline_message_dc_id(input_bot_inline_message_id));
++    send_query(G()->net_query_creator().create(
++        telegram_api::messages_getInlineGameHighScores(std::move(input_bot_inline_message_id), std::move(input_user)),
++        {}, dc_id));
++  }
++
++  void on_result(BufferSlice packet) final {
++    auto result_ptr = fetch_result<telegram_api::messages_getInlineGameHighScores>(packet);
++    if (result_ptr.is_error()) {
++      return on_error(result_ptr.move_as_error());
++    }
++
++    promise_.set_value(td_->game_manager_->get_game_high_scores_object(result_ptr.move_as_ok()));
++  }
++
++  void on_error(Status status) final {
++    promise_.set_error(std::move(status));
++  }
++};
++
++InlineMessageManager::InlineMessageManager(Td *td, ActorShared<> parent) : td_(td), parent_(std::move(parent)) {
++}
++
++void InlineMessageManager::tear_down() {
++  parent_.reset();
++}
++
++void InlineMessageManager::edit_inline_message_text(
++    const string &inline_message_id, td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++    td_api::object_ptr<td_api::InputMessageContent> &&input_message_content, Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  if (input_message_content == nullptr) {
++    return promise.set_error(Status::Error(400, "Can't edit message without new content"));
++  }
++  int32 new_message_content_type = input_message_content->get_id();
++  if (new_message_content_type != td_api::inputMessageText::ID) {
++    return promise.set_error(Status::Error(400, "Input message content type must be InputMessageText"));
++  }
++
++  TRY_RESULT_PROMISE(
++      promise, input_message_text,
++      process_input_message_text(td_, DialogId(), std::move(input_message_content), td_->auth_manager_->is_bot()));
++  TRY_RESULT_PROMISE(promise, new_reply_markup,
++                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), true, input_message_text.text.text,
++             get_input_message_entities(td_->user_manager_.get(), input_message_text.text.entities,
++                                        "edit_inline_message_text"),
++             input_message_text.disable_web_page_preview, input_message_text.get_input_media_web_page(),
++             input_message_text.show_above_text, get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
++}
++
++void InlineMessageManager::edit_inline_message_live_location(const string &inline_message_id,
++                                                             td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                                             td_api::object_ptr<td_api::location> &&input_location,
++                                                             int32 live_period, int32 heading,
++                                                             int32 proximity_alert_radius, Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  TRY_RESULT_PROMISE(promise, new_reply_markup,
++                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  Location location(input_location);
++  if (location.empty() && input_location != nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid location specified"));
++  }
++
++  int32 flags = 0;
++  if (location.empty()) {
++    flags |= telegram_api::inputMediaGeoLive::STOPPED_MASK;
++  }
++  if (live_period != 0) {
++    flags |= telegram_api::inputMediaGeoLive::PERIOD_MASK;
++  }
++  if (heading != 0) {
++    flags |= telegram_api::inputMediaGeoLive::HEADING_MASK;
++  }
++  flags |= telegram_api::inputMediaGeoLive::PROXIMITY_NOTIFICATION_RADIUS_MASK;
++  auto input_media = telegram_api::make_object<telegram_api::inputMediaGeoLive>(
++      flags, false /*ignored*/, location.get_input_geo_point(), heading, live_period, proximity_alert_radius);
++  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), false, string(),
++             vector<telegram_api::object_ptr<telegram_api::MessageEntity>>(), false, std::move(input_media),
++             false /*ignored*/, get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
++}
++
++void InlineMessageManager::edit_inline_message_media(
++    const string &inline_message_id, td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++    td_api::object_ptr<td_api::InputMessageContent> &&input_message_content, Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  if (input_message_content == nullptr) {
++    return promise.set_error(Status::Error(400, "Can't edit message without new content"));
++  }
++  int32 new_message_content_type = input_message_content->get_id();
++  if (new_message_content_type != td_api::inputMessageAnimation::ID &&
++      new_message_content_type != td_api::inputMessageAudio::ID &&
++      new_message_content_type != td_api::inputMessageDocument::ID &&
++      new_message_content_type != td_api::inputMessagePhoto::ID &&
++      new_message_content_type != td_api::inputMessageVideo::ID) {
++    return promise.set_error(Status::Error(400, "Unsupported input message content type"));
++  }
++
++  bool is_premium = td_->option_manager_->get_option_boolean("is_premium");
++  TRY_RESULT_PROMISE(promise, content,
++                     get_input_message_content(DialogId(), std::move(input_message_content), td_, is_premium));
++  if (!content.ttl.is_empty()) {
++    return promise.set_error(Status::Error(400, "Can't enable self-destruction for media"));
++  }
++
++  TRY_RESULT_PROMISE(promise, new_reply_markup,
++                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  auto input_media = get_input_media(content.content.get(), td_, MessageSelfDestructType(), string(), true);
++  if (input_media == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid message content specified"));
++  }
++
++  const FormattedText *caption = get_message_content_caption(content.content.get());
++  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), true, caption == nullptr ? "" : caption->text,
++             get_input_message_entities(td_->user_manager_.get(), caption, "edit_inline_message_media"), false,
++             std::move(input_media), content.invert_media,
++             get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
++}
++
++void InlineMessageManager::edit_inline_message_caption(const string &inline_message_id,
++                                                       td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                                       td_api::object_ptr<td_api::formattedText> &&input_caption,
++                                                       bool invert_media, Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  TRY_RESULT_PROMISE(promise, caption,
++                     get_formatted_text(td_, td_->dialog_manager_->get_my_dialog_id(), std::move(input_caption),
++                                        td_->auth_manager_->is_bot(), true, false, false));
++  TRY_RESULT_PROMISE(promise, new_reply_markup,
++                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), true, caption.text,
++             get_input_message_entities(td_->user_manager_.get(), caption.entities, "edit_inline_message_caption"),
++             false, nullptr, invert_media, get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
++}
++
++void InlineMessageManager::edit_inline_message_reply_markup(const string &inline_message_id,
++                                                            td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                                            Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  TRY_RESULT_PROMISE(promise, new_reply_markup,
++                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), false, string(),
++             vector<telegram_api::object_ptr<telegram_api::MessageEntity>>(), false, nullptr, false /*ignored*/,
++             get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
++}
++
++void InlineMessageManager::set_inline_game_score(const string &inline_message_id, bool edit_message, UserId user_id,
++                                                 int32 score, bool force, Promise<Unit> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  TRY_RESULT_PROMISE(promise, input_user, td_->user_manager_->get_input_user(user_id));
++
++  td_->create_handler<SetInlineGameScoreQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), edit_message, std::move(input_user), score, force);
++}
++
++void InlineMessageManager::get_inline_game_high_scores(const string &inline_message_id, UserId user_id,
++                                                       Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise) {
++  CHECK(td_->auth_manager_->is_bot());
++
++  auto input_bot_inline_message_id = get_input_bot_inline_message_id(inline_message_id);
++  if (input_bot_inline_message_id == nullptr) {
++    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
++  }
++
++  TRY_RESULT_PROMISE(promise, input_user, td_->user_manager_->get_input_user(user_id));
++
++  td_->create_handler<GetInlineGameHighScoresQuery>(std::move(promise))
++      ->send(std::move(input_bot_inline_message_id), std::move(input_user));
++}
++
++}  // namespace td
+diff --git a/lib/tgchat/ext/td/td/telegram/InlineMessageManager.h b/lib/tgchat/ext/td/td/telegram/InlineMessageManager.h
+new file mode 100644
+index 00000000..7a6b7e3e
+--- /dev/null
++++ b/lib/tgchat/ext/td/td/telegram/InlineMessageManager.h
+@@ -0,0 +1,61 @@
++//
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
++//
++// Distributed under the Boost Software License, Version 1.0. (See accompanying
++// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
++//
++#pragma once
++
++#include "td/telegram/td_api.h"
++#include "td/telegram/UserId.h"
++
++#include "td/actor/actor.h"
++
++#include "td/utils/common.h"
++#include "td/utils/Promise.h"
++
++namespace td {
++
++class Td;
++
++class InlineMessageManager final : public Actor {
++ public:
++  InlineMessageManager(Td *td, ActorShared<> parent);
++
++  void edit_inline_message_text(const string &inline_message_id, td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                td_api::object_ptr<td_api::InputMessageContent> &&input_message_content,
++                                Promise<Unit> &&promise);
++
++  void edit_inline_message_live_location(const string &inline_message_id,
++                                         td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                         td_api::object_ptr<td_api::location> &&input_location, int32 live_period,
++                                         int32 heading, int32 proximity_alert_radius, Promise<Unit> &&promise);
++
++  void edit_inline_message_media(const string &inline_message_id,
++                                 td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                 td_api::object_ptr<td_api::InputMessageContent> &&input_message_content,
++                                 Promise<Unit> &&promise);
++
++  void edit_inline_message_caption(const string &inline_message_id,
++                                   td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                   td_api::object_ptr<td_api::formattedText> &&input_caption, bool invert_media,
++                                   Promise<Unit> &&promise);
++
++  void edit_inline_message_reply_markup(const string &inline_message_id,
++                                        td_api::object_ptr<td_api::ReplyMarkup> &&reply_markup,
++                                        Promise<Unit> &&promise);
++
++  void set_inline_game_score(const string &inline_message_id, bool edit_message, UserId user_id, int32 score,
++                             bool force, Promise<Unit> &&promise);
++
++  void get_inline_game_high_scores(const string &inline_message_id, UserId user_id,
++                                   Promise<td_api::object_ptr<td_api::gameHighScores>> &&promise);
++
++ private:
++  void tear_down() final;
++
++  Td *td_;
++  ActorShared<> parent_;
++};
++
++}  // namespace td
+diff --git a/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.cpp b/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.cpp
+index e62e7897..63bf10e6 100644
+--- a/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.cpp
+@@ -27,7 +27,6 @@
+ #include "td/telegram/MessageContentType.h"
+ #include "td/telegram/MessageEntity.h"
+ #include "td/telegram/misc.h"
+-#include "td/telegram/net/DcId.h"
+ #include "td/telegram/Photo.h"
+ #include "td/telegram/PhotoFormat.h"
+ #include "td/telegram/PhotoSize.h"
+@@ -56,7 +55,6 @@
+ #include "td/utils/SliceBuilder.h"
+ #include "td/utils/Time.h"
+ #include "td/utils/tl_helpers.h"
+-#include "td/utils/tl_parsers.h"
+ 
+ namespace td {
+ 
+@@ -321,41 +319,6 @@ void InlineQueriesManager::after_get_difference() {
+   }
+ }
+ 
+-int32 InlineQueriesManager::get_inline_message_dc_id(
+-    const tl_object_ptr<telegram_api::InputBotInlineMessageID> &inline_message_id) {
+-  CHECK(inline_message_id != nullptr);
+-  switch (inline_message_id->get_id()) {
+-    case telegram_api::inputBotInlineMessageID::ID:
+-      return static_cast<const telegram_api::inputBotInlineMessageID *>(inline_message_id.get())->dc_id_;
+-    case telegram_api::inputBotInlineMessageID64::ID:
+-      return static_cast<const telegram_api::inputBotInlineMessageID64 *>(inline_message_id.get())->dc_id_;
+-    default:
+-      UNREACHABLE();
+-      return 0;
+-  }
+-}
+-
+-tl_object_ptr<telegram_api::InputBotInlineMessageID> InlineQueriesManager::get_input_bot_inline_message_id(
+-    const string &inline_message_id) {
+-  auto r_binary = base64url_decode(inline_message_id);
+-  if (r_binary.is_error()) {
+-    return nullptr;
+-  }
+-  BufferSlice buffer_slice(r_binary.ok());
+-  TlBufferParser parser(&buffer_slice);
+-  auto result = buffer_slice.size() == 20 ? telegram_api::inputBotInlineMessageID::fetch(parser)
+-                                          : telegram_api::inputBotInlineMessageID64::fetch(parser);
+-  parser.fetch_end();
+-  if (parser.get_error()) {
+-    return nullptr;
+-  }
+-  if (!DcId::is_valid(get_inline_message_dc_id(result))) {
+-    return nullptr;
+-  }
+-  LOG(INFO) << "Have inline message identifier: " << to_string(result);
+-  return result;
+-}
+-
+ string InlineQueriesManager::get_inline_message_id(
+     tl_object_ptr<telegram_api::InputBotInlineMessageID> &&input_bot_inline_message_id) {
+   if (input_bot_inline_message_id == nullptr) {
+diff --git a/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.h b/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.h
+index 5c56d2a2..51762df9 100644
+--- a/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.h
++++ b/lib/tgchat/ext/td/td/telegram/InlineQueriesManager.h
+@@ -78,11 +78,6 @@ class InlineQueriesManager final : public Actor {
+   void on_chosen_result(UserId user_id, Location user_location, const string &query, const string &result_id,
+                         tl_object_ptr<telegram_api::InputBotInlineMessageID> &&input_bot_inline_message_id);
+ 
+-  static int32 get_inline_message_dc_id(const tl_object_ptr<telegram_api::InputBotInlineMessageID> &inline_message_id);
+-
+-  static tl_object_ptr<telegram_api::InputBotInlineMessageID> get_input_bot_inline_message_id(
+-      const string &inline_message_id);
+-
+   static string get_inline_message_id(
+       tl_object_ptr<telegram_api::InputBotInlineMessageID> &&input_bot_inline_message_id);
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/MessageImportManager.cpp b/lib/tgchat/ext/td/td/telegram/MessageImportManager.cpp
+index c38d96d1..9da56b60 100644
+--- a/lib/tgchat/ext/td/td/telegram/MessageImportManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/MessageImportManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/MessageImportManager.h b/lib/tgchat/ext/td/td/telegram/MessageImportManager.h
+index 2c2a938a..415356af 100644
+--- a/lib/tgchat/ext/td/td/telegram/MessageImportManager.h
++++ b/lib/tgchat/ext/td/td/telegram/MessageImportManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/MessagesManager.cpp b/lib/tgchat/ext/td/td/telegram/MessagesManager.cpp
+index d5b18ab9..40c0b4da 100644
+--- a/lib/tgchat/ext/td/td/telegram/MessagesManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/MessagesManager.cpp
+@@ -1695,19 +1695,19 @@ class ReadDiscussionQuery final : public Td::ResultHandler {
+ };
+ 
+ class GetSearchResultCalendarQuery final : public Td::ResultHandler {
+-  Promise<Unit> promise_;
++  Promise<td_api::object_ptr<td_api::messageCalendar>> promise_;
+   DialogId dialog_id_;
+   SavedMessagesTopicId saved_messages_topic_id_;
+   MessageId from_message_id_;
+   MessageSearchFilter filter_;
+-  int64 random_id_;
+ 
+  public:
+-  explicit GetSearchResultCalendarQuery(Promise<Unit> &&promise) : promise_(std::move(promise)) {
++  explicit GetSearchResultCalendarQuery(Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise)
++      : promise_(std::move(promise)) {
+   }
+ 
+   void send(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id, MessageId from_message_id,
+-            MessageSearchFilter filter, int64 random_id) {
++            MessageSearchFilter filter) {
+     auto input_peer = td_->dialog_manager_->get_input_peer(dialog_id, AccessRights::Read);
+     CHECK(input_peer != nullptr);
+ 
+@@ -1715,7 +1715,6 @@ class GetSearchResultCalendarQuery final : public Td::ResultHandler {
+     saved_messages_topic_id_ = saved_messages_topic_id;
+     from_message_id_ = from_message_id;
+     filter_ = filter;
+-    random_id_ = random_id;
+ 
+     int32 flags = 0;
+     telegram_api::object_ptr<telegram_api::InputPeer> saved_input_peer;
+@@ -1751,15 +1750,15 @@ class GetSearchResultCalendarQuery final : public Td::ResultHandler {
+         dialog_id_, std::move(info),
+         PromiseCreator::lambda([actor_id = td_->messages_manager_actor_.get(), dialog_id = dialog_id_,
+                                 saved_messages_topic_id = saved_messages_topic_id_, from_message_id = from_message_id_,
+-                                filter = filter_, random_id = random_id_, periods = std::move(result->periods_),
++                                filter = filter_, periods = std::move(result->periods_),
+                                 promise = std::move(promise_)](Result<MessagesInfo> &&result) mutable {
+           if (result.is_error()) {
+             promise.set_error(result.move_as_error());
+           } else {
+             auto info = result.move_as_ok();
+             send_closure(actor_id, &MessagesManager::on_get_message_search_result_calendar, dialog_id,
+-                         saved_messages_topic_id, from_message_id, filter, random_id, info.total_count,
+-                         std::move(info.messages), std::move(periods), std::move(promise));
++                         saved_messages_topic_id, from_message_id, filter, info.total_count, std::move(info.messages),
++                         std::move(periods), std::move(promise));
+           }
+         }),
+         "GetSearchResultCalendarQuery");
+@@ -1767,7 +1766,6 @@ class GetSearchResultCalendarQuery final : public Td::ResultHandler {
+ 
+   void on_error(Status status) final {
+     td_->dialog_manager_->on_get_dialog_error(dialog_id_, status, "GetSearchResultCalendarQuery");
+-    td_->messages_manager_->on_failed_get_message_search_result_calendar(random_id_);
+     promise_.set_error(std::move(status));
+   }
+ };
+@@ -3468,64 +3466,6 @@ class EditMessageQuery final : public Td::ResultHandler {
+   }
+ };
+ 
+-class EditInlineMessageQuery final : public Td::ResultHandler {
+-  Promise<Unit> promise_;
+-
+- public:
+-  explicit EditInlineMessageQuery(Promise<Unit> &&promise) : promise_(std::move(promise)) {
+-  }
+-
+-  void send(int32 flags, tl_object_ptr<telegram_api::InputBotInlineMessageID> input_bot_inline_message_id,
+-            const string &text, vector<tl_object_ptr<telegram_api::MessageEntity>> &&entities,
+-            tl_object_ptr<telegram_api::InputMedia> &&input_media, bool invert_media,
+-            tl_object_ptr<telegram_api::ReplyMarkup> &&reply_markup) {
+-    CHECK(input_bot_inline_message_id != nullptr);
+-
+-    // file in an inline message can't be uploaded to another datacenter,
+-    // so only previously uploaded files or URLs can be used in the InputMedia
+-    CHECK(!FileManager::extract_was_uploaded(input_media));
+-
+-    if (reply_markup != nullptr) {
+-      flags |= MessagesManager::SEND_MESSAGE_FLAG_HAS_REPLY_MARKUP;
+-    }
+-    if (!entities.empty()) {
+-      flags |= MessagesManager::SEND_MESSAGE_FLAG_HAS_ENTITIES;
+-    }
+-    if (!text.empty()) {
+-      flags |= MessagesManager::SEND_MESSAGE_FLAG_HAS_MESSAGE;
+-    }
+-    if (input_media != nullptr) {
+-      flags |= telegram_api::messages_editInlineBotMessage::MEDIA_MASK;
+-    }
+-    if (invert_media) {
+-      flags |= telegram_api::messages_editInlineBotMessage::INVERT_MEDIA_MASK;
+-    }
+-
+-    auto dc_id = DcId::internal(InlineQueriesManager::get_inline_message_dc_id(input_bot_inline_message_id));
+-    send_query(G()->net_query_creator().create(
+-        telegram_api::messages_editInlineBotMessage(
+-            flags, false /*ignored*/, false /*ignored*/, std::move(input_bot_inline_message_id), text,
+-            std::move(input_media), std::move(reply_markup), std::move(entities)),
+-        {}, dc_id));
+-  }
+-
+-  void on_result(BufferSlice packet) final {
+-    auto result_ptr = fetch_result<telegram_api::messages_editInlineBotMessage>(packet);
+-    if (result_ptr.is_error()) {
+-      return on_error(result_ptr.move_as_error());
+-    }
+-
+-    LOG_IF(ERROR, !result_ptr.ok()) << "Receive false in result of editInlineMessage";
+-
+-    promise_.set_value(Unit());
+-  }
+-
+-  void on_error(Status status) final {
+-    LOG(INFO) << "Receive error for EditInlineMessageQuery: " << status;
+-    promise_.set_error(std::move(status));
+-  }
+-};
+-
+ class ForwardMessagesQuery final : public Td::ResultHandler {
+   Promise<Unit> promise_;
+   vector<int64> random_ids_;
+@@ -6822,10 +6762,14 @@ bool MessagesManager::need_skip_bot_commands(DialogId dialog_id, const Message *
+          td_->dialog_manager_->is_broadcast_channel(dialog_id);
+ }
+ 
+-void MessagesManager::on_external_update_message_content(MessageFullId message_full_id, const char *source) {
++void MessagesManager::on_external_update_message_content(MessageFullId message_full_id, const char *source,
++                                                         bool expect_no_message) {
+   Dialog *d = get_dialog(message_full_id.get_dialog_id());
+   CHECK(d != nullptr);
+   Message *m = get_message(d, message_full_id.get_message_id());
++  if (expect_no_message && m == nullptr) {
++    return;
++  }
+   CHECK(m != nullptr);
+   send_update_message_content(d, m, true, source);
+   // must not call on_message_changed, because the message itself wasn't changed
+@@ -9092,14 +9036,11 @@ void MessagesManager::on_failed_public_dialogs_search(const string &query, Statu
+ 
+ void MessagesManager::on_get_message_search_result_calendar(
+     DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id, MessageId from_message_id,
+-    MessageSearchFilter filter, int64 random_id, int32 total_count,
+-    vector<tl_object_ptr<telegram_api::Message>> &&messages,
+-    vector<tl_object_ptr<telegram_api::searchResultsCalendarPeriod>> &&periods, Promise<Unit> &&promise) {
++    MessageSearchFilter filter, int32 total_count, vector<tl_object_ptr<telegram_api::Message>> &&messages,
++    vector<tl_object_ptr<telegram_api::searchResultsCalendarPeriod>> &&periods,
++    Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise) {
+   TRY_STATUS_PROMISE(promise, G()->close_status());
+ 
+-  auto it = found_dialog_message_calendars_.find(random_id);
+-  CHECK(it != found_dialog_message_calendars_.end());
+-
+   int32 received_message_count = 0;
+   for (auto &message : messages) {
+     auto new_message_full_id = on_get_message(std::move(message), false, dialog_id.get_type() == DialogType::Channel,
+@@ -9148,14 +9089,7 @@ void MessagesManager::on_get_message_search_result_calendar(
+     days.push_back(td_api::make_object<td_api::messageCalendarDay>(
+         period->count_, get_message_object(dialog_id, m, "on_get_message_search_result_calendar")));
+   }
+-  it->second = td_api::make_object<td_api::messageCalendar>(total_count, std::move(days));
+-  promise.set_value(Unit());
+-}
+-
+-void MessagesManager::on_failed_get_message_search_result_calendar(int64 random_id) {
+-  auto it = found_dialog_message_calendars_.find(random_id);
+-  CHECK(it != found_dialog_message_calendars_.end());
+-  found_dialog_message_calendars_.erase(it);
++  promise.set_value(td_api::make_object<td_api::messageCalendar>(total_count, std::move(days)));
+ }
+ 
+ void MessagesManager::on_get_dialog_messages_search_result(
+@@ -20242,20 +20176,9 @@ std::pair<DialogId, vector<MessageId>> MessagesManager::get_message_thread_histo
+   return {};
+ }
+ 
+-td_api::object_ptr<td_api::messageCalendar> MessagesManager::get_dialog_message_calendar(
+-    DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id, MessageId from_message_id,
+-    MessageSearchFilter filter, int64 &random_id, bool use_db, Promise<Unit> &&promise) {
+-  if (random_id != 0) {
+-    // request has already been sent before
+-    auto it = found_dialog_message_calendars_.find(random_id);
+-    if (it != found_dialog_message_calendars_.end()) {
+-      auto result = std::move(it->second);
+-      found_dialog_message_calendars_.erase(it);
+-      promise.set_value(Unit());
+-      return result;
+-    }
+-    random_id = 0;
+-  }
++void MessagesManager::get_dialog_message_calendar(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
++                                                  MessageId from_message_id, MessageSearchFilter filter,
++                                                  Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise) {
+   LOG(INFO) << "Get message calendar in " << dialog_id << " with " << saved_messages_topic_id << " filtered by "
+             << filter << " from " << from_message_id;
+ 
+@@ -20264,45 +20187,25 @@ td_api::object_ptr<td_api::messageCalendar> MessagesManager::get_dialog_message_
+   }
+ 
+   if (!from_message_id.is_valid() && from_message_id != MessageId()) {
+-    promise.set_error(Status::Error(400, "Parameter from_message_id must be identifier of a chat message or 0"));
+-    return {};
++    return promise.set_error(Status::Error(400, "Parameter from_message_id must be identifier of a chat message or 0"));
+   }
+   from_message_id = from_message_id.get_next_server_message_id();
+ 
+-  const Dialog *d = get_dialog_force(dialog_id, "get_dialog_message_calendar");
+-  if (d == nullptr) {
+-    promise.set_error(Status::Error(400, "Chat not found"));
+-    return {};
+-  }
+-  if (!td_->dialog_manager_->have_input_peer(dialog_id, true, AccessRights::Read)) {
+-    promise.set_error(Status::Error(400, "Can't access the chat"));
+-    return {};
+-  }
+-  {
+-    auto status = saved_messages_topic_id.is_valid_in(td_, dialog_id);
+-    if (status.is_error()) {
+-      promise.set_error(std::move(status));
+-      return {};
+-    }
+-  }
++  TRY_RESULT_PROMISE(promise, d,
++                     check_dialog_access(dialog_id, true, AccessRights::Read, "get_dialog_message_calendar"));
++  TRY_STATUS_PROMISE(promise, saved_messages_topic_id.is_valid_in(td_, dialog_id));
+ 
+   CHECK(filter != MessageSearchFilter::Call && filter != MessageSearchFilter::MissedCall);
+   if (filter == MessageSearchFilter::Empty || filter == MessageSearchFilter::Mention ||
+       filter == MessageSearchFilter::UnreadMention || filter == MessageSearchFilter::UnreadReaction) {
+     if (filter != MessageSearchFilter::Empty && saved_messages_topic_id.is_valid()) {
+-      return td_api::make_object<td_api::messageCalendar>();
++      return promise.set_value(td_api::make_object<td_api::messageCalendar>());
+     }
+-    promise.set_error(Status::Error(400, "The filter is not supported"));
+-    return {};
++    return promise.set_error(Status::Error(400, "The filter is not supported"));
+   }
+ 
+-  do {
+-    random_id = Random::secure_int64();
+-  } while (random_id == 0 || found_dialog_message_calendars_.count(random_id) > 0);
+-  found_dialog_message_calendars_[random_id];  // reserve place for result
+-
+   // Trying to use database
+-  if (use_db && G()->use_message_database() && !saved_messages_topic_id.is_valid()) {
++  if (G()->use_message_database() && !saved_messages_topic_id.is_valid()) {
+     MessageId first_db_message_id = get_first_database_message_id_by_index(d, filter);
+     int32 message_count = d->message_count_by_index[message_search_filter_index(filter)];
+     auto fixed_from_message_id = from_message_id;
+@@ -20314,11 +20217,10 @@ td_api::object_ptr<td_api::messageCalendar> MessagesManager::get_dialog_message_
+     if (first_db_message_id < fixed_from_message_id && message_count != -1) {
+       LOG(INFO) << "Get message calendar from database in " << dialog_id << " from " << fixed_from_message_id;
+       auto new_promise =
+-          PromiseCreator::lambda([random_id, dialog_id, fixed_from_message_id, first_db_message_id, filter,
++          PromiseCreator::lambda([dialog_id, fixed_from_message_id, first_db_message_id, filter,
+                                   promise = std::move(promise)](Result<MessageDbCalendar> r_calendar) mutable {
+-            send_closure(G()->messages_manager(), &MessagesManager::on_get_message_calendar_from_database, random_id,
+-                         dialog_id, fixed_from_message_id, first_db_message_id, filter, std::move(r_calendar),
+-                         std::move(promise));
++            send_closure(G()->messages_manager(), &MessagesManager::on_get_message_calendar_from_database, dialog_id,
++                         fixed_from_message_id, first_db_message_id, filter, std::move(r_calendar), std::move(promise));
+           });
+       MessageDbDialogCalendarQuery db_query;
+       db_query.dialog_id = dialog_id;
+@@ -20326,47 +20228,48 @@ td_api::object_ptr<td_api::messageCalendar> MessagesManager::get_dialog_message_
+       db_query.from_message_id = fixed_from_message_id;
+       db_query.tz_offset = static_cast<int32>(td_->option_manager_->get_option_integer("utc_time_offset"));
+       G()->td_db()->get_message_db_async()->get_dialog_message_calendar(db_query, std::move(new_promise));
+-      return {};
++      return;
+     }
+   }
+   if (filter == MessageSearchFilter::FailedToSend) {
+-    found_dialog_message_calendars_.erase(random_id);
+-    promise.set_value(Unit());
+-    return td_api::make_object<td_api::messageCalendar>();
++    return promise.set_value(td_api::make_object<td_api::messageCalendar>());
+   }
+ 
+   switch (dialog_id.get_type()) {
+-    case DialogType::None:
+     case DialogType::User:
+     case DialogType::Chat:
+     case DialogType::Channel:
+-      td_->create_handler<GetSearchResultCalendarQuery>(std::move(promise))
+-          ->send(dialog_id, saved_messages_topic_id, from_message_id, filter, random_id);
+-      break;
++      return get_message_calendar_from_server(dialog_id, saved_messages_topic_id, from_message_id, filter,
++                                              std::move(promise));
+     case DialogType::SecretChat:
+-      promise.set_value(Unit());
+-      break;
++      return promise.set_value(td_api::make_object<td_api::messageCalendar>());
++    case DialogType::None:
+     default:
+       UNREACHABLE();
+-      promise.set_error(Status::Error(500, "Message search is not supported"));
++      return promise.set_error(Status::Error(500, "Message search is not supported"));
+   }
+-  return {};
+ }
+ 
+-void MessagesManager::on_get_message_calendar_from_database(int64 random_id, DialogId dialog_id,
+-                                                            MessageId from_message_id, MessageId first_db_message_id,
+-                                                            MessageSearchFilter filter,
+-                                                            Result<MessageDbCalendar> r_calendar,
+-                                                            Promise<Unit> promise) {
++void MessagesManager::get_message_calendar_from_server(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
++                                                       MessageId from_message_id, MessageSearchFilter filter,
++                                                       Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise) {
++  td_->create_handler<GetSearchResultCalendarQuery>(std::move(promise))
++      ->send(dialog_id, saved_messages_topic_id, from_message_id, filter);
++}
++
++void MessagesManager::on_get_message_calendar_from_database(
++    DialogId dialog_id, MessageId from_message_id, MessageId first_db_message_id, MessageSearchFilter filter,
++    Result<MessageDbCalendar> r_calendar, Promise<td_api::object_ptr<td_api::messageCalendar>> promise) {
+   TRY_STATUS_PROMISE(promise, G()->close_status());
+ 
+   if (r_calendar.is_error()) {
+     LOG(ERROR) << "Failed to get message calendar from the database: " << r_calendar.error();
+     if (first_db_message_id != MessageId::min() && dialog_id.get_type() != DialogType::SecretChat &&
+         filter != MessageSearchFilter::FailedToSend) {
+-      found_dialog_message_calendars_.erase(random_id);
++      return get_message_calendar_from_server(dialog_id, SavedMessagesTopicId(), from_message_id, filter,
++                                              std::move(promise));
+     }
+-    return promise.set_value(Unit());
++    return promise.set_value(td_api::make_object<td_api::messageCalendar>());
+   }
+   CHECK(!from_message_id.is_scheduled());
+   CHECK(!first_db_message_id.is_scheduled());
+@@ -20376,10 +20279,6 @@ void MessagesManager::on_get_message_calendar_from_database(int64 random_id, Dia
+   Dialog *d = get_dialog(dialog_id);
+   CHECK(d != nullptr);
+ 
+-  auto it = found_dialog_message_calendars_.find(random_id);
+-  CHECK(it != found_dialog_message_calendars_.end());
+-  CHECK(it->second == nullptr);
+-
+   vector<std::pair<MessageId, int32>> periods;
+   periods.reserve(calendar.messages.size());
+   for (size_t i = 0; i < calendar.messages.size(); i++) {
+@@ -20392,7 +20291,8 @@ void MessagesManager::on_get_message_calendar_from_database(int64 random_id, Dia
+ 
+   if (periods.empty() && first_db_message_id != MessageId::min() && dialog_id.get_type() != DialogType::SecretChat) {
+     LOG(INFO) << "No messages found in database";
+-    found_dialog_message_calendars_.erase(it);
++    return get_message_calendar_from_server(dialog_id, SavedMessagesTopicId(), from_message_id, filter,
++                                            std::move(promise));
+   } else {
+     auto total_count = d->message_count_by_index[message_search_filter_index(filter)];
+     vector<td_api::object_ptr<td_api::messageCalendarDay>> days;
+@@ -20402,9 +20302,8 @@ void MessagesManager::on_get_message_calendar_from_database(int64 random_id, Dia
+       days.push_back(td_api::make_object<td_api::messageCalendarDay>(
+           period.second, get_message_object(dialog_id, m, "on_get_message_calendar_from_database")));
+     }
+-    it->second = td_api::make_object<td_api::messageCalendar>(total_count, std::move(days));
++    return promise.set_value(td_api::make_object<td_api::messageCalendar>(total_count, std::move(days)));
+   }
+-  promise.set_value(Unit());
+ }
+ 
+ MessagesManager::FoundDialogMessages MessagesManager::search_dialog_messages(
+@@ -20700,15 +20599,19 @@ void MessagesManager::search_hashtag_posts(string hashtag, string offset_str, in
+ 
+   TRY_RESULT_PROMISE(promise, offset, MessageSearchOffset::from_string(offset_str));
+ 
+-  if (hashtag[0] == '#') {
++  bool is_cashtag = false;
++  if (hashtag[0] == '#' || hashtag[0] == '$') {
++    is_cashtag = (hashtag[0] == '$');
+     hashtag = hashtag.substr(1);
+   }
+   if (hashtag.empty()) {
+     return promise.set_value(get_found_messages_object({}, "search_hashtag_posts"));
+   }
+-  send_closure(td_->hashtag_search_hints_, &HashtagHints::hashtag_used, hashtag);
++  send_closure(is_cashtag ? td_->cashtag_search_hints_ : td_->hashtag_search_hints_, &HashtagHints::hashtag_used,
++               hashtag);
+ 
+-  td_->create_handler<SearchPostsQuery>(std::move(promise))->send(hashtag, offset, limit);
++  td_->create_handler<SearchPostsQuery>(std::move(promise))
++      ->send(PSTRING() << (is_cashtag ? '$' : '#') << hashtag, offset, limit);
+ }
+ 
+ void MessagesManager::search_dialog_recent_location_messages(DialogId dialog_id, int32 limit,
+@@ -23752,6 +23655,7 @@ Result<td_api::object_ptr<td_api::message>> MessagesManager::send_message(
+ 
+ Result<InputMessageContent> MessagesManager::process_input_message_content(
+     DialogId dialog_id, tl_object_ptr<td_api::InputMessageContent> &&input_message_content, bool check_permissions) {
++  CHECK(dialog_id.is_valid());
+   if (input_message_content != nullptr && input_message_content->get_id() == td_api::inputMessageForwarded::ID) {
+     // for sendMessageAlbum/editMessageMedia/addLocalMessage
+     auto input_message = td_api::move_object_as<td_api::inputMessageForwarded>(input_message_content);
+@@ -23798,11 +23702,7 @@ Result<InputMessageContent> MessagesManager::process_input_message_content(
+ 
+   bool is_premium = td_->option_manager_->get_option_boolean("is_premium");
+   TRY_RESULT(content, get_input_message_content(dialog_id, std::move(input_message_content), td_, is_premium));
+-
+-  if (dialog_id != DialogId()) {
+-    TRY_STATUS(can_send_message_content(dialog_id, content.content.get(), false, check_permissions, td_));
+-  }
+-
++  TRY_STATUS(can_send_message_content(dialog_id, content.content.get(), false, check_permissions, td_));
+   return std::move(content);
+ }
+ 
+@@ -25530,167 +25430,6 @@ void MessagesManager::edit_message_reply_markup(MessageFullId message_full_id,
+              m->invert_media /*ignored*/, std::move(input_reply_markup), get_message_schedule_date(m));
+ }
+ 
+-void MessagesManager::edit_inline_message_text(const string &inline_message_id,
+-                                               tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                               tl_object_ptr<td_api::InputMessageContent> &&input_message_content,
+-                                               Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  if (input_message_content == nullptr) {
+-    return promise.set_error(Status::Error(400, "Can't edit message without new content"));
+-  }
+-  int32 new_message_content_type = input_message_content->get_id();
+-  if (new_message_content_type != td_api::inputMessageText::ID) {
+-    return promise.set_error(Status::Error(400, "Input message content type must be InputMessageText"));
+-  }
+-
+-  TRY_RESULT_PROMISE(
+-      promise, input_message_text,
+-      process_input_message_text(td_, DialogId(), std::move(input_message_content), td_->auth_manager_->is_bot()));
+-  TRY_RESULT_PROMISE(promise, new_reply_markup,
+-                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  int32 flags = 0;
+-  if (input_message_text.disable_web_page_preview) {
+-    flags |= SEND_MESSAGE_FLAG_DISABLE_WEB_PAGE_PREVIEW;
+-  }
+-  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
+-      ->send(flags, std::move(input_bot_inline_message_id), input_message_text.text.text,
+-             get_input_message_entities(td_->user_manager_.get(), input_message_text.text.entities,
+-                                        "edit_inline_message_text"),
+-             input_message_text.get_input_media_web_page(), input_message_text.show_above_text,
+-             get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
+-}
+-
+-void MessagesManager::edit_inline_message_live_location(const string &inline_message_id,
+-                                                        tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                                        tl_object_ptr<td_api::location> &&input_location,
+-                                                        int32 live_period, int32 heading, int32 proximity_alert_radius,
+-                                                        Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  TRY_RESULT_PROMISE(promise, new_reply_markup,
+-                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  Location location(input_location);
+-  if (location.empty() && input_location != nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid location specified"));
+-  }
+-
+-  int32 flags = 0;
+-  if (location.empty()) {
+-    flags |= telegram_api::inputMediaGeoLive::STOPPED_MASK;
+-  }
+-  if (live_period != 0) {
+-    flags |= telegram_api::inputMediaGeoLive::PERIOD_MASK;
+-  }
+-  if (heading != 0) {
+-    flags |= telegram_api::inputMediaGeoLive::HEADING_MASK;
+-  }
+-  flags |= telegram_api::inputMediaGeoLive::PROXIMITY_NOTIFICATION_RADIUS_MASK;
+-  auto input_media = telegram_api::make_object<telegram_api::inputMediaGeoLive>(
+-      flags, false /*ignored*/, location.get_input_geo_point(), heading, live_period, proximity_alert_radius);
+-  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
+-      ->send(0, std::move(input_bot_inline_message_id), "", vector<tl_object_ptr<telegram_api::MessageEntity>>(),
+-             std::move(input_media), false /*ignored*/,
+-             get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
+-}
+-
+-void MessagesManager::edit_inline_message_media(const string &inline_message_id,
+-                                                tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                                tl_object_ptr<td_api::InputMessageContent> &&input_message_content,
+-                                                Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  if (input_message_content == nullptr) {
+-    return promise.set_error(Status::Error(400, "Can't edit message without new content"));
+-  }
+-  int32 new_message_content_type = input_message_content->get_id();
+-  if (new_message_content_type != td_api::inputMessageAnimation::ID &&
+-      new_message_content_type != td_api::inputMessageAudio::ID &&
+-      new_message_content_type != td_api::inputMessageDocument::ID &&
+-      new_message_content_type != td_api::inputMessagePhoto::ID &&
+-      new_message_content_type != td_api::inputMessageVideo::ID) {
+-    return promise.set_error(Status::Error(400, "Unsupported input message content type"));
+-  }
+-
+-  TRY_RESULT_PROMISE(promise, content, process_input_message_content(DialogId(), std::move(input_message_content)));
+-  if (!content.ttl.is_empty()) {
+-    return promise.set_error(Status::Error(400, "Can't enable self-destruction for media"));
+-  }
+-
+-  TRY_RESULT_PROMISE(promise, new_reply_markup,
+-                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  auto input_media = get_input_media(content.content.get(), td_, MessageSelfDestructType(), string(), true);
+-  if (input_media == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid message content specified"));
+-  }
+-
+-  const FormattedText *caption = get_message_content_caption(content.content.get());
+-  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
+-      ->send(1 << 11, std::move(input_bot_inline_message_id), caption == nullptr ? "" : caption->text,
+-             get_input_message_entities(td_->user_manager_.get(), caption, "edit_inline_message_media"),
+-             std::move(input_media), content.invert_media,
+-             get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
+-}
+-
+-void MessagesManager::edit_inline_message_caption(const string &inline_message_id,
+-                                                  tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                                  tl_object_ptr<td_api::formattedText> &&input_caption,
+-                                                  bool invert_media, Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  TRY_RESULT_PROMISE(promise, caption,
+-                     get_formatted_text(td_, td_->dialog_manager_->get_my_dialog_id(), std::move(input_caption),
+-                                        td_->auth_manager_->is_bot(), true, false, false));
+-  TRY_RESULT_PROMISE(promise, new_reply_markup,
+-                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
+-      ->send(1 << 11, std::move(input_bot_inline_message_id), caption.text,
+-             get_input_message_entities(td_->user_manager_.get(), caption.entities, "edit_inline_message_caption"),
+-             nullptr, invert_media, get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
+-}
+-
+-void MessagesManager::edit_inline_message_reply_markup(const string &inline_message_id,
+-                                                       tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                                       Promise<Unit> &&promise) {
+-  CHECK(td_->auth_manager_->is_bot());
+-
+-  TRY_RESULT_PROMISE(promise, new_reply_markup,
+-                     get_reply_markup(std::move(reply_markup), td_->auth_manager_->is_bot(), true, false, true));
+-
+-  auto input_bot_inline_message_id = td_->inline_queries_manager_->get_input_bot_inline_message_id(inline_message_id);
+-  if (input_bot_inline_message_id == nullptr) {
+-    return promise.set_error(Status::Error(400, "Invalid inline message identifier specified"));
+-  }
+-
+-  td_->create_handler<EditInlineMessageQuery>(std::move(promise))
+-      ->send(0, std::move(input_bot_inline_message_id), string(), vector<tl_object_ptr<telegram_api::MessageEntity>>(),
+-             nullptr, false /*ignored*/, get_input_reply_markup(td_->user_manager_.get(), new_reply_markup));
+-}
+-
+ void MessagesManager::edit_message_scheduling_state(
+     MessageFullId message_full_id, td_api::object_ptr<td_api::MessageSchedulingState> &&scheduling_state,
+     Promise<Unit> &&promise) {
+@@ -29291,14 +29030,14 @@ void MessagesManager::update_reply_to_message_id(DialogId dialog_id, MessageId o
+                                                  bool have_new_message, const char *source) {
+   LOG(INFO) << "Update replies of " << MessageFullId{dialog_id, old_message_id} << " to " << new_message_id << " from "
+             << source;
+-  auto it = replied_yet_unsent_messages_.find({dialog_id, old_message_id});
++  MessageFullId old_message_full_id(dialog_id, old_message_id);
++  auto it = replied_yet_unsent_messages_.find(old_message_full_id);
+   if (it == replied_yet_unsent_messages_.end()) {
+     return;
+   }
+   CHECK(old_message_id.is_yet_unsent());
+   CHECK(new_message_id == MessageId() || new_message_id.is_valid() || new_message_id.is_valid_scheduled());
+ 
+-  MessageFullId old_message_full_id(dialog_id, old_message_id);
+   for (auto message_full_id : it->second) {
+     auto reply_d = get_dialog(message_full_id.get_dialog_id());
+     CHECK(reply_d != nullptr);
+@@ -29310,7 +29049,8 @@ void MessagesManager::update_reply_to_message_id(DialogId dialog_id, MessageId o
+     if (new_message_id != MessageId()) {
+       LOG_CHECK(replied_m->replied_message_info.get_reply_message_full_id(reply_d->dialog_id, true) ==
+                 old_message_full_id)
+-          << old_message_full_id << ' ' << replied_m->replied_message_info << ' ' << *input_reply_to;
++          << old_message_full_id << ' ' << new_message_id << ' ' << replied_m->replied_message_info << ' '
++          << *input_reply_to;
+       update_message_reply_to_message_id(reply_d, replied_m, new_message_id, true);
+     } else {
+       set_message_reply(reply_d, replied_m, MessageInputReplyTo(), true);
+@@ -36625,7 +36365,7 @@ void MessagesManager::on_get_channel_difference(DialogId dialog_id, int32 reques
+       for (const auto &message : difference->new_messages_) {
+         if (is_invalid_poll_message(message.get())) {
+           LOG(ERROR) << "Receive invalid poll message in updates.channelDifference: " << oneline(to_string(message));
+-          if (channel_get_difference_retry_timeouts_[dialog_id] <= 2) {
++          if (d != nullptr && channel_get_difference_retry_timeouts_[dialog_id] <= 2) {
+             return retry_get_channel_difference_later(dialog_id);
+           }
+         }
+diff --git a/lib/tgchat/ext/td/td/telegram/MessagesManager.h b/lib/tgchat/ext/td/td/telegram/MessagesManager.h
+index 40588791..15daebd5 100644
+--- a/lib/tgchat/ext/td/td/telegram/MessagesManager.h
++++ b/lib/tgchat/ext/td/td/telegram/MessagesManager.h
+@@ -177,11 +177,10 @@ class MessagesManager final : public Actor {
+   void on_failed_public_dialogs_search(const string &query, Status &&error);
+ 
+   void on_get_message_search_result_calendar(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
+-                                             MessageId from_message_id, MessageSearchFilter filter, int64 random_id,
+-                                             int32 total_count, vector<tl_object_ptr<telegram_api::Message>> &&messages,
++                                             MessageId from_message_id, MessageSearchFilter filter, int32 total_count,
++                                             vector<tl_object_ptr<telegram_api::Message>> &&messages,
+                                              vector<tl_object_ptr<telegram_api::searchResultsCalendarPeriod>> &&periods,
+-                                             Promise<Unit> &&promise);
+-  void on_failed_get_message_search_result_calendar(int64 random_id);
++                                             Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise);
+ 
+   void on_get_dialog_messages_search_result(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
+                                             const string &query, DialogId sender_dialog_id, MessageId from_message_id,
+@@ -344,7 +343,8 @@ class MessagesManager final : public Actor {
+   void on_update_message_extended_media(MessageFullId message_full_id,
+                                         telegram_api::object_ptr<telegram_api::MessageExtendedMedia> extended_media);
+ 
+-  void on_external_update_message_content(MessageFullId message_full_id, const char *source);
++  void on_external_update_message_content(MessageFullId message_full_id, const char *source,
++                                          bool expect_no_message = false);
+ 
+   void on_update_message_content(MessageFullId message_full_id);
+ 
+@@ -483,26 +483,6 @@ class MessagesManager final : public Actor {
+   void edit_message_reply_markup(MessageFullId message_full_id, tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+                                  Promise<Unit> &&promise);
+ 
+-  void edit_inline_message_text(const string &inline_message_id, tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                tl_object_ptr<td_api::InputMessageContent> &&input_message_content,
+-                                Promise<Unit> &&promise);
+-
+-  void edit_inline_message_live_location(const string &inline_message_id,
+-                                         tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                         tl_object_ptr<td_api::location> &&input_location, int32 live_period,
+-                                         int32 heading, int32 proximity_alert_radius, Promise<Unit> &&promise);
+-
+-  void edit_inline_message_media(const string &inline_message_id, tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                 tl_object_ptr<td_api::InputMessageContent> &&input_message_content,
+-                                 Promise<Unit> &&promise);
+-
+-  void edit_inline_message_caption(const string &inline_message_id, tl_object_ptr<td_api::ReplyMarkup> &&reply_markup,
+-                                   tl_object_ptr<td_api::formattedText> &&input_caption, bool invert_media,
+-                                   Promise<Unit> &&promise);
+-
+-  void edit_inline_message_reply_markup(const string &inline_message_id,
+-                                        tl_object_ptr<td_api::ReplyMarkup> &&reply_markup, Promise<Unit> &&promise);
+-
+   void edit_message_scheduling_state(MessageFullId message_full_id,
+                                      td_api::object_ptr<td_api::MessageSchedulingState> &&scheduling_state,
+                                      Promise<Unit> &&promise);
+@@ -711,11 +691,9 @@ class MessagesManager final : public Actor {
+                                                                     int32 limit, int64 &random_id,
+                                                                     Promise<Unit> &&promise);
+ 
+-  td_api::object_ptr<td_api::messageCalendar> get_dialog_message_calendar(DialogId dialog_id,
+-                                                                          SavedMessagesTopicId saved_messages_topic_id,
+-                                                                          MessageId from_message_id,
+-                                                                          MessageSearchFilter filter, int64 &random_id,
+-                                                                          bool use_db, Promise<Unit> &&promise);
++  void get_dialog_message_calendar(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
++                                   MessageId from_message_id, MessageSearchFilter filter,
++                                   Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise);
+ 
+   struct FoundDialogMessages {
+     vector<MessageId> message_ids;
+@@ -2842,9 +2820,14 @@ class MessagesManager final : public Actor {
+ 
+   static MessageId get_first_database_message_id_by_index(const Dialog *d, MessageSearchFilter filter);
+ 
+-  void on_get_message_calendar_from_database(int64 random_id, DialogId dialog_id, MessageId from_message_id,
++  void get_message_calendar_from_server(DialogId dialog_id, SavedMessagesTopicId saved_messages_topic_id,
++                                        MessageId from_message_id, MessageSearchFilter filter,
++                                        Promise<td_api::object_ptr<td_api::messageCalendar>> &&promise);
++
++  void on_get_message_calendar_from_database(DialogId dialog_id, MessageId from_message_id,
+                                              MessageId first_db_message_id, MessageSearchFilter filter,
+-                                             Result<MessageDbCalendar> r_calendar, Promise<Unit> promise);
++                                             Result<MessageDbCalendar> r_calendar,
++                                             Promise<td_api::object_ptr<td_api::messageCalendar>> promise);
+ 
+   void on_search_dialog_message_db_result(int64 random_id, DialogId dialog_id, MessageId from_message_id,
+                                           MessageId first_db_message_id, MessageSearchFilter filter, int32 offset,
+@@ -3267,7 +3250,6 @@ class MessagesManager final : public Actor {
+   FlatHashMap<string, vector<DialogId>> found_public_dialogs_;     // TODO time bound cache
+   FlatHashMap<string, vector<DialogId>> found_on_server_dialogs_;  // TODO time bound cache
+ 
+-  FlatHashMap<int64, td_api::object_ptr<td_api::messageCalendar>> found_dialog_message_calendars_;
+   FlatHashMap<int64, FoundDialogMessages> found_dialog_messages_;  // random_id -> FoundDialogMessages
+   FlatHashMap<int64, DialogId> found_dialog_messages_dialog_id_;   // random_id -> dialog_id
+   FlatHashMap<int64, FoundMessages> found_call_messages_;          // random_id -> FoundMessages
+diff --git a/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.cpp b/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.cpp
+index a5bae311..fddb2a35 100644
+--- a/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.h b/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.h
+index 2b464987..ded03d37 100644
+--- a/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.h
++++ b/lib/tgchat/ext/td/td/telegram/PeopleNearbyManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/QuickReplyManager.cpp b/lib/tgchat/ext/td/td/telegram/QuickReplyManager.cpp
+index b139bfc1..2671cae9 100644
+--- a/lib/tgchat/ext/td/td/telegram/QuickReplyManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/QuickReplyManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/QuickReplyManager.h b/lib/tgchat/ext/td/td/telegram/QuickReplyManager.h
+index 9ba9bb07..d950aeb4 100644
+--- a/lib/tgchat/ext/td/td/telegram/QuickReplyManager.h
++++ b/lib/tgchat/ext/td/td/telegram/QuickReplyManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/ReactionManager.cpp b/lib/tgchat/ext/td/td/telegram/ReactionManager.cpp
+index 6dec8dcf..36f0e07b 100644
+--- a/lib/tgchat/ext/td/td/telegram/ReactionManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/ReactionManager.cpp
+@@ -874,31 +874,32 @@ void ReactionManager::on_get_available_reactions(
+     reaction.title_ = std::move(available_reaction->title_);
+     reaction.static_icon_ =
+         td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->static_icon_), StickerFormat::Webp)
+-            .second;
+-    reaction.appear_animation_ =
+-        td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->appear_animation_), StickerFormat::Tgs)
+-            .second;
+-    reaction.select_animation_ =
+-        td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->select_animation_), StickerFormat::Tgs)
+-            .second;
+-    reaction.activate_animation_ =
+-        td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->activate_animation_), StickerFormat::Tgs)
+-            .second;
+-    reaction.effect_animation_ =
+-        td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->effect_animation_), StickerFormat::Tgs)
+-            .second;
+-    reaction.around_animation_ =
+-        td_->stickers_manager_
+-            ->on_get_sticker_document(std::move(available_reaction->around_animation_), StickerFormat::Tgs)
+-            .second;
+-    reaction.center_animation_ =
+-        td_->stickers_manager_->on_get_sticker_document(std::move(available_reaction->center_icon_), StickerFormat::Tgs)
++            ->on_get_sticker_document(std::move(available_reaction->static_icon_), StickerFormat::Webp, "static_icon")
+             .second;
++    reaction.appear_animation_ = td_->stickers_manager_
++                                     ->on_get_sticker_document(std::move(available_reaction->appear_animation_),
++                                                               StickerFormat::Tgs, "appear_animation")
++                                     .second;
++    reaction.select_animation_ = td_->stickers_manager_
++                                     ->on_get_sticker_document(std::move(available_reaction->select_animation_),
++                                                               StickerFormat::Tgs, "select_animation")
++                                     .second;
++    reaction.activate_animation_ = td_->stickers_manager_
++                                       ->on_get_sticker_document(std::move(available_reaction->activate_animation_),
++                                                                 StickerFormat::Tgs, "activate_animation")
++                                       .second;
++    reaction.effect_animation_ = td_->stickers_manager_
++                                     ->on_get_sticker_document(std::move(available_reaction->effect_animation_),
++                                                               StickerFormat::Tgs, "effect_animation")
++                                     .second;
++    reaction.around_animation_ = td_->stickers_manager_
++                                     ->on_get_sticker_document(std::move(available_reaction->around_animation_),
++                                                               StickerFormat::Tgs, "around_animation")
++                                     .second;
++    reaction.center_animation_ = td_->stickers_manager_
++                                     ->on_get_sticker_document(std::move(available_reaction->center_icon_),
++                                                               StickerFormat::Tgs, "center_animation")
++                                     .second;
+ 
+     if (!reaction.is_valid()) {
+       LOG(ERROR) << "Receive invalid " << reaction.reaction_type_;
+@@ -1310,7 +1311,8 @@ void ReactionManager::on_get_message_effects(
+       auto effects = telegram_api::move_object_as<telegram_api::messages_availableEffects>(message_effects);
+       FlatHashMap<int64, FileId> stickers;
+       for (auto &document : effects->documents_) {
+-        auto sticker = td_->stickers_manager_->on_get_sticker_document(std::move(document), StickerFormat::Unknown);
++        auto sticker = td_->stickers_manager_->on_get_sticker_document(std::move(document), StickerFormat::Unknown,
++                                                                       "on_get_message_effects");
+         if (sticker.first != 0 && sticker.second.is_valid()) {
+           stickers.emplace(sticker.first, sticker.second);
+         } else {
+diff --git a/lib/tgchat/ext/td/td/telegram/RepliedMessageInfo.cpp b/lib/tgchat/ext/td/td/telegram/RepliedMessageInfo.cpp
+index 5c8bb981..87ec0a9a 100644
+--- a/lib/tgchat/ext/td/td/telegram/RepliedMessageInfo.cpp
++++ b/lib/tgchat/ext/td/td/telegram/RepliedMessageInfo.cpp
+@@ -120,12 +120,12 @@ RepliedMessageInfo::RepliedMessageInfo(Td *td, tl_object_ptr<telegram_api::messa
+ }
+ 
+ RepliedMessageInfo::RepliedMessageInfo(Td *td, const MessageInputReplyTo &input_reply_to) {
+-  if (!input_reply_to.message_id_.is_valid()) {
++  if (!input_reply_to.message_id_.is_valid() && !input_reply_to.message_id_.is_valid_scheduled()) {
+     return;
+   }
+   message_id_ = input_reply_to.message_id_;
+   quote_ = input_reply_to.quote_.clone();
+-  if (input_reply_to.dialog_id_ != DialogId()) {
++  if (input_reply_to.dialog_id_ != DialogId() && input_reply_to.message_id_.is_valid()) {
+     auto info =
+         td->messages_manager_->get_forwarded_message_info({input_reply_to.dialog_id_, input_reply_to.message_id_});
+     if (info.origin_date_ == 0 || info.origin_.is_empty() || info.content_ == nullptr) {
+@@ -315,7 +315,7 @@ td_api::object_ptr<td_api::messageReplyToMessage> RepliedMessageInfo::get_messag
+ 
+ MessageInputReplyTo RepliedMessageInfo::get_input_reply_to() const {
+   CHECK(!is_external());
+-  if (message_id_.is_valid()) {
++  if (message_id_.is_valid() || message_id_.is_valid_scheduled()) {
+     return MessageInputReplyTo(message_id_, dialog_id_, quote_.clone(true));
+   }
+   return {};
+diff --git a/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.cpp b/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.cpp
+index 4859b908..d9dad76b 100644
+--- a/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.h b/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.h
+index 3c939ad9..6b79327f 100644
+--- a/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.h
++++ b/lib/tgchat/ext/td/td/telegram/SavedMessagesManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/StickersManager.cpp b/lib/tgchat/ext/td/td/telegram/StickersManager.cpp
+index 096bef0d..1e8e39de 100644
+--- a/lib/tgchat/ext/td/td/telegram/StickersManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/StickersManager.cpp
+@@ -3005,20 +3005,20 @@ bool StickersManager::has_webp_thumbnail(const vector<tl_object_ptr<telegram_api
+ }
+ 
+ std::pair<int64, FileId> StickersManager::on_get_sticker_document(tl_object_ptr<telegram_api::Document> &&document_ptr,
+-                                                                  StickerFormat expected_format) {
++                                                                  StickerFormat expected_format, const char *source) {
+   if (document_ptr == nullptr) {
+     return {};
+   }
+   int32 document_constructor_id = document_ptr->get_id();
+   if (document_constructor_id == telegram_api::documentEmpty::ID) {
+-    LOG(ERROR) << "Empty sticker document received";
++    LOG(ERROR) << "Empty sticker document received from " << source;
+     return {};
+   }
+   CHECK(document_constructor_id == telegram_api::document::ID);
+   auto document = move_tl_object_as<telegram_api::document>(document_ptr);
+ 
+   if (!DcId::is_valid(document->dc_id_)) {
+-    LOG(ERROR) << "Wrong dc_id = " << document->dc_id_ << " in document " << to_string(document);
++    LOG(ERROR) << "Wrong dc_id = " << document->dc_id_ << " from " << source << " in document " << to_string(document);
+     return {};
+   }
+   auto dc_id = DcId::internal(document->dc_id_);
+@@ -3050,14 +3050,15 @@ std::pair<int64, FileId> StickersManager::on_get_sticker_document(tl_object_ptr<
+   }
+   if (sticker == nullptr && custom_emoji == nullptr) {
+     if (document->mime_type_ != "application/x-bad-tgsticker") {
+-      LOG(ERROR) << "Have no attributeSticker in sticker " << to_string(document);
++      LOG(ERROR) << "Have no attributeSticker from " << source << " in " << to_string(document);
+     }
+     return {};
+   }
+ 
+   auto format = get_sticker_format_by_mime_type(document->mime_type_);
+   if (format == StickerFormat::Unknown || (expected_format != StickerFormat::Unknown && format != expected_format)) {
+-    LOG(ERROR) << "Expected sticker of the type " << expected_format << ", but received of the type " << format;
++    LOG(ERROR) << "Expected sticker of the type " << expected_format << ", but received of the type " << format
++               << " from " << source;
+     return {};
+   }
+   int64 document_id = document->id_;
+@@ -3808,7 +3809,7 @@ StickerSetId StickersManager::on_get_sticker_set_covered(tl_object_ptr<telegram_
+ 
+       auto &sticker_ids = sticker_set->sticker_ids_;
+ 
+-      auto sticker_id = on_get_sticker_document(std::move(covered_set->cover_), StickerFormat::Unknown).second;
++      auto sticker_id = on_get_sticker_document(std::move(covered_set->cover_), StickerFormat::Unknown, source).second;
+       if (sticker_id.is_valid() && !td::contains(sticker_ids, sticker_id)) {
+         sticker_ids.push_back(sticker_id);
+         sticker_set->is_changed_ = true;
+@@ -3832,7 +3833,7 @@ StickerSetId StickersManager::on_get_sticker_set_covered(tl_object_ptr<telegram_
+       auto &sticker_ids = sticker_set->sticker_ids_;
+ 
+       for (auto &cover : multicovered_set->covers_) {
+-        auto sticker_id = on_get_sticker_document(std::move(cover), StickerFormat::Unknown).second;
++        auto sticker_id = on_get_sticker_document(std::move(cover), StickerFormat::Unknown, source).second;
+         if (sticker_id.is_valid() && !td::contains(sticker_ids, sticker_id)) {
+           sticker_ids.push_back(sticker_id);
+           sticker_set->is_changed_ = true;
+@@ -3915,7 +3916,7 @@ StickerSetId StickersManager::on_get_messages_sticker_set(StickerSetId sticker_s
+   s->premium_sticker_positions_.clear();
+   bool is_bot = td_->auth_manager_->is_bot();
+   for (auto &document_ptr : set->documents_) {
+-    auto sticker_id = on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown);
++    auto sticker_id = on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown, source);
+     if (!sticker_id.second.is_valid() || sticker_id.first == 0) {
+       continue;
+     }
+@@ -4730,7 +4731,8 @@ void StickersManager::on_find_stickers_success(const string &emoji,
+ 
+       vector<FileId> sticker_ids;
+       for (auto &sticker : received_stickers->stickers_) {
+-        FileId sticker_id = on_get_sticker_document(std::move(sticker), StickerFormat::Unknown).second;
++        FileId sticker_id =
++            on_get_sticker_document(std::move(sticker), StickerFormat::Unknown, "on_find_stickers_success").second;
+         if (sticker_id.is_valid()) {
+           sticker_ids.push_back(sticker_id);
+         }
+@@ -6404,7 +6406,7 @@ void StickersManager::on_get_custom_emoji_documents(
+       continue;
+     }
+ 
+-    on_get_sticker_document(std::move(document), StickerFormat::Unknown);
++    on_get_sticker_document(std::move(document), StickerFormat::Unknown, "on_get_custom_emoji_documents");
+   }
+ 
+   promise.set_value(get_custom_emoji_stickers_object(custom_emoji_ids));
+@@ -8938,7 +8940,8 @@ void StickersManager::on_get_recent_stickers(bool is_repair, bool is_attached,
+   vector<FileId> recent_sticker_ids;
+   recent_sticker_ids.reserve(stickers->stickers_.size());
+   for (auto &document_ptr : stickers->stickers_) {
+-    auto sticker_id = on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown).second;
++    auto sticker_id =
++        on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown, "on_get_recent_stickers").second;
+     if (!sticker_id.is_valid()) {
+       continue;
+     }
+@@ -9332,7 +9335,8 @@ void StickersManager::on_get_favorite_stickers(
+   vector<FileId> favorite_sticker_ids;
+   favorite_sticker_ids.reserve(favorite_stickers->stickers_.size());
+   for (auto &document_ptr : favorite_stickers->stickers_) {
+-    auto sticker_id = on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown).second;
++    auto sticker_id =
++        on_get_sticker_document(std::move(document_ptr), StickerFormat::Unknown, "on_get_favorite_stickers").second;
+     if (!sticker_id.is_valid()) {
+       continue;
+     }
+diff --git a/lib/tgchat/ext/td/td/telegram/StickersManager.h b/lib/tgchat/ext/td/td/telegram/StickersManager.h
+index 37bdb80b..464ea95c 100644
+--- a/lib/tgchat/ext/td/td/telegram/StickersManager.h
++++ b/lib/tgchat/ext/td/td/telegram/StickersManager.h
+@@ -206,7 +206,7 @@ class StickersManager final : public Actor {
+   void reload_special_sticker_set_by_type(SpecialStickerSetType type, bool is_recursive = false);
+ 
+   std::pair<int64, FileId> on_get_sticker_document(tl_object_ptr<telegram_api::Document> &&document_ptr,
+-                                                   StickerFormat expected_format);
++                                                   StickerFormat expected_format, const char *source);
+ 
+   void on_get_installed_sticker_sets(StickerType sticker_type,
+                                      tl_object_ptr<telegram_api::messages_AllStickers> &&stickers_ptr);
+diff --git a/lib/tgchat/ext/td/td/telegram/StoryManager.cpp b/lib/tgchat/ext/td/td/telegram/StoryManager.cpp
+index ea5fe256..e378bbb2 100644
+--- a/lib/tgchat/ext/td/td/telegram/StoryManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/StoryManager.cpp
+@@ -3810,7 +3810,7 @@ void StoryManager::on_story_changed(StoryFullId story_full_id, const Story *stor
+       CHECK(!message_full_ids.empty());
+       for (const auto &message_full_id : message_full_ids) {
+         send_closure_later(G()->messages_manager(), &MessagesManager::on_external_update_message_content,
+-                           message_full_id, "on_story_changed");
++                           message_full_id, "on_story_changed", true);
+       }
+     }
+   }
+diff --git a/lib/tgchat/ext/td/td/telegram/Td.cpp b/lib/tgchat/ext/td/td/telegram/Td.cpp
+index ddbe2354..cd6a0dc5 100644
+--- a/lib/tgchat/ext/td/td/telegram/Td.cpp
++++ b/lib/tgchat/ext/td/td/telegram/Td.cpp
+@@ -79,6 +79,7 @@
+ #include "td/telegram/GroupCallId.h"
+ #include "td/telegram/GroupCallManager.h"
+ #include "td/telegram/HashtagHints.h"
++#include "td/telegram/InlineMessageManager.h"
+ #include "td/telegram/InlineQueriesManager.h"
+ #include "td/telegram/JsonValue.h"
+ #include "td/telegram/LanguagePackManager.h"
+@@ -1381,39 +1382,6 @@ class GetMessageThreadHistoryRequest final : public RequestActor<> {
+   }
+ };
+ 
+-class GetChatMessageCalendarRequest final : public RequestActor<> {
+-  DialogId dialog_id_;
+-  SavedMessagesTopicId saved_messages_topic_id_;
+-  MessageId from_message_id_;
+-  MessageSearchFilter filter_;
+-  int64 random_id_;
+-
+-  td_api::object_ptr<td_api::messageCalendar> calendar_;
+-
+-  void do_run(Promise<Unit> &&promise) final {
+-    calendar_ =
+-        td_->messages_manager_->get_dialog_message_calendar(dialog_id_, saved_messages_topic_id_, from_message_id_,
+-                                                            filter_, random_id_, get_tries() == 3, std::move(promise));
+-  }
+-
+-  void do_send_result() final {
+-    send_result(std::move(calendar_));
+-  }
+-
+- public:
+-  GetChatMessageCalendarRequest(ActorShared<Td> td, uint64 request_id, int64 dialog_id,
+-                                SavedMessagesTopicId saved_messages_topic_id, int64 from_message_id,
+-                                tl_object_ptr<td_api::SearchMessagesFilter> filter)
+-      : RequestActor(std::move(td), request_id)
+-      , dialog_id_(dialog_id)
+-      , saved_messages_topic_id_(saved_messages_topic_id)
+-      , from_message_id_(from_message_id)
+-      , filter_(get_message_search_filter(filter))
+-      , random_id_(0) {
+-    set_tries(3);
+-  }
+-};
+-
+ class SearchChatMessagesRequest final : public RequestActor<> {
+   DialogId dialog_id_;
+   string query_;
+@@ -3143,6 +3111,7 @@ void Td::dec_actor_refcnt() {
+       reset_manager(forum_topic_manager_, "ForumTopicManager");
+       reset_manager(game_manager_, "GameManager");
+       reset_manager(group_call_manager_, "GroupCallManager");
++      reset_manager(inline_message_manager_, "InlineMessageManager");
+       reset_manager(inline_queries_manager_, "InlineQueriesManager");
+       reset_manager(link_manager_, "LinkManager");
+       reset_manager(message_import_manager_, "MessageImportManager");
+@@ -3276,6 +3245,7 @@ void Td::clear() {
+ 
+   // close all pure actors
+   reset_actor(ActorOwn<Actor>(std::move(call_manager_)));
++  reset_actor(ActorOwn<Actor>(std::move(cashtag_search_hints_)));
+   reset_actor(ActorOwn<Actor>(std::move(config_manager_)));
+   reset_actor(ActorOwn<Actor>(std::move(device_token_manager_)));
+   reset_actor(ActorOwn<Actor>(std::move(hashtag_hints_)));
+@@ -3318,6 +3288,7 @@ void Td::clear() {
+   reset_actor(ActorOwn<Actor>(std::move(forum_topic_manager_actor_)));
+   reset_actor(ActorOwn<Actor>(std::move(game_manager_actor_)));
+   reset_actor(ActorOwn<Actor>(std::move(group_call_manager_actor_)));
++  reset_actor(ActorOwn<Actor>(std::move(inline_message_manager_actor_)));
+   reset_actor(ActorOwn<Actor>(std::move(inline_queries_manager_actor_)));
+   reset_actor(ActorOwn<Actor>(std::move(link_manager_actor_)));
+   reset_actor(ActorOwn<Actor>(std::move(message_import_manager_actor_)));
+@@ -3840,6 +3811,9 @@ void Td::init_managers() {
+   group_call_manager_ = make_unique<GroupCallManager>(this, create_reference());
+   group_call_manager_actor_ = register_actor("GroupCallManager", group_call_manager_.get());
+   G()->set_group_call_manager(group_call_manager_actor_.get());
++  inline_message_manager_ = make_unique<InlineMessageManager>(this, create_reference());
++  inline_message_manager_actor_ = register_actor("InlineMessageManager", inline_message_manager_.get());
++  G()->set_inline_message_manager(inline_message_manager_actor_.get());
+   inline_queries_manager_ = make_unique<InlineQueriesManager>(this, create_reference());
+   inline_queries_manager_actor_ = register_actor("InlineQueriesManager", inline_queries_manager_.get());
+   link_manager_ = make_unique<LinkManager>(this, create_reference());
+@@ -3919,9 +3893,10 @@ void Td::init_managers() {
+ void Td::init_pure_actor_managers() {
+   call_manager_ = create_actor<CallManager>("CallManager", create_reference());
+   G()->set_call_manager(call_manager_.get());
++  cashtag_search_hints_ = create_actor<HashtagHints>("CashtagSearchHints", "cashtag_search", '$', create_reference());
+   device_token_manager_ = create_actor<DeviceTokenManager>("DeviceTokenManager", create_reference());
+-  hashtag_hints_ = create_actor<HashtagHints>("HashtagHints", "text", create_reference());
+-  hashtag_search_hints_ = create_actor<HashtagHints>("HashtagSearchHints", "search", create_reference());
++  hashtag_hints_ = create_actor<HashtagHints>("HashtagHints", "text", '#', create_reference());
++  hashtag_search_hints_ = create_actor<HashtagHints>("HashtagSearchHints", "search", '#', create_reference());
+   language_pack_manager_ = create_actor<LanguagePackManager>("LanguagePackManager", create_reference());
+   G()->set_language_pack_manager(language_pack_manager_.get());
+   password_manager_ = create_actor<PasswordManager>("PasswordManager", create_reference());
+@@ -5300,11 +5275,12 @@ void Td::on_request(uint64 id, const td_api::getMessageThreadHistory &request) {
+                  request.offset_, request.limit_);
+ }
+ 
+-void Td::on_request(uint64 id, td_api::getChatMessageCalendar &request) {
++void Td::on_request(uint64 id, const td_api::getChatMessageCalendar &request) {
+   CHECK_IS_USER();
+-  CREATE_REQUEST(GetChatMessageCalendarRequest, request.chat_id_,
+-                 saved_messages_manager_->get_topic_id(request.saved_messages_topic_id_), request.from_message_id_,
+-                 std::move(request.filter_));
++  CREATE_REQUEST_PROMISE();
++  messages_manager_->get_dialog_message_calendar(
++      DialogId(request.chat_id_), saved_messages_manager_->get_topic_id(request.saved_messages_topic_id_),
++      MessageId(request.from_message_id_), get_message_search_filter(request.filter_), std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::searchChatMessages &request) {
+@@ -5377,15 +5353,16 @@ void Td::on_request(uint64 id, td_api::getSearchedForHashtags &request) {
+       promise.set_value(td_api::make_object<td_api::hashtags>(result.move_as_ok()));
+     }
+   });
+-  send_closure(hashtag_search_hints_, &HashtagHints::query, std::move(request.prefix_), request.limit_,
+-               std::move(query_promise));
++  send_closure(request.prefix_[0] == '$' ? cashtag_search_hints_ : hashtag_search_hints_, &HashtagHints::query,
++               std::move(request.prefix_), request.limit_, std::move(query_promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::removeSearchedForHashtag &request) {
+   CHECK_IS_USER();
+   CLEAN_INPUT_STRING(request.hashtag_);
+   CREATE_OK_REQUEST_PROMISE();
+-  send_closure(hashtag_search_hints_, &HashtagHints::remove_hashtag, std::move(request.hashtag_), std::move(promise));
++  send_closure(request.hashtag_[0] == '$' ? cashtag_search_hints_ : hashtag_search_hints_,
++               &HashtagHints::remove_hashtag, std::move(request.hashtag_), std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::clearSearchedForHashtags &request) {
+@@ -5748,15 +5725,15 @@ void Td::on_request(uint64 id, td_api::editInlineMessageText &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  messages_manager_->edit_inline_message_text(request.inline_message_id_, std::move(request.reply_markup_),
+-                                              std::move(request.input_message_content_), std::move(promise));
++  inline_message_manager_->edit_inline_message_text(request.inline_message_id_, std::move(request.reply_markup_),
++                                                    std::move(request.input_message_content_), std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::editInlineMessageLiveLocation &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  messages_manager_->edit_inline_message_live_location(
++  inline_message_manager_->edit_inline_message_live_location(
+       request.inline_message_id_, std::move(request.reply_markup_), std::move(request.location_), request.live_period_,
+       request.heading_, request.proximity_alert_radius_, std::move(promise));
+ }
+@@ -5765,25 +5742,25 @@ void Td::on_request(uint64 id, td_api::editInlineMessageMedia &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  messages_manager_->edit_inline_message_media(request.inline_message_id_, std::move(request.reply_markup_),
+-                                               std::move(request.input_message_content_), std::move(promise));
++  inline_message_manager_->edit_inline_message_media(request.inline_message_id_, std::move(request.reply_markup_),
++                                                     std::move(request.input_message_content_), std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::editInlineMessageCaption &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  messages_manager_->edit_inline_message_caption(request.inline_message_id_, std::move(request.reply_markup_),
+-                                                 std::move(request.caption_), request.show_caption_above_media_,
+-                                                 std::move(promise));
++  inline_message_manager_->edit_inline_message_caption(request.inline_message_id_, std::move(request.reply_markup_),
++                                                       std::move(request.caption_), request.show_caption_above_media_,
++                                                       std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::editInlineMessageReplyMarkup &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  messages_manager_->edit_inline_message_reply_markup(request.inline_message_id_, std::move(request.reply_markup_),
+-                                                      std::move(promise));
++  inline_message_manager_->edit_inline_message_reply_markup(request.inline_message_id_,
++                                                            std::move(request.reply_markup_), std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::editMessageSchedulingState &request) {
+@@ -6069,8 +6046,9 @@ void Td::on_request(uint64 id, td_api::setInlineGameScore &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_OK_REQUEST_PROMISE();
+-  game_manager_->set_inline_game_score(request.inline_message_id_, request.edit_message_, UserId(request.user_id_),
+-                                       request.score_, request.force_, std::move(promise));
++  inline_message_manager_->set_inline_game_score(request.inline_message_id_, request.edit_message_,
++                                                 UserId(request.user_id_), request.score_, request.force_,
++                                                 std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, td_api::getGameHighScores &request) {
+@@ -6084,7 +6062,8 @@ void Td::on_request(uint64 id, td_api::getInlineGameHighScores &request) {
+   CHECK_IS_BOT();
+   CLEAN_INPUT_STRING(request.inline_message_id_);
+   CREATE_REQUEST_PROMISE();
+-  game_manager_->get_inline_game_high_scores(request.inline_message_id_, UserId(request.user_id_), std::move(promise));
++  inline_message_manager_->get_inline_game_high_scores(request.inline_message_id_, UserId(request.user_id_),
++                                                       std::move(promise));
+ }
+ 
+ void Td::on_request(uint64 id, const td_api::deleteChatReplyMarkup &request) {
+diff --git a/lib/tgchat/ext/td/td/telegram/Td.h b/lib/tgchat/ext/td/td/telegram/Td.h
+index ed7e0051..23823c86 100644
+--- a/lib/tgchat/ext/td/td/telegram/Td.h
++++ b/lib/tgchat/ext/td/td/telegram/Td.h
+@@ -68,6 +68,7 @@ class FileReferenceManager;
+ class ForumTopicManager;
+ class GameManager;
+ class GroupCallManager;
++class InlineMessageManager;
+ class InlineQueriesManager;
+ class HashtagHints;
+ class LanguagePackManager;
+@@ -216,6 +217,8 @@ class Td final : public Actor {
+   ActorOwn<GameManager> game_manager_actor_;
+   unique_ptr<GroupCallManager> group_call_manager_;
+   ActorOwn<GroupCallManager> group_call_manager_actor_;
++  unique_ptr<InlineMessageManager> inline_message_manager_;
++  ActorOwn<InlineMessageManager> inline_message_manager_actor_;
+   unique_ptr<InlineQueriesManager> inline_queries_manager_;
+   ActorOwn<InlineQueriesManager> inline_queries_manager_actor_;
+   unique_ptr<LinkManager> link_manager_;
+@@ -272,6 +275,7 @@ class Td final : public Actor {
+   ActorOwn<WebPagesManager> web_pages_manager_actor_;
+ 
+   ActorOwn<CallManager> call_manager_;
++  ActorOwn<HashtagHints> cashtag_search_hints_;
+   ActorOwn<ConfigManager> config_manager_;
+   ActorOwn<DeviceTokenManager> device_token_manager_;
+   ActorOwn<HashtagHints> hashtag_hints_;
+@@ -780,7 +784,7 @@ class Td final : public Actor {
+ 
+   void on_request(uint64 id, const td_api::getMessageThreadHistory &request);
+ 
+-  void on_request(uint64 id, td_api::getChatMessageCalendar &request);
++  void on_request(uint64 id, const td_api::getChatMessageCalendar &request);
+ 
+   void on_request(uint64 id, td_api::searchChatMessages &request);
+ 
+diff --git a/lib/tgchat/ext/td/td/telegram/TimeZoneManager.cpp b/lib/tgchat/ext/td/td/telegram/TimeZoneManager.cpp
+index c977f5ae..939fdeac 100644
+--- a/lib/tgchat/ext/td/td/telegram/TimeZoneManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/TimeZoneManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/TimeZoneManager.h b/lib/tgchat/ext/td/td/telegram/TimeZoneManager.h
+index 4cc23c34..0fe9ae8b 100644
+--- a/lib/tgchat/ext/td/td/telegram/TimeZoneManager.h
++++ b/lib/tgchat/ext/td/td/telegram/TimeZoneManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/TranslationManager.cpp b/lib/tgchat/ext/td/td/telegram/TranslationManager.cpp
+index 250de4af..2031b47b 100644
+--- a/lib/tgchat/ext/td/td/telegram/TranslationManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/TranslationManager.cpp
+@@ -122,6 +122,9 @@ void TranslationManager::on_get_translated_texts(vector<telegram_api::object_ptr
+                                                  Promise<td_api::object_ptr<td_api::formattedText>> &&promise) {
+   TRY_STATUS_PROMISE(promise, G()->close_status());
+   if (texts.size() != 1u) {
++    if (texts.empty()) {
++      return promise.set_error(Status::Error(500, "Translation failed"));
++    }
+     return promise.set_error(Status::Error(500, "Receive invalid number of results"));
+   }
+   auto formatted_text = get_formatted_text(td_->user_manager_.get(), std::move(texts[0]), max_media_timestamp == -1,
+diff --git a/lib/tgchat/ext/td/td/telegram/UserManager.cpp b/lib/tgchat/ext/td/td/telegram/UserManager.cpp
+index 4217808a..352a2cc9 100644
+--- a/lib/tgchat/ext/td/td/telegram/UserManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/UserManager.cpp
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/UserManager.h b/lib/tgchat/ext/td/td/telegram/UserManager.h
+index b8c7b91b..22f6eb86 100644
+--- a/lib/tgchat/ext/td/td/telegram/UserManager.h
++++ b/lib/tgchat/ext/td/td/telegram/UserManager.h
+@@ -1,5 +1,5 @@
+ //
+-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2023
++// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2024
+ //
+ // Distributed under the Boost Software License, Version 1.0. (See accompanying
+ // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+diff --git a/lib/tgchat/ext/td/td/telegram/WebPagesManager.cpp b/lib/tgchat/ext/td/td/telegram/WebPagesManager.cpp
+index dd030061..6c9b3d78 100644
+--- a/lib/tgchat/ext/td/td/telegram/WebPagesManager.cpp
++++ b/lib/tgchat/ext/td/td/telegram/WebPagesManager.cpp
+@@ -623,8 +623,10 @@ WebPageId WebPagesManager::on_get_web_page(tl_object_ptr<telegram_api::WebPage>
+               LOG(ERROR) << "Receive duplicate webPageAttributeStickerSet";
+             }
+             for (auto &sticker : attribute->stickers_) {
+-              auto sticker_id =
+-                  td_->stickers_manager_->on_get_sticker_document(std::move(sticker), StickerFormat::Unknown).second;
++              auto sticker_id = td_->stickers_manager_
++                                    ->on_get_sticker_document(std::move(sticker), StickerFormat::Unknown,
++                                                              "webPageAttributeStickerSet")
++                                    .second;
+               if (sticker_id.is_valid() && page->sticker_ids_.size() < 4) {
+                 page->sticker_ids_.push_back(sticker_id);
+               }
+@@ -1512,14 +1514,13 @@ void WebPagesManager::on_web_page_changed(WebPageId web_page_id, bool have_web_p
+       }
+     }
+ 
+-    bool is_ok = (have_web_page ? web_page_messages_[web_page_id].size() == message_full_ids.size()
+-                                : web_page_messages_.count(web_page_id) == 0);
+-    if (!is_ok) {
++    // don't check that on_external_update_message_content doesn't load new messages
++    if (!have_web_page && web_page_messages_.count(web_page_id) != 0) {
+       vector<MessageFullId> new_message_full_ids;
+       for (const auto &message_full_id : web_page_messages_[web_page_id]) {
+         new_message_full_ids.push_back(message_full_id);
+       }
+-      LOG_CHECK(is_ok) << have_web_page << ' ' << message_full_ids << ' ' << new_message_full_ids;
++      LOG(FATAL) << message_full_ids << ' ' << new_message_full_ids;
+     }
+   }
+   auto get_it = pending_get_web_pages_.find(web_page_id);
+diff --git a/lib/tgchat/ext/td/td/telegram/net/Session.cpp b/lib/tgchat/ext/td/td/telegram/net/Session.cpp
+index 8e3d5ec8..3ebf8f5e 100644
+--- a/lib/tgchat/ext/td/td/telegram/net/Session.cpp
++++ b/lib/tgchat/ext/td/td/telegram/net/Session.cpp
+@@ -565,7 +565,7 @@ void Session::on_connected() {
+   }
+ }
+ 
+-Status Session::on_pong() {
++Status Session::on_pong(double ping_time, double pong_time) {
+   constexpr int MAX_QUERY_TIMEOUT = 60;
+   constexpr int MIN_CONNECTION_ACTIVE = 60;
+   if (current_info_ == &main_connection_ &&
+@@ -574,16 +574,18 @@ Status Session::on_pong() {
+     if (!unknown_queries_.empty()) {
+       status = Status::Error(PSLICE() << "No state info for " << unknown_queries_.size() << " queries from auth key "
+                                       << auth_data_.get_auth_key().id() << " for "
+-                                      << format::as_time(Time::now() - current_info_->created_at_));
++                                      << format::as_time(Time::now() - current_info_->created_at_)
++                                      << " after ping sent at " << ping_time << " and answered at " << pong_time);
+     }
+     if (!sent_queries_list_.empty()) {
+       for (auto it = sent_queries_list_.prev; it != &sent_queries_list_; it = it->prev) {
+         auto query = Query::from_list_node(it);
+         if (Timestamp::at(query->sent_at_ + MAX_QUERY_TIMEOUT).is_in_past()) {
+           if (status.is_ok()) {
+-            status = Status::Error(PSLICE()
+-                                   << "No answer from auth key " << auth_data_.get_auth_key().id() << " for "
+-                                   << query->net_query_ << " for " << format::as_time(Time::now() - query->sent_at_));
++            status =
++                Status::Error(PSLICE() << "No answer from auth key " << auth_data_.get_auth_key().id() << " for "
++                                       << query->net_query_ << " for " << format::as_time(Time::now() - query->sent_at_)
++                                       << " after ping sent at " << ping_time << " and answered at " << pong_time);
+           }
+           query->is_acknowledged_ = false;
+         } else {
+diff --git a/lib/tgchat/ext/td/td/telegram/net/Session.h b/lib/tgchat/ext/td/td/telegram/net/Session.h
+index 67905a5b..803eb111 100644
+--- a/lib/tgchat/ext/td/td/telegram/net/Session.h
++++ b/lib/tgchat/ext/td/td/telegram/net/Session.h
+@@ -208,7 +208,7 @@ class Session final
+   void on_connected() final;
+   void on_closed(Status status) final;
+ 
+-  Status on_pong() final;
++  Status on_pong(double ping_time, double pong_time) final;
+ 
+   void on_network(bool network_flag, uint32 network_generation);
+   void on_online(bool online_flag);
+diff --git a/lib/tgchat/ext/td/tdutils/td/utils/optional.h b/lib/tgchat/ext/td/tdutils/td/utils/optional.h
+index 72b1fd66..bb7e4bc8 100644
+--- a/lib/tgchat/ext/td/tdutils/td/utils/optional.h
++++ b/lib/tgchat/ext/td/tdutils/td/utils/optional.h
+@@ -60,6 +60,9 @@ class optional {
+   T &operator*() {
+     return value();
+   }
++  const T &operator*() const {
++    return value();
++  }
+   T unwrap() {
+     CHECK(*this);
+     auto res = std::move(value());
+diff --git a/lib/tgchat/src/tgchat.cpp b/lib/tgchat/src/tgchat.cpp
+index 8417bb89..d34a6b90 100644
+--- a/lib/tgchat/src/tgchat.cpp
++++ b/lib/tgchat/src/tgchat.cpp
+@@ -41,7 +41,7 @@
+ 
+ // #define SIMULATED_SPONSORED_MESSAGES
+ 
+-static const int s_TdlibDate = 20240528;
++static const int s_TdlibDate = 20240611;
+ 
+ namespace detail
+ {
