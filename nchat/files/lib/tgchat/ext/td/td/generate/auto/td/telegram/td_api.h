@@ -83679,7 +83679,7 @@ class getScopeNotificationSettings final : public Function {
 class hashtags;
 
 /**
- * Returns recently searched for hashtags by their prefix.
+ * Returns recently searched for hashtags or cashtags by their prefix.
  *
  * Returns object_ptr<Hashtags>.
  */
@@ -83693,25 +83693,25 @@ class getSearchedForHashtags final : public Function {
   }
 
  public:
-  /// Prefix of hashtags to return.
+  /// Prefix of hashtags or cashtags to return.
   string prefix_;
-  /// The maximum number of hashtags to be returned.
+  /// The maximum number of items to be returned.
   int32 limit_;
 
   /**
-   * Default constructor for a function, which returns recently searched for hashtags by their prefix.
+   * Default constructor for a function, which returns recently searched for hashtags or cashtags by their prefix.
    *
    * Returns object_ptr<Hashtags>.
    */
   getSearchedForHashtags();
 
   /**
-   * Creates a function, which returns recently searched for hashtags by their prefix.
+   * Creates a function, which returns recently searched for hashtags or cashtags by their prefix.
    *
    * Returns object_ptr<Hashtags>.
    *
-   * \param[in] prefix_ Prefix of hashtags to return.
-   * \param[in] limit_ The maximum number of hashtags to be returned.
+   * \param[in] prefix_ Prefix of hashtags or cashtags to return.
+   * \param[in] limit_ The maximum number of items to be returned.
    */
   getSearchedForHashtags(string const &prefix_, int32 limit_);
 
@@ -89341,7 +89341,7 @@ class removeSavedNotificationSound final : public Function {
 class ok;
 
 /**
- * Removes a hashtag from the list of recently searched for hashtags.
+ * Removes a hashtag or a cashtag from the list of recently searched for hashtags or cashtags.
  *
  * Returns object_ptr<Ok>.
  */
@@ -89355,22 +89355,22 @@ class removeSearchedForHashtag final : public Function {
   }
 
  public:
-  /// Hashtag to delete.
+  /// Hashtag or cashtag to delete.
   string hashtag_;
 
   /**
-   * Default constructor for a function, which removes a hashtag from the list of recently searched for hashtags.
+   * Default constructor for a function, which removes a hashtag or a cashtag from the list of recently searched for hashtags or cashtags.
    *
    * Returns object_ptr<Ok>.
    */
   removeSearchedForHashtag();
 
   /**
-   * Creates a function, which removes a hashtag from the list of recently searched for hashtags.
+   * Creates a function, which removes a hashtag or a cashtag from the list of recently searched for hashtags or cashtags.
    *
    * Returns object_ptr<Ok>.
    *
-   * \param[in] hashtag_ Hashtag to delete.
+   * \param[in] hashtag_ Hashtag or cashtag to delete.
    */
   explicit removeSearchedForHashtag(string const &hashtag_);
 
@@ -92204,7 +92204,7 @@ class searchPublicChats final : public Function {
 class foundMessages;
 
 /**
- * Searches for public channel posts with the given hashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+ * Searches for public channel posts with the given hashtag or cashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
  *
  * Returns object_ptr<FoundMessages>.
  */
@@ -92218,7 +92218,7 @@ class searchPublicHashtagMessages final : public Function {
   }
 
  public:
-  /// Hashtag to search for.
+  /// Hashtag or cashtag to search for.
   string hashtag_;
   /// Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
   string offset_;
@@ -92226,18 +92226,18 @@ class searchPublicHashtagMessages final : public Function {
   int32 limit_;
 
   /**
-   * Default constructor for a function, which searches for public channel posts with the given hashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+   * Default constructor for a function, which searches for public channel posts with the given hashtag or cashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
    *
    * Returns object_ptr<FoundMessages>.
    */
   searchPublicHashtagMessages();
 
   /**
-   * Creates a function, which searches for public channel posts with the given hashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+   * Creates a function, which searches for public channel posts with the given hashtag or cashtag. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
    *
    * Returns object_ptr<FoundMessages>.
    *
-   * \param[in] hashtag_ Hashtag to search for.
+   * \param[in] hashtag_ Hashtag or cashtag to search for.
    * \param[in] offset_ Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
    * \param[in] limit_ The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
    */
@@ -97982,7 +97982,7 @@ class setMessageFactCheck final : public Function {
  public:
   /// The channel chat the message belongs to.
   int53 chat_id_;
-  /// Identifier of the message.
+  /// Identifier of the message. The message must be one of the following types: messageAnimation, messageAudio, messageDocument, messagePhoto, messageText, messageVideo.
   int53 message_id_;
   /// New text of the fact-check; 0-getOption(&quot;fact_check_length_max&quot;) characters; pass null to remove it. Only Bold, Italic, and TextUrl entities with https://t.me/ links are supported.
   object_ptr<formattedText> text_;
@@ -98000,7 +98000,7 @@ class setMessageFactCheck final : public Function {
    * Returns object_ptr<Ok>.
    *
    * \param[in] chat_id_ The channel chat the message belongs to.
-   * \param[in] message_id_ Identifier of the message.
+   * \param[in] message_id_ Identifier of the message. The message must be one of the following types: messageAnimation, messageAudio, messageDocument, messagePhoto, messageText, messageVideo.
    * \param[in] text_ New text of the fact-check; 0-getOption(&quot;fact_check_length_max&quot;) characters; pass null to remove it. Only Bold, Italic, and TextUrl entities with https://t.me/ links are supported.
    */
   setMessageFactCheck(int53 chat_id_, int53 message_id_, object_ptr<formattedText> &&text_);
