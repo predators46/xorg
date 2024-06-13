@@ -13,7 +13,7 @@ PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
 PKG_HASH:=314792d2c86a216451f8abc4a992f8e9c0b1f1963ce77a6ec8b93d628bc25508
 
-PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
+PKG_MAINTAINER:=@esaaprillia, Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
@@ -61,6 +61,8 @@ define Build/Compile
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 	rm -f $(PKG_BUILD_DIR)/node_modules/.package-lock.json
 	find $(PKG_BUILD_DIR)/node_modules -type d -empty -print0 | xargs -0 rmdir || true
+	rm -rf $(PKG_BUILD_DIR)/node_modules/esbuild/node_modules/@esbuild
+	rm -rf $(PKG_BUILD_DIR)/node_modules/rollup/node_modules/@rollup
 endef
 
 define Package/node-vite/install
