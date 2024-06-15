@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/tdlib/td.git
-PKG_SOURCE_VERSION:=4257a341bd08c1fa4d5329b7ecc75cf15563aa23
+PKG_SOURCE_VERSION:=fab354add5a257a8121a4a7f1ff6b1b9fa9a9073
 PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
