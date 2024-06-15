@@ -1,77 +1,36 @@
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-#
-
 include $(TOPDIR)/rules.mk
 
-PKG_NPM_NAME:=escalade
-PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=3.1.2
+PKG_NAME:=wstunnel
+PKG_VERSION:=9.7.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
-PKG_SOURCE_URL:=https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/erebe/wstunnel/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=skip
 
-PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
-PKG_LICENSE:=MIT
-PKG_LICENSE_FILES:=license
+PKG_MAINTAINER:=Andy Syam <privasisource@gmail.com>
+PKG_LICENSE:=LICENSE
+PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DEPENDS:=node/host
+PKG_BUILD_DEPENDS:=rust/host
 PKG_BUILD_PARALLEL:=1
-PKG_BUILD_FLAGS:=no-mips16
 
 include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/xorg/rust/rust-package.mk
 
-define Package/node-escalade
-  SUBMENU:=Node.js
-  SECTION:=lang
-  CATEGORY:=Languages
-  TITLE:=A tiny (183B to 210B) and fast utility to ascend parent directories
-  URL:=https://www.npmjs.org/package/escalade
-  DEPENDS:=+node
+define Package/wstunnel
+  SECTION:=net
+  CATEGORY:=Network
+  TITLE:=Tunnel all your traffic over Websocket
+  DEPENDS:=$(RUST_ARCH_DEPENDS)
+  URL:=https://github.com/erebe/wstunnel
 endef
 
-define Package/node-escalade/description
- With escalade, you can scale parent directories until you've found what you're looking for.
+define Package/wstunnel/description
+  Most of the time when you are using a public network, you are behind some kind of firewall or proxy.
+  One of their purpose is to constrain you to only use certain kind of protocols and consult only a subset of the web.
+  Nowadays, the most widespread protocol is http and is de facto allowed by third party equipment.
 endef
 
-TAR_OPTIONS+= --strip-components 1
-TAR_CMD=$(HOST_TAR) -C $(1) $(TAR_OPTIONS)
-
-NODEJS_CPU:=$(subst powerpc,ppc,$(subst aarch64,arm64,$(subst x86_64,x64,$(subst i386,ia32,$(ARCH)))))
-TMPNPM:=$(shell mktemp -u XXXXXXXXXX)
-NPM_CACHE_DIR:=$(if $(call qstrip,$(CONFIG_NODEJS_NPM_CACHE_DIR)),$(call qstrip,$(CONFIG_NODEJS_NPM_CACHE_DIR)),$(TMP_DIR))
-
-TARGET_CFLAGS+=$(FPIC)
-TARGET_CPPFLAGS+=$(FPIC)
-
-define Build/Compile
-	cd $(PKG_BUILD_DIR); \
-	$(MAKE_VARS) \
-	$(MAKE_FLAGS) \
-	npm_config_nodedir=$(STAGING_DIR)/usr/ \
-	$(if $(CONFIG_NODEJS_NPM_KEEP_CACHE), npm_config_cache=$(NPM_CACHE_DIR)/npm-cache-$(PKG_NPM_NAME),npm_config_cache=$(TMP_DIR)/npm-cache-$(TMPNPM)) \
-	npm install --prefer-offline --no-audit --global-style --install-strategy=shallow --no-save --omit=dev --no-package-lock --ignore-scripts
-	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
-	rm -f $(PKG_BUILD_DIR)/node_modules/.package-lock.json
-	find $(PKG_BUILD_DIR)/node_modules -type d -empty -print0 | xargs -0 rmdir || true
-endef
-
-define Package/node-escalade/install
-	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
-	$(CP) $(PKG_BUILD_DIR)/{package.json,license,*.ts,*.md} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(CP) $(PKG_BUILD_DIR)/{dist,sync,node_modules} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(INSTALL_DIR) $(1)/usr/lib/node_modules
-	$(LN) ../node/$(PKG_NPM_NAME) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
-endef
-
-define Package/node-escalade/postrm
-#!/bin/sh
-rm /usr/lib/node_modules/escalade || true
-rm -rf /usr/lib/node/escalade || true
-endef
-
-$(eval $(call BuildPackage,node-escalade))
+$(eval $(call RustBinPackage,wstunnel))
+$(eval $(call BuildPackage,wstunnel))
