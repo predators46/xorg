@@ -1,12 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nchat
-PKG_VERSION:=4.86
+PKG_VERSION:=4.88
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/d99kris/nchat/archive/v$(PKG_VERSION)
-PKG_HASH:=41a3b81af105b927cf69a92e3f4ce39a7d020ae0d7ae6399e69f860853e34991
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/d99kris/nchat.git
+PKG_SOURCE_VERSION:=1f3c82ed374177262a2b9d7c6f0eb7fca7f43d7b
+PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
