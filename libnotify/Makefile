@@ -40,18 +40,14 @@ MESON_ARGS += \
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
-	  $(1)/usr/lib \
-	  $(1)/usr/share
+	  $(1)/usr/lib
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/include/libnotify \
 	  $(1)/usr/include/
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,girepository-1.0,*.so*} \
+	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
-	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/share/gir-1.0 \
-	  $(1)/usr/share/
 endef
 
 define Package/libnotify/install
@@ -64,7 +60,7 @@ define Package/libnotify/install
 	  $(1)/usr/bin/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/lib/{girepository-1.0,*.so*} \
+	  $(PKG_INSTALL_DIR)/usr/lib/*.so* \
 	  $(1)/usr/lib/
 endef
 
