@@ -52,8 +52,8 @@ define Build/InstallDev
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/share \
-	  $(1)/usr/
+	  $(PKG_INSTALL_DIR)/usr/share/* \
+	  $(1)/usr/share/
 endef
 
 define Package/gtk3/install
