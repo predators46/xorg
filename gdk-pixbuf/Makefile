@@ -18,7 +18,6 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/nls.mk
 include $(INCLUDE_DIR)/meson.mk
 
 define Package/gdk-pixbuf
@@ -49,6 +48,7 @@ MESON_HOST_ARGS += \
 	-Dgio_sniffing=false
 
 MESON_ARGS += \
+	-Dothers=enabled \
 	-Dgtk_doc=false \
 	-Ddocs=false \
 	-Dintrospection=disabled \
