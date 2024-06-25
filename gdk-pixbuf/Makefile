@@ -63,16 +63,16 @@ define Build/InstallDev
 	  $(1)/usr/share
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/include \
-	  $(1)/usr/
+	  $(PKG_INSTALL_DIR)/usr/include/* \
+	  $(1)/usr/include/
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/lib/{pkgconfig,*.so*} \
 	  $(1)/usr/lib/
 
 	$(CP) \
-	  $(PKG_INSTALL_DIR)/usr/share \
-	  $(1)/usr/
+	  $(PKG_INSTALL_DIR)/usr/share/* \
+	  $(1)/usr/share/
 	$(foreach BIN,gdk_pixbuf_csource gdk_pixbuf_pixdata gdk_pixbuf_query_loaders,
 		$(SED) 's/^$(BIN)=$$$${bindir}\/\(.*\)/$(BIN)=$$$${prefix_hostpkg}\/bin\/\1/' $(1)/usr/lib/pkgconfig/gdk-pixbuf-2.0.pc)
 endef
