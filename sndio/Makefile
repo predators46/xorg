@@ -32,7 +32,9 @@ define Package/sndio/description
 endef
 
 CONFIGURE_ARGS = \
-	--prefix=/usr
+	--prefix=/usr \
+	--enable-alsa \
+	--without-libbsd
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
