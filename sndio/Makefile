@@ -29,8 +29,8 @@ define Package/sndio/description
 	Reliability through simplicity are part of the project goals.
 endef
 
-MAKE_PATH:=.
-CONFIGURE_PATH:=.
+CONFIGURE_ARGS = \
+	--prefix=/usr
 
 define Build/InstallDev
 	$(INSTALL_DIR) \
