@@ -29,6 +29,9 @@ define Package/sndio/description
 	Reliability through simplicity are part of the project goals.
 endef
 
+MAKE_PATH:=.
+CONFIGURE_PATH:=.
+
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
