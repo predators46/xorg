@@ -29,10 +29,6 @@ define Package/sndio/description
 	Reliability through simplicity are part of the project goals.
 endef
 
-CONFIGURE_ARGS += \
-	--prefix=/usr \
-	--without-libbsd
-
 define Build/InstallDev
 	$(INSTALL_DIR) \
 	  $(1)/usr/include \
