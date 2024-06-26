@@ -20,18 +20,19 @@ PKG_SOURCE_URL:=\
 PKG_HASH:=331963d5d3dc4caf4216a049fa40b66d6bcb8c730615859411b9518764e60585
 
 PKG_BUILD_FLAGS:=no-mips16
+PKG_FIXUP:=autoreconf
+PKG_MACRO_PATHS:=config
 PKG_BUILD_DEPENDS:=perl/host postgresql/host
 PKG_BUILD_PARALLEL:=0
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/meson.mk
 
 define Package/libpq
   SECTION:=libs
   CATEGORY:=Libraries
-  DEPENDS:=+BUILD_NLS:icu +libpthread
+  DEPENDS:=+libpthread +icu
   TITLE:=PostgreSQL client library
   URL:=http://www.postgresql.org/
   SUBMENU:=Database
@@ -114,22 +115,23 @@ PGSQL_CLI_EXTRA_BIN := \
 	vacuumdb	\
 	vacuumlo
 
-FAKE_CONFIGURE_ARGS := \
-			--disable-nls \
-			--disable-rpath \
-			--without-bonjour \
-			--without-gssapi \
-			--without-icu \
-			--without-ldap \
-			--without-openssl \
-			--without-pam \
-			--without-perl \
-			--without-python \
-			--without-readline \
-			--without-tcl \
-			--without-systemd \
-			--with-zlib="yes" \
-			--enable-depend
+PGSQL_CONFIG_VARS:= \
+	pgac_cv_snprintf_long_long_int_format="%lld" \
+	pgac_cv_snprintf_size_t_support=yes \
+	USE_DEV_URANDOM=1 \
+	ac_cv_file__dev_urandom="/dev/urandom" \
+	ZIC=zic
+
+ifeq ($(CONFIG_USE_UCLIBC),y)
+# PostgreSQL does not build against uClibc with locales
+# enabled, due to an uClibc bug, see
+# http://lists.uclibc.org/pipermail/uclibc/2014-April/048326.html
+# so overwrite automatic detection and disable locale support
+PGSQL_CONFIG_VARS+= \
+		pgac_cv_type_locale_t=no
+endif
+
+TARGET_CONFIGURE_OPTS+=$(PGSQL_CONFIG_VARS)
 
 HOST_CONFIGURE_ARGS += \
 			--disable-nls \
@@ -148,32 +150,23 @@ HOST_CONFIGURE_ARGS += \
 			--with-zlib="yes" \
 			--enable-depend
 
+CONFIGURE_ARGS += \
+			$(DISABLE_NLS) \
+			--disable-rpath \
+			--without-bonjour \
+			--without-gssapi \
+			--without-ldap \
+			--without-openssl \
+			--without-pam \
+			--without-perl \
+			--without-python \
+			--without-tcl \
+			--without-systemd \
+			--with-zlib="yes" \
+			--enable-depend \
+			$(if $(CONFIG_arc),--disable-spinlocks)
+
 HOST_CFLAGS += -std=gnu99
-
-MESON_ARGS += \
-		-Dnls=$(if $(CONFIG_BUILD_NLS),en,dis)abled \
-		-Dicu=$(if $(CONFIG_BUILD_NLS),en,dis)abled \
-		-Ddocs=disabled \
-		-Ddocs_pdf=disabled \
-		-Drpath=false \
-		-Dbonjour=disabled \
-		-Dbsd_auth=disabled \
-		-Dgssapi=disabled \
-		-Dldap=disabled \
-		-Dlibxml=disabled \
-		-Dlibxslt=disabled \
-		-Dssl=none \
-		-Dpam=disabled \
-		-Dplperl=disabled \
-		-Dplpython=disabled \
-		-Dpltcl=disabled \
-		-Dsystemd=disabled \
-		-Dzlib=enabled \
-		-Dspinlocks=$(if $(CONFIG_arc),true,false)
-
-define Host/Configure
-	$(call Host/Configure/Default)
-endef
 
 # Need a native zic and pg_config for build
 define Host/Compile
@@ -189,6 +182,13 @@ define Host/Install
 	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/bin/
 	$(INSTALL_BIN) $(HOST_BUILD_DIR)/src/timezone/zic $(STAGING_DIR_HOSTPKG)/bin/
 endef
+
+define Build/Compile
+	$(MAKE) -C $(PKG_BUILD_DIR) RANLIB="$(TARGET_CROSS)ranlib" MAKELEVEL=0 all contrib
+endef
+
+# because PROFILE means something else in the project Makefile
+unexport PROFILE
 
 define Package/libpq/install
 	$(INSTALL_DIR) $(1)/usr/lib
@@ -231,12 +231,6 @@ define Package/pgsql-server/install
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/postgresql.init $(1)/etc/init.d/postgresql
-endef
-
-define Build/Configure
-	$(call Build/Configure/Default,$(FAKE_CONFIGURE_ARGS))
-	make -C $(PKG_BUILD_DIR) maintainer-clean
-	$(call Build/Configure/Meson)
 endef
 
 define Build/InstallDev
