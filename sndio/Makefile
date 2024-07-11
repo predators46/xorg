@@ -10,7 +10,7 @@ PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=ISC
-PKG_LICENSE_FILES:=
+PKG_LICENSE_FILES:=LICENSE
 
 PKG_INSTALL:=1
 
