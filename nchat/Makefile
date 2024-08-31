@@ -55,7 +55,7 @@ CMAKE_OPTIONS += \
 	-DHAS_COREDUMP=ON
 
 define Build/Compile
-  $(call GoPackage/Build/Compile,lib/wmchat/go)
+  $(call GoPackage/Build/Compile/Default,lib/wmchat/go)
 endef
 
 define Package/nchat/install
