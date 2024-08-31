@@ -13,12 +13,13 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
-CMAKE_BINARY_SUBDIR := build
+#CMAKE_BINARY_SUBDIR := build
 
-PKG_BUILD_DEPENDS:=ncurses/host gperf/host
+PKG_BUILD_DEPENDS:=ncurses/host gperf/host golang/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
+include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 
 define Package/nchat
 	SECTION:=net
@@ -46,13 +47,16 @@ define Build/Prepare
 endef
 
 CMAKE_OPTIONS += \
-	-DCMAKE_BUILD_TYPE=Release \
 	-DHAS_DUMMY=ON \
 	-DHAS_TELEGRAM=ON \
-	-DHAS_WHATSAPP=OFF \
+	-DHAS_WHATSAPP=ON \
 	-DHAS_DYNAMICLOAD=ON \
 	-DHAS_MULTIPROTOCOL=ON \
 	-DHAS_COREDUMP=ON
+
+define Build/Compile
+  $(call GoPackage/Build/Compile,lib/wmchat/go)
+endef
 
 define Package/nchat/install
 	$(INSTALL_DIR) \
