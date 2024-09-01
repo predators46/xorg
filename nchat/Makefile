@@ -13,8 +13,8 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT license
 PKG_LICENSE_FILES:=LICENSE
 
-GO_PKG:=github.com/d99kris/nchat/lib/wmchat/go
-#GO_PKG_BUILD_PKG:=$(GO_PKG)
+GO_PKG:=github.com/d99kris/nchat
+GO_PKG_BUILD_PKG:=$(GO_PKG)/lib/wmchat/go
 CMAKE_BINARY_SUBDIR := build
 
 PKG_BUILD_DEPENDS:=ncurses/host gperf/host golang/host
