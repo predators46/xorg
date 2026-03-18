@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxtst
-PKG_VERSION:=1.2.4
+PKG_VERSION:=1.2.5
 PKG_RELEASE:=1
 
 PKG_SOURCE:=libXtst-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/lib/
-PKG_HASH:=84f5f30b9254b4ffee14b5b0940e2622153b0d3aed8286a3c5b7eeb340ca33c8
+PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=X11 License
