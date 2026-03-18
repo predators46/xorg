@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libxfixes
-PKG_VERSION:=6.0.1
+PKG_VERSION:=6.0.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=libXfixes-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/lib
-PKG_HASH:=b695f93cd2499421ab02d22744458e650ccc88c1d4c8130d60200213abc02d58
+PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
