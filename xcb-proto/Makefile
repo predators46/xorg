@@ -18,7 +18,7 @@ PYTHON3_PKG_BUILD:=0
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/python/python3-package.mk
+include $(TOPDIR)/feeds/python/lang/python/python3-package.mk
 
 define Package/xcb-proto
 	SECTION:=libs
