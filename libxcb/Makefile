@@ -12,11 +12,13 @@ PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
 
-PKG_BUILD_DEPENDS:=xcb-proto
+PKG_BUILD_DEPENDS:=xcb-proto python3/host
+PYTHON3_PKG_BUILD:=0
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/feeds/python/lang/python/python3-package.mk
 
 define Package/libxcb
 	SECTION:=libs
@@ -31,6 +33,9 @@ define Package/libxcb/description
 endef
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+
+CONFIGURE_VARS += \
+	PYTHON="$(STAGING_DIR_HOSTPKG)/bin/$(PYTHON3)"
 
 CONFIGURE_ARGS += \
 	--prefix=/usr \
