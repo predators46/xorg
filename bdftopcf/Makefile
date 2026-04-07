@@ -15,9 +15,9 @@ PKG_HASH:=skip
 
 HOST_BUILD_DEPENDS:=util-macros/host xorgproto/host
 PKG_HOST_ONLY:=1
-#PKG_BUILD_PARALLEL:=1
+PKG_BUILD_PARALLEL:=1
 HOST_BUILD_PARALLEL:=1
-#PKG_INSTALL:=1
+PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
