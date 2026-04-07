@@ -37,11 +37,11 @@ CONFIGURE_ARGS += \
 
 define Package/xauth/install
 	$(INSTALL_DIR) \
-	  $(1)/usr/sbin
+	  $(1)/usr/bin
 
 	$(CP) \
 	  $(PKG_INSTALL_DIR)/usr/bin/xauth \
-	  $(1)/usr/sbin/
+	  $(1)/usr/bin/
 endef
 
 $(eval $(call BuildPackage,xauth))
