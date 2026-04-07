@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xauth
-PKG_VERSION:=1.1.3
+PKG_VERSION:=1.1.5
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/app/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=e7075498bae332f917f01d660f9b940c0752b2556a8da61ccb62a44d0ffe9d33
+PKG_HASH:=skip
 
 PKG_MAINTAINER:=Esa Aprilia Salsabila <esaapriliasalsabila@gmail.com>
 PKG_LICENSE:=MIT
