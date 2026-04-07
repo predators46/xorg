@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xkeyboard-config
-PKG_VERSION:=2.41
+PKG_VERSION:=2.47
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://xorg.freedesktop.org/releases/individual/data/xkeyboard-config
-PKG_HASH:=f02cd6b957295e0d50236a3db15825256c92f67ef1f73bf1c77a4b179edf728f
+PKG_HASH:=skip
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=MIT
