@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=font-alias
-PKG_VERSION:=1.0.5
+PKG_VERSION:=1.0.6
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/font/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=9f89e217bb73e0e3636a0a493fbf8b7c995156e0c53d9a0476d201b67c2d6b6e
+PKG_HASH:=skip
 
 #PKG_BUILD_DIR:=$(BUILD_DIR)/$(_PKG_NAME)-$(PKG_VERSION)
 PKG_BUILD_DEPENDS:=util-macros
