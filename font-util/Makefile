@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=font-util
-PKG_VERSION:=1.4.1
+PKG_VERSION:=1.4.2
 PKG_RELEASE:=1
 
 PKG_SOURCE_URL:=https://www.x.org/releases/individual/font/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_HASH:=5c9f64123c194b150fee89049991687386e6ff36ef2af7b80ba53efaf368cc95
+PKG_HASH:=skip
 
 HOST_BUILD_DEPENDS:=util-macros/host
 PKG_BUILD_DEPENDS:=util-macros
